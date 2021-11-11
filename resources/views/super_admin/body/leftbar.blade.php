@@ -21,6 +21,12 @@
                  <li><a href="email-compose.html">Email Compose</a></li>
              </ul>
          </li>
+         <li>
+            <a href="{{ route('all.accountant') }}" class="waves-effect">
+                <i class="ti-home"></i>
+                <span>Accountant</span>
+            </a>
+        </li>
 
 
      </ul>

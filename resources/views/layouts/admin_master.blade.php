@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
     <link href="{{ asset('backend') }}/assets/libs/chartist/chartist.min.css" rel="stylesheet">
+    
 
     <!-- Bootstrap Css -->
     <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
@@ -20,7 +21,21 @@
     <link href="{{ asset('backend') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="{{ asset('backend') }}/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    {{-- for data table --}}
+    <!-- DataTables -->
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
+         {{-- for modal --}}
+     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+     {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
+       
 </head>
 
 <body data-sidebar="dark">
@@ -150,3 +165,41 @@
 
 </html>
 {{-- {{ asset('backend') }}/ --}}
+{{-- for datatable --}}
+  <!-- JAVASCRIPT -->
+  <script src="assets/libs/jquery/jquery.min.js"></script>
+  <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/libs/metismenu/metisMenu.min.js"></script>
+  <script src="assets/libs/simplebar/simplebar.min.js"></script>
+  <script src="assets/libs/node-waves/waves.min.js"></script>
+
+  <!-- Required datatable js -->
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <!-- Responsive examples -->
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js">
+  </script>
+ 
+
+  <!-- Buttons examples -->
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/jszip/jszip.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+  <!-- Datatable init js -->
+  <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script> 
+
+  {{-- <script src="assets/js/app.js"></script> --}}
+   {{-- for modal --}}
+   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+   
+  
