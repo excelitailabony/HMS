@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\Admin\DoctorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +23,20 @@ Route::get('/', function () {
 
 // Admin Login View
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
+
+    // Admin Profile
 	Route::get('/login', [AdminController::class, 'loginForm']);
 	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
+
 });
+
+// Patients routes goes here
+Route::get('all/patient',[PatientController::class,'index'])->name('all.patient');
+Route::post('store/patient',[PatientController::class,'StorePatient'])->name('store.patient');
+
+
+// Doctors routes goes here
+Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
 
 
 // Admin View 
