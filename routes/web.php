@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+
+use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +51,13 @@ Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', fun
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+// Accountant Start
+Route::prefix('accountant')->group(function () {
+    Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
+    Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
+    // Route::get('/edit/{id}', [BrandController::class, 'BrandEdit'])->name('edit.brand'); 
+    // Route::post('/update', [BrandController::class, 'BrandUpdate'])->name('update.brand');
+    // Route::get('/delete/{id}', [BrandController::class, 'BrandDelete'])->name('delete.brand'); 
+     
+  });// Admin Brand All Route Group End 
