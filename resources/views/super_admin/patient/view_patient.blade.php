@@ -69,7 +69,7 @@
                                                         <label>Email</label>
                                                         <input type="email" class="form-control"
                                                             placeholder="Enter your email" name="email">
-                                                        @error('name')
+                                                        @error('email')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -79,7 +79,7 @@
                                                         <label>Password</label>
                                                         <input type="password" class="form-control"
                                                             placeholder="Enter your password" name="password">
-                                                        @error('name')
+                                                        @error('password')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
@@ -95,13 +95,13 @@
                                                     <div class="form-group">
                                                         <label>Phone</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter phone number" name="number">
+                                                            placeholder="Enter phone number" name="phone">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Sex</label>
-                                                        <input type="email" class="form-control"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter your gender" name="gender">
                                                     </div>
                                                 </div>
@@ -109,7 +109,7 @@
                                                     <div class="form-group">
                                                         <label>DOB</label>
                                                         <input type="password" class="form-control"
-                                                            placeholder="Enter your birth date" name="date">
+                                                            placeholder="Enter your birth date" name="dob">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -123,7 +123,7 @@
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
                                                         <input type="password" class="form-control"
-                                                            placeholder="Enter your blood group" name="blood">
+                                                            placeholder="Enter your blood group" name="blood_group">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
