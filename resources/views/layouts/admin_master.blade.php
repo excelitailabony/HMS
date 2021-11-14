@@ -258,17 +258,24 @@
         @endif
     </script>
 
+<script>
+    $(document).ready(function()
+{
+   $(document).on('click','editBtn',function()
+   {
+       var account_id=$(this).val();
+       alert(account_id);
+   });
+});
+    </script>
+    @yield('scripts')
+
 </body>
 
 </html>
 {{-- {{ asset('backend') }}/ --}}
 {{-- for datatable --}}
-  <!-- JAVASCRIPT -->
-  <script src="assets/libs/jquery/jquery.min.js"></script>
-  <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/libs/metismenu/metisMenu.min.js"></script>
-  <script src="assets/libs/simplebar/simplebar.min.js"></script>
-  <script src="assets/libs/node-waves/waves.min.js"></script>
+
 
   <!-- Required datatable js -->
   <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -289,14 +296,6 @@
   <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
   <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
   <!-- Datatable init js -->
-  <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script> 
-
-  {{-- <script src="assets/js/app.js"></script> --}}
-   {{-- for modal --}}
-   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-   
-  
+ {{-- for edit --}}
+ 
+ {{-- end edit --}}

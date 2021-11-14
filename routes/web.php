@@ -53,11 +53,13 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 // Accountant Start
-Route::prefix('accountant')->group(function () {
+// Route::prefix('accountant')->group(function () {
     Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
     Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
-    // Route::get('/edit/{id}', [BrandController::class, 'BrandEdit'])->name('edit.brand'); 
-    // Route::post('/update', [BrandController::class, 'BrandUpdate'])->name('update.brand');
-    // Route::get('/delete/{id}', [BrandController::class, 'BrandDelete'])->name('delete.brand'); 
+    Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
+    Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
+    Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
+    Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
+    Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
-  });// Admin Brand All Route Group End 
+//   });// Admin Brand All Route Group End 
