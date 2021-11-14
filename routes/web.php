@@ -25,6 +25,17 @@ Route::get('/', function () {
 
 
 // Admin Login View
+// Admin View 
+Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
+    return view('super_admin.home');
+})->name('dashboard');
+
+
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
     // Admin Profile
@@ -36,21 +47,13 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 // Patients routes goes here
 Route::get('all/patient',[PatientController::class,'index'])->name('all.patient');
 Route::post('store/patient',[PatientController::class,'StorePatient'])->name('store.patient');
+Route::get('delete/patient/{id}',[PatientController::class,'DeletePatient'])->name('delete.patient');
+Route::get('edit-patient/{id}',[PatientController::class,'EditPatient'])->name('edit.patient');
+Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('update.patient');
 
 
 // Doctors routes goes here
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
-
-
-// Admin View 
-Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('super_admin.home');
-})->name('dashboard');
-
-
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 // Accountant Start
 Route::prefix('accountant')->group(function () {
