@@ -19,13 +19,13 @@ class CreateDoctorsTable extends Migration
             $table->string('email');
             $table->string('image');
             $table->string('password');
-            $table->string('phone');
+            $table->integer('phone');
             $table->string('doc_dept');
             $table->string('profile');
             $table->string('sex');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('address');
-            $table->string('age');
+            $table->integer('age');
             $table->string('blood_group');
             $table->string('social_link');
             $table->integer('status')->default(1);
