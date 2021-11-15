@@ -55,12 +55,15 @@ Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('
 // Doctors routes goes here
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
 Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
+Route::get('delete/doctor/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+Route::get('/patient/deactive/{id}', [DoctorController::class, 'DoctorDeactive'])->name('doctor.deactive'); 
+Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->name('doctor.active');
 
 // Accountant Start
 // Route::prefix('accountant')->group(function () {
     Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
     Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
-    Route::get('edit-patient/{id}', [AccountantController::class, 'AccountEdit']); 
+    Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
     Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
     Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
     Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 

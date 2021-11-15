@@ -202,13 +202,17 @@
                                                     aria-label="Start date: activate to sort column ascending">Department
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 105px;"
+                                                    aria-label="Start date: activate to sort column ascending">Status
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Actions</th>
                                             </tr>
                                         </thead>
 
 
-                                        <tbody>
+                                        <tbody class="text-center">
                                             @foreach ($doctors as $doctor)
                                                 <tr>
                                                     <td class="dtr-control sorting_1" tabindex="0">{{ $doctor->name }}
@@ -218,14 +222,31 @@
                                                     <td>{{ $doctor->email }}</td>
                                                     <td>{{ $doctor->phone }}</td>
                                                     <td>{{ $doctor->doc_dept }}</td>
+                                                    @if ($doctor->status == 0)
+                                                        <td> <a class="btn btn-danger btn-sm">Deactive</a> </td>
+                                                    @else
+                                                        <td> <a class="btn btn-success btn-sm">Active</a> </td>
+                                                    @endif
                                                     <td>
+
                                                         <button type="button" value="{{ $doctor->id }}"
                                                             class="btn btn-primary editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
-                                                        <a href="" class="btn btn-sm btn-danger" id="delete"
-                                                            title="delete data">
+                                                        <a href="{{ route('delete.doctor', $doctor->id) }}"
+                                                            class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
+
+                                                        @if ($doctor->status == 1)
+                                                            <a href="{{ route('doctor.deactive', $doctor->id) }}"
+                                                                class="btn btn-danger btn-sm" title="Doctor deactive now"><i
+                                                                    class="fa fa-arrow-down"></i></a>
+                                                        @else
+                                                            <a href="{{ route('doctor.active', $doctor->id) }}"
+                                                                class="btn btn-success btn-sm" title="Doctor active now"><i
+                                                                    class="fa fa-arrow-up"></i></a>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -241,4 +262,42 @@
             </div> <!-- end col -->
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editBtn', function() {
+                var doctor_id = $(this).val();
+                alert(doctor_id);
+                $('#editModal').modal('show');
+
+                // $.ajax({
+                //     type: "GET",
+                //     url: "/edit-patient/" + patient_id,
+                //     success: function(response) {
+                //         // console.log(response.patient);
+                //         $('#patient_id').val(response.patient.id);
+                //         $('#name').val(response.patient.name);
+                //         $('#email').val(response.patient.email);
+                //         $('#old_image').val(response.patient.image);
+                //         $('#address').val(response.patient.address);
+                //         $('#phone').val(response.patient.phone);
+                //         $('#gender').val(response.patient.sex);
+                //         $('#dob').val(response.patient.dob);
+                //         $('#age').val(response.patient.age);
+                //         $('#blood_group').val(response.patient.blood_group);
+
+                //         if (response.patient.sex == 'male') {
+                //             $('#editModal').find(':radio[name=gender][value="male"]').prop(
+                //                 'checked', true);
+                //         } else {
+                //             $('#editModal').find(':radio[name=gender][value="female"]').prop(
+                //                 'checked', true);
+                //         }
+                //     }
+                // })
+            });
+        });
+    </script>
 @endsection

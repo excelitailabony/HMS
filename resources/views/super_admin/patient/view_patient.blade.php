@@ -261,7 +261,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
                                             {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
-                                            <button type="submit" id="delete"
+                                            <button type="submit" id="update"
                                                 class="btn btn-primary btn-rounded">update</button>
                                         </div>
                                     </form>
@@ -324,10 +324,6 @@
                                                     <td>{{ $patient->age }}</td>
                                                     <td>{{ $patient->blood_group }}</td>
                                                     <td>
-                                                        {{-- <a href="{{ route('edit.patient', $patient->id) }}"
-                                                            class="btn btn-sm btn-warning" id="delete" title="edit data">
-                                                            <i class="fa fa-pencil-alt"></i>
-                                                        </a> --}}
                                                         <button type="button" value="{{ $patient->id }}"
                                                             class="btn btn-primary editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>

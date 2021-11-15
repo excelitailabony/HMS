@@ -52,11 +52,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        {{-- for sweet alert start --}}
-        
+    {{-- for sweet alert start --}}
 
 
-        {{-- sweet alert end --}}
+
+    {{-- sweet alert end --}}
 
     {{-- link for toaster cdn --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
@@ -222,7 +222,7 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
     {{-- for sweet alert start --}}
-  
+
     <script src="{{ asset('backend') }}/assets/libs/sweetalert2/sweetalert.min.js"></script>
 
 
@@ -232,8 +232,6 @@
     {{-- for toaster cdn --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-    <script src="{{ asset('backend') }}/assets/libs/sweetalert/sweetalert.min.js"></script>
 
     {{-- js code for toaster --}}
     <script>

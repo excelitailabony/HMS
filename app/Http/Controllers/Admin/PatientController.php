@@ -69,6 +69,8 @@ class PatientController extends Controller
     // method for editing patient data
     public function EditPatient($id){
         $patient = Patient::find($id);
+
+        // dd($patient);
         return response()->json([
             'status' =>200,
             'patient' => $patient,

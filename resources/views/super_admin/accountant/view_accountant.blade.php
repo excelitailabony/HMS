@@ -155,47 +155,47 @@
 
                         {{-- check end --}}
                         {{-- modal end --}}
-                             <!-- Edit Modal -->
-                             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                             <div class="modal-dialog">
-                                 <div class="modal-content">
-                                     <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Edit Patient</h5>
-                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                             aria-label="Close"></button>
-                                     </div>
- 
-                                     <form action="{{ route('account.update') }}" method="POST"
-                                         enctype="multipart/form-data">
-                                         @csrf
- 
-                                         <input type="hidden" id="patient_id" name="patient_id">
-                                         <input type="hidden" id="old_image" name="old_image">
-                                         <div class="modal-body">
- 
-                                             <div class="row">
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Name</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter first name" name="name" id="name">
-                                                         @error('name')
-                                                             <span class="text-danger">{{ $message }}</span>
-                                                         @enderror
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Email</label>
-                                                         <input type="email" class="form-control"
-                                                             placeholder="Enter your email" name="email" id="email">
-                                                         @error('email')
-                                                             <span class="text-danger">{{ $message }}</span>
-                                                         @enderror
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Patient</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <form action="{{ route('account.update') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" id="patient_id" name="patient_id">
+                                        <input type="hidden" id="old_image" name="old_image">
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter first name" name="name" id="name">
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control"
+                                                            placeholder="Enter your email" name="email" id="email">
+                                                        @error('email')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
                                                         <input type="password" class="form-control"
@@ -205,70 +205,70 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Address</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your address" name="address" id="address">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Phone</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter phone number" name="phone" id="phone">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Sex</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your gender" name="sex" id="sex">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>DOB</label>
-                                                         <input type="date" class="form-control"
-                                                             placeholder="Enter your birth date" name="dob" id="dob">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Age</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your age" name="age" id="age">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Blood Group</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your blood group" name="bloodgrp"
-                                                             id="bloodgrp">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Image</label>
-                                                         <input type="file" class="form-control"
-                                                             placeholder="Enter your image" name="image" id="image">
-                                                     </div>
-                                                 </div>
-                                             </div>
-                                         </div>
- 
-                                         <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary"
-                                                 data-bs-dismiss="modal">Close</button>
-                                             {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
-                                             <button type="submit">update</button>
-                                         </div>
-                                     </form>
-                                 </div>
-                             </div>
-                         </div>
-                         {{-- Edit  modal end --}}
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your address" name="address" id="address">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Phone</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter phone number" name="phone" id="phone">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Sex</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your gender" name="sex" id="sex">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>DOB</label>
+                                                        <input type="date" class="form-control"
+                                                            placeholder="Enter your birth date" name="dob" id="dob">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Age</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your age" name="age" id="age">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Blood Group</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your blood group" name="bloodgrp"
+                                                            id="bloodgrp">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Image</label>
+                                                        <input type="file" class="form-control"
+                                                            placeholder="Enter your image" name="image" id="image">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
+                                            <button type="submit">update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
@@ -336,20 +336,27 @@
                                                         <td> <a class="btn btn-success btn-sm">Active</a> </td>
                                                     @endif
                                                     <td>
-                                                        {{-- <a href="" value=" {{$accountant->id}}" class="btn btn-info btn-sm editbtn" ><i class="fa fa-pencil-alt"></i> </a> --}}
+
                                                         <button type="button" value="{{ $accountant->id }}"
                                                             class="btn btn-primary editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
 
-                                        {{-- <button class="btn btn-danger btn-flat btn-sm remove-user" data-id="{{ $accountant->id }}" data-action="{{ route('accountant.delete',$accountant->id) }}" onclick="deleteConfirmation({{$accountant->id}})"> Delete</button>								 --}}
-                                        {{-- <button class="btn btn-danger" >Delete</button> --}}
-                                        <a href="{{route('accountant.delete',$accountant->id)}}" class="btn btn-danger btn-sm" id="delete"><i class ="fa fa-trash"></i></a>
+                                                        <a href="{{ route('accountant.delete', $accountant->id) }}"
+                                                            class="btn btn-danger btn-sm" id="delete"><i
+                                                                class="fa fa-trash"></i></a>
 
-                                        @if($accountant->status==1)
-									<a href="{{ route('accountant.deactive',$accountant->id) }}" class="btn btn-danger btn-sm" title="Product deactive now"><i class ="fa fa-arrow-down"></i></a>
-								@else
-									<a href="{{ route('accountant.active',$accountant->id) }}" class="btn btn-success btn-sm" title="Product active now"><i class ="fa fa-arrow-up"></i></a>
-								@endif
+                                                        @if ($accountant->status == 1)
+                                                            <a href="{{ route('accountant.deactive', $accountant->id) }}"
+                                                                class="btn btn-danger btn-sm"
+                                                                title="Product deactive now"><i
+                                                                    class="fa fa-arrow-down"></i></a>
+                                                        @else
+                                                            <a href="{{ route('accountant.active', $accountant->id) }}"
+                                                                class="btn btn-success btn-sm"
+                                                                title="Product active now"><i
+                                                                    class="fa fa-arrow-up"></i></a>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -366,10 +373,7 @@
         </div>
     </div>
 @endsection
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-data-bs-target="#exampleModal">
-Add Accountant
-</button> --}}
+
 @section('scripts')
     <script>
         $(document).ready(function() {
@@ -379,7 +383,7 @@ Add Accountant
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",
-                    url: "/edit-patient/" + patient_id,
+                    url: "/edit-accountant/" + patient_id,
                     success: function(response) {
                         // console.log(response.patient.name);
                         $('#patient_id').val(response.patient.id);
@@ -399,4 +403,3 @@ Add Accountant
         });
     </script>
 @endsection
-

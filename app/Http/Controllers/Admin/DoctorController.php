@@ -70,4 +70,47 @@ class DoctorController extends Controller
 
         return Redirect()->back()->with($notification);
     }
+
+    // Doctor deactive
+    public function DoctorDeactive($id){
+     
+
+        Doctor::findOrFail($id)->update([
+            'status' => 0, 
+        ]);
+        $notification = array(
+            'message' =>  'Doctor Deactivated Successfully',
+            'alert-type' => 'info'
+        ); 
+
+        return redirect()->back()->with($notification);
+    }
+    // Doctor active
+    public function DoctorActive($id){
+        Doctor::findOrFail($id)->update([
+                'status' => 1, 
+            ]);
+            $notification = array(
+                'message' =>  'Doctor Activated Successfully',
+                'alert-type' => 'info'
+            ); 
+            return redirect()->back()->with($notification);
+    }
+
+    // method for deleting patient data
+     public function DeleteDoctor($id){
+
+        $doctor = Doctor::findOrFail($id);
+        if($doctor->image){
+             $img = $doctor->image;
+             unlink($img);
+        }
+
+        Doctor::findOrFail($id)->delete();
+        $notification = array(
+            'message' =>  'Doctor Delete Sucessyfully',
+            'alert-type' => 'info'
+        ); 
+        return redirect()->back()->with($notification);
+    } 
 }
