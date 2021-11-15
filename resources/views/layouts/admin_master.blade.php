@@ -47,7 +47,7 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css">
-<<<<<<< HEAD
+
          {{-- for modal --}}
      {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
      {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
@@ -65,7 +65,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
        
-=======
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -85,7 +84,7 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
->>>>>>> ad9955cfabd7691267886c9b82fa62ca405c2d29
+
 </head>
 
 <body data-sidebar="dark">
@@ -257,7 +256,7 @@
     <script src="{{ asset('backend') }}/assets/libs/sweetalert/sweetalert.min.js"></script>
 
     {{-- js code for toaster --}}
-    <script>
+  <!-- <script>
         @if (Session::has('message'))
             toastr.options =
             {
@@ -290,9 +289,9 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
-    </script>
+    </script> -->
 
-    {{-- js code for sweetalert2 delete --}}
+    <!-- js code for sweetalert2 delete  -->
     <script type="text/javascript">
         $(document).on('click', '#delete', function(e) {
             var link = $(this).attr("href");
@@ -313,7 +312,7 @@
                     }
                 });
         });
-    </script>
+    </script> --> -->
 
     @yield('scripts')
 
@@ -322,7 +321,7 @@
 </html>
 {{-- {{ asset('backend') }}/ --}}
 {{-- for datatable --}}
-<<<<<<< HEAD
+
   <!-- JAVASCRIPT -->
   <script src="assets/libs/jquery/jquery.min.js"></script>
   <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -401,7 +400,7 @@
 </script>
    
   
-=======
+
 
 <!-- Required datatable js -->
 <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -421,4 +420,3 @@
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
->>>>>>> ad9955cfabd7691267886c9b82fa62ca405c2d29

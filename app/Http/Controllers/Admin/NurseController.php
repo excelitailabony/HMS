@@ -119,6 +119,15 @@ class NurseController extends Controller
 
         }
     }//end method
+
+    //delete nurse info
+    public function DeleteNurse($id){
+        $nurse=Nurse::find($id);
+        $image=$nurse->image;
+        unlink( $image);
+        $nurse->delete();
+        return redirect()->back();
+    }//end method
    
 
 

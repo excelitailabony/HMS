@@ -37,8 +37,8 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 
-<<<<<<< HEAD
 //All nurse route 
+
 Route::prefix('nurse')->group(function () {
    Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
    //add nurse
@@ -47,11 +47,13 @@ Route::prefix('nurse')->group(function () {
 
     //update nurse info 
    Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+
+   //delete nurse 
+   Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
 });
 
 
 //
-=======
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
     // Admin Profile
@@ -83,4 +85,3 @@ Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store
     Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
->>>>>>> ad9955cfabd7691267886c9b82fa62ca405c2d29

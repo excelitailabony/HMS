@@ -247,10 +247,10 @@
 
                                                
                                                <button id=""  data-bs-toggle="modal" data-bs-target="#editModal"      class="btn btn-primary edit" title="Edit"  data-bs-target="#exampleModal2" >
-                                               <i class="fas fa-comment-times"></i>
+                                               <i class="fa fa-pencil-alt"></i>
                                                </button> 
                                                    <!-- <a class="btn btn-success btn-sm"  href="#exampleModal" title="Edit"><i class="fas fa-pencil-alt"></i></a> -->
-                                                   <a class="btn btn-danger btn-sm" title="Delete"><i class="fas fa-comment-times"></i></a>
+                                                   <a href="{{route('delete.nurse',$nurse->id)}}" class="btn btn-danger btn-sm" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
                                                </td>
                                             </tr>
                                             @endforeach
@@ -272,7 +272,7 @@
 
             <form action="{{route('update.nurse')}}" method="POST" enctype="multipart/form-data" >
                     @csrf
-                    <input type="hidden" name="id" id="id" value="{{$nurse->id}}">
+                    <input type="hidden" name="id" id="id">
             <div class="modal-body">
                 <div class="row">
  
@@ -321,10 +321,15 @@
                             <textarea type="text" name="address" id="address" class="form-control placeholder="address"></textarea>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="exampleInputPassword3"  style="padding-right: 175px;">sex</label>
-                            <input type="text" name="sex" id="sex" class="form-control"  placeholder="sex">
-                        </div>
+                        <div class="radio col-md-6" style="padding-top: 15px;">
+                              <label>Sex </label>
+                                <input type="radio" name="sex" id="sex" value="male">
+                                male
+
+                                 <input type="radio" name="sex" id="sex" value="female">
+                                female
+                             
+                            </div>
 
                         <div class="form-group col-md-6 marge">
                             <label  style="padding-right: 175px;" >dob</label>
@@ -394,8 +399,11 @@
         $('#address').val(_this.find('.address').text());
         $('#sex').val(_this.find('.sex').text());
         $('#age').val(_this.find('.age').text());
+        $('#dob').val(_this.find('.dob').text());
         $('#blood_group').val(_this.find('.blood_group').text());
         $('#image').val(_this.find('.image').text());
+
+        
       })
     </script>
 @endsection
