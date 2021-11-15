@@ -124,7 +124,7 @@ else{
   $patient->dob=$request->dob;
   $patient->age=$request->age;
   $patient->bloodgrp=$request->bloodgrp;
-  $patient->image=$save_url;
+  // $patient->image=$save_url;
   $patient->update();
 
    $notification=array(

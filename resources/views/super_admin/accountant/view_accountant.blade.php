@@ -106,9 +106,18 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Sex</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your gender" name="sex">
+                                                        <label>Sex</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="sex"
+                                                                id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="sex"
+                                                                id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -171,7 +180,8 @@
                                          @csrf
  
                                          <input type="hidden" id="patient_id" name="patient_id">
-                                         <input type="hidden" id="old_image" name="old_image">
+                                         <input type="text" id="old_image" name="old_image">
+
                                          <div class="modal-body">
  
                                              <div class="row">
@@ -220,11 +230,20 @@
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Sex</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your gender" name="sex" id="sex">
-                                                     </div>
+                                                    <div class="form-group">
+                                                        <label>Sex</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="sex"
+                                                                id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="sex"
+                                                                id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
+                                                    </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
@@ -381,18 +400,26 @@ Add Accountant
                     type: "GET",
                     url: "/edit-patient/" + patient_id,
                     success: function(response) {
-                        // console.log(response.patient.name);
+                        // console.log(response.patient.image);
                         $('#patient_id').val(response.patient.id);
                         $('#name').val(response.patient.name);
                         $('#email').val(response.patient.email);
                         $('#password').val(response.patient.password);
                         $('#address').val(response.patient.address);
                         $('#phone').val(response.patient.phone);
-                        $('#sex').val(response.patient.sex);
+                        // $('#sex').val(response.patient.sex);
                         $('#dob').val(response.patient.dob);
                         $('#age').val(response.patient.age);
                         $('#bloodgrp').val(response.patient.bloodgrp);
                         $('#old_image').val(response.patient.image);
+                        if (response.patient.sex == 'male') {
+                            $('#editModal').find(':radio[name=sex][value="male"]').prop(
+                                'checked', true);
+                        } else {
+                            $('#editModal').find(':radio[name=sex][value="female"]').prop(
+                                'checked', true);
+                        }
+                       
                     }
                 })
             });

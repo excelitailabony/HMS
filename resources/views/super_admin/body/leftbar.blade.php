@@ -27,7 +27,12 @@
                 <span>Accountant</span>
             </a>
         </li>
-
+         <li>
+             <a href="{{ route('all.doctor') }}" class="waves-effect">
+                 <i class="ti-home"></i>
+                 <span>Doctor</span>
+             </a>
+         </li>
          <li>
              <a href="{{ route('all.patient') }}" class="waves-effect">
                  <i class="ti-home"></i>
@@ -36,7 +41,7 @@
          </li>
 
          <li>
-             <a href="{{ route('all.doctor') }}" class="waves-effect">
+             <a href="{{ route('all.laboratorist') }}" class="waves-effect">
                  <i class="ti-home"></i>
                  <span>Doctor</span>
              </a>

@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\LaboratoristController;
 
 
 /*
@@ -67,3 +68,13 @@ Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store
     Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
+// Labroatorist Start
+Route::prefix('laboratorist')->group(function () {
+    Route::get('/view', [LaboratoristControllerr::class, 'LaboratoristView'])->name('all.laboratorist'); 
+    // Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
+    // Route::get('edit-patient/{id}', [AccountantController::class, 'AccountEdit']); 
+    // Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
+    // Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
+   
+     
+  });// Admin Brand All Route Group End 
