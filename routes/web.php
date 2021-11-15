@@ -54,6 +54,7 @@ Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('
 
 // Doctors routes goes here
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
+Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
 
 // Accountant Start
 // Route::prefix('accountant')->group(function () {

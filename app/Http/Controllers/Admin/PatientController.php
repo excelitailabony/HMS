@@ -78,16 +78,40 @@ class PatientController extends Controller
     // method for updating data
     public function UpdatePatient(Request $request){
         $patient_id=$request->input('patient_id');
-        $patient = Patient::find($patient_id);
-        $patient->name=$request->name;
-        $patient->email=$request->email;
-        $patient->address=$request->address;
-        $patient->phone=$request->phone;
-        $patient->sex=$request->gender;
-        $patient->dob=$request->dob;
-        $patient->age=$request->age;
-        $patient->blood_group=$request->blood_group;
-        $patient->update();
+        $old_img = $request->old_image;
+
+
+        if ($request->file('image')) {
+            unlink($old_img);
+            $image = $request->file('image');
+            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(166,110)->save('uploads/patient/'.$name_gen);
+            $save_url = 'uploads/patient/'.$name_gen;
+
+            $patient = Patient::find($patient_id);
+            $patient->name=$request->name;
+            $patient->email=$request->email;
+            $patient->image=$save_url;
+            $patient->address=$request->address;
+            $patient->phone=$request->phone;
+            $patient->sex=$request->gender;
+            $patient->dob=$request->dob;
+            $patient->age=$request->age;
+            $patient->blood_group=$request->blood_group;
+            $patient->update();
+        }else{
+            $patient = Patient::find($patient_id);
+            $patient->name=$request->name;
+            $patient->email=$request->email;
+            $patient->address=$request->address;
+            $patient->phone=$request->phone;
+            $patient->sex=$request->gender;
+            $patient->dob=$request->dob;
+            $patient->age=$request->age;
+            $patient->blood_group=$request->blood_group;
+            $patient->update();
+        }
+
 
          $notification=array(
             'message'=>'Patient Updated Success',
@@ -95,6 +119,7 @@ class PatientController extends Controller
         );
 
         return Redirect()->back()->with($notification);
+
     }
 
     // method for deleting patient data
