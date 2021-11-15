@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\NurseController;
 
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
@@ -36,6 +37,23 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 
+//All nurse route 
+
+Route::prefix('nurse')->group(function () {
+   Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
+   //add nurse
+   Route::post('/view',[NurseController::class,'AddNurse'])->name('add.nurse');
+    
+
+    //update nurse info 
+   Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+
+   //delete nurse 
+   Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
+});
+
+
+//
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
     // Admin Profile
