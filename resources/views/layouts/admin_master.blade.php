@@ -8,11 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
+    {{-- for sweet alert --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
+    {{-- end sweet alerty --}}
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
     <link href="{{ asset('backend') }}/assets/libs/chartist/chartist.min.css" rel="stylesheet">
     
+
+
+    <!-- DataTables -->
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
+
+    <!-- Responsive datatable examples -->
+    <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Css -->
     <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
@@ -30,6 +47,7 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css">
+<<<<<<< HEAD
          {{-- for modal --}}
      {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
      {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
@@ -47,6 +65,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
        
+=======
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {{-- for sweet alert start --}}
+        
+
+
+        {{-- sweet alert end --}}
+
+    {{-- link for toaster cdn --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+>>>>>>> ad9955cfabd7691267886c9b82fa62ca405c2d29
 </head>
 
 <body data-sidebar="dark">
@@ -68,7 +107,6 @@
             </div>
         </div>
         <!-- Left Sidebar End -->
-
 
 
         <!-- ============================================================== -->
@@ -172,11 +210,119 @@
 
     <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
 
+    <!-- Required datatable js -->
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js">
+    </script>
+
+    <!-- Buttons examples -->
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/jszip/jszip.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+
+    <!-- Datatable init js -->
+    <script src="{{ asset('backend') }}/assets/js/pages/datatables.init.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    {{-- for sweet alert start --}}
+  
+    <script src="{{ asset('backend') }}/assets/libs/sweetalert2/sweetalert.min.js"></script>
+
+
+
+    {{-- sweet alert end --}}
+
+    {{-- for toaster cdn --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="{{ asset('backend') }}/assets/libs/sweetalert/sweetalert.min.js"></script>
+
+    {{-- js code for toaster --}}
+    <script>
+        @if (Session::has('message'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.success("{{ session('message') }}");
+        @endif
+        @if (Session::has('error'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.error("{{ session('error') }}");
+        @endif
+        @if (Session::has('info'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.info("{{ session('info') }}");
+        @endif
+        @if (Session::has('warning'))
+            toastr.options =
+            {
+            "closeButton" : true,
+            "progressBar" : true
+            }
+            toastr.warning("{{ session('warning') }}");
+        @endif
+    </script>
+
+    {{-- js code for sweetalert2 delete --}}
+    <script type="text/javascript">
+        $(document).on('click', '#delete', function(e) {
+            var link = $(this).attr("href");
+            e.preventDefault();
+            swal({
+                    title: "Careful!",
+                    text: "Are you sure you want to delete ?",
+                    icon: "warning",
+                    dangerMode: true,
+                    buttons: {
+                        cancel: "Exit",
+                        confirm: "Confirm",
+                    },
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+                    }
+                });
+        });
+    </script>
+
+    @yield('scripts')
+
 </body>
 
 </html>
 {{-- {{ asset('backend') }}/ --}}
 {{-- for datatable --}}
+<<<<<<< HEAD
   <!-- JAVASCRIPT -->
   <script src="assets/libs/jquery/jquery.min.js"></script>
   <script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -255,3 +401,24 @@
 </script>
    
   
+=======
+
+<!-- Required datatable js -->
+<script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Responsive examples -->
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js">
+</script>
+
+
+<!-- Buttons examples -->
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/jszip/jszip.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+>>>>>>> ad9955cfabd7691267886c9b82fa62ca405c2d29
