@@ -233,27 +233,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).on('click', '#delete', function(e) {
-            var link = $(this).attr("href");
-            e.preventDefault();
-            swal({
-                    title: "Careful!",
-                    text: "Are you sure you want to delete ?",
-                    icon: "warning",
-                    dangerMode: true,
-                    buttons: {
-                        cancel: "Exit",
-                        confirm: "Confirm",
-                    },
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        window.location.href = link;
-                    }
-                });
-        });
-    </script>
+    <script src="{{ asset('backend') }}/assets/libs/sweetalert/sweetalert.min.js"></script>
 
     {{-- js code for toaster --}}
     <script>
@@ -289,6 +269,29 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
+    </script>
+
+    {{-- js code for sweetalert2 delete --}}
+    <script type="text/javascript">
+        $(document).on('click', '#delete', function(e) {
+            var link = $(this).attr("href");
+            e.preventDefault();
+            swal({
+                    title: "Careful!",
+                    text: "Are you sure you want to delete ?",
+                    icon: "warning",
+                    dangerMode: true,
+                    buttons: {
+                        cancel: "Exit",
+                        confirm: "Confirm",
+                    },
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+                    }
+                });
+        });
     </script>
 
     @yield('scripts')

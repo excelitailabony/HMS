@@ -150,10 +150,9 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> 
-                        {{-- end add modal --}}
+                        </div>
                         {{-- check start --}}
-                       
+
                         {{-- check end --}}
                         {{-- modal end --}}
                              <!-- Edit Modal -->
@@ -283,7 +282,7 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Name</th>
-                                                
+
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 117px;"
                                                     aria-label="Office: activate to sort column ascending">Email</th>
@@ -303,10 +302,10 @@
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Blood Group</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 141px;"
                                                     aria-label="Position: activate to sort column ascending">Image</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Status</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
@@ -319,26 +318,28 @@
                                         <tbody>
                                             @foreach ($accountants as $accountant)
                                                 <tr>
-                                                    <td class="dtr-control sorting_1" tabindex="0">{{ $accountant->name }}
+                                                    <td class="dtr-control sorting_1" tabindex="0">
+                                                        {{ $accountant->name }}
                                                     </td>
-                                                    
+
                                                     <td>{{ $accountant->email }}</td>
                                                     <td>{{ $accountant->phone }}</td>
                                                     <td>{{ $accountant->sex }}</td>
                                                     <td>{{ $accountant->dob }}</td>
                                                     <td>{{ $accountant->age }}</td>
-                                                    <td>{{ $accountant->bloodgrp}}</td>
-                                                    <td><img src="{{ asset($accountant->image) }}" height="80px;" width="80px;"></td>
-                                                    @if($accountant->status==0)
-								<td>  <a class="btn btn-danger btn-sm">Deactive</a> </td>
-								@else
-								<td>  <a class="btn btn-success btn-sm">Active</a> </td>
-								@endif
+                                                    <td>{{ $accountant->bloodgrp }}</td>
+                                                    <td><img src="{{ asset($accountant->image) }}" height="80px;"
+                                                            width="80px;"></td>
+                                                    @if ($accountant->status == 0)
+                                                        <td> <a class="btn btn-danger btn-sm">Deactive</a> </td>
+                                                    @else
+                                                        <td> <a class="btn btn-success btn-sm">Active</a> </td>
+                                                    @endif
                                                     <td>
-                                {{-- <a href="" value=" {{$accountant->id}}" class="btn btn-info btn-sm editbtn" ><i class="fa fa-pencil-alt"></i> </a> --}}
-                                <button type="button" value="{{ $accountant->id }}"
-                                    class="btn btn-primary editBtn btn-sm"><i
-                                        class="fa fa-pencil-alt"></i></button>
+                                                        {{-- <a href="" value=" {{$accountant->id}}" class="btn btn-info btn-sm editbtn" ><i class="fa fa-pencil-alt"></i> </a> --}}
+                                                        <button type="button" value="{{ $accountant->id }}"
+                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                                class="fa fa-pencil-alt"></i></button>
 
                                         {{-- <button class="btn btn-danger btn-flat btn-sm remove-user" data-id="{{ $accountant->id }}" data-action="{{ route('accountant.delete',$accountant->id) }}" onclick="deleteConfirmation({{$accountant->id}})"> Delete</button>								 --}}
                                         {{-- <button class="btn btn-danger" >Delete</button> --}}

@@ -100,9 +100,18 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Sex</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your gender" name="gender">
+                                                        <label>Sex</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -161,7 +170,8 @@
                                         enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="text" id="patient_id" name="patient_id">
+                                        <input type="hidden" id="patient_id" name="patient_id">
+                                        <input type="hidden" id="old_image" name="old_image">
                                         <div class="modal-body">
 
                                             <div class="row">
@@ -201,9 +211,18 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Sex</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your gender" name="gender" id="gender">
+                                                        <label>Sex</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender"
+                                                                id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -242,7 +261,8 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
                                             {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
-                                            <button type="submit">update</button>
+                                            <button type="submit" id="delete"
+                                                class="btn btn-primary btn-rounded">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -344,17 +364,25 @@
                     type: "GET",
                     url: "/edit-patient/" + patient_id,
                     success: function(response) {
-                        // console.log(response.patient.name);
+                        // console.log(response.patient);
                         $('#patient_id').val(response.patient.id);
                         $('#name').val(response.patient.name);
                         $('#email').val(response.patient.email);
-                       
+                        $('#old_image').val(response.patient.image);
                         $('#address').val(response.patient.address);
                         $('#phone').val(response.patient.phone);
                         $('#gender').val(response.patient.sex);
                         $('#dob').val(response.patient.dob);
                         $('#age').val(response.patient.age);
-                        $('#bloodgrp').val(response.patient.bloodgrp);
+                        $('#blood_group').val(response.patient.blood_group);
+
+                        if (response.patient.sex == 'male') {
+                            $('#editModal').find(':radio[name=gender][value="male"]').prop(
+                                'checked', true);
+                        } else {
+                            $('#editModal').find(':radio[name=gender][value="female"]').prop(
+                                'checked', true);
+                        }
                     }
                 })
             });
