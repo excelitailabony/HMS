@@ -60,7 +60,7 @@ Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store
 // Route::prefix('accountant')->group(function () {
     Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
     Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
-    Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
+    Route::get('edit-patient/{id}', [AccountantController::class, 'AccountEdit']); 
     Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
     Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
     Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
