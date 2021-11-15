@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\NurseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +36,18 @@ Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', fun
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+//All nurse route 
+Route::prefix('nurse')->group(function () {
+   Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
+   //add nurse
+   Route::post('/view',[NurseController::class,'AddNurse'])->name('add.nurse');
+    
+
+    //update nurse info 
+   Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+});
+
+
+//
