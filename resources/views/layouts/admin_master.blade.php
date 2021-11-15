@@ -8,6 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
+    {{-- for sweet alert --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
+    {{-- end sweet alerty --}}
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
@@ -46,6 +52,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        {{-- for sweet alert start --}}
+        
+
+
+        {{-- sweet alert end --}}
 
     {{-- link for toaster cdn --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
@@ -210,10 +221,39 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
+    {{-- for sweet alert start --}}
+  
+    <script src="{{ asset('backend') }}/assets/libs/sweetalert2/sweetalert.min.js"></script>
+
+
+
+    {{-- sweet alert end --}}
 
     {{-- for toaster cdn --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).on('click', '#delete', function(e) {
+            var link = $(this).attr("href");
+            e.preventDefault();
+            swal({
+                    title: "Careful!",
+                    text: "Are you sure you want to delete ?",
+                    icon: "warning",
+                    dangerMode: true,
+                    buttons: {
+                        cancel: "Exit",
+                        confirm: "Confirm",
+                    },
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = link;
+                    }
+                });
+        });
+    </script>
 
     {{-- js code for toaster --}}
     <script>
@@ -225,7 +265,6 @@
             }
             toastr.success("{{ session('message') }}");
         @endif
-
         @if (Session::has('error'))
             toastr.options =
             {
@@ -234,7 +273,6 @@
             }
             toastr.error("{{ session('error') }}");
         @endif
-
         @if (Session::has('info'))
             toastr.options =
             {
@@ -243,7 +281,6 @@
             }
             toastr.info("{{ session('info') }}");
         @endif
-
         @if (Session::has('warning'))
             toastr.options =
             {

@@ -21,6 +21,12 @@
         }
 
     </style>
+    {{-- for sweet alert --}}
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script> --}}
+    {{-- for sweetalert --}}
 
     <div class="container-full topBar">
 
@@ -37,7 +43,7 @@
                             </button>
                         </h4>
 
-                        <!-- Modal -->
+                        <!-- AddModal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
@@ -87,7 +93,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Address</label>
-                                                        <input type="email" class="form-control"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter your address" name="address">
                                                     </div>
                                                 </div>
@@ -108,21 +114,21 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>DOB</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="date" class="form-control"
                                                             placeholder="Enter your birth date" name="dob">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Age</label>
-                                                        <input type="email" class="form-control"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter your age" name="age">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter your blood group" name="bloodgrp">
                                                     </div>
                                                 </div>
@@ -145,38 +151,36 @@
                                 </div>
                             </div>
                         </div> 
+                        {{-- end add modal --}}
                         {{-- check start --}}
                        
                         {{-- check end --}}
                         {{-- modal end --}}
                              <!-- Edit Modal -->
-                             <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                              <div class="modal-dialog">
                                  <div class="modal-content">
                                      <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                         <button type="button" class="btn-close" data-bs-dismiss="modal1"
+                                         <h5 class="modal-title" id="exampleModalLabel">Edit Patient</h5>
+                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                              aria-label="Close"></button>
                                      </div>
-                                     
  
-                                     <form action="{{url('accountant.update')}}" method="POST" enctype="multipart/form-data" >
-
-                                        @csrf
-                      
-                                        <input type="hidden"  id="id" >
-                      
+                                     <form action="{{ route('account.update') }}" method="POST"
+                                         enctype="multipart/form-data">
+                                         @csrf
+ 
+                                         <input type="hidden" id="patient_id" name="patient_id">
+                                         <input type="hidden" id="old_image" name="old_image">
                                          <div class="modal-body">
-                                            
-                                            {{-- <input type="hidden" name="old_image" value="{{ $accountedit->image }}"> --}}
  
                                              <div class="row">
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Name</label>
                                                          <input type="text" class="form-control"
-                                                             placeholder="Enter first name" name="name"  id="name">
+                                                             placeholder="Enter first name" name="name" id="name">
                                                          @error('name')
                                                              <span class="text-danger">{{ $message }}</span>
                                                          @enderror
@@ -186,68 +190,70 @@
                                                      <div class="form-group">
                                                          <label>Email</label>
                                                          <input type="email" class="form-control"
-                                                             placeholder="Enter your email" name="email" id="email">                                                         @error('email')
+                                                             placeholder="Enter your email" name="email" id="email">
+                                                         @error('email')
                                                              <span class="text-danger">{{ $message }}</span>
                                                          @enderror
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Password</label>
-                                                         <input type="password" class="form-control"
-                                                             placeholder="Enter your password" name="password"  id="password"> 
-                                                         @error('password')
-                                                             <span class="text-danger">{{ $message }}</span>
-                                                         @enderror
-                                                     </div>
-                                                 </div>
+                                                    <div class="form-group">
+                                                        <label>Password</label>
+                                                        <input type="password" class="form-control"
+                                                            placeholder="Enter your password" name="password" id="password">
+                                                        @error('password')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Address</label>
-                                                         <input type="email" class="form-control"
-                                                             placeholder="Enter your address" name="address"  id="address"> 
+                                                         <input type="text" class="form-control"
+                                                             placeholder="Enter your address" name="address" id="address">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Phone</label>
                                                          <input type="text" class="form-control"
-                                                             placeholder="Enter phone number" name="phone"  id="phone"> 
+                                                             placeholder="Enter phone number" name="phone" id="phone">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Sex</label>
                                                          <input type="text" class="form-control"
-                                                             placeholder="Enter your gender" name="sex"  id="sex"> 
+                                                             placeholder="Enter your gender" name="sex" id="sex">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>DOB</label>
-                                                         <input type="password" class="form-control"
-                                                             placeholder="Enter your birth date" name="dob"  id="dob"> 
+                                                         <input type="date" class="form-control"
+                                                             placeholder="Enter your birth date" name="dob" id="dob">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Age</label>
-                                                         <input type="email" class="form-control"
-                                                             placeholder="Enter your age" name="age"  id="age"> 
+                                                         <input type="text" class="form-control"
+                                                             placeholder="Enter your age" name="age" id="age">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Blood Group</label>
-                                                         <input type="password" class="form-control"
-                                                             placeholder="Enter your blood group" name="bloodgrp" id="bloodgrp"> 
+                                                         <input type="text" class="form-control"
+                                                             placeholder="Enter your blood group" name="bloodgrp"
+                                                             id="bloodgrp">
                                                      </div>
                                                  </div>
                                                  <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Image</label>
                                                          <input type="file" class="form-control"
-                                                             placeholder="Enter your image" name="image"  id="image"> 
+                                                             placeholder="Enter your image" name="image" id="image">
                                                      </div>
                                                  </div>
                                              </div>
@@ -256,12 +262,13 @@
                                          <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary"
                                                  data-bs-dismiss="modal">Close</button>
-                                             <input type="submit" class="btn btn-rounded btn-info" value="Edit Accountant">
+                                             {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
+                                             <button type="submit">update</button>
                                          </div>
                                      </form>
                                  </div>
                              </div>
-                         </div>  
+                         </div>
                          {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -333,8 +340,11 @@
                                     class="btn btn-primary editBtn btn-sm"><i
                                         class="fa fa-pencil-alt"></i></button>
 
-									<a href="{{ route('accountant.delete',$accountant->id) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> </a>
-								@if($accountant->status==1)
+                                        {{-- <button class="btn btn-danger btn-flat btn-sm remove-user" data-id="{{ $accountant->id }}" data-action="{{ route('accountant.delete',$accountant->id) }}" onclick="deleteConfirmation({{$accountant->id}})"> Delete</button>								 --}}
+                                        {{-- <button class="btn btn-danger" >Delete</button> --}}
+                                        <a href="{{route('accountant.delete',$accountant->id)}}" class="btn btn-danger btn-sm" id="delete"><i class ="fa fa-trash"></i></a>
+
+                                        @if($accountant->status==1)
 									<a href="{{ route('accountant.deactive',$accountant->id) }}" class="btn btn-danger btn-sm" title="Product deactive now"><i class ="fa fa-arrow-down"></i></a>
 								@else
 									<a href="{{ route('accountant.active',$accountant->id) }}" class="btn btn-success btn-sm" title="Product active now"><i class ="fa fa-arrow-up"></i></a>
@@ -368,13 +378,24 @@ Add Accountant
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",
-                    url: "/edit-accountant/" + patient_id,
+                    url: "/edit-patient/" + patient_id,
                     success: function(response) {
-                        // 
-                        $('#name').val(response.accountant.name);
+                        // console.log(response.patient.name);
+                        $('#patient_id').val(response.patient.id);
+                        $('#name').val(response.patient.name);
+                        $('#email').val(response.patient.email);
+                        $('#password').val(response.patient.password);
+                        $('#address').val(response.patient.address);
+                        $('#phone').val(response.patient.phone);
+                        $('#sex').val(response.patient.sex);
+                        $('#dob').val(response.patient.dob);
+                        $('#age').val(response.patient.age);
+                        $('#bloodgrp').val(response.patient.bloodgrp);
+                        $('#old_image').val(response.patient.image);
                     }
                 })
             });
         });
     </script>
 @endsection
+

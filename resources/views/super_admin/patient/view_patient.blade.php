@@ -348,12 +348,13 @@
                         $('#patient_id').val(response.patient.id);
                         $('#name').val(response.patient.name);
                         $('#email').val(response.patient.email);
+                       
                         $('#address').val(response.patient.address);
                         $('#phone').val(response.patient.phone);
                         $('#gender').val(response.patient.sex);
                         $('#dob').val(response.patient.dob);
                         $('#age').val(response.patient.age);
-                        $('#blood_group').val(response.patient.blood_group);
+                        $('#bloodgrp').val(response.patient.bloodgrp);
                     }
                 })
             });

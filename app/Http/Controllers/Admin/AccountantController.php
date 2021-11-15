@@ -57,7 +57,7 @@ class AccountantController extends Controller
           ]); 
 
           $notification = array(
-            'message' =>  'Brand Add Sucessyfuly',
+            'message' =>  'Accountant Added Sucessyfuly',
             'alert-type' => 'success'
         ); 
 
@@ -66,89 +66,86 @@ class AccountantController extends Controller
 
   } // end method 
 
+  // method for editing accountant data
   public function AccountEdit($id){
-
-    $accountant = Accountant::find($id);
-        return response()->json([
-            'status' =>200,
-            'accountant' => $accountant,
-        ]);
+    $patient = Accountant::find($id);
+    return response()->json([
+        'status' =>200,
+        'patient' => $patient,
+    ]);
 }
 
 
 
-public function AccountUpdate(Request $request){
-    $accountant_id = $request->id;
-    $old_img  = $request->old_image;
+ // method for updating data
+ public function AccountUpdate(Request $request){
+  $old_img  = $request->old_image;
 
-    if ($request->file('image')) {
+  if ($request->file('image')) {
 
-        unlink($old_img);
-        $image = $request->file('image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(300,300)->save('upload/accountant/'.$name_gen);
-        $save_url = 'upload/accountant/'.$name_gen;
+    unlink($old_img);
+    $image = $request->file('image');
+    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+    Image::make($image)->resize(300,300)->save('upload/accountant/'.$name_gen);
+    $save_url = 'upload/accountant/'.$name_gen;
+  
+   
+// image
+  $patient_id=$request->input('patient_id');
+  $patient =Accountant::find($patient_id);
+  $patient->name=$request->name;
+  $patient->email=$request->email;
+  $patient->password=$request->password;
+  $patient->address=$request->address;
+  $patient->phone=$request->phone;
+  $patient->sex=$request->sex;
+  $patient->dob=$request->dob;
+  $patient->age=$request->age;
+  $patient->bloodgrp=$request->bloodgrp;
+  $patient->image=$save_url;
+  $patient->update();
 
-     // Brand Update    
-     Accountant::findOrFail($accountant_id)->update([
-      'name' => $request->name,   
-      'email' => $request->email,
-      'password' => $request->password, 
-      'address' => $request->address, 
-      'phone' => $request->phone, 
-      'sex' => $request->sex, 
-      'dob' => $request->dob, 
-      'age' => $request->age, 
-      'bloodgrp' => $request->bloodgrp,            
-      'image' => $save_url,
+   $notification=array(
+      'message'=>'Accountant Updated Success',
+      'alert-type'=>'success'
+  );
 
-        ]);
+  return Redirect()->back()->with($notification);
+}
+else{
+  $patient_id=$request->input('patient_id');
+  $patient =Accountant::find($patient_id);
+  $patient->name=$request->name;
+  $patient->email=$request->email;
+  $patient->password=$request->password;
+  $patient->address=$request->address;
+  $patient->phone=$request->phone;
+  $patient->sex=$request->sex;
+  $patient->dob=$request->dob;
+  $patient->age=$request->age;
+  $patient->bloodgrp=$request->bloodgrp;
+  $patient->image=$save_url;
+  $patient->update();
 
-        $notification = array(
-          'message' =>  'Slider Update Sucessyfully',
-          'alert-type' => 'success'
-      ); 
+   $notification=array(
+      'message'=>'Accountant Updated Success',
+      'alert-type'=>'success'
+  );
 
-      return redirect()->route('all.accountant')->with($notification);
-
-
-    }else{
-      Accountant::findOrFail($accountant_id)->update([
-        'name' => $request->name,   
-        'email' => $request->email,
-        'password' => $request->password, 
-        'address' => $request->address, 
-        'phone' => $request->phone, 
-        'sex' => $request->sex, 
-        'dob' => $request->dob, 
-        'age' => $request->age, 
-        'bloodgrp' => $request->bloodgrp,            
-        'image' => $save_url,
-           ]);
- 
-           $notification = array(
-             'message' =>  'Slider Update Sucessyfully',
-             'alert-type' => 'info'
-         ); 
- 
-         return redirect()->route('all.accountant')->with($notification);
+  return Redirect()->back()->with($notification);
 }
 }
 // delete
-public function AccountantDelete($id){
+public function AccountDelete($id){
 
   $accountant = Accountant::findOrFail($id);
 
-    $img = $accountant->slider_img;
-    unlink($img);
+            $img = $accountant->image;
+            unlink($img);  
+            Accountant::findOrFail($id)->delete(); 
+            return redirect()->back();
 
-    Accountant::findOrFail($id)->delete();
-
-  $notification = array(
-      'message' =>  'Slider deleted Successfully',
-      'alert-type' => 'success'
-     );
-  return redirect()->back()->with($notification);  
+ 
 }
   // Accountant deactive
   public function AccountantDeactive($id){
