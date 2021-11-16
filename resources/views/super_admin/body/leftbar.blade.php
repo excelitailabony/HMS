@@ -44,14 +44,19 @@
 
 
          <li>
-             <a href="javascript: void(0);" class="has-arrow waves-effect">
+             <a href="{{route('view.nurse')}}" class="waves-effect">
                  <i class="ti-email"></i>
                  <span>Nurse</span>
              </a>
-             <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="{{route('view.nurse')}}">View Nurse</a></li>
-                
-             </ul>
+             
+         </li>
+
+         <li>
+             <a href="{{route('view.pharmacist')}}" class="waves-effect">
+                 <i class="ti-email"></i>
+                 <span>Pharmacist</span>
+             </a>
+             
          </li>
 
 
