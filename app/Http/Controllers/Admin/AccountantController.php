@@ -12,7 +12,7 @@ class AccountantController extends Controller
     //View
     public function AccountantView(){
 
-        $accountants=  Accountant::latest()->get();
+        $accountants=  Accountant::orderBy('id', 'DESC')->get();
     
         return View('super_admin.accountant.view_accountant', compact('accountants'));
     
@@ -68,10 +68,10 @@ class AccountantController extends Controller
 
   // method for editing accountant data
   public function AccountEdit($id){
-    $patient = Accountant::find($id);
+    $accountant = Accountant::find($id);
     return response()->json([
         'status' =>200,
-        'patient' => $patient,
+        'accountant' => $accountant,
     ]);
 }
 
@@ -91,19 +91,19 @@ class AccountantController extends Controller
   
    
 // image
-  $patient_id=$request->input('patient_id');
-  $patient =Accountant::find($patient_id);
-  $patient->name=$request->name;
-  $patient->email=$request->email;
-  $patient->password=$request->password;
-  $patient->address=$request->address;
-  $patient->phone=$request->phone;
-  $patient->sex=$request->sex;
-  $patient->dob=$request->dob;
-  $patient->age=$request->age;
-  $patient->bloodgrp=$request->bloodgrp;
-  $patient->image=$save_url;
-  $patient->update();
+  $accountant_id=$request->input('accountant_id');
+  $accountant =Accountant::find($accountant_id);
+  $accountant->name=$request->name;
+  $accountant->email=$request->email;
+  $accountant->password=$request->password;
+  $accountant->address=$request->address;
+  $accountant->phone=$request->phone;
+  $accountant->sex=$request->sex;
+  $accountant->dob=$request->dob;
+  $accountant->age=$request->age;
+  $accountant->bloodgrp=$request->bloodgrp;
+  $accountant->image=$save_url;
+  $accountant->update();
 
    $notification=array(
       'message'=>'Accountant Updated Success',
@@ -113,19 +113,19 @@ class AccountantController extends Controller
   return Redirect()->back()->with($notification);
 }
 else{
-  $patient_id=$request->input('patient_id');
-  $patient =Accountant::find($patient_id);
-  $patient->name=$request->name;
-  $patient->email=$request->email;
-  $patient->password=$request->password;
-  $patient->address=$request->address;
-  $patient->phone=$request->phone;
-  $patient->sex=$request->sex;
-  $patient->dob=$request->dob;
-  $patient->age=$request->age;
-  $patient->bloodgrp=$request->bloodgrp;
-  $patient->image=$save_url;
-  $patient->update();
+  $accountant_id=$request->input('accountant_id');
+  $accountant =Accountant::find($accountant_id);
+  $accountant->name=$request->name;
+  $accountant->email=$request->email;
+  $accountant->password=$request->password;
+  $accountant->address=$request->address;
+  $accountant->phone=$request->phone;
+  $accountant->sex=$request->sex;
+  $accountant->dob=$request->dob;
+  $accountant->age=$request->age;
+  $accountant->bloodgrp=$request->bloodgrp;
+  
+  $accountant->update();
 
    $notification=array(
       'message'=>'Accountant Updated Success',
@@ -154,7 +154,7 @@ public function AccountDelete($id){
     
        ]);
        $notification = array(
-        'message' =>  'Slider Deactivated Successfully',
+        'message' =>  'Accountant Deactivated Successfully',
         'alert-type' => 'info'
     ); 
 
@@ -168,7 +168,7 @@ public function AccountantActive($id){
     
        ]);
        $notification = array(
-        'message' =>  'Slider Activated Successfully',
+        'message' =>  'Accountant Activated Successfully',
         'alert-type' => 'info'
     ); 
 

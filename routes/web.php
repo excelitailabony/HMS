@@ -7,7 +7,9 @@ use App\Http\Controllers\Admin\NurseController;
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
-use App\Http\Controllers\Pharmacist\PharmacistController;
+use App\Http\Controllers\Admin\LaboratoristController;
+use App\Http\Controllers\Admin\ReceptionistController;
+
 
 
 /*
@@ -80,15 +82,41 @@ Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('
 // Doctors routes goes here
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
 Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
+Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
+Route::post('update/doctor',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
+Route::get('delete/doctor/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+Route::get('/patient/deactive/{id}', [DoctorController::class, 'DoctorDeactive'])->name('doctor.deactive'); 
+Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->name('doctor.active');
 
 // Accountant Start
 // Route::prefix('accountant')->group(function () {
     Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
     Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
-    Route::get('edit-patient/{id}', [AccountantController::class, 'AccountEdit']); 
+    Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
     Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
     Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
     Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
     Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
+// Labroatorist Start
+Route::prefix('laboratorist')->group(function () {
+    Route::get('/view', [LaboratoristController::class, 'LaboratoristView'])->name('all.laboratorist'); 
+    Route::post('/add', [LaboratoristController::class, 'LaboratoristStore'])->name('laboratorist.add'); 
+    Route::get('edit-laboratorist/{id}', [LaboratoristController::class, 'LaboratoristEdit']); 
+    Route::post('/update', [LaboratoristController::class, 'LaboratoristUpdate'])->name('laboratorist.update');
+    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete'); 
+   
+     
+  });// Admin Brand All Route Group End 
+//    Receptionist Start
+  Route::prefix('receptionist')->group(function () {
+      Route::get('/view', [ReceptionistController::class, 'ReceptionistView'])->name('all.receptionist'); 
+      Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
+      Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
+      Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
+      Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
+     
+       
+    });// Admin Brand All Route Group End 
+  
