@@ -14,6 +14,8 @@ class PatientController extends Controller
     // method for all patient data 
     public function index(){
         $patients = Patient::latest()->get();
+
+        // dd($patients);
         return view('super_admin.patient.view_patient',compact('patients'));
     }
 
@@ -81,7 +83,6 @@ class PatientController extends Controller
     public function UpdatePatient(Request $request){
         $patient_id=$request->input('patient_id');
         $old_img = $request->old_image;
-
 
         if ($request->file('image')) {
             unlink($old_img);
