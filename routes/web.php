@@ -7,6 +7,9 @@ use App\Http\Controllers\Admin\NurseController;
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\LaboratoristController;
+use App\Http\Controllers\Admin\ReceptionistController;
+
 
 
 /*
@@ -90,3 +93,24 @@ Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->n
     Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
+// Labroatorist Start
+Route::prefix('laboratorist')->group(function () {
+    Route::get('/view', [LaboratoristController::class, 'LaboratoristView'])->name('all.laboratorist'); 
+    Route::post('/add', [LaboratoristController::class, 'LaboratoristStore'])->name('laboratorist.add'); 
+    Route::get('edit-laboratorist/{id}', [LaboratoristController::class, 'LaboratoristEdit']); 
+    Route::post('/update', [LaboratoristController::class, 'LaboratoristUpdate'])->name('laboratorist.update');
+    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete'); 
+   
+     
+  });// Admin Brand All Route Group End 
+//    Receptionist Start
+  Route::prefix('receptionist')->group(function () {
+      Route::get('/view', [ReceptionistController::class, 'ReceptionistView'])->name('all.receptionist'); 
+      Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
+      Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
+      Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
+      Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
+     
+       
+    });// Admin Brand All Route Group End 
+  

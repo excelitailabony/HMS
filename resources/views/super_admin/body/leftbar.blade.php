@@ -38,9 +38,15 @@
          <li>
              <a href="{{ route('all.doctor') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Doctor</span>
+                 <span>Laboratorist</span>
              </a>
          </li>
+         <li>
+            <a href="{{ route('all.receptionist') }}" class="waves-effect">
+                <i class="ti-home"></i>
+                <span>Receptionist</span>
+            </a>
+        </li>
 
 
          <li>
