@@ -16,7 +16,8 @@
             justify-content: space-between;
         }
 
-        .modal-body .row .col-md-6 {
+        .modal-body .row .col-md-6,
+        .modal-body .row .col-md-12 {
             margin-bottom: 1rem;
         }
 
@@ -128,19 +129,32 @@
                                                             placeholder="Enter your age" name="age">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your blood group" name="blood_group">
+                                                        <select name="blood_group" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Blood group
+                                                            </option>
+                                                            <option value="A+">A+</option>
+                                                            <option value="A-">A-</option>
+                                                            <option value="AB+">AB+</option>
+                                                            <option value="AB-">AB-</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="B-">B-</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="O-">O-</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
-                                                        <input type="file" class="form-control"
+                                                        <input type="file" class="form-control" onchange="loadFile(event)"
                                                             placeholder="Enter your image" name="image">
                                                     </div>
+                                                </div>
+                                                <div class="col-md-6 img-show">
+                                                    <img id="output" width="100" />
                                                 </div>
                                             </div>
                                         </div>
@@ -242,16 +256,32 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your blood group" name="blood_group"
-                                                            id="blood_group">
+                                                        <select name="blood_group" id="blood_group" class="form-control"
+                                                            required="">
+                                                            <option value="" selected="" disabled="">Select Blood group
+                                                            </option>
+                                                            <option value="A+">A+</option>
+                                                            <option value="A-">A-</option>
+                                                            <option value="AB+">AB+</option>
+                                                            <option value="AB-">AB-</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="B-">B-</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="O-">O-</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
                                                         <input type="file" class="form-control"
-                                                            placeholder="Enter your image" name="image" id="">
+                                                            placeholder="Enter your image" name="image"
+                                                            onChange="mainThamUrl(this)">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <img src="" id="mainThmb">
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,8 +290,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            {{-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient"> --}}
-                                            <button type="submit" id="delete"
+                                            <button type="submit" id="update"
                                                 class="btn btn-primary btn-rounded">update</button>
                                         </div>
                                     </form>
@@ -271,41 +300,42 @@
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="datatable_length"><label>Show <select
+                                                name="datatable_length" aria-controls="datatable"
+                                                class="custom-select custom-select-sm form-control form-control-sm form-select form-select-sm">
+                                                <option value="2">2</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                                class="form-control form-control-sm" placeholder=""
+                                                aria-controls="datatable"></label></div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable-buttons"
                                         class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline text-center align-middle"
                                         style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
                                         aria-describedby="datatable-buttons_info">
+
                                         <thead>
                                             <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 141px;"
-                                                    aria-label="Position: activate to sort column ascending">Image</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 117px;"
-                                                    aria-label="Office: activate to sort column ascending">Email</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 53px;"
-                                                    aria-label="Age: activate to sort column ascending">Phone</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 105px;"
-                                                    aria-label="Start date: activate to sort column ascending">Sex
+                                                <th rowspan="1" colspan="1" style="width: 50px;">Id</th>
+                                                <th rowspan="1" colspan="1" style="width: 120px;">Name</th>
+                                                <th rowspan="1" colspan="1" style="width: 141px;">Image</th>
+                                                <th rowspan="1" colspan="1" style="width: 117px;">Email</th>
+                                                <th rowspan="1" colspan="1" style="width: 53p">Phone</th>
+                                                <th rowspan="1" colspan="1" style="width: 105px;">Sex
                                                 </th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Dob</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 50px;"
-                                                    aria-label="Salary: activate to sort column ascending">Age</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Blood Group</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Actions</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Dob</th>
+                                                <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Blood Group</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
                                             </tr>
                                         </thead>
 
@@ -313,10 +343,12 @@
                                         <tbody>
                                             @foreach ($patients as $patient)
                                                 <tr>
-                                                    <td class="dtr-control sorting_1" tabindex="0">{{ $patient->name }}
+                                                    <td>{{ $patient->id }}</td>
+                                                    <td>{{ $patient->name }}
                                                     </td>
                                                     <td><img src="{{ asset($patient->image) }}" alt=""
-                                                            style="width: 80px;"></td>
+                                                            style="width: 80px;">
+                                                    </td>
                                                     <td>{{ $patient->email }}</td>
                                                     <td>{{ $patient->phone }}</td>
                                                     <td>{{ $patient->sex }}</td>
@@ -324,10 +356,6 @@
                                                     <td>{{ $patient->age }}</td>
                                                     <td>{{ $patient->blood_group }}</td>
                                                     <td>
-                                                        {{-- <a href="{{ route('edit.patient', $patient->id) }}"
-                                                            class="btn btn-sm btn-warning" id="delete" title="edit data">
-                                                            <i class="fa fa-pencil-alt"></i>
-                                                        </a> --}}
                                                         <button type="button" value="{{ $patient->id }}"
                                                             class="btn btn-primary editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
@@ -387,5 +415,23 @@
                 })
             });
         });
+    </script>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    {{-- edit img --}}
+    <script type="text/javascript">
+        function mainThamUrl(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#mainThmb').attr('src', e.target.result).width(100).height(100);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 @endsection

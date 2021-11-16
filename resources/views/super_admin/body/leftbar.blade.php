@@ -27,12 +27,7 @@
                 <span>Accountant</span>
             </a>
         </li>
-         <li>
-             <a href="{{ route('all.doctor') }}" class="waves-effect">
-                 <i class="ti-home"></i>
-                 <span>Doctor</span>
-             </a>
-         </li>
+
          <li>
              <a href="{{ route('all.patient') }}" class="waves-effect">
                  <i class="ti-home"></i>
@@ -41,7 +36,7 @@
          </li>
 
          <li>
-             <a href="{{ route('all.laboratorist') }}" class="waves-effect">
+             <a href="{{ route('all.doctor') }}" class="waves-effect">
                  <i class="ti-home"></i>
                  <span>Laboratorist</span>
              </a>
@@ -52,6 +47,18 @@
                 <span>Receptionist</span>
             </a>
         </li>
+
+
+         <li>
+             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                 <i class="ti-email"></i>
+                 <span>Nurse</span>
+             </a>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{route('view.nurse')}}">View Nurse</a></li>
+                
+             </ul>
+         </li>
 
 
      </ul>

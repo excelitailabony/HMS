@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\NurseController;
 
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
@@ -39,6 +40,23 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 
+//All nurse route 
+
+Route::prefix('nurse')->group(function () {
+   Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
+   //add nurse
+   Route::post('/view',[NurseController::class,'AddNurse'])->name('add.nurse');
+    
+
+    //update nurse info 
+   Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+
+   //delete nurse 
+   Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
+});
+
+
+//
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
     // Admin Profile
@@ -58,6 +76,11 @@ Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('
 // Doctors routes goes here
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
 Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
+Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
+Route::post('update/doctor',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
+Route::get('delete/doctor/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+Route::get('/patient/deactive/{id}', [DoctorController::class, 'DoctorDeactive'])->name('doctor.deactive'); 
+Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->name('doctor.active');
 
 // Accountant Start
 // Route::prefix('accountant')->group(function () {

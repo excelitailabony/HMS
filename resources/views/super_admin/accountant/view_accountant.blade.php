@@ -222,21 +222,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Address</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your address" name="address" id="address">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Phone</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter phone number" name="phone" id="phone">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Sex</label><br>
                                                         <div class="form-check form-check-inline">
@@ -374,20 +360,27 @@
                                                         <td> <a class="btn btn-success btn-sm">Active</a> </td>
                                                     @endif
                                                     <td>
-                                                        {{-- <a href="" value=" {{$accountant->id}}" class="btn btn-info btn-sm editbtn" ><i class="fa fa-pencil-alt"></i> </a> --}}
+
                                                         <button type="button" value="{{ $accountant->id }}"
                                                             class="btn btn-primary editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
 
-                                        {{-- <button class="btn btn-danger btn-flat btn-sm remove-user" data-id="{{ $accountant->id }}" data-action="{{ route('accountant.delete',$accountant->id) }}" onclick="deleteConfirmation({{$accountant->id}})"> Delete</button>								 --}}
-                                        {{-- <button class="btn btn-danger" >Delete</button> --}}
-                                        <a href="{{route('accountant.delete',$accountant->id)}}" class="btn btn-danger btn-sm" id="delete"><i class ="fa fa-trash"></i></a>
+                                                        <a href="{{ route('accountant.delete', $accountant->id) }}"
+                                                            class="btn btn-danger btn-sm" id="delete"><i
+                                                                class="fa fa-trash"></i></a>
 
-                                        @if($accountant->status==1)
-									<a href="{{ route('accountant.deactive',$accountant->id) }}" class="btn btn-danger btn-sm" title="Product deactive now"><i class ="fa fa-arrow-down"></i></a>
-								@else
-									<a href="{{ route('accountant.active',$accountant->id) }}" class="btn btn-success btn-sm" title="Product active now"><i class ="fa fa-arrow-up"></i></a>
-								@endif
+                                                        @if ($accountant->status == 1)
+                                                            <a href="{{ route('accountant.deactive', $accountant->id) }}"
+                                                                class="btn btn-danger btn-sm"
+                                                                title="Product deactive now"><i
+                                                                    class="fa fa-arrow-down"></i></a>
+                                                        @else
+                                                            <a href="{{ route('accountant.active', $accountant->id) }}"
+                                                                class="btn btn-success btn-sm"
+                                                                title="Product active now"><i
+                                                                    class="fa fa-arrow-up"></i></a>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -404,10 +397,7 @@
         </div>
     </div>
 @endsection
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-data-bs-target="#exampleModal">
-Add Accountant
-</button> --}}
+
 @section('scripts')
     <script>
         $(document).ready(function() {
@@ -445,4 +435,3 @@ Add Accountant
         });
     </script>
 @endsection
-
