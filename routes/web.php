@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
 use App\Http\Controllers\Pharmacist\PharmacistController;
 
+
+use App\Http\Controllers\Blood_Bank\BloodIssueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -129,4 +131,10 @@ Route::prefix('laboratorist')->group(function () {
      
        
     });// Admin Brand All Route Group End 
+
+
+//Blood Issue 
+Route::prefix('blood')->group(function () {
+     Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
+});
   

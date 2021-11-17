@@ -56,7 +56,7 @@
 
 
          <li>
-             <a href="{{route('view.nurse')}}" class="waves-effect">
+             <a href="{{ route('view.nurse') }}" class="waves-effect">
                  <i class="ti-email"></i>
                  <span>Nurse</span>
              </a>
@@ -72,7 +72,7 @@
                  <span>Blood Bank</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">Blood Issue</a></li>
+                 <li><a href="{{ route('blood.issue') }}">Blood Issue</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="">Blood Bag</a></li>
