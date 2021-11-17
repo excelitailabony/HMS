@@ -31,7 +31,7 @@
 
                     <h4 class="card-title text-center">All Receptionist
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
                             Add Receptionist
                         </button>
@@ -43,7 +43,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Receptionist</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -310,7 +310,7 @@
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary"
                                              data-bs-dismiss="modal">Close</button>
-                                         <button type="submit" class="btn btn-primary">update</button>
+                                         <button type="submit" class="btn btn-rounded btn-info">update</button>
                                      </div>
                                  </form>
                              </div>

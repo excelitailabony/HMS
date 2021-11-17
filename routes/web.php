@@ -78,7 +78,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
     // Admin Profile
 	Route::get('/login', [AdminController::class, 'loginForm']);
 	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
-
+  
 });
 
 // Patients routes goes here

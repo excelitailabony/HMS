@@ -1,24 +1,26 @@
 <!doctype html>
 <html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
-        <title>Login | Veltrix - Admin & Dashboard Template</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
-        <meta content="Themesbrand" name="author">
-        <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('/')}}backend/assets/images/favicon.ico">
+    <meta charset="utf-8">
+    <title>Admin Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
-        <!-- Bootstrap Css -->
-        <link href="{{asset('/')}}backend/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css">
-        <!-- Icons Css -->
-        <link href="{{asset('/')}}backend/assets/css/icons.min.css" rel="stylesheet" type="text/css">
-        <!-- App Css-->
-        <link href="{{asset('/')}}backend/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <!-- Bootstrap Css -->
+    <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet"
+        type="text/css">
+    <!-- Icons Css -->
+    <link href="{{ asset('backend') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link href="{{ asset('backend') }}/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
 
-    </head>
+</head>
+
 
 <body>
 
@@ -35,41 +37,52 @@
                                 <h5 class="text-white font-size-20">Welcome Back !</h5>
                                 <p class="text-white-50">Sign in to continue to Veltrix.</p>
                                 <a href="index.html" class="logo logo-admin">
-                                    <img src="assets/images/logo-sm.png" height="24" alt="logo">
+                                    <img src="{{ asset('backend') }}/assets/images/logo-sm.png" height="24"
+                                        alt="logo">
                                 </a>
                             </div>
                         </div>
 
                         <div class="card-body p-4">
                             <div class="p-3">
-                            <form method="POST" action="{{ isset($guard) ? url($guard.'/login') : route('login') }}">
-                                @csrf
+
+                                <form method="POST"
+                                    action="{{ isset($guard) ? url($guard . '/login') : route('admin.login') }}">
+                                    @csrf
 
                                     <div class="mb-3">
-                                        <label class="form-label" for="username">email</label>
-                                        <input type="text" class="form-control"  type="email" id="email" name="email" placeholder="Enter email">
+                                        <label class="form-label" for="username">Email</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Enter your email">
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label" for="userpassword">Password</label>
-                                        <input class="form-control"  type="password"  id="password" name="password" placeholder="Enter password">
+
+                                        <input type="password" class="form-control" name="password" id="password"
+                                            placeholder="Enter your password">
                                     </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-sm-6">
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="customControlInline">
-                                                <label class="form-check-label" for="customControlInline">Remember me</label>
+                                            
+                                                {{-- <input type="checkbox" class="form-check-input" id="customControlInline">
+                                                <label class="form-check-label" for="customControlInline">Remember me</label> --}}
+                                                <input type="checkbox" id="remember_me" name="remember">
+                                                <label for="remember_me">{{ __('Remember me') }}</label>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 text-end">
-                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
+                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">
+                                                {{ __('Log in') }}</button>
                                         </div>
                                     </div>
 
                                     <div class="mt-2 mb-0 row">
                                         <div class="col-12 mt-4">
-                                            <a href="pages-recoverpw.html"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                            <a href="{{ route('password.request') }}"><i class="mdi mdi-lock"></i>
+                                                Forgot your password?</a>
                                         </div>
                                     </div>
 
@@ -81,8 +94,8 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <p>Don't have an account ? <a href="pages-register.html" class="fw-medium text-primary"> Signup now </a> </p>
-                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Veltrix. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                        {{-- <p>Don't have an account ? <a href="pages-register.html" class="fw-medium text-primary"> Signup now </a> </p>
+                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Veltrix. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p> --}}
                     </div>
 
 
@@ -92,13 +105,14 @@
     </div>
 
     <!-- JAVASCRIPT -->
-    <script src="{{asset('/')}}backend/assets/libs/jquery/jquery.min.js"></script>
-    <script src="{{asset('/')}}backend/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{asset('/')}}backend/assets/libs/metismenu/metisMenu.min.js"></script>
-    <script src="{{asset('/')}}backend/assets/libs/simplebar/simplebar.min.js"></script>
-    <script src="{{asset('/')}}backend/assets/libs/node-waves/waves.min.js"></script>
 
-    <script src="assets/js/app.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/jquery/jquery.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/metismenu/metisMenu.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/simplebar/simplebar.min.js"></script>
+    <script src="{{ asset('backend') }}/assets/libs/node-waves/waves.min.js"></script>
+
+    <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
 </body>
 

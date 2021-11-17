@@ -46,7 +46,6 @@ class AdminController extends Controller
     } // end method
 
 
-
     public function create(Request $request): LoginViewResponse
     {
         return app(LoginViewResponse::class);
@@ -109,4 +108,5 @@ class AdminController extends Controller
 
         return app(LogoutResponse::class);
     }
+
 }
