@@ -81,7 +81,7 @@
                  <li><a href="">Blood Donation</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">Blood Donor</a></li>
+                 <li><a href="{{route('all.blooddonor')}}">Blood Donor</a></li>
              </ul>
          </li>
 
