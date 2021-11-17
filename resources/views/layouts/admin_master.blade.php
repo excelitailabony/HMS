@@ -254,11 +254,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     {{-- js code for toaster --}}
-<<<<<<< HEAD
-  <script>
-=======
     <script>
->>>>>>> bf309bb1e2e2a5ce7e90c884aff1393d19590686
         @if (Session::has('message'))
             toastr.options =
             {
@@ -324,11 +320,6 @@
 {{-- {{ asset('backend') }}/ --}}
 {{-- for datatable --}}
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> bf309bb1e2e2a5ce7e90c884aff1393d19590686
 <!-- Required datatable js -->
 <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>

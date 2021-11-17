@@ -235,8 +235,8 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="#"><i
-                            class="mdi mdi-account-circle font-size-17 align-middle me-1"></i> Profile</a>
+                    <a class="dropdown-item" href="{{ route('admin.profile') }}"><i
+                            class="mdi mdi-account-circle font-size-17 align-middle me-1"></i> Admin Profile</a>
                     <a class="dropdown-item" href="#"><i class="mdi mdi-wallet font-size-17 align-middle me-1"></i>
                         My Wallet</a>
                     <a class="dropdown-item d-flex align-items-center" href="#"><i

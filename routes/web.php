@@ -3,14 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NurseController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
-
-
+use App\Http\Controllers\Pharmacist\PharmacistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +26,16 @@ use App\Http\Controllers\Admin\ReceptionistController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
+	Route::get('/login', [AdminController::class, 'loginForm']);
+	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
+});
+
+//// admin profile view
+Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
+
+
 
 
 // Admin Login View
