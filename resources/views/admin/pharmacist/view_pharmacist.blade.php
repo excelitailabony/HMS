@@ -29,25 +29,25 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title text-center">All Nurse
+                        <h4 class="card-title text-center">All Pharmacist
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddDoctor">
-                                Add Nurse
+                                Add Pharmacist
                             </button>
                         </h4>
 
-                        <!-- Modal for add nurse -->
+                        <!-- Modal for add pharmacist -->
                         <div class="modal fade" id="AddDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add nurse info</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Add pharmacist info</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('add.nurse')}}" method="POST"
+                                    <form action="{{ route('add.pharmacist')}}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
@@ -164,32 +164,32 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Nurse">
+                                            <input type="submit" class="btn btn-rounded btn-info" value="Add pharmacist">
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        {{--end modal for add nurse--}}
+                        {{--end modal for add pharmacist--}}
 
 
-                        {{--modal for edit nurse--}}
-                        {{-- Modal for edit nurse --}}
+                        
+                        {{-- Modal for edit pharmacist --}}
                         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Nurse</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit pharmacist</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('update.nurse') }}" method="POST"
+                                    <form action="{{ route('update.pharmacist') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="hidden" id="nurse_id" name="nurse_id">
+                                        <input type="hidden" id="pharmacist_id" name="pharmacist_id">
                                          <input type="hidden" id="old_image" name="old_image"> 
                                         <div class="modal-body">
 
@@ -309,7 +309,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--end modal for edit  nurse--}}
+                        {{--end modal for edit  pharmacist--}}
 
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -372,25 +372,25 @@
 
 
                                         <tbody>
-                                        @foreach($nurses as $nurse)
+                                        @foreach($pharmacists as $pharmacist)
                                             <tr class="odd">
-                                                <td class="id">{{$nurse->id}}</td>
-                                               <td class="name">{{$nurse->name}}</td>
-                                               <td class="image"><img src="{{asset($nurse->image)}}" ></td>
-                                               <td class="email">{{$nurse->email}}</td>
-                                               <td class="phone">{{$nurse->phone}}</td>
-                                               <td class="password">{{$nurse->password}}</td>
-                                               <td class="address">{{$nurse->address}}</td>
-                                               <td class="sex">{{$nurse->sex}}</td>
-                                               <td class="dob">{{$nurse->dob}}</td>
-                                               <td class="age">{{$nurse->age}}</td>
-                                               <td class="blood_group">{{$nurse->blood_group}}</td>
+                                                <td class="id">{{$pharmacist->id}}</td>
+                                               <td class="name">{{$pharmacist->name}}</td>
+                                               <td class="image"><img src="{{asset($pharmacist->image)}}" ></td>
+                                               <td class="email">{{$pharmacist->email}}</td>
+                                               <td class="phone">{{$pharmacist->phone}}</td>
+                                               <td class="password">{{$pharmacist->password}}</td>
+                                               <td class="address">{{$pharmacist->address}}</td>
+                                               <td class="sex">{{$pharmacist->sex}}</td>
+                                               <td class="dob">{{$pharmacist->dob}}</td>
+                                               <td class="age">{{$pharmacist->age}}</td>
+                                               <td class="blood_group">{{$pharmacist->blood_group}}</td>
                                                <td>
-                                               <button id="" value="{{ $nurse->id }}"  data-bs-toggle="modal" data-bs-target="#editModal"  class="btn btn-primary btn-sm editBtn" title="Edit"  data-bs-target="#exampleModal2" >
+                                               <button id="" value="{{ $pharmacist->id }}"  data-bs-toggle="modal" data-bs-target="#editModal"  class="btn btn-primary btn-sm editBtn" title="Edit"  data-bs-target="#exampleModal2" >
                                                <i class="fa fa-pencil-alt"></i>
                                                </button> 
                                                    <!-- <a class="btn btn-success btn-sm"  href="#exampleModal" title="Edit"><i class="fas fa-pencil-alt"></i></a> -->
-                                                   <a href="{{route('delete.nurse',$nurse->id)}}" class="btn btn-danger btn-sm" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
+                                                   <a href="{{route('delete.pharmacist',$pharmacist->id)}}" class="btn btn-danger btn-sm" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
                                                </td>
                                             </tr>
                                             @endforeach
@@ -412,28 +412,29 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
-                var nurse_id = $(this).val();
-                // alert(nurse_id);
+                var pharmacist_id = $(this).val();
+                // alert(pharmacist_id);
                 $('#editModal').modal('show');
 
                 $.ajax({
                     type: "GET",
-                    url: "/edit-nurse/" + nurse_id,
+                    url: "/edit-pharmacist/" + pharmacist_id,
                     success: function(response) {
-                        console.log(response.nurse.blood_group);
-                        $('#nurse_id').val(response.nurse.id);
-                        $('#name').val(response.nurse.name);
-                        $('#email').val(response.nurse.email);
-                        $('#old_image').val(response.nurse.image);
-                        $('#address').val(response.nurse.address);
-                        $('#phone').val(response.nurse.phone);
-                        $('#password').val(response.nurse.password);
-                        $('#sex').val(response.nurse.sex);
-                        $('#dob').val(response.nurse.dob);
-                        $('#age').val(response.nurse.age);
-                        $('#blood_group').val(response.nurse.blood_group);
+                        // console.log(response.pharmacist);
+                        console.log(response.pharmacist.blood_group);
+                        $('#pharmacist_id').val(response.pharmacist.id);
+                        $('#name').val(response.pharmacist.name);
+                        $('#email').val(response.pharmacist.email);
+                        $('#old_image').val(response.pharmacist.image);
+                        $('#address').val(response.pharmacist.address);
+                        $('#phone').val(response.pharmacist.phone);
+                        $('#password').val(response.pharmacist.password);
+                        $('#sex').val(response.pharmacist.sex);
+                        $('#dob').val(response.pharmacist.dob);
+                        $('#age').val(response.pharmacist.age);
+                        $('#blood_group').val(response.pharmacist.blood_group);
 
-                        if (response.nurse.sex == 'male') {
+                        if (response.pharmacist.sex == 'male') {
                             $('#editModal').find(':radio[name=sex][value="male"]').prop(
                                 'checked', true);
                         } else {

@@ -40,9 +40,10 @@ class AdminController extends Controller
         $this->guard = $guard;
     }
 
-    public function loginForm(){
+     // admin Login 
+     public function loginForm(){
     	return view('auth.admin_login', ['guard' => 'admin']);
-    }
+    } // end method
 
 
     public function create(Request $request): LoginViewResponse

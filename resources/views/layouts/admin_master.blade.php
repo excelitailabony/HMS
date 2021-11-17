@@ -287,7 +287,7 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
-    </script> -->
+    </script>
 
     <!-- js code for sweetalert2 delete  -->
     <script type="text/javascript">

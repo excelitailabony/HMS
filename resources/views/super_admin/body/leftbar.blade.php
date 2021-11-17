@@ -56,7 +56,7 @@
 
 
          <li>
-             <a href="javascript: void(0);" class="has-arrow waves-effect">
+             <a href="{{route('view.nurse')}}" class="waves-effect">
                  <i class="ti-email"></i>
                  <span>Nurse</span>
              </a>
