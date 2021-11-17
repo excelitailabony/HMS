@@ -96,8 +96,8 @@ class AccountantController extends Controller
   $accountant->name=$request->name;
   $accountant->email=$request->email;
   $accountant->password=$request->password;
-  $accountant->address=$request->address;
-  $accountant->phone=$request->phone;
+  // $accountant->address=$request->address;
+  // $accountant->phone=$request->phone;
   $accountant->sex=$request->sex;
   $accountant->dob=$request->dob;
   $accountant->age=$request->age;
@@ -118,8 +118,8 @@ else{
   $accountant->name=$request->name;
   $accountant->email=$request->email;
   $accountant->password=$request->password;
-  $accountant->address=$request->address;
-  $accountant->phone=$request->phone;
+  // $accountant->address=$request->address;
+  // $accountant->phone=$request->phone;
   $accountant->sex=$request->sex;
   $accountant->dob=$request->dob;
   $accountant->age=$request->age;
