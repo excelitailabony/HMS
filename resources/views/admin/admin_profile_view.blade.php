@@ -66,3 +66,7 @@
     </div>
     <!-- End Page-content -->
 @endsection
+
+<div class="float-start mini-stat-img me-4">
+                                    <img src="assets/images/services-icon/01.png" alt="">
+                                </div>
