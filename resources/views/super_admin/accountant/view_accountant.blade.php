@@ -21,7 +21,7 @@
         }
 
     </style>
- 
+
 
     <div class="container-full topBar">
 
@@ -134,18 +134,19 @@
                                                         <label>Blood Group</label>
                                                         {{-- <input type="text" class="form-control"
                                                             placeholder="Enter your blood group" name="bloodgrp"> --}}
-                                                            <select name="bloodgrp" class="form-control" required="" >
-                                                                <option value="" selected="" disabled="">Select Blood Group</option>
-                                                    
-                                                          <option value="A+">A+</option>
-                                                          <option value="A-">A-</option>
-                                                          <option value="AB+">AB+</option>	
-                                                          <option value="AB-">AB-</option>	
-                                                          <option value="B+">B+</option>
-                                                          <option value="B-">B-</option>
-                                                          <option value="O+">O+</option>
-                                                          <option value="O-">O-</option>
-                                                            </select>
+                                                        <select name="bloodgrp" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Blood Group
+                                                            </option>
+
+                                                            <option value="A+">A+</option>
+                                                            <option value="A-">A-</option>
+                                                            <option value="AB+">AB+</option>
+                                                            <option value="AB-">AB-</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="B-">B-</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="O-">O-</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -171,48 +172,48 @@
 
                         {{-- check end --}}
                         {{-- modal end --}}
-                             <!-- Edit Modal -->
-                             <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                             aria-hidden="true">
-                             <div class="modal-dialog">
-                                 <div class="modal-content">
-                                     <div class="modal-header">
-                                         <h5 class="modal-title" id="exampleModalLabel">Edit Accountant</h5>
-                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                             aria-label="Close"></button>
-                                     </div>
- 
-                                     <form action="{{ route('account.update') }}" method="POST"
-                                         enctype="multipart/form-data">
-                                         @csrf
- 
-                                         <input type="hidden" id="accountant_id" name="accountant_id">
-                                         <input type="hidden" id="old_image" name="old_image">
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Accountant</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
 
-                                         <div class="modal-body">
- 
-                                             <div class="row">
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Name</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your name" name="name" id="name">
-                                                         @error('name')
-                                                             <span class="text-danger">{{ $message }}</span>
-                                                         @enderror
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Email</label>
-                                                         <input type="email" class="form-control"
-                                                             placeholder="Enter your email" name="email" id="email">
-                                                         @error('email')
-                                                             <span class="text-danger">{{ $message }}</span>
-                                                         @enderror
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
+                                    <form action="{{ route('account.update') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" id="accountant_id" name="accountant_id">
+                                        <input type="hidden" id="old_image" name="old_image">
+
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your name" name="name" id="name">
+                                                        @error('name')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Email</label>
+                                                        <input type="email" class="form-control"
+                                                            placeholder="Enter your email" name="email" id="email">
+                                                        @error('email')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
                                                         <input type="password" class="form-control"
@@ -231,68 +232,70 @@
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="sex" 
+                                                            <input class="form-check-input" type="radio" name="sex"
                                                                 id="inlineRadio2" value="female">
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
                                                         </div>
                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>DOB</label>
-                                                         <input type="date" class="form-control"
-                                                             placeholder="Enter your birth date" name="dob" id="dob">
-                                                          
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Age</label>
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your age" name="age" id="age">
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
-                                                     <div class="form-group">
-                                                         <label>Blood Group</label>
-                                                         {{-- <input type="text" class="form-control"
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>DOB</label>
+                                                        <input type="date" class="form-control"
+                                                            placeholder="Enter your birth date" name="dob" id="dob">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Age</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your age" name="age" id="age">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Blood Group</label>
+                                                        {{-- <input type="text" class="form-control"
                                                              placeholder="Enter your blood group" name="bloodgrp"
                                                              id="bloodgrp"> --}}
-                                                             <select name="bloodgrp" class="form-control" required="" id="bloodgrp" >
-                                                                <option value="" selected="" disabled="">Select Blood group</option>
-                                                    
-                                                          <option value="A+">A+</option>
-                                                          <option value="A-">A-</option>
-                                                          <option value="AB+">AB+</option>	
-                                                          <option value="AB-">AB-</option>	
-                                                          <option value="B+">B+</option>
-                                                          <option value="B-">B-</option>
-                                                          <option value="O+">O+</option>
-                                                          <option value="O-">O-</option>
-                                                            </select>
-                                                     </div>
-                                                 </div>
-                                                 <div class="col-md-6">
+                                                        <select name="bloodgrp" class="form-control" required=""
+                                                            id="bloodgrp">
+                                                            <option value="" selected="" disabled="">Select Blood group
+                                                            </option>
+
+                                                            <option value="A+">A+</option>
+                                                            <option value="A-">A-</option>
+                                                            <option value="AB+">AB+</option>
+                                                            <option value="AB-">AB-</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="B-">B-</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="O-">O-</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
                                                         <input type="file" class="form-control"
                                                             placeholder="Enter your image" name="image" id="image">
                                                     </div>
                                                 </div>
-                                             </div>
-                                         </div>
- 
-                                         <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary"
-                                                 data-bs-dismiss="modal">Close</button>
-                                             <button type="submit">update</button>
-                                         </div>
-                                     </form>
-                                 </div>
-                             </div>
-                         </div>
-                         {{-- Edit  modal end --}}
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
@@ -304,12 +307,12 @@
                                         <thead>
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
-                                                rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">Id</th>
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Id</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Name</th>
-    
+
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 117px;"
                                                     aria-label="Office: activate to sort column ascending">Image</th>
@@ -331,8 +334,9 @@
                                                     aria-label="Salary: activate to sort column ascending">Age</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 141px;"
-                                                    aria-label="Position: activate to sort column ascending">Blood Group</th>
-                                             
+                                                    aria-label="Position: activate to sort column ascending">Blood Group
+                                                </th>
+
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Actions</th>
@@ -347,7 +351,7 @@
                                                         {{ $accountant->name }}
                                                     </td>
                                                     <td><img src="{{ asset($accountant->image) }}" height="80px;"
-                                                        width="80px;"></td>
+                                                            width="80px;"></td>
                                                     <td>{{ $accountant->email }}</td>
                                                     <td>{{ $accountant->phone }}</td>
                                                     <td>{{ $accountant->sex }}</td>
@@ -403,7 +407,7 @@
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
                 var accountant_id = $(this).val();
-           
+
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",
@@ -420,15 +424,14 @@
                         $('#age').val(response.accountant.age);
                         $('#bloodgrp').val(response.accountant.bloodgrp);
                         $('#old_image').val(response.accountant.image);
-                        if (response.accountant.sex == 'male') 
-                        {
+                        if (response.accountant.sex == 'male') {
                             $('#editModal').find(':radio[name=sex][value="male"]').prop(
                                 'checked', true);
                         } else {
                             $('#editModal').find(':radio[name=sex][value="female"]').prop(
                                 'checked', true);
                         }
-                       
+
                     }
                 })
             });

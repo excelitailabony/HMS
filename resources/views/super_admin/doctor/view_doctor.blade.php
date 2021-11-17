@@ -31,7 +31,7 @@
 
                         <h4 class="card-title text-center">All Doctor
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddDoctor">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddDoctor">
                                 Add Doctor
                             </button>
                         </h4>
