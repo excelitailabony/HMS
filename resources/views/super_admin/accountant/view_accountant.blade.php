@@ -283,19 +283,19 @@
                                                             placeholder="Enter your image" name="image" id="image">
                                                     </div>
                                                 </div>
-                                             </div>
-                                         </div>
- 
-                                         <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary"
-                                                 data-bs-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-rounded btn-info">update</button>
-                                         </div>
-                                     </form>
-                                 </div>
-                             </div>
-                         </div>
-                         {{-- Edit  modal end --}}
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
