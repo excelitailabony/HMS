@@ -21,6 +21,7 @@
 
 </head>
 
+
 <body>
 
     <div class="home-btn d-none d-sm-block">
@@ -44,6 +45,7 @@
 
                         <div class="card-body p-4">
                             <div class="p-3">
+
                                 <form method="POST"
                                     action="{{ isset($guard) ? url($guard . '/login') : route('admin.login') }}">
                                     @csrf
@@ -56,6 +58,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label" for="userpassword">Password</label>
+
                                         <input type="password" class="form-control" name="password" id="password"
                                             placeholder="Enter your password">
                                     </div>
@@ -63,6 +66,7 @@
                                     <div class="mb-3 row">
                                         <div class="col-sm-6">
                                             <div class="form-check">
+                                            
                                                 {{-- <input type="checkbox" class="form-check-input" id="customControlInline">
                                                 <label class="form-check-label" for="customControlInline">Remember me</label> --}}
                                                 <input type="checkbox" id="remember_me" name="remember">
@@ -101,6 +105,7 @@
     </div>
 
     <!-- JAVASCRIPT -->
+
     <script src="{{ asset('backend') }}/assets/libs/jquery/jquery.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('backend') }}/assets/libs/metismenu/metisMenu.min.js"></script>
