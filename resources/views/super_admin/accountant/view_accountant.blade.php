@@ -32,7 +32,7 @@
 
                         <h4 class="card-title text-center">All Accountant
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Add Accountant
                             </button>
@@ -44,7 +44,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Add Accountant</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -283,19 +283,19 @@
                                                             placeholder="Enter your image" name="image" id="image">
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">update</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        {{-- Edit  modal end --}}
+                                             </div>
+                                         </div>
+ 
+                                         <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary"
+                                                 data-bs-dismiss="modal">Close</button>
+                                             <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                         </div>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                         {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
@@ -418,8 +418,8 @@
                         $('#name').val(response.accountant.name);
                         $('#email').val(response.accountant.email);
                         $('#password').val(response.accountant.password);
-                        $('#address').val(response.accountant.address);
-                        $('#phone').val(response.accountant.phone);
+                        // $('#address').val(response.accountant.address);
+                        // $('#phone').val(response.accountant.phone);
                         $('#dob').val(response.accountant.dob);
                         $('#age').val(response.accountant.age);
                         $('#bloodgrp').val(response.accountant.bloodgrp);
