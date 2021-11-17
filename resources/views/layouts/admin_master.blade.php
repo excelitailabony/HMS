@@ -15,7 +15,7 @@
 
     {{-- end sweet alerty --}}
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
+    {{-- <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico"> --}}
 
     <link href="{{ asset('backend') }}/assets/libs/chartist/chartist.min.css" rel="stylesheet">
 
