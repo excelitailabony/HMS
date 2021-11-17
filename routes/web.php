@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
+use App\Http\Controllers\Blood_Bank\BloodDonorController;
+
 use App\Http\Controllers\Pharmacist\PharmacistController;
 
 
@@ -74,14 +76,16 @@ Route::get('edit-pharmacist/{id}',[PharmacistController::class,'EditPharmacist']
 //pharmacist end
 
 
-//
+//admin login
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 
     // Admin Profile
 	Route::get('/login', [AdminController::class, 'loginForm']);
 	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
-  
+
 });
+// admin logout route 
+Route::get('admin/logout', [AdminController::class, 'loginForm'])->name('admin.logout');
 
 // Patients routes goes here
 Route::get('all/patient',[PatientController::class,'index'])->name('all.patient');
@@ -130,6 +134,7 @@ Route::prefix('laboratorist')->group(function () {
       Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
      
        
+<<<<<<< HEAD
     });// Admin Brand All Route Group End 
 
 
@@ -137,4 +142,19 @@ Route::prefix('laboratorist')->group(function () {
 Route::prefix('blood')->group(function () {
      Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
 });
+=======
+    });//Receptionist end
+>>>>>>> 4672c186a86ed44948fb6891363ffed86c8fd8be
   
+// Blood Donor Start
+Route::prefix('bloodDonor')->group(function () {
+    Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
+    Route::post('/add', [BloodDonorController::class, 'BloodDonorStore'])->name('blooddonor.add'); 
+    // Route::get('edit-receptionist/{id}', [BloodDonorController::class, 'BloodDonorEdit']); 
+    // Route::post('/update', [BloodDonorController::class, 'BloodDonorUpdate'])->name('blooddonor.update');
+    // Route::get('/delete/{id}', [BloodDonorController::class, 'BloodDonorDelete'])->name('blooddonor.delete'); 
+   
+     
+  });
+
+//Blood Donor End

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Blood_Bank;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Laboratorist extends Model
+class BloodDonor extends Model
 {
     use HasFactory;
     protected $guarded = [];
