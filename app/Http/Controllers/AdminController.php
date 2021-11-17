@@ -107,4 +107,5 @@ class AdminController extends Controller
 
         return app(LogoutResponse::class);
     }
+
 }

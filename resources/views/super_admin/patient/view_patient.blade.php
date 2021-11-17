@@ -32,7 +32,7 @@
 
                         <h4 class="card-title text-center">All Patient
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Add Patient
                             </button>
@@ -44,7 +44,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Add Patient</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -299,23 +299,6 @@
                         </div>
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="dataTables_length" id="datatable_length"><label>Show <select
-                                                name="datatable_length" aria-controls="datatable"
-                                                class="custom-select custom-select-sm form-control form-control-sm form-select form-select-sm">
-                                                <option value="2">2</option>
-                                                <option value="25">25</option>
-                                                <option value="50">50</option>
-                                                <option value="100">100</option>
-                                            </select> entries</label></div>
-                                </div>
-                                <div class="col-sm-12 col-md-6">
-                                    <div id="datatable_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                                class="form-control form-control-sm" placeholder=""
-                                                aria-controls="datatable"></label></div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable-buttons"
