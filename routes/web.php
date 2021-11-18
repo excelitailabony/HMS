@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\NurseController;
+use App\Http\Controllers\Admin\AdminProfileController;
 
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
@@ -12,9 +13,10 @@ use App\Http\Controllers\Admin\ReceptionistController;
 use App\Http\Controllers\Blood_Bank\BloodDonorController;
 use App\Http\Controllers\Blood_Bank\BloodDonationController;
 
+use App\Http\Controllers\Pharmacist\PharmacistController;
 
 
-
+use App\Http\Controllers\Blood_Bank\BloodIssueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
+	Route::get('/login', [AdminController::class, 'loginForm']);
+	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
+});
+
+//// admin profile view
+Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
+
+
+
 
 // Admin Login View
 // Admin View 
@@ -43,20 +55,26 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 })->name('dashboard');
 
 
-//All nurse route 
 
+// Nurse Start
 Route::prefix('nurse')->group(function () {
-   Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
-   //add nurse
-   Route::post('/view',[NurseController::class,'AddNurse'])->name('add.nurse');
-    
-
-    //update nurse info 
-   Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
-
-   //delete nurse 
-   Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
+Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
+Route::post('/add',[NurseController::class,'AddNurse'])->name('add.nurse');
+Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
 });
+Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse');
+// Nurse End
+
+//All pharmacist  
+Route::prefix('pharmacist')->group(function () {
+Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
+Route::post('/add',[PharmacistController::class,'AddPharmacist'])->name('add.pharmacist');
+ Route::post('/update',[PharmacistController::class,'UpdatePharmacist'])->name('update.pharmacist');
+    Route::get('/delete/{id}',[PharmacistController::class,'DeletePharmacist'])->name('delete.pharmacist');
+ });
+Route::get('edit-pharmacist/{id}',[PharmacistController::class,'EditPharmacist'])->name('edit.pharmacist');
+//pharmacist end
 
 
 //admin login
@@ -117,7 +135,17 @@ Route::prefix('laboratorist')->group(function () {
       Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
      
        
+<<<<<<< HEAD
+    });// Admin Brand All Route Group End 
+
+
+//Blood Issue 
+Route::prefix('blood')->group(function () {
+     Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
+});
+=======
     });//Receptionist end
+>>>>>>> 4672c186a86ed44948fb6891363ffed86c8fd8be
   
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {

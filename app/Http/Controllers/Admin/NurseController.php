@@ -97,7 +97,7 @@ class NurseController extends Controller
 
     //update nurse info
     public function UpdateNurse(Request $request){
-        $nurseInfo=Nurse::find($request->id);
+        $nurseInfo=Nurse::find($request->nurse_id);
         $old_image=$nurseInfo->image;
 
         if($request->file('image')){
@@ -128,37 +128,17 @@ class NurseController extends Controller
         $nurse->delete();
         return redirect()->back();
     }//end method
+
+
+    // method for editing nurse data
+    public function EditNurse($id){
+        $nurse = Nurse::find($id);
+        return response()->json([
+            'status' =>200,
+            'nurse' => $nurse,
+        ]);
+    }//end method
    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }//main end
