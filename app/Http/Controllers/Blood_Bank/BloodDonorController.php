@@ -14,7 +14,7 @@ class BloodDonorController extends Controller
 
         $blooddonors= BloodDonor::latest()->get();
     
-        return View('Blood_Bank.view_blood_donor', compact('blooddonors'));
+        return View('Blood_Bank.Blood_Donor.view_blood_donor', compact('blooddonors'));
     
         }// end method
         public function BloodDonorStore(Request $request){   
@@ -49,4 +49,46 @@ class BloodDonorController extends Controller
                 return Redirect()->back()->with($notification);        
         
           } // end method 
+          
+  // method for editing blood donor data
+  public function BloodDonorEdit($id){
+    $blooddonor = BloodDonor::find($id);
+    return response()->json([
+        'status' =>200,
+        'blooddonor' => $blooddonor,
+    ]);
+}
+
+
+
+ // method for updating data
+ public function BloodDonorUpdate(Request $request){
+
+  $blooddonor_id=$request->input('blooddonor_id');
+  $blooddonor =BloodDonor::find($blooddonor_id);
+  $blooddonor->name=$request->name;
+  $blooddonor->age=$request->age;
+  $blooddonor->gender=$request->gender;
+  $blooddonor->blood_group=$request->blood_group;
+  $blooddonor->last_donation_date=$request->last_donation_date;
+  $blooddonor->update();
+
+   $notification=array(
+      'message'=>'Blood Donor Updated Success',
+      'alert-type'=>'success'
+  );
+
+  return Redirect()->back()->with($notification);
+
+
+}
+// delete
+public function BloodDonorDelete($id){
+
+  $blooddonor = BloodDonor::findOrFail($id);
+            BloodDonor::findOrFail($id)->delete(); 
+            return redirect()->back();
+
+ 
+}
 }
