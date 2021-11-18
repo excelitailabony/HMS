@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
 use App\Http\Controllers\Blood_Bank\BloodDonorController;
+use App\Http\Controllers\Blood_Bank\BloodDonationController;
 
 use App\Http\Controllers\Pharmacist\PharmacistController;
 
@@ -150,11 +151,23 @@ Route::prefix('blood')->group(function () {
 Route::prefix('bloodDonor')->group(function () {
     Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
     Route::post('/add', [BloodDonorController::class, 'BloodDonorStore'])->name('blooddonor.add'); 
-    // Route::get('edit-receptionist/{id}', [BloodDonorController::class, 'BloodDonorEdit']); 
-    // Route::post('/update', [BloodDonorController::class, 'BloodDonorUpdate'])->name('blooddonor.update');
-    // Route::get('/delete/{id}', [BloodDonorController::class, 'BloodDonorDelete'])->name('blooddonor.delete'); 
+    Route::get('edit-blooddonor/{id}', [BloodDonorController::class, 'BloodDonorEdit']); 
+    Route::post('/update', [BloodDonorController::class, 'BloodDonorUpdate'])->name('blooddonor.update');
+    Route::get('/delete/{id}', [BloodDonorController::class, 'BloodDonorDelete'])->name('blooddonor.delete'); 
    
      
   });
 
 //Blood Donor End
+// Blood Donation Start
+Route::prefix('bloodDonation')->group(function () {
+    Route::get('/view', [BloodDonationController::class, 'BloodDonationView'])->name('all.blooddonation'); 
+    Route::post('/add', [BloodDonationController::class, 'BloodDonationStore'])->name('blooddonation.add'); 
+    Route::get('edit-blooddonation/{id}', [BloodDonationController::class, 'BloodDonationEdit']); 
+    Route::post('/update', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
+    Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
+   
+     
+  });
+
+//Blood Donation End

@@ -132,23 +132,22 @@
                     {{-- check end --}}
                     {{-- modal end --}}
                     <!-- Edit Modal -->
-                    {{-- <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Accountant</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Blood Donor</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('account.update') }}" method="POST"
+                                <form action="{{ route('blooddonor.update') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
 
-                                    <input type="hidden" id="accountant_id" name="accountant_id">
-                                    <input type="hidden" id="old_image" name="old_image">
-
+                                    <input type="hidden" id="blooddonor_id" name="blooddonor_id">
+                                  
                                     <div class="modal-body">
 
                                         <div class="row">
@@ -164,34 +163,22 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Email</label>
-                                                    <input type="email" class="form-control"
-                                                        placeholder="Enter your email" name="email" id="email">
-                                                    @error('email')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                    <label>Age</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter your age" name="age" id="age">
                                                 </div>
                                             </div>
+                                         
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Password</label>
-                                                    <input type="password" class="form-control"
-                                                        placeholder="Enter your password" name="password" id="password">
-                                                    @error('password')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Sex</label><br>
+                                                    <label>Gender</label><br>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="sex"
+                                                        <input class="form-check-input" type="radio" name="gender"
                                                             id="inlineRadio1" value="male">
                                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="sex"
+                                                        <input class="form-check-input" type="radio" name="gender"
                                                             id="inlineRadio2" value="female">
                                                         <label class="form-check-label"
                                                             for="inlineRadio2">Female</label>
@@ -200,27 +187,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>DOB</label>
-                                                    <input type="date" class="form-control"
-                                                        placeholder="Enter your birth date" name="dob" id="dob">
-
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Age</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter your age" name="age" id="age">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
                                                     <label>Blood Group</label>
-                                                    {{-- <input type="text" class="form-control"
-                                                         placeholder="Enter your blood group" name="bloodgrp"
-                                                         id="bloodgrp"> --}}
-                                                    {{-- <select name="bloodgrp" class="form-control" required=""
-                                                        id="bloodgrp">
+                                                    
+                                                     <select name="blood_group" class="form-control" required=""
+                                                        id="blood_group">
                                                         <option value="" selected="" disabled="">Select Blood group
                                                         </option>
 
@@ -237,9 +207,10 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control"
-                                                        placeholder="Enter your image" name="image" id="image">
+                                                    <label>Last Donation Date</label>
+                                                    <input type="date" class="form-control"
+                                                        placeholder="Enter your birth date" name="last_donation_date" id="last_donation_date">
+
                                                 </div>
                                             </div>
                                          </div>
@@ -253,7 +224,7 @@
                                  </form>
                              </div>
                          </div>
-                     </div> --}} 
+                     </div> 
                      {{-- Edit  modal end --}}
 
                     <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -307,13 +278,13 @@
                                                 
                                                 <td>
 
-                                                    {{-- <button type="button" value="{{ $blooddonor->id }}"
+                                                     <button type="button" value="{{ $blooddonor->id }}"
                                                         class="btn btn-primary editBtn btn-sm"><i
                                                             class="fa fa-pencil-alt"></i></button>
 
-                                                    <a href="{{ route('accountant.delete', $accountant->id) }}"
+                                                    <a href="{{ route('blooddonor.delete', $blooddonor->id) }}"
                                                         class="btn btn-danger btn-sm" id="delete"><i
-                                                            class="fa fa-trash"></i></a> --}}
+                                                            class="fa fa-trash"></i></a> 
 
                                                  
 
@@ -338,29 +309,24 @@
 <script>
     $(document).ready(function() {
         $(document).on('click', '.editBtn', function() {
-            var accountant_id = $(this).val();
+            var blooddonor_id = $(this).val();
 
             $('#editModal').modal('show');
             $.ajax({
                 type: "GET",
-                url: "/edit-accountant/" + accountant_id,
+                url: "/bloodDonor/edit-blooddonor/" + blooddonor_id,
                 success: function(response) {
 
-                    $('#accountant_id').val(response.accountant.id);
-                    $('#name').val(response.accountant.name);
-                    $('#email').val(response.accountant.email);
-                    $('#password').val(response.accountant.password);
-                    // $('#address').val(response.accountant.address);
-                    // $('#phone').val(response.accountant.phone);
-                    $('#dob').val(response.accountant.dob);
-                    $('#age').val(response.accountant.age);
-                    $('#bloodgrp').val(response.accountant.bloodgrp);
-                    $('#old_image').val(response.accountant.image);
-                    if (response.accountant.sex == 'male') {
-                        $('#editModal').find(':radio[name=sex][value="male"]').prop(
+                    $('#blooddonor_id').val(response.blooddonor.id);
+                    $('#name').val(response.blooddonor.name);
+                    $('#age').val(response.blooddonor.age);
+                    $('#blood_group').val(response.blooddonor.blood_group);
+                    $('#last_donation_date').val(response.blooddonor.last_donation_date);
+                    if (response.blooddonor.gender == 'male') {
+                        $('#editModal').find(':radio[name=gender][value="male"]').prop(
                             'checked', true);
                     } else {
-                        $('#editModal').find(':radio[name=sex][value="female"]').prop(
+                        $('#editModal').find(':radio[name=gender][value="female"]').prop(
                             'checked', true);
                     }
 
