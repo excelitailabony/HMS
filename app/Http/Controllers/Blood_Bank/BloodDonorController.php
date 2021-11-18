@@ -50,45 +50,43 @@ class BloodDonorController extends Controller
         
           } // end method 
           
-  // method for editing blood donor data
-  public function BloodDonorEdit($id){
-    $blooddonor = BloodDonor::find($id);
-    return response()->json([
-        'status' =>200,
-        'blooddonor' => $blooddonor,
-    ]);
-}
+          // method for editing blood donor data
+          public function BloodDonorEdit($id){
+            $blooddonor = BloodDonor::find($id);
+            return response()->json([
+                'status' =>200,
+                'blooddonor' => $blooddonor,
+            ]);
+        }
 
 
 
- // method for updating data
- public function BloodDonorUpdate(Request $request){
+        // method for updating data
+        public function BloodDonorUpdate(Request $request){
 
-  $blooddonor_id=$request->input('blooddonor_id');
-  $blooddonor =BloodDonor::find($blooddonor_id);
-  $blooddonor->name=$request->name;
-  $blooddonor->age=$request->age;
-  $blooddonor->gender=$request->gender;
-  $blooddonor->blood_group=$request->blood_group;
-  $blooddonor->last_donation_date=$request->last_donation_date;
-  $blooddonor->update();
+          $blooddonor_id=$request->input('blooddonor_id');
+          $blooddonor =BloodDonor::find($blooddonor_id);
+          $blooddonor->name=$request->name;
+          $blooddonor->age=$request->age;
+          $blooddonor->gender=$request->gender;
+          $blooddonor->blood_group=$request->blood_group;
+          $blooddonor->last_donation_date=$request->last_donation_date;
+          $blooddonor->update();
 
-   $notification=array(
-      'message'=>'Blood Donor Updated Success',
-      'alert-type'=>'success'
-  );
+          $notification=array(
+              'message'=>'Blood Donor Updated Success',
+              'alert-type'=>'success'
+          );
 
-  return Redirect()->back()->with($notification);
+          return Redirect()->back()->with($notification);
 
 
-}
-// delete
-public function BloodDonorDelete($id){
+        }
+        // delete
+        public function BloodDonorDelete($id){
 
-  $blooddonor = BloodDonor::findOrFail($id);
+            $blooddonor = BloodDonor::findOrFail($id);
             BloodDonor::findOrFail($id)->delete(); 
             return redirect()->back();
-
- 
-}
+        }
 }

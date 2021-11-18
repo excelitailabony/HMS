@@ -135,17 +135,20 @@ Route::prefix('laboratorist')->group(function () {
       Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
      
        
-<<<<<<< HEAD
     });// Admin Brand All Route Group End 
 
 
 //Blood Issue 
 Route::prefix('blood')->group(function () {
      Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
+     Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']); 
+     Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
+     Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue'); 
+     Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']); 
+
+     Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']); 
+     Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');   
 });
-=======
-    });//Receptionist end
->>>>>>> 4672c186a86ed44948fb6891363ffed86c8fd8be
   
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {
