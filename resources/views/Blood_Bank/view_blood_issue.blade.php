@@ -20,6 +20,26 @@
             margin-bottom: 1rem;
         }
 
+        .ImgBox img {
+            border-radius: 50%;
+        }
+
+        .circle {
+            height: 80px;
+            width: 80px;
+            display: block;
+            background-color: darkseagreen;
+            border-radius: 80px;
+            position: relative;
+        }
+
+        .word {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
     </style>
 
     <div class="container-full topBar">
@@ -47,7 +67,8 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('blood_issue.store') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
 
@@ -81,19 +102,43 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Donor</label>
-                                                        <select name="donor_name" class="form-control" required="">
+                                                        <select name="donor_id" class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Donor Name
                                                             </option>
-                                                            <option value="A+">A+</option>
+                                                            @foreach ($donors as $donor)
+                                                                <option value="{{ $donor->id }}">{{ $donor->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
+                                                        <select class="form-control" placeholder="Blood group of donor"
+                                                            name="blood_donor_group" id="blood_donor_group">
+                                                            <option label="Choose one"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Amount</label>
+                                                        <input type="text" class="form-control" placeholder="Enter smount"
+                                                            name="amount">
+                                                        @error('amount')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Remarks</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Blood group of donor" name="blood_donor_group"
-                                                            id="blood_donor_group">
+                                                            placeholder="Enter remarks" name="remarks">
+                                                        @error('remarks')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -102,7 +147,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Doctor">
+                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Issue">
                                         </div>
                                     </form>
                                 </div>
@@ -110,148 +155,90 @@
                         </div>
 
                         <!-- Modal for add Edit doctor -->
-                        <div class="modal fade" id="EditDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="EditBloosIssue" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Doctor</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Update Blood Issue</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('bloodissue.update') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" id="bloodissue_id" name="bloodissue_id">
                                         <div class="modal-body">
-                                            <input type="hidden" id="doctor_id" name="doctor_id">
-                                            <input type="hidden" id="old_image" name="old_image">
+
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter first name" name="name" id="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Enter your email" name="email" id="email">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Enter your password" name="password" id="password">
-                                                        @error('password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your address" name="address" id="address">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter phone number" name="phone" id="phone">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Profile</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your profile" name="profile" id="profile">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Doc Dept</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter doctor department" name="doc_dept"
-                                                            id="doc_dept">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Sex</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>DOB</label>
-                                                        <input type="date" class="form-control"
-                                                            placeholder="Enter your birth date" name="dob" id="dob">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Age</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your age" name="age" id="age">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Blood Group</label>
-                                                        <select name="blood_group" id="blood_group" class="form-control"
-                                                            required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
+                                                        <label>Patient</label>
+                                                        <select name="patient_name" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
+                                                            @foreach ($patients as $patient)
+                                                                <option value="{{ $patient->id }}">
+                                                                    {{ $patient->name }}
+                                                                </option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Social Link</label>
+                                                        <label>Doctor</label>
+                                                        <select name="doctor_name" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Doctor Name
+                                                            </option>
+                                                            @foreach ($doctors as $doctor)
+                                                                <option value="{{ $doctor->id }}">{{ $doctor->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Donor</label>
+                                                        <select name="donor_edit_id" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Donor Name
+                                                            </option>
+                                                            @foreach ($donors as $donor)
+                                                                <option value="{{ $donor->id }}">{{ $donor->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Blood Group</label>
+                                                        <select class="form-control" placeholder="Blood group of donor"
+                                                            name="blood_donor_group_edit" id="blood_donor_group_edit">
+                                                            <option label="Choose one"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Amount</label>
+                                                        <input type="text" class="form-control" placeholder="Enter smount"
+                                                            name="amount" id="amount">
+                                                        @error('amount')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Remarks</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter doctor social link" name="social_link"
-                                                            id="social_link">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Image</label>
-                                                        <input type="file" class="form-control"
-                                                            placeholder="Enter your image" name="image" id="image"
-                                                            onChange="mainThamUrl(this)">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <img src="" id="mainThmb">
+                                                            placeholder="Enter remarks" name="remarks" id="remarks">
+                                                        @error('remarks')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -260,7 +247,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Update Doctor">
+                                            <input type="submit" class="btn btn-rounded btn-info" value="Update Issue">
                                         </div>
                                     </form>
                                 </div>
@@ -276,77 +263,75 @@
                                         style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
                                         aria-describedby="datatable-buttons_info">
                                         <thead>
-                                            <tr role="row">
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 50px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Patient</th>
-                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Doctor</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 141px;"
-                                                    aria-label="Position: activate to sort column ascending">Donor</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 117px;"
-                                                    aria-label="Office: activate to sort column ascending">Issue Date</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 53px;"
-                                                    aria-label="Age: activate to sort column ascending">Blood Group</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 105px;"
-                                                    aria-label="Start date: activate to sort column ascending">Department
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 105px;"
-                                                    aria-label="Start date: activate to sort column ascending">Amount
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Actions</th>
+                                            <tr>
+                                                <th>Patient</th>
+                                                <th>Doctor</th>
+                                                <th>Donor</th>
+                                                <th>Issue Date</th>
+                                                <th>Blood Group</th>
+                                                <th>Amount</th>
+                                                <th>Actions</th>
                                             </tr>
                                         </thead>
 
-
                                         <tbody class="text-center">
-                                            {{-- @foreach ($doctors as $doctor)
-                                                <tr>
-                                                    <td>{{ $doctor->id }}</td>
-                                                    <td class="dtr-control sorting_1" tabindex="0">{{ $doctor->name }}
-                                                    </td>
-                                                    <td><img src="{{ asset($doctor->image) }}" alt=""
-                                                            style="width: 80px;"></td>
-                                                    <td>{{ $doctor->email }}</td>
-                                                    <td>{{ $doctor->phone }}</td>
-                                                    <td>{{ $doctor->doc_dept }}</td>
-                                                    @if ($doctor->status == 0)
-                                                        <td> <a class="btn btn-danger btn-sm">Deactive</a> </td>
-                                                    @else
-                                                        <td> <a class="btn btn-success btn-sm">Active</a> </td>
-                                                    @endif
+                                            @foreach ($bloods as $blood)
+                                                @php
+                                                    $donor_name = $blood['donor']['name'];
+                                                @endphp
+                                                <tr class="ImgBox">
                                                     <td>
-
-                                                        <button type="button" value="{{ $doctor->id }}"
-                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-md-6 text-end">
+                                                                <img src="{{ asset($blood['patient']['image']) }}" alt=""
+                                                                    style="width:80px;height:80px;">
+                                                            </div>
+                                                            <div class="col-md-6 text-start">
+                                                                <a href=""><b>{{ $blood['patient']['name'] }}</b></a><br>
+                                                                {{ $blood['patient']['email'] }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-md-6 text-end">
+                                                                <img src="{{ asset($blood['doctor']['image']) }}" alt=""
+                                                                    style="width:80px;height:80px;">
+                                                            </div>
+                                                            <div class="col-md-6 text-start">
+                                                                <a href=""><b>{{ $blood['doctor']['name'] }}</b></a><br>
+                                                                {{ $blood['doctor']['email'] }}
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="row d-flex align-items-center">
+                                                            <div class="col-md-6">
+                                                                <div class="circle">
+                                                                    <div class="word">
+                                                                        {{ $donor_name[0] }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 text-start">
+                                                                <a href=""><b>{{ $blood['donor']['name'] }}</b></a><br>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $blood['created_at'] }}</td>
+                                                    <td>${{ $blood['amount'] }}</td>
+                                                    <td>{{ $blood['blood_group'] }}</td>
+                                                    <td>
+                                                        <button type="button" value="{{ $blood->id }}"
+                                                            class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
-                                                        <a href="{{ route('delete.doctor', $doctor->id) }}"
+                                                        <a href="{{ route('delete.blood.issue', $blood->id) }}"
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
-
-                                                        @if ($doctor->status == 1)
-                                                            <a href="{{ route('doctor.deactive', $doctor->id) }}"
-                                                                class="btn btn-danger btn-sm"
-                                                                title="Doctor deactive now"><i
-                                                                    class="fa fa-arrow-down"></i></a>
-                                                        @else
-                                                            <a href="{{ route('doctor.active', $doctor->id) }}"
-                                                                class="btn btn-success btn-sm" title="Doctor active now"><i
-                                                                    class="fa fa-arrow-up"></i></a>
-                                                        @endif
-
                                                     </td>
                                                 </tr>
-                                            @endforeach --}}
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -359,45 +344,85 @@
             </div> <!-- end col -->
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select[name="donor_id"]').on('change', function() {
+                var donor_id = $(this).val();
+                // alert(donor_edit_id);
+                if (donor_id) {
+                    $.ajax({
+                        url: "{{ url('/blood/donor/group') }}/" + donor_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            var d = $('select[name="blood_donor_group"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="blood_donor_group"]').append(
+                                    '<option value="' + value.blood_group +
+                                    '">' + value
+                                    .blood_group + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    alert('danger');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select[name="donor_edit_id"]').on('change', function() {
+                var donor_edit_id = $(this).val();
+                // alert(donor_edit_id);
+                if (donor_edit_id) {
+                    $.ajax({
+                        url: "{{ url('/blood/donor/group/edit') }}/" + donor_edit_id,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            var d = $('select[name="blood_donor_group_edit"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="blood_donor_group_edit"]').append(
+                                    '<option value="' + value.blood_group +
+                                    '">' + value
+                                    .blood_group + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    alert('danger');
+                }
+            });
+        });
+    </script>
 @endsection
 
-{{-- @section('scripts')
+@section('scripts')
     <script>
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
-                var doctor_id = $(this).val();
-                // alert(doctor_id);
-                $('#EditDoctor').modal('show');
+                var bloodissue_id = $(this).val();
+                // alert(bloodissue_id);
+                $('#EditBloosIssue').modal('show');
 
                 $.ajax({
                     type: "GET",
-                    url: "/edit-doctor/" + doctor_id,
+                    url: "/blood/issue/edit/" + bloodissue_id,
                     success: function(response) {
-                        console.log(response.doctor.blood_group);
-                        $('#doctor_id').val(response.doctor.id);
-                        $('#name').val(response.doctor.name);
-                        $('#email').val(response.doctor.email);
-                        $('#old_image').val(response.doctor.image);
-                        $('#address').val(response.doctor.address);
-                        $('#phone').val(response.doctor.phone);
-                        $('#gender').val(response.doctor.sex);
-                        $('#dob').val(response.doctor.dob);
-                        $('#age').val(response.doctor.age);
-                        $('#profile').val(response.doctor.profile);
-                        $('#doc_dept').val(response.doctor.doc_dept);
-                        $('#social_link').val(response.doctor.social_link);
-                        $('#blood_group').val(response.doctor.blood_group);
+                        // console.log(response.blood_issue);
+                        $('#bloodissue_id').val(response.blood_issue.id);
+                        $('#patient_name').val(response.blood_issue.name);
+                        $('#doctor_name').val(response.blood_issue.name);
+                        $('#donor_edit_id').val(response.blood_issue.name);
+                        $('#amount').val(response.blood_issue.amount);
+                        $('#remarks').val(response.blood_issue.remarks);
 
-                        if (response.doctor.sex == 'male') {
-                            $('#EditDoctor').find(':radio[name=gender][value="male"]').prop(
-                                'checked', true);
-                        } else {
-                            $('#EditDoctor').find(':radio[name=gender][value="female"]').prop(
-                                'checked', true);
-                        }
                     }
                 })
             });
         });
-    </script> --}}
-{{-- @endsection --}}
+    </script>
+@endsection

@@ -139,8 +139,18 @@ Route::prefix('laboratorist')->group(function () {
 //Blood Issue 
 Route::prefix('blood')->group(function () {
      Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
-});
+     Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']); 
+     Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
+     Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue'); 
+     Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']); 
 
+     Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']); 
+     Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');   
+});
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
   
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {

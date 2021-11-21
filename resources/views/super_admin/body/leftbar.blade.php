@@ -53,7 +53,12 @@
                  <span>Receptionist</span>
              </a>
          </li>
-
+         <li>
+             <a href="{{ route('view.pharmacist') }}" class="waves-effect">
+                 <i class="ti-home"></i>
+                 <span>Pharmacist</span>
+             </a>
+         </li>
 
          <li>
              <a href="{{ route('view.nurse') }}" class="waves-effect">
@@ -78,10 +83,10 @@
                  <li><a href="">Blood Bag</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="{{route('all.blooddonation')}}">Blood Donation</a></li>
+                 <li><a href="{{ route('all.blooddonation') }}">Blood Donation</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="{{route('all.blooddonor')}}">Blood Donor</a></li>
+                 <li><a href="{{ route('all.blooddonor') }}">Blood Donor</a></li>
              </ul>
          </li>
         {{-- for patient Bed --}}
