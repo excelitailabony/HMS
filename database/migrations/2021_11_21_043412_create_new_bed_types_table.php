@@ -16,7 +16,7 @@ class CreateNewBedTypesTable extends Migration
         Schema::create('new_bed_types', function (Blueprint $table) {
             $table->id();
             $table->string('bed_types');
-            $table->text('description');
+            $table->string('description');
             $table->timestamps();
         });
     }

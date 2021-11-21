@@ -40,6 +40,13 @@
             transform: translate(-50%, -50%);
         }
 
+        .modal-body select,
+        .modal-body input {
+            border: none;
+            background: #e0ffed !important;
+            border-radius: 5%;
+        }
+
     </style>
 
     <div class="container-full topBar">

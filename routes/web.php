@@ -168,7 +168,6 @@ Route::prefix('bloodDonation')->group(function () {
     Route::post('/update', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
     Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
    
-     
   });
 
 //Blood Donation End
@@ -179,8 +178,6 @@ Route::prefix('NewBedType')->group(function () {
   Route::get('/edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
   Route::post('/update', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
- 
-   
 });
 //New Bed Type End
 // New Bed Start
