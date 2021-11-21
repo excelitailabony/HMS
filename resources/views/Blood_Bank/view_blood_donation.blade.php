@@ -1,6 +1,61 @@
 @extends('layouts.admin_master')
 
 @section('super-admin-content')
+<<<<<<< HEAD
+<style>
+    .topBar {
+        margin-top: 4rem;
+    }
+
+    .topBar {
+        padding: 2rem;
+    }
+
+    .card-title {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .modal-body .row .col-md-6 {
+        margin-bottom: 1rem;
+    }
+    .circle
+{
+    height: 100px;
+    width: 100px;
+
+    display: block;
+    border: 1px solid black;
+
+    border-radius: 100px;
+}
+</style>
+<div class="container-full topBar">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title text-center">Blood Donation
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            New Blood Donation
+                        </button>
+                    </h4>
+
+                    <!-- AddModal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">New Blood Donation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+=======
     <style>
         .topBar {
             margin-top: 4rem;
@@ -56,6 +111,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
+>>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
 
                                     <form action="{{ route('blooddonation.add') }}" method="POST"
                                         enctype="multipart/form-data">
@@ -179,8 +235,45 @@
 
 
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+<<<<<<< HEAD
+                                                rowspan="1" colspan="1" style="width: 89px;"
+                                                aria-label="Salary: activate to sort column ascending">Bags</th>
+                                         
+
+                                            <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                rowspan="1" colspan="1" style="width: 89px;"
+                                                aria-label="Salary: activate to sort column ascending">Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach ($blooddonations as $blooddonation)
+                                            <tr>
+                                              
+                                                <td class="dtr-control sorting_1" tabindex="0">
+                                                    {{ $blooddonation['donor']['name'] }} </td>
+                                                <td>{{ $blooddonation->bags }}</td>
+                                              
+                                                
+                                                
+                                                <td>
+
+                                                     <button type="button" value="{{ $blooddonation->id }}"
+                                                        class="btn btn-primary editBtn btn-sm">
+                                                        <i class="fa fa-pencil-alt"></i></button>
+
+                                                    <a href="{{ route('blooddonation.delete', $blooddonation->id) }}"
+                                                        class="btn btn-danger btn-sm" id="delete"><i
+                                                            class="fa fa-trash"></i></a> 
+
+                                                 
+
+                                                </td>
+                                                
+=======
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Actions</th>
+>>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
                                             </tr>
                                         </thead>
 
@@ -217,6 +310,20 @@
             </div> <!-- end col -->
         </div>
     </div>
+<<<<<<< HEAD
+</div>
+{{-- <div class="circle">
+ 
+@php
+    $rest = substr("abcdef", -2);    // returns "ef"
+        echo $rest;
+@endphp
+        
+    </div> --}}
+
+
+=======
+>>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
 @endsection
 
 @section('scripts')
@@ -239,5 +346,10 @@
                 })
             });
         });
+<<<<<<< HEAD
+    });
+</script> 
+=======
     </script>
+>>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
 @endsection
