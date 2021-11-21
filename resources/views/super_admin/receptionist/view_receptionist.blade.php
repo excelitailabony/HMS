@@ -20,6 +20,39 @@
     }
 
 </style>
+{{-- for validation start --}}
+<script>
+    var hasError=false;
+    function get(id)
+    {
+            return document.getElementById(id);
+    }
+    function validate()
+    {
+        refresh();
+        if(get("name").value == "")
+        {
+            hasError = true;
+            get("err_name").innerHTML = "*Name Req";
+        }
+        else if(get("name").value.length <=2)
+        {
+            hasError = true;
+            get("err_name").innerHTML = "*Name must be > 2 characters";
+        }
+        
+        
+        return !hasError;
+    }
+    function refresh()
+    {
+        hasError = false;
+        get("err_name").innerHTML ="";
+        
+    }
+        
+</script>
+{{-- for validation end --}}
 
 
 <div class="container-full topBar">
@@ -48,8 +81,8 @@
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('receptionist.add') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('receptionist.add') }}" onsubmit="return validate()" method="POST"
+                                    enctype="multipart/form-data" >
                                     @csrf
                                     <div class="modal-body">
 

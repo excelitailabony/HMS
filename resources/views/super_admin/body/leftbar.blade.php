@@ -99,7 +99,7 @@
                 <li><a href="">New Bed Assign</a></li>
             </ul>
             <ul class="sub-menu" aria-expanded="false">
-                <li><a href="">New Bed</a></li>
+                <li><a href="{{route('all.newbed')}}">New Bed</a></li>
             </ul>
             <ul class="sub-menu" aria-expanded="false">
                 <li><a href="{{route('all.newbedtype')}}">New Bed Type</a></li>

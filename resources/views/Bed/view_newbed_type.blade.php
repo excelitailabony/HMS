@@ -30,7 +30,7 @@
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
-                           New Blood Type
+                           New Bed Type
                         </button>
                     </h4>
 
@@ -84,7 +84,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Blood Donation</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit New Bed Type</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
