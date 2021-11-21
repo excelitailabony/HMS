@@ -18,16 +18,6 @@
     .modal-body .row .col-md-6 {
         margin-bottom: 1rem;
     }
-    .circle
-{
-    height: 100px;
-    width: 100px;
-
-    display: block;
-    border: 1px solid black;
-
-    border-radius: 100px;
-}
 </style>
 <div class="container-full topBar">
 
@@ -36,11 +26,11 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title text-center">Blood Donation
+                    <h4 class="card-title text-center">New Bed Type
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
-                            New Blood Donation
+                           New Blood Type
                         </button>
                     </h4>
 
@@ -50,39 +40,30 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New Blood Donation</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">New Bed Type</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('blooddonation.add') }}" method="POST"
+                                <form action="{{ route('newbedtype.add') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                    <label> Bed Type</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Bed Type" name="bed_types">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Name</label>
-                                                    <select name="donor_id"  required="" id="donor_id" class="form-control" aria-invalid="false">
-                                                        <option value="" selected="" disabled="" >Select Donor Name</option>
-                                                        @foreach($blooddonors as $blooddonor)
-                                                        <option value="{{ $blooddonor->id }}">{{ $blooddonor->name }}</option>
-                                                        @endforeach                             
-                                                      
-                                                    </select>
-                                                   
+                                                    <label> Description</label>
+                                                    <textarea class="form-control" id="description" name="description"></textarea>
                                                 </div>
                                             </div>
-                                           
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label> Blood Bags</label>
-                                                    <input type="Number" class="form-control"
-                                                        placeholder="Enter your age" name="bags">
-                                                </div>
-                                            </div>
-                                          
                                         </div>
                                     </div>
 
@@ -95,12 +76,10 @@
                             </div>
                         </div>
                     </div>
-                    {{-- check start --}}
-
-                    {{-- check end --}}
                     {{-- modal end --}}
-                    <!-- Edit Modal -->
-                      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    
+                 <!-- Edit Modal -->
+                       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -110,35 +89,29 @@
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('blooddonation.update') }}" method="POST"
+                                <form action="{{ route('newbedtype.update') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
 
-                                    <input type="hidden" id="blooddonation_id" name="blooddonation_id">
+                                    <input type="hidden" id="newbedtype_id" name="newbedtype_id">
                                   
                                     <div class="modal-body">
 
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                    <label> Bed Type</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Bed Type" name="bed_types" id="bed_types">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Blood Donor Name</label>
-                                                    <select name="donor_id"  required="" id="donor_id" class="form-control" aria-invalid="false">
-                                                        <option value="" selected="" disabled="" >Select Donor Name</option>
-                                                        @foreach($blooddonors as $blooddonor)
-                                                        <option value="{{ $blooddonor->id }}">{{ $blooddonor->name }}</option>
-                                                        @endforeach                             
-                                                      
-                                                    </select>
+                                                    <label> Description</label>
+                                                    <input type="text" class="form-control" name="description"  id="description">
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label>Blood Bags</label>
-                                                    <input type="number" class="form-control"
-                                                        placeholder="Enter your bags" name="bags" id="bags">
-                                                </div>
-                                            </div>
-                                         </div>
+                                        </div>
                                      </div>
                                      <div class="modal-footer">
                                          <button type="button" class="btn btn-secondary"
@@ -148,10 +121,10 @@
                                  </form>
                              </div>
                          </div>
-                     </div>  
+                     </div>   
                      {{-- Edit  modal end --}}
 
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                     <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="datatable-buttons"
@@ -163,13 +136,10 @@
                                       
                                             <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                 rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending">Donor Name</th>
-
+                                                aria-label="Name: activate to sort column descending">Bed Type</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                 rowspan="1" colspan="1" style="width: 89px;"
-                                                aria-label="Salary: activate to sort column ascending">Bags</th>
-                                         
-
+                                                aria-label="Salary: activate to sort column ascending">Description</th>
                                             <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                 rowspan="1" colspan="1" style="width: 89px;"
                                                 aria-label="Salary: activate to sort column ascending">Actions</th>
@@ -177,22 +147,22 @@
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($blooddonations as $blooddonation)
+                                        @foreach ($newbedtypes as $newbedtype)
                                             <tr>
                                               
                                                 <td class="dtr-control sorting_1" tabindex="0">
-                                                    {{ $blooddonation['donor']['name'] }} </td>
-                                                <td>{{ $blooddonation->bags }}</td>
+                                                    {{ $newbedtype->bed_types }}</td>
+                                                <td>{{ $newbedtype->description }}</td>
                                               
                                                 
                                                 
                                                 <td>
 
-                                                     <button type="button" value="{{ $blooddonation->id }}"
+                                                     <button type="button" value="{{ $newbedtype->id }}"
                                                         class="btn btn-primary editBtn btn-sm">
                                                         <i class="fa fa-pencil-alt"></i></button>
 
-                                                    <a href="{{ route('blooddonation.delete', $blooddonation->id) }}"
+                                                    <a href="{{ route('newbedtype.delete', $newbedtype->id) }}"
                                                         class="btn btn-danger btn-sm" id="delete"><i
                                                             class="fa fa-trash"></i></a> 
 
@@ -213,35 +183,24 @@
             </div>
         </div> <!-- end col -->
     </div>
-</div>
-{{-- <div class="circle">
- 
-@php
-    $rest = substr("abcdef", -2);    // returns "ef"
-        echo $rest;
-@endphp
-        
-    </div> --}}
-
-
+</div> 
 @endsection
 
 @section('scripts')
  <script>
     $(document).ready(function() {
         $(document).on('click', '.editBtn', function() {
-            var blooddonation_id = $(this).val();
+            var newbedtype_id = $(this).val();
 
             $('#editModal').modal('show');
             $.ajax({
                 type: "GET",
-                url: "/bloodDonation/edit-blooddonation/" + blooddonation_id,
+                url: "/NewBedType/edit-newbedtype/" + newbedtype_id,
                 success: function(response) {
-
-                    $('#blooddonation_id').val(response.blooddonation.id);
-                    $('#donor_id').val(response.blooddonation.donor_id);
-                    $('#bags').val(response.blooddonation.bags);
-
+                    //   console.log(response.newbedtype.description);
+                    $('#newbedtype_id').val(response.newbedtype.id);
+                    $('#bed_types').val(response.newbedtype.bed_types);
+                    $('#description').val(response.newbedtype.description);
                 }
             })
         });

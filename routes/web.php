@@ -10,13 +10,11 @@ use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
 use App\Http\Controllers\Admin\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
+use App\Http\Controllers\Pharmacist\PharmacistController;
 use App\Http\Controllers\Blood_Bank\BloodDonorController;
 use App\Http\Controllers\Blood_Bank\BloodDonationController;
-
-use App\Http\Controllers\Pharmacist\PharmacistController;
-
-
 use App\Http\Controllers\Blood_Bank\BloodIssueController;
+use App\Http\Controllers\Bed\NewBedController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -135,7 +133,6 @@ Route::prefix('laboratorist')->group(function () {
       Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
      
        
-<<<<<<< HEAD
     });// Admin Brand All Route Group End 
 
 
@@ -143,9 +140,7 @@ Route::prefix('laboratorist')->group(function () {
 Route::prefix('blood')->group(function () {
      Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
 });
-=======
-    });//Receptionist end
->>>>>>> 4672c186a86ed44948fb6891363ffed86c8fd8be
+
   
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {
@@ -169,5 +164,17 @@ Route::prefix('bloodDonation')->group(function () {
    
      
   });
+
+//Blood Donation End
+// New Bed Type Start
+Route::prefix('NewBedType')->group(function () {
+  Route::get('/view', [NewBedController::class, 'NewBedTypeView'])->name('all.newbedtype'); 
+  Route::post('/add', [NewBedController::class, 'NewBedTypeStore'])->name('newbedtype.add'); 
+  Route::get('edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
+  Route::post('/update', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
+  Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
+ 
+   
+});
 
 //Blood Donation End
