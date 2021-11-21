@@ -47,10 +47,6 @@
             border-radius: 5%;
         }
 
-        /* *:focus {
-                                        outline: none;
-                                    } */
-
     </style>
 
     <div class="container-full topBar">
