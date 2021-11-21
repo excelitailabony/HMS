@@ -1,50 +1,49 @@
 @extends('layouts.admin_master')
 
 @section('super-admin-content')
-    <style>
-        .topBar {
-            margin-top: 4rem;
-        }
+<style>
+    .topBar {
+        margin-top: 4rem;
+    }
 
-        .topBar {
-            padding: 2rem;
-        }
+    .topBar {
+        padding: 2rem;
+    }
 
-        .card-title {
-            display: flex;
-            justify-content: space-between;
-        }
+    .card-title {
+        display: flex;
+        justify-content: space-between;
+    }
 
-        .modal-body .row .col-md-6 {
-            margin-bottom: 1rem;
-        }
+    .modal-body .row .col-md-6 {
+        margin-bottom: 1rem;
+    }
+</style>
+<div class="container-full topBar">
 
-    </style>
-    <div class="container-full topBar">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
+                    <h4 class="card-title text-center">New Bed Type
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                           New Bed Type
+                        </button>
+                    </h4>
 
-                        <h4 class="card-title text-center">New Bed Type
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                New Blood Type
-                            </button>
-                        </h4>
-
-                        <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">New Bed Type</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
+                    <!-- AddModal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">New Bed Type</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
                                     <form action="{{ route('newbedtype.add') }}" method="POST"
                                         enctype="multipart/form-data">
@@ -78,18 +77,19 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- modal end --}}
-
-                        <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Blood Donation</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
+                    </div>
+                    {{-- modal end --}}
+                    
+                 <!-- Edit Modal -->
+                       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit New Bed Type</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
                                     <form action="{{ route('newbedtype.update') }}" method="POST"
                                         enctype="multipart/form-data">

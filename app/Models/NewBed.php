@@ -9,4 +9,7 @@ class NewBed extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function newbed(){
+    	return $this->belongsTo(NewBedType::class,'bed_type_id','id');
+    }
 }

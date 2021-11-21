@@ -136,18 +136,18 @@ Route::prefix('laboratorist')->group(function () {
     });// Admin Brand All Route Group End 
 
 
-//Blood Issue 
-Route::prefix('blood')->group(function () {
-     Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');   
-     Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']); 
-     Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
-     Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue'); 
-     Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']); 
+   //Blood Issue
+    Route::prefix('blood')->group(function () {
+         Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');  
+         Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']);
+         Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
+         Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue');
+         Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']);
+         Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']);
+         Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
+    });
 
-     Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']); 
-     Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');   
-});
-
+  
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {
     Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
@@ -175,9 +175,16 @@ Route::prefix('bloodDonation')->group(function () {
 Route::prefix('NewBedType')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedTypeView'])->name('all.newbedtype'); 
   Route::post('/add', [NewBedController::class, 'NewBedTypeStore'])->name('newbedtype.add'); 
-  Route::get('edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
+  Route::get('/edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
   Route::post('/update', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
 });
-
-//Blood Donation End
+//New Bed Type End
+// New Bed Start
+Route::prefix('NewBed')->group(function () {
+  Route::get('/view', [NewBedController::class, 'NewBedView'])->name('all.newbed'); 
+  Route::post('/add', [NewBedController::class, 'NewBedStore'])->name('newbed.add'); 
+  Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
+  Route::post('/update', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
+  Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
+});

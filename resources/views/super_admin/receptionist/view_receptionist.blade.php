@@ -20,6 +20,39 @@
     }
 
 </style>
+{{-- for validation start --}}
+<script>
+    var hasError=false;
+    function get(id)
+    {
+            return document.getElementById(id);
+    }
+    function validate()
+    {
+        refresh();
+        if(get("name").value == "")
+        {
+            hasError = true;
+            get("err_name").innerHTML = "*Name Req";
+        }
+        else if(get("name").value.length <=2)
+        {
+            hasError = true;
+            get("err_name").innerHTML = "*Name must be > 2 characters";
+        }
+        
+        
+        return !hasError;
+    }
+    function refresh()
+    {
+        hasError = false;
+        get("err_name").innerHTML ="";
+        
+    }
+        
+</script>
+{{-- for validation end --}}
 
 
 <div class="container-full topBar">
@@ -48,8 +81,8 @@
                                         aria-label="Close"></button>
                                 </div>
 
-                                <form action="{{ route('receptionist.add') }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('receptionist.add') }}" onsubmit="return validate()" method="POST"
+                                    enctype="multipart/form-data" >
                                     @csrf
                                     <div class="modal-body">
 
@@ -58,17 +91,16 @@
                                                 <div class="form-group">
                                                     <label>Name</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter your name" name="name">
-                                                    @error('name')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                    @enderror
+                                                        placeholder="Enter your name" name="name" id="name">
+                                                        <span id="err_name"><?php echo $err_name;?></span>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="email" class="form-control"
-                                                        placeholder="Enter your email" name="email">
+                                                        placeholder="Enter your email" name="email" id="email">
                                                     @error('email')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -78,7 +110,7 @@
                                                 <div class="form-group">
                                                     <label>Password</label>
                                                     <input type="password" class="form-control"
-                                                        placeholder="Enter your password" name="password">
+                                                        placeholder="Enter your password" name="password" id="password">
                                                     @error('password')
                                                         <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -88,14 +120,14 @@
                                                 <div class="form-group">
                                                     <label>Address</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter your address" name="address">
+                                                        placeholder="Enter your address" name="address" id="address">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter phone number" name="phone">
+                                                        placeholder="Enter phone number" name="phone" id="phone">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -118,14 +150,14 @@
                                                 <div class="form-group">
                                                     <label>Date Of Birth</label>
                                                     <input type="date" class="form-control"
-                                                        placeholder="Enter your birth date" name="dob">
+                                                        placeholder="Enter your birth date" name="dob" id="dob">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Age</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter your age" name="age">
+                                                        placeholder="Enter your age" name="age" id="age">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -133,7 +165,7 @@
                                                     <label>Blood Group</label>
                                                     {{-- <input type="text" class="form-control"
                                                         placeholder="Enter your blood group" name="bloodgrp"> --}}
-                                                        <select name="bloodgrp" class="form-control" required="" >
+                                                        <select name="bloodgrp" id="bloodgrp" class="form-control" required="" >
                                                             <option value="" selected="" disabled="">Select Blood Group</option>
                                                 
                                                       <option value="A+">A+</option>

@@ -15,7 +15,7 @@
 
     {{-- end sweet alerty --}}
     <!-- App favicon -->
-    {{-- <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico"> --}}
+    <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
     <link href="{{ asset('backend') }}/assets/libs/chartist/chartist.min.css" rel="stylesheet">
 
@@ -287,7 +287,7 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
-    </script>
+    </script> -->
 
     <!-- js code for sweetalert2 delete  -->
     <script type="text/javascript">
@@ -310,7 +310,7 @@
                     }
                 });
         });
-    </script> --> -->
+    </script>
 
     @yield('scripts')
 
