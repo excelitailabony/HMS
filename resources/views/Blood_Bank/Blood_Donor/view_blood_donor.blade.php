@@ -281,7 +281,7 @@
                                                     <td>
 
                                                         <button type="button" value="{{ $blooddonor->id }}"
-                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                            class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
 
                                                         <a href="{{ route('blooddonor.delete', $blooddonor->id) }}"

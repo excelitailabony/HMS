@@ -20,15 +20,15 @@
         }
 
         /* .circle
-    {
-        height: 100px;
-        width: 100px;
+        {
+            height: 100px;
+            width: 100px;
 
-        display: block;
-        border: 1px solid black;
+            display: block;
+            border: 1px solid black;
 
-        border-radius: 100px;
-    } */
+            border-radius: 100px;
+        } */
 
     </style>
     <div class="container-full topBar">
@@ -195,7 +195,7 @@
                                                     <td>
 
                                                         <button type="button" value="{{ $blooddonation->id }}"
-                                                            class="btn btn-primary editBtn btn-sm">
+                                                            class="btn btn-success editBtn btn-sm">
                                                             <i class="fa fa-pencil-alt"></i></button>
 
                                                         <a href="{{ route('blooddonation.delete', $blooddonation->id) }}"
