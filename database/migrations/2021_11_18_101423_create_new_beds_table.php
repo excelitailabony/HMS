@@ -33,18 +33,3 @@ class CreateNewBedsTable extends Migration
         Schema::dropIfExists('new_beds');
     }
 }
-// CREATE TABLE `beds` (
-//     `bed_id` int(11) NOT NULL,
-//     `bed` varchar(100) DEFAULT NULL,
-//     `bed_types` varchar(100) DEFAULT NULL,
-//     `charge` int(11) DEFAULT NULL,
-//     `avavilable` varchar(100) DEFAULT NULL,
-//     `action` blob DEFAULT NULL
-//   ) 
-
-//   CREATE TABLE `new_bed` (
-//     `bed` varchar(100) DEFAULT NULL,
-//     `bed_type` blob DEFAULT NULL,
-//     `charge` int(11) DEFAULT NULL,
-//     `description` text DEFAULT NULL
-//   ) 

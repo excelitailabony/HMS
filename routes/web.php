@@ -147,11 +147,7 @@ Route::prefix('blood')->group(function () {
      Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']); 
      Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');   
 });
-<<<<<<< HEAD
 
-=======
->>>>>>> 6bf562eaa790fa23cfe0a4022e638165b7cb9f9d
-  
 // Blood Donor Start
 Route::prefix('bloodDonor')->group(function () {
     Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
@@ -172,7 +168,6 @@ Route::prefix('bloodDonation')->group(function () {
     Route::post('/update', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
     Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
    
-     
   });
 
 //Blood Donation End
@@ -183,8 +178,6 @@ Route::prefix('NewBedType')->group(function () {
   Route::get('edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
   Route::post('/update', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
- 
-   
 });
 
 //Blood Donation End
