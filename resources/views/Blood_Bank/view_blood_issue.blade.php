@@ -43,7 +43,7 @@
         .modal-body select,
         .modal-body input {
             border: none;
-            background: #e0ffed !important;
+            background: #f5f8fa !important;
             border-radius: 5%;
         }
 
@@ -182,7 +182,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Patient</label>
-                                                        <select name="patient_name" class="form-control" required="">
+                                                        <select name="patient_name" id="patient_name_id"
+                                                            class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
@@ -196,7 +197,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doctor</label>
-                                                        <select name="doctor_name" class="form-control" required="">
+                                                        <select name="doctor_name" id="doctor_name_id"
+                                                            class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Doctor Name
                                                             </option>
                                                             @foreach ($doctors as $doctor)
@@ -209,7 +211,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Donor</label>
-                                                        <select name="donor_edit_id" class="form-control" required="">
+                                                        <select name="donor_edit_id" id="donor_name_id"
+                                                            class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Donor Name
                                                             </option>
                                                             @foreach ($donors as $donor)
@@ -223,7 +226,7 @@
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
                                                         <select class="form-control" placeholder="Blood group of donor"
-                                                            name="blood_donor_group_edit" id="blood_donor_group_edit">
+                                                            name="blood_donor_group_edit" id="blood_donor_group_edit_id">
                                                             <option label="Choose one"></option>
                                                         </select>
                                                     </div>
@@ -419,14 +422,14 @@
                     type: "GET",
                     url: "/blood/issue/edit/" + bloodissue_id,
                     success: function(response) {
-                        // console.log(response.blood_issue);
+                        console.log(response.blood_issue.blood_group);
                         $('#bloodissue_id').val(response.blood_issue.id);
-                        $('#patient_name').val(response.blood_issue.name);
-                        $('#doctor_name').val(response.blood_issue.name);
-                        $('#donor_edit_id').val(response.blood_issue.name);
+                        $('#patient_name_id').val(response.blood_issue.patient_id);
+                        $('#doctor_name_id').val(response.blood_issue.doctor_id);
+                        $('#donor_name_id').val(response.blood_issue.donor_id);
+                        $('#blood_donor_group_edit_id').val(response.blood_issue.blood_group);
                         $('#amount').val(response.blood_issue.amount);
                         $('#remarks').val(response.blood_issue.remarks);
-
                     }
                 })
             });
