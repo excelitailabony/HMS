@@ -17,6 +17,7 @@ use App\Http\Controllers\Blood_Bank\BloodIssueController;
 use App\Http\Controllers\Bed\NewBedController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\Appointment\AppointmentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -201,3 +202,12 @@ Route::get('events', [EventController::class, 'index']);
 
 
 
+
+// Appointment start
+Route::prefix('Appointment')->group(function () {
+  Route::get('/view', [AppointmentController::class, 'AppointmentView'])->name('all.appointment');
+  Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
+  Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
+  Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
+  Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
+});

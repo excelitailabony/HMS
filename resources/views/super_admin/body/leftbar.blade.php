@@ -78,22 +78,27 @@
                  <li><a href="{{ route('all.blooddonor') }}">Blood Donor</a></li>
              </ul>
          </li>
-        {{-- for patient Bed --}}
-        <li>
-            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ti-email"></i>
-                <span>Patient Bed</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="">New Bed Assign</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.newbed')}}">New Bed</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.newbedtype')}}">New Bed Type</a></li>
-            </ul>
-            
-        </li>
+         {{-- for patient Bed --}}
+         <li>
+             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                 <i class="ti-email"></i>
+                 <span>Patient Bed</span>
+             </a>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="">New Bed Assign</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.newbed') }}">New Bed</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.newbedtype') }}">New Bed Type</a></li>
+             </ul>
+         </li>
+         <li>
+             <a href="{{ route('all.appointment') }}" class="waves-effect">
+                 <i class="ti-home"></i>
+                 <span>Appointment</span>
+             </a>
+         </li>
      </ul>
  </div>

@@ -17,6 +17,7 @@ class BloodDonorController extends Controller
         return View('Blood_Bank.Blood_Donor.view_blood_donor', compact('blooddonors'));
     
         }// end method
+
         public function BloodDonorStore(Request $request){   
       
             // validation 
@@ -28,24 +29,19 @@ class BloodDonorController extends Controller
                     'last_donation_date' => 'required'     
                   ]);
                  
-        
                // Blood Donor Insert    
                BloodDonor::insert([
-        
                    'name' => $request->name,   
                    'age' => $request->age, 
                    'gender' => $request->gender, 
                    'blood_group' => $request->blood_group,            
                    'last_donation_date' => $request->last_donation_date,  
-        
                   ]); 
         
                   $notification = array(
                     'message' =>  'Blood Donor Added Sucessyfuly',
                     'alert-type' => 'success'
                 ); 
-        
-        
                 return Redirect()->back()->with($notification);        
         
           } // end method 
