@@ -175,6 +175,14 @@ public function AccountantActive($id){
     return redirect()->back()->with($notification);
 
 }
+public function changeStatus(Request $request)
+    {
+        $user = Accountant::find($request->id);
+        $user->status = $request->status;
+        $user->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
+    }
 
 
 }

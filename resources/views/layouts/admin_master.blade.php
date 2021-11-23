@@ -83,6 +83,9 @@
 
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+        {{-- for toggle start --}}
+        
+        {{-- for toggle end --}}
 
 
 </head>
@@ -338,3 +341,6 @@
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+{{-- for toggle start --}}
+
+{{-- for toggle end --}}

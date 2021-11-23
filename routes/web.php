@@ -15,6 +15,8 @@ use App\Http\Controllers\Blood_Bank\BloodDonorController;
 use App\Http\Controllers\Blood_Bank\BloodDonationController;
 use App\Http\Controllers\Blood_Bank\BloodIssueController;
 use App\Http\Controllers\Bed\NewBedController;
+use App\Http\Controllers\CheckController;
+use App\Http\Controllers\EventController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +27,6 @@ use App\Http\Controllers\Bed\NewBedController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -110,8 +111,9 @@ Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->n
     Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
     Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
     Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
-    Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
-    Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
+    Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
+    // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
+    // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
 // Labroatorist Start
@@ -188,3 +190,14 @@ Route::prefix('NewBed')->group(function () {
   Route::post('/update', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 });
+// Route::get('/fullcalendar', [CheckController::class, 'Chartjs']); 
+Route::get('/full',[CheckController::class, 'index'])->name('home');
+Route::get('events', [EventController::class, 'index']);
+// 
+Route::get('full-calender', [EventController::class, 'index']);
+
+Route::post('full-calender/action', [EventController::class, 'action']);
+Route::get('events', [EventController::class, 'index']);
+
+
+

@@ -14,7 +14,11 @@
         "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.5",
+        "maddhatter/laravel-fullcalendar": "~5.0",
         "onokumus/metismenu": "dev-master"
+       
+            
+        
     },
     "require-dev": {
         "facade/ignition": "^2.5",

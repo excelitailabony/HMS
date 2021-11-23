@@ -92,7 +92,7 @@
                                                     <label>Name</label>
                                                     <input type="text" class="form-control"
                                                         placeholder="Enter your name" name="name" id="name">
-                                                        <span id="err_name"><?php echo $err_name;?></span>
+                                                        {{-- <span id="err_name"><?php echo $err_name;?></span> --}}
                                                    
                                                 </div>
                                             </div>
