@@ -294,7 +294,7 @@
                                                         <div class="row d-flex align-items-center">
                                                             <div class="col-md-6 text-end">
                                                                 <img src="{{ asset($blood['patient']['image']) }}" alt=""
-                                                                    style="width:80px;height:80px;">
+                                                                    class="rounded-circle avatar-md">
                                                             </div>
                                                             <div class="col-md-6 text-start">
                                                                 <a href=""><b>{{ $blood['patient']['name'] }}</b></a><br>
@@ -306,7 +306,7 @@
                                                         <div class="row d-flex align-items-center">
                                                             <div class="col-md-6 text-end">
                                                                 <img src="{{ asset($blood['doctor']['image']) }}" alt=""
-                                                                    style="width:80px;height:80px;">
+                                                                    class="rounded-circle avatar-md">
                                                             </div>
                                                             <div class="col-md-6 text-start">
                                                                 <a href=""><b>{{ $blood['doctor']['name'] }}</b></a><br>

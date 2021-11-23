@@ -38,7 +38,7 @@ class NurseController extends Controller
         // img upload and save
         $image = $request->file('image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(50,50)->save('upload/nurse/'.$name_gen);
+        Image::make($image)->resize(300,300)->save('upload/nurse/'.$name_gen);
         $save_url = 'upload/nurse/'.$name_gen;
 
         $nurseInfo=new Nurse();

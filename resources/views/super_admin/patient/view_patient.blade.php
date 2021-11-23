@@ -315,7 +315,7 @@
                                                 <th rowspan="1" colspan="1" style="width: 53p">Phone</th>
                                                 <th rowspan="1" colspan="1" style="width: 105px;">Sex
                                                 </th>
-                                                <th rowspan="1" colspan="1" style="width: 89px;">Dob</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Date Of Birth</th>
                                                 <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
                                                 <th rowspan="1" colspan="1" style="width: 89px;">Blood Group</th>
                                                 <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
@@ -329,8 +329,8 @@
                                                     <td>{{ $patient->id }}</td>
                                                     <td>{{ $patient->name }}
                                                     </td>
-                                                    <td><img src="{{ asset($patient->image) }}" alt=""
-                                                            style="width: 80px;">
+                                                    <td><img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
+                                                            alt="" style="width: 80px;">
                                                     </td>
                                                     <td>{{ $patient->email }}</td>
                                                     <td>{{ $patient->phone }}</td>
@@ -340,7 +340,7 @@
                                                     <td>{{ $patient->blood_group }}</td>
                                                     <td>
                                                         <button type="button" value="{{ $patient->id }}"
-                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                            class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
                                                         <a href="{{ route('delete.patient', $patient->id) }}"
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">

@@ -54,10 +54,6 @@
                  <i class="ti-email"></i>
                  <span>Nurse</span>
              </a>
-             <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="{{ route('view.nurse') }}">View Nurse</a></li>
-
-             </ul>
          </li>
          {{-- For Blood Bank --}}
          <li>

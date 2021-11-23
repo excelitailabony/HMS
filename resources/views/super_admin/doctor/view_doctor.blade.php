@@ -393,8 +393,8 @@
                                                     <td>{{ $doctor->id }}</td>
                                                     <td class="dtr-control sorting_1" tabindex="0">{{ $doctor->name }}
                                                     </td>
-                                                    <td><img src="{{ asset($doctor->image) }}" alt=""
-                                                            style="width: 80px;"></td>
+                                                    <td><img src="{{ asset($doctor->image) }}" class="rounded avatar-lg"
+                                                            alt="" style="width: 80px;"></td>
                                                     <td>{{ $doctor->email }}</td>
                                                     <td>{{ $doctor->phone }}</td>
                                                     <td>{{ $doctor->doc_dept }}</td>
@@ -406,7 +406,7 @@
                                                     <td>
 
                                                         <button type="button" value="{{ $doctor->id }}"
-                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                            class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
                                                         <a href="{{ route('delete.doctor', $doctor->id) }}"
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">

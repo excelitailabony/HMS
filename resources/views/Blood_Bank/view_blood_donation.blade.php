@@ -185,7 +185,7 @@
                                                     <td>{{ $blooddonation->bags }}</td>
                                                     <td>
                                                         <button type="button" value="{{ $blooddonation->id }}"
-                                                            class="btn btn-primary editBtn btn-sm">
+                                                            class="btn btn-success editBtn btn-sm">
                                                             <i class="fa fa-pencil-alt"></i></button>
 
                                                         <a href="{{ route('blooddonation.delete', $blooddonation->id) }}"
