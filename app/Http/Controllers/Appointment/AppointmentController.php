@@ -70,21 +70,21 @@ class AppointmentController extends Controller
     public function AppointmentUpdate(Request $request){
 
         // dd($request->all());
-              $appointment_id=$request->input('appointment_id');
-              $appointments =Appointment::find($appointment_id);
-              $appointments->patient_id=$request->patient_name_id;
-              $appointments->doctor_dept_id=$request->doctor_dept_id;
-              $appointments->doctor_id=$request->doctor_name_id;
-              $appointments->date=$request->appointment_date_id;
-              $appointments->descritpion=$request->description_id;
-              $appointments->update();
-            
-              $notification=array(
-                  'message'=>'Appointment Updated Successfully',
-                  'alert-type'=>'success'
-              );
-            
-              return Redirect()->back()->with($notification); 
+        $appointment_id=$request->input('appointment_id');
+        $appointments =Appointment::find($appointment_id);
+        $appointments->patient_id=$request->patient_name;
+        $appointments->doctor_dept_id=$request->doctor_dept;
+        $appointments->doctor_id=$request->doctor_name;
+        $appointments->date=$request->appointment_date;
+        $appointments->description=$request->description;
+        $appointments->update();
+    
+        $notification=array(
+            'message'=>'Appointment Updated Successfully',
+            'alert-type'=>'success'
+        );
+    
+        return Redirect()->back()->with($notification); 
     }
     public function index(Request $request)
      {

@@ -305,52 +305,53 @@
                                     class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline text-center align-middle"
                                     style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
                                     aria-describedby="datatable-buttons_info">
-
-                                    <thead>
-                                        <tr role="row">
-                                            <th rowspan="1" colspan="1" style="width: 50px;">Id</th>
-                                            <th rowspan="1" colspan="1" style="width: 120px;">Name</th>
-                                            <th rowspan="1" colspan="1" style="width: 141px;">Image</th>
-                                            <th rowspan="1" colspan="1" style="width: 117px;">Email</th>
-                                            <th rowspan="1" colspan="1" style="width: 53p">Phone</th>
-                                            <th rowspan="1" colspan="1" style="width: 105px;">Sex
-                                            </th>
-                                            <th rowspan="1" colspan="1" style="width: 89px;">Dob</th>
-                                            <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
-                                            <th rowspan="1" colspan="1" style="width: 89px;">Blood Group</th>
-                                            <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                        @foreach ($patients as $patient)
-                                            <tr>
-                                                <td>{{ $patient->id }}</td>
-                                                <td>{{ $patient->name }}
-                                                </td>
-                                                <td><img src="{{ asset($patient->image) }}" alt=""
-                                                        style="width: 80px;">
-                                                </td>
-                                                <td>{{ $patient->email }}</td>
-                                                <td>{{ $patient->phone }}</td>
-                                                <td>{{ $patient->sex }}</td>
-                                                <td>{{ $patient->dob }}</td>
-                                                <td>{{ $patient->age }}</td>
-                                                <td>{{ $patient->blood_group }}</td>
-                                                <td>
-                                                    <button type="button" value="{{ $patient->id }}"
-                                                        class="btn btn-primary editBtn btn-sm"><i
-                                                            class="fa fa-pencil-alt"></i></button>
-                                                    <a href="{{ route('delete.patient', $patient->id) }}"
-                                                        class="btn btn-sm btn-danger" id="delete" title="delete data">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
-                                                </td>
+ 
+                                        <thead>
+                                            <tr role="row">
+                                                <th rowspan="1" colspan="1" style="width: 50px;">Id</th>
+                                                <th rowspan="1" colspan="1" style="width: 120px;">Name</th>
+                                                <th rowspan="1" colspan="1" style="width: 141px;">Image</th>
+                                                <th rowspan="1" colspan="1" style="width: 117px;">Email</th>
+                                                <th rowspan="1" colspan="1" style="width: 53p">Phone</th>
+                                                <th rowspan="1" colspan="1" style="width: 105px;">Sex
+                                                </th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Date Of Birth</th>
+                                                <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Blood Group</th>
+                                                <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach ($patients as $patient)
+                                                <tr>
+                                                    <td>{{ $patient->id }}</td>
+                                                    <td>{{ $patient->name }}
+                                                    </td>
+                                                    <td><img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
+                                                            alt="" style="width: 80px;">
+                                                    </td>
+                                                    <td>{{ $patient->email }}</td>
+                                                    <td>{{ $patient->phone }}</td>
+                                                    <td>{{ $patient->sex }}</td>
+                                                    <td>{{ $patient->dob }}</td>
+                                                    <td>{{ $patient->age }}</td>
+                                                    <td>{{ $patient->blood_group }}</td>
+                                                    <td>
+                                                        <button type="button" value="{{ $patient->id }}"
+                                                            class="btn btn-success editBtn btn-sm"><i
+                                                                class="fa fa-pencil-alt"></i></button>
+                                                        <a href="{{ route('delete.patient', $patient->id) }}"
+                                                            class="btn btn-sm btn-danger" id="delete" title="delete data">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

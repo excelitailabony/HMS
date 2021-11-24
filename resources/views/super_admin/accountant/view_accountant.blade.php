@@ -254,15 +254,12 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Blood Group</label> 
-                                                         <input type="text" class="form-control"
-                                                             placeholder="Enter your blood group" name="bloodgrp"
-                                                             id="bloodgrp"> 
-                                                         <select name="bloodgrp" class="form-control" required=""
+
+                                                        <label>Blood Group</label>
+                                                        <select name="bloodgrp" class="form-control" required=""
                                                             id="bloodgrp">
                                                             <option value="" selected="" disabled="">Select Blood group
                                                             </option>
-
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A-</option>
                                                             <option value="AB+">AB+</option>
@@ -326,7 +323,8 @@
                                                     aria-label="Salary: activate to sort column ascending">Sex</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 50px;"
-                                                    aria-label="Salary: activate to sort column ascending">Dob</th>
+                                                    aria-label="Salary: activate to sort column ascending">Date Of Birth
+                                                </th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Age</th>
@@ -367,7 +365,7 @@
                                                       <td>
 
                                                         <button type="button" value="{{ $accountant->id }}"
-                                                            class="btn btn-primary editBtn btn-sm"><i
+                                                            class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
 
                                                         <a href="{{ route('accountant.delete', $accountant->id) }}"

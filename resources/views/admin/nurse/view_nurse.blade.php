@@ -31,7 +31,7 @@
 
                         <h4 class="card-title text-center">All Nurse
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddDoctor">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddDoctor">
                                 Add Nurse
                             </button>
                         </h4>
@@ -47,8 +47,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('add.nurse')}}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form action="{{ route('add.nurse') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
 
@@ -138,17 +137,17 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
 
-                                                    <select name="blood_group">
-                                                            <option selected="" >Select blood group</option>
+                                                        <select name="blood_group">
+                                                            <option selected="">Select blood group</option>
                                                             <option>O+</option>
                                                             <option>O-</option>
                                                             <option>B+</option>
                                                             <option>AB+</option>
-                                                        
-                                                        </select>  
 
-                                                        
-                                                    </div> 
+                                                        </select>
+
+
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -170,10 +169,10 @@
                                 </div>
                             </div>
                         </div>
-                        {{--end modal for add nurse--}}
+                        {{-- end modal for add nurse --}}
 
 
-                        {{--modal for edit nurse--}}
+                        {{-- modal for edit nurse --}}
                         {{-- Modal for edit nurse --}}
                         <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
@@ -190,7 +189,7 @@
                                         @csrf
 
                                         <input type="hidden" id="nurse_id" name="nurse_id">
-                                         <input type="hidden" id="old_image" name="old_image"> 
+                                        <input type="hidden" id="old_image" name="old_image">
                                         <div class="modal-body">
 
                                             <div class="row">
@@ -232,8 +231,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                        <input type="password" name="password" id="password" class="form-control"
-                                                            placeholder="Enter your password">
+                                                        <input type="password" name="password" id="password"
+                                                            class="form-control" placeholder="Enter your password">
                                                         @error('password')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -243,13 +242,13 @@
                                                     <div class="form-group">
                                                         <label>Sex</label><br>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="sex"
-                                                                id="sex" value="male">
+                                                            <input class="form-check-input" type="radio" name="sex" id="sex"
+                                                                value="male">
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="sex"
-                                                                id="sex" value="female">
+                                                            <input class="form-check-input" type="radio" name="sex" id="sex"
+                                                                value="female">
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
                                                         </div>
@@ -271,20 +270,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                    <label>Blood group</label>
-                                                    <!-- <select name="blood_group" id="blood_group" class="form-control"
-                                                            required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
-                                                            </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
-                                                        </select> -->
+                                                        <label>Blood group</label>
                                                         <input type="text" name="blood_group" id="blood_group">
                                                     </div>
                                                 </div>
@@ -301,15 +287,13 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <!-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient">  -->
-                                            <button type="submit" 
-                                                class="btn btn-primary btn-rounded">update</button>
+                                            <button type="submit" class="btn btn-primary btn-rounded">update</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                        {{--end modal for edit  nurse--}}
+                        {{-- end modal for edit  nurse --}}
 
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -321,7 +305,7 @@
                                         aria-describedby="datatable-buttons_info">
                                         <thead>
                                             <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Id</th>
 
@@ -341,11 +325,11 @@
                                                     rowspan="1" colspan="1" style="width: 53px;"
                                                     aria-label="Age: activate to sort column ascending">Phone</th>
 
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 53px;"
                                                     aria-label="Age: activate to sort column ascending">Password</th>
 
-                                                    <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
+                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 53px;"
                                                     aria-label="Age: activate to sort column ascending">Address</th>
 
@@ -356,12 +340,13 @@
 
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Dob</th>
+                                                    aria-label="Salary: activate to sort column ascending">Date Of Birth
+                                                </th>
 
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 50px;"
                                                     aria-label="Salary: activate to sort column ascending">Age</th>
-                                                    
+
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Blood Group</th>
@@ -372,27 +357,33 @@
 
 
                                         <tbody>
-                                        @foreach($nurses as $nurse)
-                                            <tr class="odd">
-                                                <td class="id">{{$nurse->id}}</td>
-                                               <td class="name">{{$nurse->name}}</td>
-                                               <td class="image"><img src="{{asset($nurse->image)}}" ></td>
-                                               <td class="email">{{$nurse->email}}</td>
-                                               <td class="phone">{{$nurse->phone}}</td>
-                                               <td class="password">{{$nurse->password}}</td>
-                                               <td class="address">{{$nurse->address}}</td>
-                                               <td class="sex">{{$nurse->sex}}</td>
-                                               <td class="dob">{{$nurse->dob}}</td>
-                                               <td class="age">{{$nurse->age}}</td>
-                                               <td class="blood_group">{{$nurse->blood_group}}</td>
-                                               <td>
-                                               <button id="" value="{{ $nurse->id }}"  data-bs-toggle="modal" data-bs-target="#editModal"  class="btn btn-primary btn-sm editBtn" title="Edit"  data-bs-target="#exampleModal2" >
-                                               <i class="fa fa-pencil-alt"></i>
-                                               </button> 
-                                                   <!-- <a class="btn btn-success btn-sm"  href="#exampleModal" title="Edit"><i class="fas fa-pencil-alt"></i></a> -->
-                                                   <a href="{{route('delete.nurse',$nurse->id)}}" class="btn btn-danger btn-sm" title="Delete" id="delete"><i class="fa fa-trash"></i></a>
-                                               </td>
-                                            </tr>
+                                            @foreach ($nurses as $nurse)
+                                                <tr class="odd">
+                                                    <td class="id">{{ $nurse->id }}</td>
+                                                    <td class="name">{{ $nurse->name }}</td>
+                                                    <td class="image"><img src="{{ asset($nurse->image) }}"
+                                                            class="rounded avatar-lg" alt="" style="width: 80px;">
+                                                    </td>
+                                                    <td class="email">{{ $nurse->email }}</td>
+                                                    <td class="phone">{{ $nurse->phone }}</td>
+                                                    <td class="password">{{ $nurse->password }}</td>
+                                                    <td class="address">{{ $nurse->address }}</td>
+                                                    <td class="sex">{{ $nurse->sex }}</td>
+                                                    <td class="dob">{{ $nurse->dob }}</td>
+                                                    <td class="age">{{ $nurse->age }}</td>
+                                                    <td class="blood_group">{{ $nurse->blood_group }}</td>
+                                                    <td>
+                                                        <button id="" value="{{ $nurse->id }}" data-bs-toggle="modal"
+                                                            data-bs-target="#editModal"
+                                                            class="btn btn-success btn-sm editBtn" title="Edit"
+                                                            data-bs-target="#exampleModal2">
+                                                            <i class="fa fa-pencil-alt"></i>
+                                                        </button>
+                                                        <a href="{{ route('delete.nurse', $nurse->id) }}"
+                                                            class="btn btn-danger btn-sm" title="Delete" id="delete"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

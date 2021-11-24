@@ -19,6 +19,8 @@ use App\Http\Controllers\CheckController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\Diagnosis\NewDiagnosisController;
+use App\Http\Controllers\Diagnosis\DiagnosisController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -202,6 +204,7 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
+
   Route::get('/calennnnnnnn', [AppointmentController::class, 'index']);
 });
 // For Diagonosis
@@ -212,3 +215,13 @@ Route::prefix('Diagnosis')->group(function (){
   Route::post('/update', [NewDiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisCategory');
   Route::get('/delete/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryDelete'])->name('delete.diagnosisCategory');
 });
+
+
+// Appointment start
+Route::prefix('Diagnsosis')->group(function () {  
+  Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
+  Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
+  Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
+});
+
+

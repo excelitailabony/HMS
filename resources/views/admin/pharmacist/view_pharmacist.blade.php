@@ -273,18 +273,18 @@
                                                     <div class="form-group">
                                                         <label>Blood group</label>
                                                         <!-- <select name="blood_group" id="blood_group" class="form-control"
-                                                                    required="">
-                                                                    <option value="" selected="" disabled="">Select Blood group
-                                                                    </option>
-                                                                    <option value="A+">A+</option>
-                                                                    <option value="A-">A-</option>
-                                                                    <option value="AB+">AB+</option>
-                                                                    <option value="AB-">AB-</option>
-                                                                    <option value="B+">B+</option>
-                                                                    <option value="B-">B-</option>
-                                                                    <option value="O+">O+</option>
-                                                                    <option value="O-">O-</option>
-                                                                </select> -->
+                                                                        required="">
+                                                                        <option value="" selected="" disabled="">Select Blood group
+                                                                        </option>
+                                                                        <option value="A+">A+</option>
+                                                                        <option value="A-">A-</option>
+                                                                        <option value="AB+">AB+</option>
+                                                                        <option value="AB-">AB-</option>
+                                                                        <option value="B+">B+</option>
+                                                                        <option value="B-">B-</option>
+                                                                        <option value="O+">O+</option>
+                                                                        <option value="O-">O-</option>
+                                                                    </select> -->
                                                         <input type="text" name="blood_group" id="blood_group">
                                                     </div>
                                                 </div>
@@ -355,7 +355,8 @@
 
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Dob</th>
+                                                    aria-label="Salary: activate to sort column ascending">Date Of Birth
+                                                </th>
 
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 50px;"
