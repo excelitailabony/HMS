@@ -55,8 +55,6 @@ class BloodDonorController extends Controller
             ]);
         }
 
-
-
         // method for updating data
         public function BloodDonorUpdate(Request $request){
 
@@ -80,7 +78,6 @@ class BloodDonorController extends Controller
         }
         // delete
         public function BloodDonorDelete($id){
-
             $blooddonor = BloodDonor::findOrFail($id);
             BloodDonor::findOrFail($id)->delete(); 
             return redirect()->back();
