@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Diagnosis;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Diagnosis extends Model
 {
     use HasFactory;
     protected $guarded = [];

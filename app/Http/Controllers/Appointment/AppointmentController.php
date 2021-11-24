@@ -8,6 +8,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Appointment\Appointment;
 use Carbon\carbon;
+use App\Models\Event;
 
 class AppointmentController extends Controller
 {
@@ -32,7 +33,8 @@ class AppointmentController extends Controller
             'doctor_dept_id' => $request->doctor_dept_id, 
             'doctor_id' => $request->doctor_name, 
             'date' => $request->appointment_date,   
-            'description' => $request->description, 
+            'description' => $request->description,
+            'title' => $request->title, 
             'created_at' => Carbon::now(),          
             ]); 
 
@@ -84,5 +86,29 @@ class AppointmentController extends Controller
             
               return Redirect()->back()->with($notification); 
     }
+    public function index(Request $request)
+     {
+     if($request->ajax())
+    	{ 
+            // $row=Appointment::orderBy('description','ASC')->get();
+    		$data = Appointment::get(['id', 'date','title']);
+            // dd($data);
+            return response()->json($data);
+    	}
+    	return view('check');
+    }
+     
+    public function check(Request $request)
+    {
+    	if($request->ajax())
+    	 {
+    		$data = Event::get(['id', 'title', 'start']);
+            return response()->json($data);
+  	 }
+    	return view('full-calender');
+    }
+    
+
+    
           
 }

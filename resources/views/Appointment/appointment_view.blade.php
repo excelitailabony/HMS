@@ -58,10 +58,15 @@
 
                         <h4 class="card-title text-center">All Appointment
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#AddAppointment">
-                                New Appointment
-                            </button>
+                            <div>
+                                
+                                <a href="{{ url("Appointment/calennnnnnnn") }}"><i class="mdi mdi-alarm-panel"></i></a>
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#AddAppointment">
+                                        New Appointment
+                                </button>
+                            </div>
+                            
                         </h4>
 
                         <!-- Modal for add doctor -->
@@ -134,6 +139,16 @@
                                                         <label>Description</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter description" name="description">
+                                                        @error('description')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>title</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter description" name="title">
                                                         @error('description')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

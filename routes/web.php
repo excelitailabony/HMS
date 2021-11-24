@@ -18,6 +18,7 @@ use App\Http\Controllers\Bed\NewBedController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
+use App\Http\Controllers\Diagnosis\NewDiagnosisController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -191,15 +192,6 @@ Route::prefix('NewBed')->group(function () {
   Route::post('/update', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 });
-// Route::get('/fullcalendar', [CheckController::class, 'Chartjs']); 
-Route::get('/full',[CheckController::class, 'index'])->name('home');
-Route::get('events', [EventController::class, 'index']);
-// 
-Route::get('full-calender', [EventController::class, 'index']);
-
-Route::post('full-calender/action', [EventController::class, 'action']);
-Route::get('events', [EventController::class, 'index']);
-
 
 
 
@@ -210,4 +202,13 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
+  Route::get('/calennnnnnnn', [AppointmentController::class, 'index']);
+});
+// For Diagonosis
+Route::prefix('Diagnosis')->group(function (){
+  Route::get('/view', [NewDiagnosisController::class, 'DiagnosisCategoryView'])->name('all.diagnosisCategory');
+  Route::post('/store', [NewDiagnosisController::class, 'DiagnosisCategoryStore'])->name('diagnosisCategory.add');
+  Route::get('/edit/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryEdit']);
+  Route::post('/update', [NewDiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisCategory');
+  Route::get('/delete/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryDelete'])->name('delete.diagnosisCategory');
 });
