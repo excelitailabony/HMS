@@ -15,8 +15,12 @@ use App\Http\Controllers\Blood_Bank\BloodDonorController;
 use App\Http\Controllers\Blood_Bank\BloodDonationController;
 use App\Http\Controllers\Blood_Bank\BloodIssueController;
 use App\Http\Controllers\Bed\NewBedController;
+use App\Http\Controllers\CheckController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
+use App\Http\Controllers\Diagnosis\NewDiagnosisController;
 use App\Http\Controllers\Diagnosis\DiagnosisController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +31,6 @@ use App\Http\Controllers\Diagnosis\DiagnosisController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -112,8 +115,9 @@ Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->n
     Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
     Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
     Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
-    Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
-    Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
+    Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
+    // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
+    // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
 //   });// Admin Brand All Route Group End 
 // Labroatorist Start
@@ -189,7 +193,9 @@ Route::prefix('NewBed')->group(function () {
   Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
   Route::post('/update', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
-}); 
+});
+
+
 
 // Appointment start
 Route::prefix('Appointment')->group(function () {
@@ -198,7 +204,18 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
-}); 
+
+  Route::get('/calennnnnnnn', [AppointmentController::class, 'index']);
+});
+// For Diagonosis
+Route::prefix('Diagnosis')->group(function (){
+  Route::get('/view', [NewDiagnosisController::class, 'DiagnosisCategoryView'])->name('all.diagnosisCategory');
+  Route::post('/store', [NewDiagnosisController::class, 'DiagnosisCategoryStore'])->name('diagnosisCategory.add');
+  Route::get('/edit/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryEdit']);
+  Route::post('/update', [NewDiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisCategory');
+  Route::get('/delete/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryDelete'])->name('delete.diagnosisCategory');
+});
+
 
 // Appointment start
 Route::prefix('Diagnsosis')->group(function () {  

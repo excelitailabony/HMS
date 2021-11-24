@@ -20,8 +20,10 @@ class CreateAppointmentsTable extends Migration
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->dateTime('date');
             $table->text('description');
+            $table->text('title');
             $table->string('status')->default(1);
             $table->timestamps();
+          
         });
     }
 

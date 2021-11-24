@@ -21,6 +21,7 @@
         }
 
     </style>
+  
 
 
     <div class="container-full topBar">
@@ -39,7 +40,7 @@
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -132,9 +133,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        {{-- <input type="text" class="form-control"
-                                                            placeholder="Enter your blood group" name="bloodgrp"> --}}
-                                                        <select name="bloodgrp" class="form-control" required="">
+                                                         <input type="text" class="form-control"
+                                                            placeholder="Enter your blood group" name="bloodgrp"> 
+                                                         <select name="bloodgrp" class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Blood Group
                                                             </option>
 
@@ -152,7 +153,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
-                                                        <input type="file" class="form-control"
+                                                        <input type="file" class="form-control "
                                                             placeholder="Enter your image" name="image">
                                                     </div>
                                                 </div>
@@ -166,14 +167,11 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                        </div>
-                        {{-- check start --}}
-
-                        {{-- check end --}}
+                            </div> 
+                         </div> 
                         {{-- modal end --}}
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                          <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -256,6 +254,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+
                                                         <label>Blood Group</label>
                                                         <select name="bloodgrp" class="form-control" required=""
                                                             id="bloodgrp">
@@ -289,8 +288,8 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                        </div>
+                            </div> 
+                         </div>   
                         {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -341,26 +340,29 @@
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($accountants as $accountant)
+                                               @foreach ($accountants as $accountant)
                                                 <tr>
                                                     <td>{{ $accountant->id }}</td>
                                                     <td class="dtr-control sorting_1" tabindex="0">
                                                         {{ $accountant->name }}
                                                     </td>
-                                                    <td><img src="{{ asset($accountant->image) }}"
-                                                            class="rounded avatar-lg" height="80px;" width="80px;"></td>
+                                                    <td>
+                                                       <img src="{{ asset($accountant->image) }} " class="rounded avatar-lg"  height="80px;"
+                                                            width="80px;"></td>
                                                     <td>{{ $accountant->email }}</td>
                                                     <td>{{ $accountant->phone }}</td>
                                                     <td>{{ $accountant->sex }}</td>
                                                     <td>{{ $accountant->dob }}</td>
                                                     <td>{{ $accountant->age }}</td>
                                                     <td>{{ $accountant->bloodgrp }}</td>
-                                                    @if ($accountant->status == 0)
+                                                     <td> <input data-id="{{ $accountant->id }}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" {{ $accountant->status ? 'checked' : '' }}> 
+                                                    </td> 
+                                                    {{-- @if ($accountant->status == 0)
                                                         <td> <a class="btn btn-danger btn-sm">Deactive</a> </td>
                                                     @else
-                                                        <td> <a class="btn btn-success btn-sm">Active</a> </td>
-                                                    @endif
-                                                    <td>
+                                                        <td> <a class="btn btn-success btn-sm">Active</a> </td> 
+                                                     @endif --}}
+                                                      <td>
 
                                                         <button type="button" value="{{ $accountant->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
@@ -368,9 +370,9 @@
 
                                                         <a href="{{ route('accountant.delete', $accountant->id) }}"
                                                             class="btn btn-danger btn-sm" id="delete"><i
-                                                                class="fa fa-trash"></i></a>
+                                                                class="fa fa-trash"></i></a>  
 
-                                                        @if ($accountant->status == 1)
+                                                        {{-- @if ($accountant->status == 1)
                                                             <a href="{{ route('accountant.deactive', $accountant->id) }}"
                                                                 class="btn btn-danger btn-sm"
                                                                 title="Product deactive now"><i
@@ -380,11 +382,11 @@
                                                                 class="btn btn-success btn-sm"
                                                                 title="Product active now"><i
                                                                     class="fa fa-arrow-up"></i></a>
-                                                        @endif
+                                                        @endif --}}
 
-                                                    </td>
+                                                     </td>
                                                 </tr>
-                                            @endforeach
+                                             @endforeach  
                                         </tbody>
                                     </table>
                                 </div>
@@ -392,7 +394,7 @@
 
                         </div>
 
-                    </div>
+                    </div> 
                 </div>
             </div> <!-- end col -->
         </div>
@@ -434,4 +436,22 @@
             });
         });
     </script>
+    <script>
+        $(function() {
+          $('.toggle-class').change(function() {
+              var status = $(this).prop('checked') == true ? 1 : 0; 
+              var id = $(this).data('id'); 
+               
+              $.ajax({
+                  type: "GET",
+                  dataType: "json",
+                  url: '/changeStatus',
+                  data: {'status': status, 'id': id},
+                  success: function(data){
+                    console.log(data.success)
+                  }
+              });
+          })
+        })
+      </script>
 @endsection

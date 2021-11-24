@@ -9,7 +9,6 @@
         .topBar {
             padding: 2rem;
         }
-
         .card-title {
             display: flex;
             justify-content: space-between;
