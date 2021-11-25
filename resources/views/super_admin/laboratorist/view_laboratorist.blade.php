@@ -423,7 +423,6 @@
                     type: "GET",
                     url: "/laboratorist/edit-laboratorist/" + laboratorist_id,
                     success: function(response) {
-
                         $('#laboratorist_id').val(response.laboratorist.id);
                         $('#name').val(response.laboratorist.name);
                         $('#email').val(response.laboratorist.email);
@@ -434,14 +433,6 @@
                         $('#age').val(response.laboratorist.age);
                         $('#bloodgrp').val(response.laboratorist.bloodgrp);
                         $('#old_image').val(response.laboratorist.image);
-                        if (response.laboratorist.sex == 'male') {
-                            $('#editModal').find(':radio[name=sex][value="male"]').prop(
-                                'checked', true);
-                        } else {
-                            $('#editModal').find(':radio[name=sex][value="female"]').prop(
-                                'checked', true);
-                        }
-
                     }
                 })
             });

@@ -18,4 +18,8 @@ class DiagnosisTest extends Model
     public function doctor(){
         return $this->belongsTo("App\Models\Doctor",'doctor_id');
     }
+
+    public function diagnosis(){
+        return $this->belongsTo("App\Models\Diagnosis\Diagnosis",'diagnosis_category_id');
+    }
 }

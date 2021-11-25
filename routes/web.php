@@ -205,7 +205,7 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
 
-  Route::get('/calennnnnnnn', [AppointmentController::class, 'index']);
+  Route::get('/calender', [AppointmentController::class, 'index']);
 });
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){
@@ -222,6 +222,8 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
+  Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
+  Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
 });
 
 

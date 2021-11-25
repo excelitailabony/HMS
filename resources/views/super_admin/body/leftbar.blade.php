@@ -110,5 +110,18 @@
              </ul>
          </li>
 
+         <li>
+             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                 <i class="ti-email"></i>
+                 <span>Record</span>
+             </a>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="">Birth Record</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="">Death Record</a></li>
+             </ul>
+         </li>
+
      </ul>
  </div>
