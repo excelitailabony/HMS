@@ -26,11 +26,11 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title text-center">New Bed Type
+                    <h4 class="card-title text-center">Medicine Category
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">
-                           New Bed Type
+                          Medicine Category
                         </button>
                     </h4>
 
@@ -40,30 +40,21 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New Bed Type</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Medicine Category</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
 
-                                    <form action="{{ route('newbedtype.add') }}" method="POST"
+                                    <form action="{{ route('store.medicinecategory') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label> Bed Type</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="bed_types">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label> Description</label>
-                                                        <textarea class="form-control"
-                                                            name="description"></textarea>
-                                                    </div>
+                                                    <label> Medicine Category</label>
+                                                    <input type="text" class="form-control" placeholder="Enter Medicine Type"
+                                                        name="name">
                                                 </div>
                                             </div>
                                         </div>
@@ -71,7 +62,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Blood Donor">
+                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Medicine Type">
                                         </div>
                                     </form>
                                 </div>
@@ -86,32 +77,23 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit New Bed Type</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Medicine Category</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
 
-                                    <form action="{{ route('newbedtype.update') }}" method="POST"
+                                    <form action="{{ route('update.medicinecategory') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
 
-                                        <input type="hidden" id="newbedtype_id" name="newbedtype_id">
+                                        <input type="hidden" id="medicinecategory_id" name="medicinecategory_id">
 
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label> Bed Type</label>
+                                                    <label> Medicine Category</label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="bed_types" id="bed_types">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label> Description</label>
-                                                        <input type="text" class="form-control" name="description"
-                                                            id="description">
-                                                    </div>
+                                                        name="name" id="name">
                                                 </div>
                                             </div>
                                         </div>
@@ -135,13 +117,13 @@
                                         aria-describedby="datatable-buttons_info">
                                         <thead>
                                             <tr role="row">
-
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Bed Type</th>
-                                                <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
-                                                    rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Description</th>
+                                                    aria-label="Name: activate to sort column descending">Serial Id</th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Medicine Category</th>
+                                              
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Actions</th>
@@ -149,19 +131,20 @@
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($newbedtypes as $newbedtype)
+                                            @foreach ($medicinecategorys as $medicinecategory)
                                                 <tr>
 
                                                     <td class="dtr-control sorting_1" tabindex="0">
-                                                        {{ $newbedtype->bed_types }}</td>
-                                                    <td>{{ $newbedtype->description }}</td>
+                                                        {{ $medicinecategory->id }}</td>
+                                                        <td>{{ $medicinecategory->name }}</td>
+                                                   
 
                                                     <td>
-                                                        <button type="button" value="{{ $newbedtype->id }}"
+                                                        <button type="button" value="{{ $medicinecategory->id }}"
                                                             class="btn btn-success editBtn btn-sm">
                                                             <i class="fa fa-pencil-alt"></i></button>
 
-                                                        <a href="{{ route('newbedtype.delete', $newbedtype->id) }}"
+                                                        <a href="{{ route('delete.medicinecategory', $medicinecategory->id) }}"
                                                             class="btn btn-danger btn-sm" id="delete"><i
                                                                 class="fa fa-trash"></i></a>
                                                     </td>
@@ -186,17 +169,16 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
-                var newbedtype_id = $(this).val();
+                var medicinecategory_id = $(this).val();
 
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",
-                    url: "/NewBedType/edit-newbedtype/" + newbedtype_id,
+                    url: "/Medicine/category/edit/" +  medicinecategory_id,
                     success: function(response) {
                         //   console.log(response.newbedtype.description);
-                        $('#newbedtype_id').val(response.newbedtype.id);
-                        $('#bed_types').val(response.newbedtype.bed_types);
-                        $('#description').val(response.newbedtype.description);
+                        $('#medicinecategory_id').val(response.medicinecategory.id);
+                        $('#name').val(response.medicinecategory.name);
                     }
                 })
             });

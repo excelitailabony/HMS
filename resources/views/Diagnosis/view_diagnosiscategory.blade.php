@@ -157,7 +157,6 @@
                                                         <button type="button" value="{{ $diagnosiscat->id }}"
                                                             class="btn btn-success editBtn btn-sm">
                                                             <i class="fa fa-pencil-alt"></i></button>
-
                                                         <a href="{{ route('delete.diagnosisCategory', $diagnosiscat->id) }}"
                                                             class="btn btn-danger btn-sm" id="delete"><i
                                                                 class="fa fa-trash"></i></a>

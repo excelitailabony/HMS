@@ -16,7 +16,6 @@ class AppointmentController extends Controller
         $doctors=Doctor::all();
         $patients=Patient::all();
         $appointments=Appointment::with('doctor','patient')->get();
-        // dd($appointments);
         return view('Appointment.appointment_view',compact('doctors','patients','appointments'));
     }
 
@@ -37,7 +36,6 @@ class AppointmentController extends Controller
             'title' => $request->title, 
             'created_at' => Carbon::now(),          
             ]); 
-
             $notification = array(
             'message' =>  'Appointment Added Successfully',
             'alert-type' => 'success'
