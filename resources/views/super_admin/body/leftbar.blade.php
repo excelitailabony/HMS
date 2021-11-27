@@ -109,6 +109,25 @@
                  <li><a href="{{ route('all.diagnosis_test') }}">Diagnosis Test</a></li>
              </ul>
          </li>
+         <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ti-email"></i>
+                <span>Medicine</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('all.medicinemanufacture')}}">Medicine Manufacture</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('all.medicinecategory')}}">Medicine Category</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('all.medicine')}}">Medicine Type</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{route('all.medicinelist')}}">Medicine List</a></li>
+            </ul>
+            
+        </li>
 
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">

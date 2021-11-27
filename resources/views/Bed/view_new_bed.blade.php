@@ -60,7 +60,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select name="bed_type_id" required="" id="bed_type_id"
+                                                    <select name="bed_type_id" required="" 
                                                         class="form-control" aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
@@ -75,7 +75,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Charge</label>
-                                                        <input type="text" class="form-control" id="charge" name="charge">
+                                                        <input type="text" class="form-control"  name="charge">
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <textarea class="form-control" id="description"
+                                                        <textarea class="form-control" 
                                                             name="description"></textarea>
                                                     </div>
                                                 </div>

@@ -20,7 +20,12 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\Diagnosis\NewDiagnosisController;
 use App\Http\Controllers\Diagnosis\DiagnosisController;
+
+use App\Http\Controllers\Medicine\MedicineController;
+use App\Http\Controllers\Medicine\MedicineListController;
+
 use App\Http\Controllers\Record\RecordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -222,6 +227,40 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
+
+// Medicine type start
+Route::prefix('Medicine')->group(function () {  
+  Route::get('/type/view', [MedicineController::class, 'MedicineTypeView'])->name('all.medicine');
+  Route::post('/type/store', [MedicineController::class, 'MedicineTypeStore'])->name('store.medicine');
+  Route::get('/type/edit/{id}', [MedicineController::class, 'MedicineTypeEdit']);
+  Route::post('/type/update', [MedicineController::class, 'MedicineTypeUpdate'])->name('update.medicine');
+  Route::get('/type/delete/{id}', [MedicineController::class, 'MedicineTypeDelete'])->name('delete.medicine');
+  //Medicine type end
+  //  Medicine category start
+  Route::get('/category/view', [MedicineController::class, 'MedicineCategoryView'])->name('all.medicinecategory');
+  Route::post('/category/store', [MedicineController::class, 'MedicineCategoryStore'])->name('store.medicinecategory');
+  Route::get('/category/edit/{id}', [MedicineController::class, 'MedicineCategoryEdit']);
+  Route::post('/category/update', [MedicineController::class, 'MedicineCategoryUpdate'])->name('update.medicinecategory');
+  Route::get('/category/delete/{id}', [MedicineController::class, 'MedicineCategoryDelete'])->name('delete.medicinecategory');
+  //  Medicine category end
+  //  Medicine Manufacture start
+  Route::get('/manufacture/view', [MedicineController::class, 'MedicineManufactureView'])->name('all.medicinemanufacture');
+  Route::post('/manufacture/store', [MedicineController::class, 'MedicineManufactureStore'])->name('store.medicinemanufacture');
+  Route::get('/manufacture/edit/{id}', [MedicineController::class, 'MedicineManufactureEdit']);
+  Route::post('/manufacture/update', [MedicineController::class, 'MedicineManufactureUpdate'])->name('update.medicinemanufacture');
+  Route::get('/manufacture/delete/{id}', [MedicineController::class, 'MedicineManufactureDelete'])->name('delete.medicinemanufacture');
+  //  Medicine manufacture end
+  //  Medicine List start
+  Route::get('/list/view', [MedicineListController::class, 'MedicineListView'])->name('all.medicinelist');
+  Route::post('/list/store', [MedicineListController::class, 'MedicineListStore'])->name('store.medicinelist');
+  Route::get('/list/edit/{id}', [MedicineListController::class, 'MedicineListEdit']);
+  Route::post('/list/update', [MedicineListController::class, 'MedicineListUpdate'])->name('update.medicinelist');
+  Route::get('/list/delete/{id}', [MedicineListController::class, 'MedicineListDelete'])->name('delete.medicinelist');
+  //  Medicine manufacture end
+
+});
+
+
   Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
   Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
 });  
@@ -243,5 +282,6 @@ Route::prefix('Record')->group(function () {
   Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
   Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
 }); 
+
 
 
