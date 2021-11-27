@@ -36,7 +36,7 @@
                             </button>
                         </h4>
 
-                        <!-- Modal for add doctor -->
+                        <!-- Modal for add Diagnosis -->
                         <div class="modal fade bd-example-modal-lg" id="AddDiagnosisTest" tabindex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
@@ -51,7 +51,6 @@
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
@@ -86,7 +85,10 @@
                                                             <option value="" selected="" disabled="">Select Diagnosis
                                                                 Category
                                                             </option>
-                                                            <option value="34">hellow</option>
+                                                            @foreach ($diagnosis as $diagnos)
+                                                                <option value="{{ $diagnos->id }}">
+                                                                    {{ $diagnos->new_diagnosis_category }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -94,8 +96,7 @@
                                                     <div class="form-group">
                                                         <label>Report Number</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your report number" name="report_number"
-                                                            id="report_number">
+                                                            placeholder="Enter your report number" name="report_number">
                                                         @error('report_number')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -204,150 +205,158 @@
                             </div>
                         </div>
 
-                        <!-- Modal for add Edit doctor -->
-                        {{-- <div class="modal fade" id="EditDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <!-- Modal for add Edit Diagnosis -->
+                        <div class="modal fade bd-example-modal-lg" id="EditDiagnosis" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Edit Doctor</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Diagnosis</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('update.doctor') }}" method="POST"
+                                    <form action="{{ route('update.diagnosisTest') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
-                                            <input type="hidden" id="doctor_id" name="doctor_id">
-                                            <input type="hidden" id="old_image" name="old_image">
+                                            <input type="hidden" id="diagnosis_id" name="diagnosis_id">
                                             <div class="row">
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Name</label>
+                                                        <label>Patient</label>
+                                                        <select name="patient_id" class="form-control" required=""
+                                                            id="patient_id">
+                                                            <option value="" selected="" disabled="">Select Patient Name
+                                                            </option>
+                                                            @foreach ($patients as $patient)
+                                                                <option value="{{ $patient->id }}">
+                                                                    {{ $patient->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Doctor</label>
+                                                        <select name="doctor_id" id="doctor_id" class="form-control"
+                                                            required="">
+                                                            <option value="" selected="" disabled="">Select Doctor Name
+                                                            </option>
+                                                            @foreach ($doctors as $doctor)
+                                                                <option value="{{ $doctor->id }}">{{ $doctor->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Diagnosis Category</label>
+                                                        <select name="diagnosis_test_id" id="diagnosis_test_id"
+                                                            class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Diagnosis
+                                                                Category
+                                                            </option>
+                                                            @foreach ($diagnosis as $diagnos)
+                                                                <option value="{{ $diagnos->id }}">
+                                                                    {{ $diagnos->new_diagnosis_category }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Report Number</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter first name" name="name" id="name">
-                                                        @error('name')
+                                                            placeholder="Enter your report number" name="report_number"
+                                                            id="report_number">
+                                                        @error('report_number')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Enter your email" name="email" id="email">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Enter your password" name="password" id="password">
-                                                        @error('password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your address" name="address" id="address">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter phone number" name="phone" id="phone">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Profile</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your profile" name="profile" id="profile">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Doc Dept</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter doctor department" name="doc_dept"
-                                                            id="doc_dept">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Sex</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>DOB</label>
-                                                        <input type="date" class="form-control"
-                                                            placeholder="Enter your birth date" name="dob" id="dob">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Age</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter your age" name="age" id="age">
+                                                        @error('age')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Blood Group</label>
-                                                        <select name="blood_group" id="blood_group" class="form-control"
-                                                            required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
-                                                            </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Social Link</label>
+                                                        <label>Height</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter doctor social link" name="social_link"
-                                                            id="social_link">
+                                                            placeholder="Enter your height" name="height" id="height">
+                                                        @error('height')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label>Image</label>
-                                                        <input type="file" class="form-control"
-                                                            placeholder="Enter your image" name="image" id="image"
-                                                            onChange="mainThamUrl(this)">
+                                                        <label>Weight</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your weight" name="weight" id="weight">
+                                                        @error('weight')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <img src="" id="mainThmb">
+                                                        <label>Average Glucose</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your glucose" name="glucose" id="glucose">
+                                                        @error('glucose')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Urine</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your urine" name="urine" id="urine">
+                                                        @error('urine')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Blood Pressure</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your blood_pressure" name="blood_pressure"
+                                                            id="blood_pressure">
+                                                        @error('blood_pressure')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Diabetis</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your diabetis" name="diabetis" id="diabetis">
+                                                        @error('diabetis')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Cholestrol</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter your cholestrol" name="cholestrol"
+                                                            id="cholestrol">
+                                                        @error('cholestrol')
+                                                            <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             </div>
@@ -356,12 +365,12 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Update Doctor">
+                                            <input type="submit" class="btn btn-rounded btn-info" value="Update Diagnosis">
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
 
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -403,10 +412,10 @@
                                                     <td>{{ $diagnosisTest->report_number }}</td>
                                                     <td>{{ $diagnosisTest['patient']['name'] }}</td>
                                                     <td>{{ $diagnosisTest['doctor']['name'] }}</td>
-                                                    <td>{{ $diagnosisTest['doctor']['name'] }}</td>
+                                                    <td>{{ $diagnosisTest['diagnosis']['new_diagnosis_category'] }}</td>
                                                     <td>{{ $diagnosisTest->created_at }}</td>
                                                     <td>
-                                                        <button type="button" value=""
+                                                        <button type="button" value={{ $diagnosisTest->id }}
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
                                                         <a href="{{ route('delete.diagnosisTest', $diagnosisTest->id) }}"
@@ -429,4 +438,37 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.editBtn', function() {
+                var diagnosis_id = $(this).val();
+                // alert(diagnosis_id);
+                $('#EditDiagnosis').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "/Diagnsosis/edit-Diagnosis-test/" + diagnosis_id,
+                    success: function(response) {
+                        // console.log(response.diagnosisTests);
+                        $('#diagnosis_id').val(response.diagnosisTests.id);
+                        $('#patient_id').val(response.diagnosisTests.patient_id);
+                        $('#doctor_id').val(response.diagnosisTests.doctor_id);
+                        $('#diagnosis_test_id').val(response.diagnosisTests
+                            .diagnosis_category_id);
+                        $('#report_number').val(response.diagnosisTests.report_number);
+                        $('#age').val(response.diagnosisTests.age);
+                        $('#height').val(response.diagnosisTests.height);
+                        $('#weight').val(response.diagnosisTests.weight);
+                        $('#glucose').val(response.diagnosisTests.average_glucose);
+                        $('#urine').val(response.diagnosisTests.urine_sugar);
+                        $('#blood_pressure').val(response.diagnosisTests.blood_pressure);
+                        $('#diabetis').val(response.diagnosisTests.diabetes);
+                        $('#cholestrol').val(response.diagnosisTests.cholesterol);
+                    }
+                })
+            });
+        });
+    </script>
 @endsection

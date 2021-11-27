@@ -54,41 +54,30 @@ class NewDiagnosisController extends Controller
 }
 
 
-
  // method for updating data
  public function DiagnosisCategoryUpdate(Request $request){
-  
+      
+      $diagnosiscat_id=$request->input('diagnosiscat_id');
+      $diagnosiscat =Diagnosis::find($diagnosiscat_id);
+      $diagnosiscat->new_diagnosis_category=$request->new_diagnosis_category;
+      $diagnosiscat->description=$request->description;
+      
+    
+      $diagnosiscat->update();
 
-  
-  
-   
-// image
-  $diagnosiscat_id=$request->input('diagnosiscat_id');
-  $diagnosiscat =Diagnosis::find($diagnosiscat_id);
-  $diagnosiscat->new_diagnosis_category=$request->new_diagnosis_category;
-  $diagnosiscat->description=$request->description;
-  
- 
-  $diagnosiscat->update();
+      $notification=array(
+          'message'=>'Diagnosis category Updated Success',
+          'alert-type'=>'success'
+      );
 
-   $notification=array(
-      'message'=>'Diagnosis category Updated Success',
-      'alert-type'=>'success'
-  );
+      return Redirect()->back()->with($notification);
+    }
 
-  return Redirect()->back()->with($notification);
+  // delete
+  public function DiagnosisCategoryDelete($id){
 
-
-}
-// delete
-public function DiagnosisCategoryDelete($id){
-
-  $diagnosiscat = Diagnosis::findOrFail($id);
-
-            
-  Diagnosis::findOrFail($id)->delete(); 
-            return redirect()->back();
-
- 
-}
+    $diagnosiscat = Diagnosis::findOrFail($id);
+    Diagnosis::findOrFail($id)->delete(); 
+    return redirect()->back();
+  }
 }

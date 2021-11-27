@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    protected $guarded = [];
 
-    public function patient(){
+   public function patient(){
        return $this->belongsTo("App\Models\Patient",'patient_id');
    }
 

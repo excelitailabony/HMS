@@ -9,6 +9,7 @@ use App\Models\Patient;
 use App\Models\Appointment\Appointment;
 use Carbon\carbon;
 use App\Models\Event;
+use DB;
 
 class AppointmentController extends Controller
 {
@@ -29,7 +30,7 @@ class AppointmentController extends Controller
         // Blood Donor Insert    
         Appointment::insert([
             'patient_id' => $request->patient_name,   
-            'doctor_dept_id' => $request->doctor_dept_id, 
+            'doctor_dept' => $request->doctor_dept_id, 
             'doctor_id' => $request->doctor_name, 
             'date' => $request->appointment_date,   
             'description' => $request->description,
@@ -71,7 +72,7 @@ class AppointmentController extends Controller
         $appointment_id=$request->input('appointment_id');
         $appointments =Appointment::find($appointment_id);
         $appointments->patient_id=$request->patient_name;
-        $appointments->doctor_dept_id=$request->doctor_dept;
+        $appointments->doctor_dept=$request->doctor_dept;
         $appointments->doctor_id=$request->doctor_name;
         $appointments->date=$request->appointment_date;
         $appointments->description=$request->description;
@@ -84,29 +85,21 @@ class AppointmentController extends Controller
     
         return Redirect()->back()->with($notification); 
     }
+
+
     public function index(Request $request)
      {
      if($request->ajax())
     	{ 
             // $row=Appointment::orderBy('description','ASC')->get();
-    		$data = Appointment::get(['id', 'date','title']);
+    		// $data = Appointment::get(['id', 'date','title']);
+            $data = Appointment::join('doctors', 'appointments.doctor_id', '=', 'doctors.id')
+            ->select('appointments.id as id','appointments.date as date', 'doctors.name as title')
+            ->get();
             // dd($data);
             return response()->json($data);
     	}
-    	return view('check');
+    	return view('Appointment.appointment_calender');
     }
-     
-    public function check(Request $request)
-    {
-    	if($request->ajax())
-    	 {
-    		$data = Event::get(['id', 'title', 'start']);
-            return response()->json($data);
-  	 }
-    	return view('full-calender');
-    }
-    
-
-    
           
 }

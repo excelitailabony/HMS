@@ -47,6 +47,14 @@
             border-radius: 5%;
         }
 
+        .addapoint {
+            margin-left: 1rem;
+        }
+
+        .card-title i {
+            color: rgb(70, 75, 104);
+        }
+
     </style>
 
     <div class="container-full topBar">
@@ -58,15 +66,14 @@
 
                         <h4 class="card-title text-center">All Appointment
                             <!-- Button trigger modal -->
-                            <div>
-                                
-                                <a href="{{ url("Appointment/calennnnnnnn") }}"><i class="mdi mdi-alarm-panel"></i></a>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#AddAppointment">
-                                        New Appointment
+                            <div class="d-flex">
+                                <a href="{{ url('Appointment/calender') }}"><i class="fas fa-calendar-alt fa-2x"></i></a>
+                                <button type="button" class="btn btn-success addapoint" data-bs-toggle="modal"
+                                    data-bs-target="#AddAppointment">
+                                    New Appointment
                                 </button>
                             </div>
-                            
+
                         </h4>
 
                         <!-- Modal for add doctor -->
@@ -106,7 +113,7 @@
                                                                 Department
                                                             </option>
                                                             @foreach ($doctors as $doctor)
-                                                                <option value="{{ $doctor->id }}">
+                                                                <option value="{{ $doctor->doc_dept }}">
                                                                     {{ $doctor->doc_dept }}
                                                                 </option>
                                                             @endforeach
@@ -192,7 +199,8 @@
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
-                                                                <option value="{{ $patient->id }}">{{ $patient->name }}
+                                                                <option value="{{ $patient->id }}">
+                                                                    {{ $patient->name }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -283,7 +291,7 @@
                                             @foreach ($appointments as $appointment)
                                                 <td>{{ $appointment['patient']['name'] }}</td>
                                                 <td>{{ $appointment['doctor']['name'] }}</td>
-                                                <td>{{ $appointment['doctor']['doc_dept'] }}</td>
+                                                <td>{{ $appointment->doctor_dept }}</td>
                                                 <td>{{ $appointment['date'] }}</td>
                                                 <td>
                                                     <button type="button" value="{{ $appointment->id }}"

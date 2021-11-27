@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Diagnosis\DiagnosisTest;
+use App\Models\Diagnosis\Diagnosis;
 use Carbon\carbon;
 
 class DiagnosisController extends Controller
@@ -14,8 +15,9 @@ class DiagnosisController extends Controller
     public function DignsosisTestView(){
         $patients=Patient::all();
         $doctors=Doctor::all();
-        $diagnosisTests=DiagnosisTest::with('patient','doctor')->get();
-        return view('Diagnosis.view_diagnosis_test',compact('doctors','patients','diagnosisTests'));
+        $diagnosis=Diagnosis::all();
+        $diagnosisTests=DiagnosisTest::with('patient','doctor','diagnosis')->get();
+        return view('Diagnosis.view_diagnosis_test',compact('doctors','patients','diagnosis','diagnosisTests'));
     }
 
     public function DignsosisTestStore(Request $request){
@@ -52,4 +54,41 @@ class DiagnosisController extends Controller
         DiagnosisTest::findOrFail($id)->delete(); 
         return redirect()->back();
     }
+
+    public function DiagnosisCategoryEdit($id){
+        $diagnosisTests = DiagnosisTest::find($id);
+         return response()->json([
+            'status' =>200,
+            'diagnosisTests' => $diagnosisTests,
+         ]);
+    }
+
+    public function DiagnosisCategoryUpdate(Request $request){
+
+        $diagnosis_id=$request->input('diagnosis_id');
+        
+        $diagnosisTest =DiagnosisTest::find($diagnosis_id);
+        // dd($bloodissue);
+        $diagnosisTest->doctor_id=$request->doctor_id;
+        $diagnosisTest->patient_id=$request->patient_id;
+        $diagnosisTest->diagnosis_category_id=$request->diagnosis_test_id;
+        $diagnosisTest->report_number=$request->report_number;
+        $diagnosisTest->age=$request->age;
+        $diagnosisTest->height=$request->height;
+        $diagnosisTest->weight=$request->weight;
+        $diagnosisTest->average_glucose=$request->glucose;
+        $diagnosisTest->urine_sugar=$request->urine;
+        $diagnosisTest->blood_pressure=$request->blood_pressure;
+        $diagnosisTest->diabetes=$request->diabetis;
+        $diagnosisTest->cholesterol=$request->cholestrol;
+        $diagnosisTest->update();
+
+        $notification=array(
+            'message'=>'Diagnosis Updated Successfully',
+            'alert-type'=>'success'
+        );
+
+        return Redirect()->back()->with($notification);
+    }
+
 }
