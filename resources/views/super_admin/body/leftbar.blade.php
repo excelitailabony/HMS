@@ -116,10 +116,10 @@
                  <span>Record</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">Birth Record</a></li>
+                 <li><a href="{{ route('all.birth_record') }}">Birth Record</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">Death Record</a></li>
+                 <li><a href="{{ route('all.death_record') }}">Death Record</a></li>
              </ul>
          </li>
 

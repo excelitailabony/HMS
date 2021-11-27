@@ -130,27 +130,11 @@ class PharmacistController extends Controller
 
    //delete nurse info
    public function DeletePharmacist($id){
-    $pharmacist=Pharmacist::find($id);
-    $image=$pharmacist->image;
-    unlink($image);
-    $pharmacist->delete();
-    return redirect()->back();
-}//end method
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $pharmacist=Pharmacist::find($id);
+        $image=$pharmacist->image;
+        unlink($image);
+        $pharmacist->delete();
+        return redirect()->back();
+    }//end method
 
 }//main end

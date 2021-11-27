@@ -52,7 +52,7 @@
         }
 
         .card-title i {
-            color: ;
+            color: rgb(70, 75, 104);
         }
 
     </style>

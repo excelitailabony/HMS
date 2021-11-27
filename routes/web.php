@@ -20,7 +20,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\Diagnosis\NewDiagnosisController;
 use App\Http\Controllers\Diagnosis\DiagnosisController;
-
+use App\Http\Controllers\Record\RecordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -224,6 +224,24 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
   Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
   Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
-});
+});  
+
+// Birth & Death Record Start
+Route::prefix('Record')->group(function () {  
+
+  // birth record
+  Route::get('/birth/view', [RecordController::class, 'BirthView'])->name('all.birth_record'); 
+  Route::post('/birth/store', [RecordController::class, 'BirthStore'])->name('store.birth_record');
+  Route::get('/birth/delete/{id}', [RecordController::class, 'BirthDelete'])->name('delete.birth_record');
+  Route::get('/birth/edit/{id}', [RecordController::class, 'BirthEdit']);
+  Route::post('/birth/update', [RecordController::class, 'BirthUpdate'])->name('update.birth_record');
+
+  // birth record
+  Route::get('/death/view', [RecordController::class, 'DeathView'])->name('all.death_record'); 
+  Route::post('/death/store', [RecordController::class, 'DeathStore'])->name('store.death_record');
+  Route::get('/death/delete/{id}', [RecordController::class, 'DeathDelete'])->name('delete.death_record');
+  Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
+  Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
+}); 
 
 
