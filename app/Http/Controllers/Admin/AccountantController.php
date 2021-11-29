@@ -124,7 +124,7 @@ else{
   $accountant->dob=$request->dob;
   $accountant->age=$request->age;
   $accountant->bloodgrp=$request->bloodgrp;
-  
+
   $accountant->update();
 
    $notification=array(

@@ -5,20 +5,16 @@
         .topBar {
             margin-top: 4rem;
         }
-
         .topBar {
             padding: 2rem;
         }
-
         .card-title {
             display: flex;
             justify-content: space-between;
         }
-
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
-
     </style>
     <div class="container-full topBar">
 
@@ -60,7 +56,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select name="bed_type_id" required="" 
+                                                    <select name="bed_type_id" required="" id="bed_type_id"
                                                         class="form-control" aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
@@ -75,7 +71,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Charge</label>
-                                                        <input type="text" class="form-control"  name="charge">
+                                                        <input type="text" class="form-control" id="charge" name="charge">
                                                     </div>
                                                 </div>
                                             </div>
@@ -83,7 +79,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <textarea class="form-control" 
+                                                        <textarea class="form-control" id="description"
                                                             name="description"></textarea>
                                                     </div>
                                                 </div>
@@ -211,8 +207,17 @@
                                                         {{ $newbed['newbed']['bed_types'] }} </td>
                                                     <td>{{ $newbed->charge }}</td>
                                                     <td>{{ $newbed->description }}</td>
-
                                                     <td>
+                                                        <button type="button" value="{{ $newbed->id }}"
+                                                            class="btn btn-success editBtn btn-sm"><i
+                                                                class="fa fa-pencil-alt"></i></button>
+                                                        <a href="{{ route('newbed.delete', $newbed->id) }}"
+                                                            class="btn btn-sm btn-danger" id="delete" title="delete data">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+
+                                                    {{-- <td>
 
                                                         <button type="button" value="{{ $newbed->id }}"
                                                             class="btn btn-success editBtn btn-sm">
@@ -221,7 +226,7 @@
                                                         <a href="{{ route('newbed.delete', $newbed->id) }}"
                                                             class="btn btn-danger btn-sm" id="delete"><i
                                                                 class="fa fa-trash"></i></a>
-                                                    </td>
+                                                    </td> --}}
 
                                                 </tr>
                                             @endforeach
@@ -245,7 +250,6 @@
             $(document).on('click', '.editBtn', function() {
                 var newbed_id = $(this).val();
                 // alert(newbed_id);
-
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",

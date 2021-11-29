@@ -5,19 +5,19 @@
     .topBar {
         margin-top: 4rem;
     }
-
     .topBar {
         padding: 2rem;
     }
-
     .card-title {
         display: flex;
         justify-content: space-between;
     }
-
     .modal-body .row .col-md-6 {
         margin-bottom: 1rem;
     }
+    .errorColor {
+            color: red;
+        }
 </style>
 <div class="container-full topBar">
 
@@ -29,13 +29,13 @@
                     <h4 class="card-title text-center">New Bed Type
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#addModal">
                            New Bed Type
                         </button>
                     </h4>
 
                     <!-- AddModal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -45,24 +45,25 @@
                                         aria-label="Close"></button>
                                 </div>
 
-                                    <form action="{{ route('newbedtype.add') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form >
                                         @csrf
                                         <div class="modal-body">
 
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="bed_types">
+                                                    <input type="text" required class="bed_types form-control">
+                                                    <span id="error_bed_types" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <textarea class="form-control"
-                                                            name="description"></textarea>
+                                                        {{-- <textarea class="form-control" id="description"
+                                                            name="description"></textarea> --}}
+                                                            <input type="text" required class="description form-control">
+                                                            <span id="error_description" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,7 +72,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Blood Donor">
+                                                <button type="button" class="btn btn-primary add_bed_types">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -81,7 +82,7 @@
                     {{-- modal end --}}
                     
                  <!-- Edit Modal -->
-                       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                       <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -91,26 +92,26 @@
                                         aria-label="Close"></button>
                                 </div>
 
-                                    <form action="{{ route('newbedtype.update') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form action="">
                                         @csrf
 
-                                        <input type="hidden" id="newbedtype_id" name="newbedtype_id">
-
+                                        <input type="hidden" id="newbedtype_id" >
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="bed_types" id="bed_types">
+                                                         id="bed_typesss">
+                                                        <span id="error_bed_type" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <input type="text" class="form-control" name="description"
-                                                            id="description">
+                                                        <input type="text" class="form-control" 
+                                                            id="descriptionsss">
+                                                            <span id="error_descriptions" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -118,7 +119,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                            <button type="button" class="btn btn-rounded btn-info update_bed_types">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -185,9 +186,10 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
+
             $(document).on('click', '.editBtn', function() {
                 var newbedtype_id = $(this).val();
-
                 $('#editModal').modal('show');
                 $.ajax({
                     type: "GET",
@@ -195,11 +197,94 @@
                     success: function(response) {
                         //   console.log(response.newbedtype.description);
                         $('#newbedtype_id').val(response.newbedtype.id);
-                        $('#bed_types').val(response.newbedtype.bed_types);
-                        $('#description').val(response.newbedtype.description);
+                        $('#bed_typesss').val(response.newbedtype.bed_types);
+                        $('#descriptionsss').val(response.newbedtype.description);
                     }
-                })
+                });
+                $('.btn-close').find('input').val('');
+
             });
+        
+            // for adding data using ajax
+            $(document).on('click', '.add_bed_types', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'bed_types': $('.bed_types').val(),
+                    'description': $('.description').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/NewBedType/add",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_bed_types').text(response.errors.bed_types);
+                            $('#error_description').text(response.errors.description);
+
+                            $('.add_bed_types').text('Save');
+                        } else {
+                            $('#addModal').find('input').val('');
+                            $('.add_bed_types').text('Save');
+                            $('#addModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.update_bed_types', function (e) {
+            e.preventDefault();
+
+            $(this).text('Updating..');
+            var id = $('#newbedtype_id').val();
+            // alert(id);
+
+            var data = {
+                'bed_types': $('#bed_typesss').val(),
+                'description': $('#descriptionsss').val(),
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "PUT",
+                url: "/NewBedType/update/" + id,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    // console.log(response);
+                    if (response.status == 400) {
+                        $('#error_bed_type').text(response.errors.bed_types);
+                        $('#error_descriptions').text(response.errors.description);
+                        $('.update_bed_types').text('Update');
+                    } else {
+                        $('#editModal').find('input').val('');
+                        $('.update_bed_types').text('Update');
+                        $('#editModal').modal('hide');
+                        toastr.success(response.message);
+                        // fetchstudent();
+                        location.reload();
+                    }
+                }
+            });
+
+        });
+           
+
         });
     </script>
+    
 @endsection
