@@ -20,6 +20,19 @@
             margin-bottom: 1rem;
         }
 
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0;
+            /* <-- Apparently some margin are still there even though it's hidden */
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+            /* Firefox */
+        }
+
     </style>
 
     <div class="container-full topBar">
@@ -76,7 +89,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Phone</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="number" class="form-control"
                                                             placeholder="Enter your phone number" name="phone">
                                                         @error('phone')
                                                             <span class="text-danger">{{ $message }}</span>

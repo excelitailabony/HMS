@@ -227,6 +227,9 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
+  Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
+  Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
+});  
 
 // Medicine type start
 Route::prefix('Medicine')->group(function () {  
@@ -240,7 +243,7 @@ Route::prefix('Medicine')->group(function () {
   Route::get('/category/view', [MedicineController::class, 'MedicineCategoryView'])->name('all.medicinecategory');
   Route::post('/category/store', [MedicineController::class, 'MedicineCategoryStore'])->name('store.medicinecategory');
   Route::get('/category/edit/{id}', [MedicineController::class, 'MedicineCategoryEdit']);
-  Route::post('/category/update', [MedicineController::class, 'MedicineCategoryUpdate'])->name('update.medicinecategory');
+  Route::put('/category/update/{id}', [MedicineController::class, 'MedicineCategoryUpdate'])->name('update.medicinecategory');
   Route::get('/category/delete/{id}', [MedicineController::class, 'MedicineCategoryDelete'])->name('delete.medicinecategory');
   //  Medicine category end
   //  Medicine Manufacture start
@@ -256,18 +259,12 @@ Route::prefix('Medicine')->group(function () {
   Route::get('/list/edit/{id}', [MedicineListController::class, 'MedicineListEdit']);
   Route::post('/list/update', [MedicineListController::class, 'MedicineListUpdate'])->name('update.medicinelist');
   Route::get('/list/delete/{id}', [MedicineListController::class, 'MedicineListDelete'])->name('delete.medicinelist');
-  //  Medicine manufacture end
-
+  //  Medicine List end
 });
 
 
-  Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
-  Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
-});  
-
 // Birth & Death Record Start
 Route::prefix('Record')->group(function () {  
-
   // birth record
   Route::get('/birth/view', [RecordController::class, 'BirthView'])->name('all.birth_record'); 
   Route::post('/birth/store', [RecordController::class, 'BirthStore'])->name('store.birth_record');
