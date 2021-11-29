@@ -8,12 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description">
     <meta content="Themesbrand" name="author">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- for sweet alert --}}
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     {{-- end sweet alerty --}}
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
@@ -85,14 +80,15 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-        
-        
- {{-- full calender start --}}
+
+
+    {{-- full calender start --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     {{-- full calender end --}}
     {{-- for toggle start --}}
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">  
-       {{-- for toggle end --}}
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        rel="stylesheet">
+    {{-- for toggle end --}}
     {{-- for toggle start --}}
 
     {{-- for toggle end --}}
@@ -308,7 +304,7 @@
             }
             toastr.warning("{{ session('warning') }}");
         @endif
-    </script> 
+    </script>
 
     <!-- js code for sweetalert2 delete  -->
     <script type="text/javascript">

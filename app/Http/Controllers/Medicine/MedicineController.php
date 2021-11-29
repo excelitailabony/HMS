@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Medicine\Medicine;
 use App\Models\Medicine\MedicineCategory;
 use App\Models\Medicine\Medicine_manufacture;
+use Illuminate\Support\Facades\Validator;
 
 class MedicineController extends Controller
 {
@@ -23,8 +24,7 @@ class MedicineController extends Controller
           public function MedicineTypeStore(Request $request){
           // Sub category validation 
           $request->validate([
-          'name' => 'required',   
-          
+             'name' => 'required',   
             ]);
         
     
@@ -80,32 +80,47 @@ class MedicineController extends Controller
      public function MedicineCategoryView(){
 
         $medicinecategorys= MedicineCategory::latest()->get();
-        return View('Medicine.view_medicine_category', compact('medicinecategorys'));
+        return View('Medicine.view_medicine_category',compact('medicinecategorys'));
+
   
     }// end method
+
    
      // Medicine category store
-          public function MedicineCategoryStore(Request $request){
-          // Medicine category validation 
-          $request->validate([
-          'name' => 'required',   
-          
-          ]);
-        
-    
-          // Medicine category Insert    
-          MedicineCategory::insert([
-          'name' => $request->name,                  
-          ]);    
-          $notification = array(
-              'message' =>  'Medicine Category Added Successfuly',
-              'alert-type' => 'success'
-          );     
-          return redirect()->back()->with($notification);   
-       } // end method
+        public function MedicineCategoryStore(Request $request){
+        // Medicine category validation 
+
+            $validator = Validator::make($request->all(), [
+                'name'=> 'required|max:191',
+            ]);
+
+            $notification = array(
+                'message' =>  'Medicine Category Added Successfuly',
+                'alert-type' => 'success'
+            );  
+
+            if($validator->fails())
+            {
+                return response()->json([
+                    'status'=>400,
+                    'errors'=>$validator->messages()
+                ]);
+            }
+            else
+            {
+                $student = new MedicineCategory;
+                $student->name = $request->input('name');
+                $student->save();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Medicine Category Added Successfully',
+                ]);
+            }
+        } // end method
+
 
         // method for editing medicine category data
-            public function MedicineCategoryEdit($id){
+        public function MedicineCategoryEdit($id){
             $medicinecategory = MedicineCategory::find($id);
             return response()->json([
                 'status' =>200,
@@ -115,19 +130,40 @@ class MedicineController extends Controller
 
 
     // method for updating data
-    public function MedicineCategoryUpdate(Request $request){
+    public function MedicineCategoryUpdate(Request $request, $id){
 
-      $medicinecategory_id=$request->input('medicinecategory_id');
-      $medicinecategory =MedicineCategory::find($medicinecategory_id);
-      $medicinecategory->name=$request->name;
-      $medicinecategory->update();
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+        ]);
 
-      $notification=array(
-          'message'=>' Medicine Category Updated Success',
-          'alert-type'=>'success'
-      );
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $medicinecategory = MedicineCategory::find($id);
+            if($medicinecategory)
+            {
+                $medicinecategory->name = $request->input('name');
+                $medicinecategory->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Medicine Category Updated Successfully.'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No medicine category Found.'
+                ]);
+            }
 
-      return Redirect()->back()->with($notification);
+        }      
     }
 
     // delete Medicinetype
