@@ -180,14 +180,14 @@ Route::prefix('bloodDonation')->group(function () {
     Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
    
   });
-
+  
 //Blood Donation End
-// New Bed Type Start
+
 Route::prefix('NewBedType')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedTypeView'])->name('all.newbedtype'); 
   Route::post('/add', [NewBedController::class, 'NewBedTypeStore'])->name('newbedtype.add'); 
   Route::get('/edit-newbedtype/{id}', [NewBedController::class, 'NewBedTypeEdit']); 
-  Route::post('/update', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
+  Route::put('/update/{id}', [NewBedController::class, 'NewBedTypeUpdate'])->name('newbedtype.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
 });
 //New Bed Type End
@@ -227,6 +227,9 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
+  Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
+  Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
+}); 
 
 // Medicine type start
 Route::prefix('Medicine')->group(function () {  
@@ -261,9 +264,7 @@ Route::prefix('Medicine')->group(function () {
 });
 
 
-  Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
-  Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
-});  
+   
 
 // Birth & Death Record Start
 Route::prefix('Record')->group(function () {  
