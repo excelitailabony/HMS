@@ -14,11 +14,11 @@ class BloodDonationController extends Controller
      // Blood Donation View
      public function BloodDonationView(){
 
-            $blooddonors = BloodDonor::orderBy('name', 'ASC')->get();
-            $blooddonations = BloodDonation::latest()->get();
-            return view('Blood_Bank.view_blood_donation', compact('blooddonors','blooddonations'));
+          $blooddonors = BloodDonor::orderBy('name', 'ASC')->get();
+          $blooddonations = BloodDonation::latest()->get();
+          return view('Blood_Bank.view_blood_donation', compact('blooddonors','blooddonations'));
     
-        }// end method
+      }// end method
 
 
       // Blood Donation store
@@ -63,7 +63,6 @@ class BloodDonationController extends Controller
                 'blooddonation' => $blooddonation,
             ]);
         }//end edit of blood donation
-
 
 
         // method for updating data

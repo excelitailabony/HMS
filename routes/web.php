@@ -155,7 +155,7 @@ Route::prefix('laboratorist')->group(function () {
         Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue');
         Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']);
         Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']);
-        Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
+        Route::put('/issue/update/{id}', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
   });
 
 

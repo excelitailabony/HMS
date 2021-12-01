@@ -9,6 +9,7 @@ use App\Models\Patient;
 use App\Models\Blood_Bank\BloodDonor;
 use App\Models\Blood_Bank\Blood_Issue;
 use Carbon\carbon;
+use Illuminate\Support\Facades\Validator;
 
 class BloodIssueController extends Controller
 {
@@ -34,22 +35,45 @@ class BloodIssueController extends Controller
 
 
     public function BloodIssueStore(Request $request){
-        // dd($request->all());
-       Blood_Issue::insert([
-            'doctor_id' => $request->doctor_name,
-            'patient_id' => $request->patient_name,
-            'donor_id' => $request->donor_id,
-            'blood_group' => $request->blood_donor_group,
-            'remarks' => $request->remarks,
-            'amount' => $request->amount,
-            'created_at' => Carbon::now(),
-       ]);
 
-        $notification=array(
-            'message'=>'Blood Issue Added Success',
-            'alert-type'=>'success'
-        );
-        return Redirect()->back()->with($notification);
+        $validator = Validator::make($request->all(), [
+            'doctor_name'=> 'required',
+            'patient_name'=> 'required',
+            'donor_id'=> 'required',
+            'remarks'=> 'required',
+            'amount'=> 'required | numeric',
+        ],[
+            'doctor_name.required' => 'Doctor name is required',
+            'patient_name.required' => 'Patient name is required',
+            'donor_id.required' => 'Donor name is required',
+            'remarks.required' => 'Remarks field is required',
+            'amount.required' => 'Amount is required'
+        ]);
+
+       if($validator->fails())
+          {
+              return response()->json([
+                  'status'=>400,
+                  'errors'=>$validator->messages()
+              ]);
+          }
+          else
+          {
+              Blood_Issue::insert([
+                    'doctor_id' => $request->doctor_name,
+                    'patient_id' => $request->patient_name,
+                    'donor_id' => $request->donor_id,
+                    'blood_group' => $request->blood_donor_group,
+                    'remarks' => $request->remarks,
+                    'amount' => $request->amount,
+                    'created_at' => Carbon::now(),
+            ]);
+              return response()->json([
+                  'status'=>200,
+                  'message'=>'Donor Added Successfuly',
+              ]);
+          }
+
     }
 
     public function BloodIssueDelete($id){
@@ -65,24 +89,40 @@ class BloodIssueController extends Controller
          ]);
     }
 
-    public function BloodDonorGroupUpdate(Request $request){
-          $bloodissue_id=$request->input('bloodissue_id');
+    public function BloodDonorGroupUpdate(Request $request,$id){
         
-          $bloodissue =Blood_Issue::find($bloodissue_id);
-            // dd($bloodissue);
-          $bloodissue->doctor_id=$request->doctor_name;
-          $bloodissue->patient_id=$request->patient_name;
-          $bloodissue->donor_id=$request->donor_edit_id;
-          $bloodissue->blood_group=$request->blood_donor_group_edit;
-          $bloodissue->remarks=$request->remarks;
-          $bloodissue->amount=$request->amount;
-          $bloodissue->update();
+          $validator = Validator::make($request->all(), [
+            'blood_donor_group'=> 'required',
+            'remarks'=> 'required',
+            'amount'=> 'required | numeric',
+        ],[
+            'remarks.required' => 'Remarks field is required',
+            'amount.required' => 'Amount is required',
+            'blood_donor_group.required' => 'Blood Group is required'
+        ]);
 
-          $notification=array(
-              'message'=>'Blood Issue Updated Successfully',
-              'alert-type'=>'success'
-          );
+          if($validator->fails())
+          {
+              return response()->json([
+                  'status'=>400,
+                  'errors'=>$validator->messages()
+              ]);
+          }
+          else
+          {
+                $bloodissue =Blood_Issue::find($id);
+                $bloodissue->doctor_id=$request->doctor_name;
+                $bloodissue->patient_id=$request->patient_name;
+                $bloodissue->donor_id=$request->donor_id;
+                $bloodissue->blood_group=$request->blood_donor_group;
+                $bloodissue->remarks=$request->remarks;
+                $bloodissue->amount=$request->amount;
+                $bloodissue->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Blood Issue Updated Successfully.'
+                ]);
+          } 
 
-          return Redirect()->back()->with($notification);
     }
 }

@@ -166,13 +166,13 @@
                                                     <div class="form-group">
                                                         <label>Gender</label><br>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
+                                                            <input class="form-check-input gender1" type="radio"
+                                                                name="gender" id="inlineRadio1" value="male">
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
+                                                            <input class="form-check-input gender1" type="radio"
+                                                                name="gender" id="inlineRadio2" value="female">
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
                                                         </div>
@@ -312,7 +312,7 @@
                 var data = {
                     'name': $('.name').val(),
                     'age': $('.age').val(),
-                    'gender': $('.gender').val(),
+                    'gender': $('.gender:checked').val(),
                     'blood_group': $('.blood_group').val(),
                     'last_donation_date': $('.last_donation_date').val(),
                 }
@@ -362,10 +362,10 @@
                         $('#blood_group').val(response.blooddonor.blood_group);
                         $('#last_donation_date').val(response.blooddonor.last_donation_date);
                         if (response.blooddonor.gender == 'male') {
-                            $('#editModal').find(':radio[name=gender][value="male"]').prop(
+                            $('#editDonor').find(':radio[name=gender][value="male"]').prop(
                                 'checked', true);
                         } else {
-                            $('#editModal').find(':radio[name=gender][value="female"]').prop(
+                            $('#editDonor').find(':radio[name=gender][value="female"]').prop(
                                 'checked', true);
                         }
 
@@ -381,7 +381,7 @@
                 var data = {
                     'name': $('#name').val(),
                     'age': $('#age').val(),
-                    'gender': $('#gender').val(),
+                    'gender': $('.gender1:checked').val(),
                     'blood_group': $('#blood_group').val(),
                     'last_donation_date': $('#last_donation_date').val(),
                 }
