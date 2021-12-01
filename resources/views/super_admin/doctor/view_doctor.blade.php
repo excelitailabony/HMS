@@ -31,13 +31,13 @@
 
                         <h4 class="card-title text-center">All Doctor
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddDoctor">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">
                                 Add Doctor
                             </button>
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade" id="AddDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -47,8 +47,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('store.doctor') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form  enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
 
@@ -56,95 +55,97 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control name"
                                                             placeholder="Enter first name" name="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                            <span id="error_name" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Email</label>
-                                                        <input type="email" class="form-control"
+                                                        <input type="email" class="form-control email"
                                                             placeholder="Enter your email" name="email">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                            <span id="error_email" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                        <input type="password" class="form-control"
+                                                        <input type="password" class="form-control password"
                                                             placeholder="Enter your password" name="password">
-                                                        @error('password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                            <span id="error_password" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Address</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control address"
                                                             placeholder="Enter your address" name="address">
+                                                            <span id="error_address" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Phone</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control phone"
                                                             placeholder="Enter phone number" name="phone">
+                                                            <span id="error_phone" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Profile</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control profile"
                                                             placeholder="Enter your profile" name="profile">
+                                                            <span id="error_profile" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doc Dept</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control doc_dept"
                                                             placeholder="Enter doctor department" name="doc_dept">
+                                                            <span id="error_doc_dept" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Sex</label><br>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
+                                                            <input class="form-check-input gender" type="radio" name="gender"
                                                                 id="inlineRadio1" value="male">
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                            <span id="error_gender" class="errorColor"></span>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
+                                                            <input class="form-check-input gender" type="radio" name="gender"
                                                                 id="inlineRadio2" value="female">
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
+                                                                <span id="error_gender" class="errorColor"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>DOB</label>
-                                                        <input type="date" class="form-control"
+                                                        <input type="date" class="form-control dob"
                                                             placeholder="Enter your birth date" name="dob">
+                                                            <span id="error_dob" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Age</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control age"
                                                             placeholder="Enter your age" name="age">
+                                                            <span id="error_age" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <select name="blood_group" class="form-control" required="">
+                                                        <select name="blood_group" class="form-control blood_group" required="">
                                                             <option value="" selected="" disabled="">Select Blood group
                                                             </option>
                                                             <option value="A+">A+</option>
@@ -156,20 +157,23 @@
                                                             <option value="O+">O+</option>
                                                             <option value="O-">O-</option>
                                                         </select>
+                                                        <span id="error_blood_group" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Social Link</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control social_link"
                                                             placeholder="Enter doctor social link" name="social_link">
+                                                            <span id="error_social_link" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
-                                                        <input type="file" class="form-control" onchange="loadFile(event)"
+                                                        <input type="file" class="form-control image" onchange="loadFile(event)"
                                                             placeholder="Enter your image" name="image">
+                                                            <span id="error_image" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6 img-show">
@@ -181,7 +185,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Doctor">
+                                                <button type="button" class="btn btn-primary add_doctor">Save</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -199,7 +204,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('update.doctor') }}" method="POST"
+                                    <form action="" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
@@ -324,7 +329,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
-                                                        <input type="file" class="form-control"
+                                                        <input type="file" class="form-control image"
                                                             placeholder="Enter your image" name="image" id="image"
                                                             onChange="mainThamUrl(this)">
                                                     </div>
@@ -478,6 +483,66 @@
                     }
                 })
             });
+            
+            // for adding data using ajax
+            $(document).on('click', '.add_doctor', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'name': $('.name').val(),
+                    'email': $('.email').val(),
+                    'password': $('.password').val(),
+                    'address': $('.address').val(),
+                    'description': $('.description').val(),
+                    'phone': $('.phone').val(),
+                    'profile': $('.profile').val(),
+                    'doc_dept': $('.doc_dept').val(),
+                    'gender': $('.gender').val(),
+                    'dob': $('.dob').val(),
+                    'age': $('.age').val(),
+                    'blood_group': $('.blood_group').val(),
+                    'social_link': $('.social_link').val(),
+                    'image': $('.image').val(),
+                    
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/store/doctor/",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_name').text(response.errors.name);
+                            $('#error_email').text(response.errors.email);
+                            $('#error_password').text(response.errors.password);
+                            $('#error_address').text(response.errors.address);
+                            $('#error_phone').text(response.errors.phone);
+                            $('#error_profile').text(response.errors.profile);
+                            $('#error_doc_dept').text(response.errors.doc_dept);
+                            $('#error_gender').text(response.errors.gender);
+                            $('#error_dob').text(response.errors.dob);
+                            $('#error_age').text(response.errors.age);
+                            $('#error_blood_group').text(response.errors.blood_group);
+                            $('#error_social_link').text(response.errors.social_link);
+                            $('#error_image').text(response.errors.image);
+                            $('.add_doctor').text('Save');
+                        } else {
+                            $('#addModal').find('input').val('');
+                            $('.add_doctor').text('Save');
+                            $('#addModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
         });
     </script>
     <script>
@@ -498,4 +563,5 @@
             }
         }
     </script>
+
 @endsection

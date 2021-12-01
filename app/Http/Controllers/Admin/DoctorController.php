@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use Carbon\Carbon;
 use Image;
+use Illuminate\Support\Facades\Validator;
 
 class DoctorController extends Controller
 {
@@ -18,57 +19,72 @@ class DoctorController extends Controller
 
      // method for storing doctors data
     public function StoreDoctor(Request $request){
-        $request->validate([
-             'name' => 'required',
-             'email' => 'required',
-             'password' => 'required',
-        ]);
+        // gdfhb
+        dd($request->all());
+         // validation 
+         $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'profile' => 'required',
+            'doc_dept' => 'required',
+            'gender' => 'required',
+            'dob' => 'required',
+            'age' => 'required',
+            'blood_group' => 'required',
+            'social_link' => 'required',
+            'image' => 'required',
+         ]);
+        
+        // ,
+        // [
+        //     'patient_id.required'=>"Patient type is required",
+        // ]);
+        $image = $request->image;
 
-        if($request->file('image')) {
-            $image = $request->file('image');
-            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(166,110)->save('uploads/doctor/'.$name_gen);
-            $save_url = 'uploads/doctor/'.$name_gen;
-            Doctor::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'image' => $save_url,
-            'password' => $request->password,
-            'phone' => $request->phone,
-            'sex' => $request->gender,
-            'dob' => $request->dob,
-            'address' => $request->address,
-            'age' => $request->age,
-            'blood_group' => $request->blood_group,
-            'doc_dept' => $request->doc_dept,
-            'profile' => $request->profile,
-            'social_link' => $request->social_link,
-            'created_at' => Carbon::now(),
-           ]);
-        }else{
-            Doctor::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'phone' => $request->phone,
-            'sex' => $request->gender,
-            'dob' => $request->dob,
-            'address' => $request->address,
-            'age' => $request->age,
-            'blood_group' => $request->blood_group,
-            'doc_dept' => $request->doc_dept,
-            'profile' => $request->profile,
-            'social_link' => $request->social_link,
-            'created_at' => Carbon::now(),
-           ]);
+        // dd($image);
+        $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(166,110)->save('uploads/doctor/'.$name_gen);
+        $save_url = 'uploads/doctor/'.$name_gen;
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
         }
-
-        $notification=array(
-            'message'=>'Doctor Upload Success',
-            'alert-type'=>'success'
-        );
-
-        return Redirect()->back()->with($notification);
+        else
+        {
+            $doctor = new Doctor;
+            $doctor->name = $request->input('name');
+            $doctor->email = $request->input('email');
+            $doctor->password = $request->input('password');
+            $doctor->address = $request->input('address');
+            $doctor->phone = $request->input('phone');
+            $doctor->profile = $request->input('profile');
+            $doctor->doc_dept = $request->input('doc_dept');
+            $doctor->gender = $request->input('gender');
+            $doctor->dob = $request->input('dob');
+            $doctor->age = $request->input('age');
+            $doctor->blood_group = $request->input('blood_group');
+            $doctor->social_link = $request->input('social_link');
+            $doctor->image=$save_url;
+            $doctor->save();
+           
+            return response()->json([
+                'status'=>200,
+                'message'=>'Doctor Added Successfully.'
+            ]);
+            $notification = array(
+                    'message' =>  'Doctor added Successfuly',
+                    'alert-type' => 'success'
+                );     
+                
+        }
+        // fbfdb
+       
     }
 
     // Doctor deactive

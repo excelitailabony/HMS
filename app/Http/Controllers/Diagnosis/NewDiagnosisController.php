@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Diagnosis;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Diagnosis\Diagnosis;
+use Illuminate\Support\Facades\Validator;
 
 class NewDiagnosisController extends Controller
 {
@@ -20,64 +21,101 @@ class NewDiagnosisController extends Controller
            // store Diagnosis
   public function DiagnosisCategoryStore(Request $request){   
       
-    // validation 
-        $request->validate([
-            'new_diagnosis_category' => 'required', 
-            'description' => 'required', 
-          ]);
-          
-       // Diagnosis Insert    
-       Diagnosis::insert([
+    $validator = Validator::make($request->all(), [
+      'new_diagnosis_category'=> 'required|max:10',
+      'description'=>'required|max:191',
+      
+  ]);
 
-           'new_diagnosis_category' => $request->new_diagnosis_category,   
-           'description' => $request->description,
-
-          ]); 
-
-          $notification = array(
-            'message' =>  'Diagnosis Category Added Sucessyfuly',
-            'alert-type' => 'success'
-        ); 
-
-
-        return Redirect()->back()->with($notification);        
-
+  if($validator->fails())
+  {
+      return response()->json([
+          'status'=>400,
+          'errors'=>$validator->messages()
+      ]);
+  }
+  else
+  {
+      $diagnosis = new Diagnosis;
+      $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
+      $diagnosis->description = $request->input('description');
+      $diagnosis->save();
+      return response()->json([
+          'status'=>200,
+          'message'=>'Diagnosis category added Successfully.'
+      ]);
+      $notification = array(
+              'message' =>  'Diagnosis category aaded Successfuly',
+              'alert-type' => 'success'
+          );     
+        
+  }
   } // end method 
 
   // method for editing accountant data
   public function DiagnosisCategoryEdit($id){
     $diagnosiscat = Diagnosis::find($id);
-    return response()->json([
-        'status' =>200,
-        'diagnosiscat' => $diagnosiscat,
-    ]);
+    if($diagnosiscat)
+    {
+        return response()->json([
+            'status'=>200,
+            'diagnosiscat'=> $diagnosiscat,
+        ]);
+    }
+    else
+    {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No diagnosis Found.'
+        ]);
+    }
 }
 
 
  // method for updating data
- public function DiagnosisCategoryUpdate(Request $request){
+ public function DiagnosisCategoryUpdate(Request $request,$id){
       
-      $diagnosiscat_id=$request->input('diagnosiscat_id');
-      $diagnosiscat =Diagnosis::find($diagnosiscat_id);
-      $diagnosiscat->new_diagnosis_category=$request->new_diagnosis_category;
-      $diagnosiscat->description=$request->description;
-      
-    
-      $diagnosiscat->update();
+  $validator = Validator::make($request->all(), [
+    'new_diagnosis_category'=> 'required|max:10',
+    'description'=>'required|max:191',
+]);
 
-      $notification=array(
-          'message'=>'Diagnosis category Updated Success',
-          'alert-type'=>'success'
-      );
-
-      return Redirect()->back()->with($notification);
+if($validator->fails())
+{
+    return response()->json([
+        'status'=>400,
+        'errors'=>$validator->messages()
+    ]);
+}
+else
+{
+    $diagnosis = Diagnosis::find($id);
+    if($diagnosis)
+    {
+        $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
+        $diagnosis->description = $request->input('description');
+        $diagnosis->update();
+        return response()->json([
+            'status'=>200,
+            'message'=>'Diagnosis Updated Successfully.'
+        ]);
+    }
+    else
+    {
+        return response()->json([
+            'status'=>404,
+            'message'=>'No Diagnosis Found.'
+        ]);  
     }
 
-  // delete
-  public function DiagnosisCategoryDelete($id){
+}
+ }
+ // delete
+ public function DiagnosisCategoryDelete($id){
 
-    $diagnosiscat = Diagnosis::findOrFail($id);
-    Diagnosis::findOrFail($id)->delete(); 
-    return redirect()->back();
-  }
+  $diagnosis = Diagnosis::findOrFail($id);
+  Diagnosis::findOrFail($id)->delete(); 
+            return redirect()->back(); 
+}//end method
+
 }

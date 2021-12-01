@@ -18,6 +18,9 @@
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+        .errorColor {
+            color: red;
+        }
 
     </style>
     <div class="container-full topBar">
@@ -30,13 +33,13 @@
                         <h4 class="card-title text-center">New Diagnosis Category
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                                data-bs-target="#addModal">
                                 Add New Diagnosis Category
                             </button>
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -46,22 +49,24 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('diagnosisCategory.add') }}" method="POST" enctype="multipart/form-data">
+                                    <form >
                                         @csrf
                                         <div class="modal-body">
 
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Diagnosis Category</label>
-                                                    <input type="text" class="form-control" placeholder="Enter Diagnosis Category"
+                                                    <input type="text" class="form-control new_diagnosis_category" placeholder="Enter Diagnosis Category"
                                                         name="new_diagnosis_category">
+                                                        <span id="error_diagnosis_category" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <input type="text" class="form-control"  name="description">
+                                                        <input type="text" class="form-control description"  name="description">
+                                                        <span id="error_description" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,7 +76,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add New Bed">
+                                                <button type="button" class="btn btn-primary add_diagnosis_category">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -90,10 +95,9 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('update.diagnosisCategory') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form action="">
                                         @csrf
-                                        <input type="hidden" id="diagnosiscat_id" name="diagnosiscat_id">
+                                        <input type="hidden" id="diagnosiscat_id" >
 
                                         <div class="modal-body">
 
@@ -101,14 +105,17 @@
                                                 <div class="col-md-12">
                                                     <label> Diagnosis Category</label>
                                                     <input type="text" class="form-control" placeholder="Enter Diagnosis Category"
-                                                        name="new_diagnosis_category" id="new_diagnosis_category">
+                                                         id="new_diagnosis_category">
+                                                        <span id="error_diagnosis_categoryedit" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <input type="text" class="form-control"  name="description" id="description">
+                                                        <input type="text" class="form-control"  id="description">
+                                                        <span id="error_diagnosis_descriptionedit" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +123,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                            <button type="submit" class="btn btn-rounded btn-info update_diagnosis_category">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -197,6 +204,84 @@
                     }
                 })
             });
+             // for adding data using ajax
+             $(document).on('click', '.add_diagnosis_category', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'new_diagnosis_category': $('.new_diagnosis_category').val(),
+                    'description': $('.description').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/Diagnosis/store",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_diagnosis_category').text(response.errors.new_diagnosis_category);
+                            $('#error_description').text(response.errors.description);
+
+                            $('.add_diagnosis_category').text('Save');
+                        } else {
+                            $('#addModal').find('input').val('');
+                            $('.add_diagnosis_category').text('Save');
+                            $('#addModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+            });
+
+            $(document).on('click', '.update_diagnosis_category', function (e) {
+            e.preventDefault();
+
+            $(this).text('Updating..');
+            var id = $('#diagnosiscat_id').val();
+            // alert(id);
+
+            var data = {
+                'new_diagnosis_category': $('#new_diagnosis_category').val(),
+                'description': $('#description').val(),
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "PUT",
+                url: "/Diagnosis/update/" + id,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    // console.log(response);
+                    if (response.status == 400) {
+                        $('#error_diagnosis_categoryedit').text(response.errors.new_diagnosis_category);
+                        $('#error_diagnosis_descriptionedit').text(response.errors.description);
+                        $('.update_diagnosis_category').text('Update');
+                    } else {
+                        $('#editModal').find('input').val('');
+                        $('.update_diagnosis_category').text('Update');
+                        $('#editModal').modal('hide');
+                        toastr.success(response.message);
+                        // fetchstudent();
+                        location.reload();
+                    }
+                }
+            });
+
+        });
+           
         });
     </script>
 @endsection
