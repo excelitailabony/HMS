@@ -10,6 +10,8 @@ use App\Models\Appointment\Appointment;
 use Carbon\carbon;
 use App\Models\Event;
 use DB;
+use Illuminate\Support\Facades\Validator;
+
 
 class AppointmentController extends Controller
 {
@@ -22,26 +24,45 @@ class AppointmentController extends Controller
 
     public function AppointmentStore(Request $request){
         // validation 
-        $request->validate([
-            'appointment_date' => 'required',   
-            'description' => 'required', 
+        $validator = Validator::make($request->all(), [
+            'patient_id'=> 'required',
+            'doctor_dept'=>'required|max:20',
+            'doctor_id'=>'required',
+            'date'=>'required',
+            'description'=>'required|max:191',
+            'title'=>'required|max:10',
+        ],
+        [
+            'patient_id.required'=>"Patient type is required",
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
             ]);
-            
-        // Blood Donor Insert    
-        Appointment::insert([
-            'patient_id' => $request->patient_name,   
-            'doctor_dept' => $request->doctor_dept_id, 
-            'doctor_id' => $request->doctor_name, 
-            'date' => $request->appointment_date,   
-            'description' => $request->description,
-            'title' => $request->title, 
-            'created_at' => Carbon::now(),          
-            ]); 
+        }
+        else
+        {
+            $appointment = new Appointment;
+            $appointment->patient_id = $request->input('patient_id');
+            $appointment->doctor_dept = $request->input('doctor_dept');
+            $appointment->doctor_id = $request->input('doctor_id');
+            $appointment->date = $request->input('date');
+            $appointment->description = $request->input('description');
+            $appointment->title = $request->input('title');
+            $appointment->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Appointment Added Successfully.'
+            ]);
             $notification = array(
-            'message' =>  'Appointment Added Successfully',
-            'alert-type' => 'success'
-        ); 
-        return Redirect()->back()->with($notification);        
+                    'message' =>  'Appointment added Successfuly',
+                    'alert-type' => 'success'
+                );     
+                
+        }
 
     } // end method 
 
@@ -59,31 +80,75 @@ class AppointmentController extends Controller
     }
 
     public function AppointmentEdit($id){
-         $appointments = Appointment::find($id);
+        $appointments = Appointment::find($id);
+        if($appointments)
+        {
             return response()->json([
-                'status' =>200,
-                'appointments' => $appointments,
+                'status'=>200,
+                'appointments'=> $appointments,
             ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'No Appointment Found.'
+            ]);
+        }
     }
 
-    public function AppointmentUpdate(Request $request){
+    public function AppointmentUpdate(Request $request,$id){
 
-        // dd($request->all());
-        $appointment_id=$request->input('appointment_id');
-        $appointments =Appointment::find($appointment_id);
-        $appointments->patient_id=$request->patient_name;
-        $appointments->doctor_dept=$request->doctor_dept;
-        $appointments->doctor_id=$request->doctor_name;
-        $appointments->date=$request->appointment_date;
-        $appointments->description=$request->description;
-        $appointments->update();
-    
-        $notification=array(
-            'message'=>'Appointment Updated Successfully',
-            'alert-type'=>'success'
-        );
-    
-        return Redirect()->back()->with($notification); 
+        $validator = Validator::make($request->all(), [
+            'patient_name_id'=> 'required',
+            'doctor_dept_id'=> 'required',
+            'doctor_name_id'=>'required',
+            'appointment_date_id'=>'required',
+            'description_id'=>'required',
+            'title_id'=>'required',
+        ],
+    [
+        'patient_name_id.required'=>'Patient name required',
+        'doctor_dept_id.required'=>'Doctor department required',
+        'doctor_name_id.required'=>'Doctor name required',
+        'appointment_date_id.required'=>'appointment date required',
+        'description_id.required'=>'description required',
+        'title_id.required'=>'title required',
+]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $appointments = Appointment::find($id);
+            if($appointments)
+            {
+                $appointments->patient_id = $request->input('patient_name_id');
+                $appointments->doctor_dept = $request->input('doctor_dept_id');
+                $appointments->doctor_id = $request->input('doctor_name_id');
+                $appointments->date = $request->input('appointment_date_id');
+                $appointments->description = $request->input('description_id');
+                $appointments->title = $request->input('title_id');
+                $appointments->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Appointment Updated Successfully.'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No Appointment Found.'
+                ]);  
+            }
+
+        }
     }
 
 

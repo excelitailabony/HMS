@@ -108,7 +108,7 @@ Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('
 Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
 Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
 Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
-Route::post('update/doctor',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
+Route::put('update/doctor/{id}',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
 Route::get('delete/doctor/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
 Route::get('/patient/deactive/{id}', [DoctorController::class, 'DoctorDeactive'])->name('doctor.deactive'); 
 Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->name('doctor.active');
@@ -196,7 +196,7 @@ Route::prefix('NewBed')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedView'])->name('all.newbed'); 
   Route::post('/add', [NewBedController::class, 'NewBedStore'])->name('newbed.add'); 
   Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
-  Route::post('/update', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
+  Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 });
 
@@ -208,7 +208,7 @@ Route::prefix('Appointment')->group(function () {
   Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
-  Route::post('/update', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
+  Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
 
   Route::get('/calender', [AppointmentController::class, 'index']);
 });
@@ -217,7 +217,7 @@ Route::prefix('Diagnosis')->group(function (){
   Route::get('/view', [NewDiagnosisController::class, 'DiagnosisCategoryView'])->name('all.diagnosisCategory');
   Route::post('/store', [NewDiagnosisController::class, 'DiagnosisCategoryStore'])->name('diagnosisCategory.add');
   Route::get('/edit/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryEdit']);
-  Route::post('/update', [NewDiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisCategory');
+  Route::put('/update/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisCategory');
   Route::get('/delete/{id}', [NewDiagnosisController::class, 'DiagnosisCategoryDelete'])->name('delete.diagnosisCategory');
 });
 

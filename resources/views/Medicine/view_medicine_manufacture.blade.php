@@ -28,10 +28,14 @@
         }
 
         .modal-body input {
-            height: 40px;
+            /* height: 40px;
             border-radius: 20px;
             box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            border: none;
+            border: none; */
+            border-radius: 10px;
+            border: 1px solid darkseagreen;
+            padding: 0 15px;
+            box-shadow: 0 3px 6px 0 darkseagreen;
         }
 
     </style>
