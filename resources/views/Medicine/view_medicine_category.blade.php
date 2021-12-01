@@ -111,6 +111,7 @@
                                 </div>
                             </div>
                         </div>
+                  
                         {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">

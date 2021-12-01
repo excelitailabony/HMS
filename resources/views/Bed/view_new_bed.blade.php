@@ -15,6 +15,9 @@
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+        .errorColor {
+            color: red;
+        }
     </style>
     <div class="container-full topBar">
 
@@ -49,15 +52,16 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed </label>
-                                                    <input type="text" class="form-control" placeholder="Enter Bed Type"
+                                                    <input type="text" class="form-control bed" placeholder="Enter Bed Type"
                                                         name="bed">
+                                                        <span id="error_bed" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select name="bed_type_id" required="" id="bed_type_id"
-                                                        class="form-control" aria-invalid="false">
+                                                    <select name="bed_type_id" required="" 
+                                                        class="form-control bed_type_id" aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
                                                             <option value="{{ $newbedtype->id }}">
@@ -65,13 +69,15 @@
                                                         @endforeach
 
                                                     </select>
+                                                    <span id="error_bed_types" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Charge</label>
-                                                        <input type="text" class="form-control" id="charge" name="charge">
+                                                        <input type="text" class="form-control charge"  name="charge">
+                                                        <span id="error_charge" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,8 +85,9 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <textarea class="form-control" id="description"
+                                                        <textarea class="form-control description" 
                                                             name="description"></textarea>
+                                                            <span id="error_description" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -89,7 +96,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add New Bed">
+                                                <button type="button" class="btn btn-primary add_bed">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -108,8 +115,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('newbed.update') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form >
                                         @csrf
 
                                         <input type="hidden" id="newbed_id" name="newbed_id">
@@ -120,18 +126,21 @@
                                                 <div class="col-md-6">
                                                     <label> Bed </label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="bed" id="bed">
+                                                        id="bed">
+                                                        <span id="error_bededit" class="errorColor"></span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label> Charge </label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                        name="charge" id="charge">
+                                                      id="charge">
+                                                        <span id="error_chargeedit" class="errorColor"></span>
+
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select name="bed_type_id" required="" id="bed_type_id"
+                                                    <select  required="" id="bed_type_id"
                                                         class="form-control" aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
@@ -140,6 +149,8 @@
                                                         @endforeach
 
                                                     </select>
+                                                    <span id="error_bed_typesedit" class="errorColor"></span>
+
                                                 </div>
                                             </div>
                                             {{-- <div class="row">
@@ -154,8 +165,9 @@
                                                     <div class="form-group">
                                                         <label> Description</label>
                                                         {{-- <textarea class="form-control" id="description" name="description"></textarea> --}}
-                                                        <input type="text" class="form-control" id="description"
-                                                            name="description">
+                                                        <input type="text" class="form-control" id="description">
+                                                            <span id="error_descriptionedit" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -163,7 +175,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                                <button type="button" class="btn btn-rounded btn-info update_bed">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -240,6 +252,7 @@
                     </div>
                 </div>
             </div> <!-- end col -->
+            
         </div>
     </div>
 @endsection
@@ -264,6 +277,93 @@
                     }
                 })
             });
+               // for adding data using ajax
+               $(document).on('click', '.add_bed', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'bed': $('.bed').val(),
+                    'bed_type_id': $('.bed_type_id').val(),
+                    'charge': $('.charge').val(),
+                    'description': $('.description').val(),
+
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/NewBed/add",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_bed').text(response.errors.bed);
+                            $('#error_bed_types').text(response.errors.bed_type_id);
+                            $('#error_charge').text(response.errors.charge);
+                            $('#error_description').text(response.errors.description);
+
+                            $('.add_bed').text('Save');
+                        } else {
+                            $('#addModal').find('input').val('');
+                            $('.add_bed').text('Save');
+                            $('#addModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            
+            $(document).on('click', '.update_bed', function (e) {
+            e.preventDefault();
+
+            $(this).text('Updating..');
+            var id = $('#newbed_id').val();
+            // alert(id);
+
+            var data = {
+                'bed': $('#bed').val(),
+                'bed_type_id': $('#bed_type_id').val(),
+                'charge': $('#charge').val(),
+                'description': $('#description').val(),
+            }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "PUT",
+                url: "/NewBed/update/" + id,
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    // console.log(response);
+                    if (response.status == 400) {
+                        $('#error_bededit').text(response.errors.bed);
+                        $('#error_bed_typesedit').text(response.errors.bed_type_id);
+                        $('#error_chargeedit').text(response.errors.charge);
+                        $('#error_descriptionedit').text(response.errors.description);
+                        $('.update_bed').text('Update');
+                    } else {
+                        $('#editModal').find('input').val('');
+                        $('.update_bed').text('Update');
+                        $('#editModal').modal('hide');
+                        toastr.success(response.message);
+                        // fetchstudent();
+                        location.reload();
+                    }
+                }
+            });
+
+        });
+
         });
     </script>
 @endsection

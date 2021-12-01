@@ -48,7 +48,7 @@ class NewBedController extends Controller
                     'message' =>  'New Bed Added Successfuly',
                     'alert-type' => 'success'
                 );     
-                // return redirect()->back()->toast()->success('done'); 
+              
         }
   
     } // end mathod
@@ -132,27 +132,40 @@ class NewBedController extends Controller
           
        // new bede type store
        public function NewBedStore(Request $request){
-        // Sub category validation 
-        $request->validate([
-            'bed'=>'required',
-            'bed_type_id' => 'required', 
-            'charge' => 'required',     
-            'description' => 'required',    
-          ]);
-      
+        $validator = Validator::make($request->all(), [
+            'bed'=> 'required',
+            'bed_type_id'=> 'required',
+            'charge'=> 'required|numeric',
+            'description'=> 'required|max:191',
 
-        // new bed type Insert    
-        NewBed::insert([
-        'bed'=>$request->bed,
-        'bed_type_id' => $request->bed_type_id,
-        'charge'=>$request->charge,         
-        'description' => $request->description,                 
-        ]);    
-        $notification = array(
-            'message' =>  'New Bed Added Successfuly',
-            'alert-type' => 'success'
-        );     
-        return redirect()->back()->with($notification);   
+            
+        ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $student = new NewBed;
+            $student->bed = $request->input('bed');
+            $student->bed_type_id = $request->input('bed_type_id');
+            $student->charge = $request->input('charge');
+            $student->description = $request->input('description');
+            $student->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'New bed Added Successfully.'
+            ]);
+            $notification = array(
+                    'message' =>  'New Bed Added Successfuly',
+                    'alert-type' => 'success'
+                );  
+        }
+
     } // end mathod
 
 
@@ -169,23 +182,49 @@ class NewBedController extends Controller
 
 
 
-        // method for updating data
-        public function NewBedUpdate(Request $request){
+        // // method for updating data
+        public function NewBedUpdate(Request $request,$id)
+        {
+            $validator = Validator::make($request->all(), [
+                'bed'=> 'required',
+                'bed_type_id'=> 'required',
+                'charge'=> 'required|numeric',
+                'description'=> 'required|max:191',
+    
+            ]);
 
-            $newbed_id=$request->input('newbed_id');
-            $newbed =NewBed::find($newbed_id);
-            $newbed->bed=$request->bed;
-            $newbed->bed_type_id=$request->bed_type_id;
-            $newbed->charge=$request->charge;
-            $newbed->description=$request->description;
-            $newbed->update();
+            if($validator->fails())
+            {
+                return response()->json([
+                    'status'=>400,
+                    'errors'=>$validator->messages()
+                ]);
+            }
+            else
+            {
+                $student = NewBed::find($id);
+                if($student)
+                {
+                    $student->bed = $request->input('bed');
+                    $student->bed_type_id = $request->input('bed_type_id');
+                    $student->charge = $request->input('charge');
+                    $student-> description= $request->input('description');
+                    $student->update();
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'New Bed  Updated Successfully.'
+                    ]);
+                }
+                else
+                {
+                    return response()->json([
+                        'status'=>404,
+                        'message'=>'No  New Bed Found.'
+                    ]);  
+                }
 
-            $notification=array(
-                'message'=>'New Bed Updated Success',
-                'alert-type'=>'success'
-            );
-
-            return Redirect()->back()->with($notification);
+            }  
+                
         }
         // delete
         public function NewBedDelete($id){
