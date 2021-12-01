@@ -73,7 +73,6 @@
                                     New Appointment
                                 </button>
                             </div>
-
                         </h4>
 
                         <!-- Modal for add doctor -->

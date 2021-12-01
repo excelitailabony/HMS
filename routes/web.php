@@ -147,27 +147,25 @@ Route::prefix('laboratorist')->group(function () {
     });// Admin Brand All Route Group End 
 
 
-   //Blood Issue
-    Route::prefix('blood')->group(function () {
-         Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');  
-         Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']);
-         Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
-         Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue');
-         Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']);
-         Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']);
-         Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
-    });
+  //Blood Issue
+  Route::prefix('blood')->group(function () {
+        Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');  
+        Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']);
+        Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
+        Route::get('/issue/delete/{id}', [BloodIssueController::class, 'BloodIssueDelete'])->name('delete.blood.issue');
+        Route::get('/issue/edit/{bloodissue_id}', [BloodIssueController::class, 'BloodIssueEdit']);
+        Route::get('/donor/group/edit/{blood_id}', [BloodIssueController::class, 'BloodDonorGroupEdit']);
+        Route::post('/issue/update', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
+  });
 
-  
-// Blood Donor Start
-Route::prefix('bloodDonor')->group(function () {
+
+ // Blood Donor Start
+ Route::prefix('bloodDonor')->group(function () {
     Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
     Route::post('/add', [BloodDonorController::class, 'BloodDonorStore'])->name('blooddonor.add'); 
     Route::get('edit-blooddonor/{id}', [BloodDonorController::class, 'BloodDonorEdit']); 
-    Route::post('/update', [BloodDonorController::class, 'BloodDonorUpdate'])->name('blooddonor.update');
-    Route::get('/delete/{id}', [BloodDonorController::class, 'BloodDonorDelete'])->name('blooddonor.delete'); 
-   
-     
+    Route::put('/update/{id}', [BloodDonorController::class, 'BloodDonorUpdate'])->name('blooddonor.update');
+    Route::get('/delete/{id}', [BloodDonorController::class, 'BloodDonorDelete'])->name('blooddonor.delete');   
   });
 
 //Blood Donor End
@@ -176,11 +174,9 @@ Route::prefix('bloodDonation')->group(function () {
     Route::get('/view', [BloodDonationController::class, 'BloodDonationView'])->name('all.blooddonation'); 
     Route::post('/add', [BloodDonationController::class, 'BloodDonationStore'])->name('blooddonation.add'); 
     Route::get('edit-blooddonation/{id}', [BloodDonationController::class, 'BloodDonationEdit']); 
-    Route::post('/update', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
+    Route::put('/update/{id}', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
     Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
-   
   });
-  
 //Blood Donation End
 
 Route::prefix('NewBedType')->group(function () {
@@ -233,14 +229,17 @@ Route::prefix('Diagnsosis')->group(function () {
 });  
 
 
-// Medicine type start
+
 Route::prefix('Medicine')->group(function () {  
+
+  // Medicine type start
   Route::get('/type/view', [MedicineController::class, 'MedicineTypeView'])->name('all.medicine');
   Route::post('/type/store', [MedicineController::class, 'MedicineTypeStore'])->name('store.medicine');
   Route::get('/type/edit/{id}', [MedicineController::class, 'MedicineTypeEdit']);
-  Route::post('/type/update', [MedicineController::class, 'MedicineTypeUpdate'])->name('update.medicine');
+  Route::put('/type/update/{id}', [MedicineController::class, 'MedicineTypeUpdate'])->name('update.medicine');
   Route::get('/type/delete/{id}', [MedicineController::class, 'MedicineTypeDelete'])->name('delete.medicine');
   //Medicine type end
+
   //  Medicine category start
   Route::get('/category/view', [MedicineController::class, 'MedicineCategoryView'])->name('all.medicinecategory');
   Route::post('/category/store', [MedicineController::class, 'MedicineCategoryStore'])->name('store.medicinecategory');
@@ -248,13 +247,15 @@ Route::prefix('Medicine')->group(function () {
   Route::put('/category/update/{id}', [MedicineController::class, 'MedicineCategoryUpdate'])->name('update.medicinecategory');
   Route::get('/category/delete/{id}', [MedicineController::class, 'MedicineCategoryDelete'])->name('delete.medicinecategory');
   //  Medicine category end
+
   //  Medicine Manufacture start
   Route::get('/manufacture/view', [MedicineController::class, 'MedicineManufactureView'])->name('all.medicinemanufacture');
   Route::post('/manufacture/store', [MedicineController::class, 'MedicineManufactureStore'])->name('store.medicinemanufacture');
   Route::get('/manufacture/edit/{id}', [MedicineController::class, 'MedicineManufactureEdit']);
-  Route::post('/manufacture/update', [MedicineController::class, 'MedicineManufactureUpdate'])->name('update.medicinemanufacture');
+  Route::put('/manufacture/update/{id}', [MedicineController::class, 'MedicineManufactureUpdate'])->name('update.medicinemanufacture');
   Route::get('/manufacture/delete/{id}', [MedicineController::class, 'MedicineManufactureDelete'])->name('delete.medicinemanufacture');
   //  Medicine manufacture end
+
   //  Medicine List start
   Route::get('/list/view', [MedicineListController::class, 'MedicineListView'])->name('all.medicinelist');
   Route::post('/list/store', [MedicineListController::class, 'MedicineListStore'])->name('store.medicinelist');
@@ -262,6 +263,7 @@ Route::prefix('Medicine')->group(function () {
   Route::post('/list/update', [MedicineListController::class, 'MedicineListUpdate'])->name('update.medicinelist');
   Route::get('/list/delete/{id}', [MedicineListController::class, 'MedicineListDelete'])->name('delete.medicinelist');
   //  Medicine List end
+
 });
 
 

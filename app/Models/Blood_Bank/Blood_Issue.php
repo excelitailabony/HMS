@@ -9,7 +9,7 @@ class Blood_Issue extends Model
 {
     use HasFactory;
 
-     protected $guarded = [];
+    protected $guarded = [];
 
     public function patient(){
         return $this->belongsTo("App\Models\Patient",'patient_id');

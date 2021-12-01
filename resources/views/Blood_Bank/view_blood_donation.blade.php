@@ -19,14 +19,8 @@
             margin-bottom: 1rem;
         }
 
-        .circle {
-            height: 100px;
-            width: 100px;
-
-            display: block;
-            border: 1px solid black;
-
-            border-radius: 100px;
+        .errorColor {
+            color: red;
         }
 
     </style>
@@ -40,13 +34,13 @@
                         <h4 class="card-title text-center">Blood Donation
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                                data-bs-target="#AddblooDonation">
                                 New Blood Donation
                             </button>
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="AddblooDonation" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -55,17 +49,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-
-                                    <form action="{{ route('blooddonation.add') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <select name="donor_id" class="form-control">
+                                                        <select name="donor_id" class="donor_id form-control">
                                                             <option value="" selected="" disabled="">Select Donor Name
                                                             </option>
                                                             @foreach ($blooddonors as $blooddonor)
@@ -73,33 +64,33 @@
                                                                     {{ $blooddonor->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                        <span id="error_donor_id" class="errorColor"></span>
                                                     </div>
                                                 </div>
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label> Blood Bags</label>
-                                                        <input type="Number" class="form-control"
+                                                        <input type="text" class="bags form-control"
                                                             placeholder="Enter your age" name="bags">
+                                                        <span id="error_bags" class="errorColor"></span>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Blood Donor">
+                                            <input type="submit" class="btn btn-rounded btn-info add_blood_donation"
+                                                value="Add Blood Donation">
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-
                         {{-- modal end --}}
+
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="editBloodDonation" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -109,14 +100,10 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('blooddonation.update') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
-
                                         <input type="hidden" id="blooddonation_id" name="blooddonation_id">
-
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -128,15 +115,15 @@
                                                                 <option value="{{ $blooddonor->id }}">
                                                                     {{ $blooddonor->name }}</option>
                                                             @endforeach
-
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Bags</label>
-                                                        <input type="number" class="form-control"
+                                                        <input type="text" class="form-control"
                                                             placeholder="Enter your bags" name="bags" id="bags">
+                                                        <span id="error_bags_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -144,12 +131,14 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                            <button type="submit"
+                                                class="btn btn-rounded btn-info update_blood_donation">update</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
+
                         {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
@@ -211,10 +200,48 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
+            // for adding data using ajax
+            $(document).on('click', '.add_blood_donation', function(e) {
+
+                e.preventDefault();
+                $(this).text('Sending..');
+
+                var data = {
+                    'donor_id': $('.donor_id').val(),
+                    'bags': $('.bags').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/bloodDonation/add",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_donor_id').text(response.errors.donor_id);
+                            $('#error_bags').text(response.errors.bags);
+                            $('.add_blood_donation').text('Save');
+                        } else {
+                            $('#AddblooDonation').find('input').val('');
+                            $('.add_blood_donation').text('Save');
+                            $('#AddblooDonation').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
+            // for editing data using ajax
             $(document).on('click', '.editBtn', function() {
                 var blooddonation_id = $(this).val();
-
-                $('#editModal').modal('show');
+                $('#editBloodDonation').modal('show');
                 $.ajax({
                     type: "GET",
                     url: "/bloodDonation/edit-blooddonation/" + blooddonation_id,
@@ -224,6 +251,43 @@
                         $('#bags').val(response.blooddonation.bags);
                     }
                 })
+            });
+
+            // for updating data using ajax
+            $(document).on('click', '.update_blood_donation', function(e) {
+                e.preventDefault();
+                $(this).text('Updating..');
+
+                var id = $('#blooddonation_id').val();
+
+                var data = {
+                    'donor_id': $('#donor_id').val(),
+                    'bags': $('#bags').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: "/bloodDonation/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_bags_edit').text(response.errors.bags);
+                            $('.update_blood_donation').text('Update');
+                        } else {
+                            $('#editBloodDonation').find('input').val('');
+                            $('.update_blood_donation').text('Update');
+                            $('#editBloodDonation').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
             });
         });
     </script>
