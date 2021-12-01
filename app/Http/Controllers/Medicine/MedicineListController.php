@@ -19,14 +19,27 @@ class MedicineListController extends Controller
         $medicine_cat = MedicineCategory::orderBy('name', 'ASC')->get();
         $medicine_type = Medicine::orderBy('name', 'ASC')->get();
         $medicine_manufacture = Medicine_manufacture::orderBy('name', 'ASC')->get();
-        $medicinelsts= MedicineList::latest()->get();
+        $medicinelsts= MedicineList::with('Medicinecategory','Medicinetype','MedicineManufacture')->get();
+
+        // dd($medicinelsts);
+        
         return View('Medicine.view_medicine_list', compact('medicinelsts','medicine_manufacture','medicine_type','medicine_cat'));
   
     }// end method
    
      // Medicine List store
           public function MedicineListStore(Request $request){
-          // Medicine list validation 
+
+        //  dd($request->all());
+          // Medicine list validation
+          
+        
+
+             $image = $request->file('image');
+            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+
+             dd($name_gen);
+             
           $request->validate([
           'name' => 'required',   
         //   'image' => 'required',
@@ -38,8 +51,7 @@ class MedicineListController extends Controller
           
           ]);
         
-           // img upload and save
-           $image = $request->file('image');
+
            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
            Image::make($image)->resize(300,300)->save('uploads/medicine/'.$name_gen);
            $save_url = 'uploads/medicine/'.$name_gen;

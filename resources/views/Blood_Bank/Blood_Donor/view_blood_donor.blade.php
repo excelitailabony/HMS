@@ -19,9 +19,12 @@
             margin-bottom: 1rem;
         }
 
+        .errorColor {
+            color: red;
+        }
+
     </style>
     <div class="container-full topBar">
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -29,14 +32,13 @@
 
                         <h4 class="card-title text-center">Blood Donor
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddDonor">
                                 New Blood Donor
                             </button>
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="AddDonor" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -45,58 +47,51 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-
-                                    <form action="{{ route('blooddonor.add') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="name form-control"
                                                             placeholder="Enter your name" name="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span id="error_name" class="errorColor"></span>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Age</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="age form-control"
                                                             placeholder="Enter your age" name="age">
+                                                        <span id="error_age" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Gender</label><br>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
+                                                            <input class="gender form-check-input" type="radio"
+                                                                name="gender" id="inlineRadio1" value="male">
                                                             <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
+                                                            <input class="gender form-check-input" type="radio"
+                                                                name="gender" id="inlineRadio2" value="female">
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
                                                         </div>
+                                                        <span id="error_gender" class="errorColor"></span>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        {{-- <input type="text" class="form-control"
-                                                        placeholder="Enter your blood group" name="bloodgrp"> --}}
-                                                        <select name="blood_group" class="form-control" required="">
+                                                        <select name="blood_group" class="blood_group form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Blood Group
                                                             </option>
-
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A-</option>
                                                             <option value="AB+">AB+</option>
@@ -106,13 +101,15 @@
                                                             <option value="O+">O+</option>
                                                             <option value="O-">O-</option>
                                                         </select>
+                                                        <span id="error_blood_group" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Last Donation Date</label>
-                                                        <input type="date" class="form-control"
+                                                        <input type="date" class="last_donation_date form-control"
                                                             placeholder="Enter your birth date" name="last_donation_date">
+                                                        <span id="error_last_donation_date" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +118,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Blood Donor">
+                                            <input type="submit" class="btn btn-rounded btn-info add_donor"
+                                                value="Add Blood Donor">
                                         </div>
                                     </form>
                                 </div>
@@ -129,10 +127,8 @@
                         </div>
                         {{-- check start --}}
 
-                        {{-- check end --}}
-                        {{-- modal end --}}
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="editDonor" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -142,23 +138,19 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('blooddonor.update') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
 
                                         <input type="hidden" id="blooddonor_id" name="blooddonor_id">
 
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter your name" name="name" id="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span id="error_name_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -166,6 +158,7 @@
                                                         <label>Age</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter your age" name="age" id="age">
+                                                        <span id="error_age_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
 
@@ -183,17 +176,16 @@
                                                             <label class="form-check-label"
                                                                 for="inlineRadio2">Female</label>
                                                         </div>
+                                                        <span id="error_gender_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-
                                                         <select name="blood_group" class="form-control" required=""
                                                             id="blood_group">
                                                             <option value="" selected="" disabled="">Select Blood group
                                                             </option>
-
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A-</option>
                                                             <option value="AB+">AB+</option>
@@ -203,6 +195,7 @@
                                                             <option value="O+">O+</option>
                                                             <option value="O-">O-</option>
                                                         </select>
+                                                        <span id="error_blood_group_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -211,16 +204,17 @@
                                                         <input type="date" class="form-control"
                                                             placeholder="Enter your birth date" name="last_donation_date"
                                                             id="last_donation_date">
-
+                                                        <span id="error_last_donation_date_edit"
+                                                            class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-rounded btn-info">update</button>
+                                            <button type="submit"
+                                                class="btn btn-rounded btn-info update_blood_donor">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -308,15 +302,60 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
+            // for adding data using ajax
+            $(document).on('click', '.add_donor', function(e) {
+
+                e.preventDefault();
+                $(this).text('Sending..');
+
+                var data = {
+                    'name': $('.name').val(),
+                    'age': $('.age').val(),
+                    'gender': $('.gender').val(),
+                    'blood_group': $('.blood_group').val(),
+                    'last_donation_date': $('.last_donation_date').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/bloodDonor/add",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_name').text(response.errors.name);
+                            $('#error_age').text(response.errors.age);
+                            $('#error_gender').text(response.errors.gender);
+                            $('#error_blood_group').text(response.errors.blood_group);
+                            $('#error_last_donation_date').text(response.errors
+                                .last_donation_date);
+                            $('.add_donor').text('Save');
+                        } else {
+                            $('#AddDonor').find('input').val('');
+                            $('.add_donor').text('Save');
+                            $('#AddDonor').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
+            // for editing data using ajax
             $(document).on('click', '.editBtn', function() {
                 var blooddonor_id = $(this).val();
-
-                $('#editModal').modal('show');
+                $('#editDonor').modal('show');
                 $.ajax({
                     type: "GET",
                     url: "/bloodDonor/edit-blooddonor/" + blooddonor_id,
                     success: function(response) {
-
                         $('#blooddonor_id').val(response.blooddonor.id);
                         $('#name').val(response.blooddonor.name);
                         $('#age').val(response.blooddonor.age);
@@ -333,6 +372,49 @@
                     }
                 })
             });
+
+            // for updating data using ajax
+            $(document).on('click', '.update_blood_donor', function(e) {
+                e.preventDefault();
+                $(this).text('Updating..');
+                var id = $('#blooddonor_id').val();
+                var data = {
+                    'name': $('#name').val(),
+                    'age': $('#age').val(),
+                    'gender': $('#gender').val(),
+                    'blood_group': $('#blood_group').val(),
+                    'last_donation_date': $('#last_donation_date').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: "/bloodDonor/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_name_edit').text(response.errors.name);
+                            $('#error_age_edit').text(response.errors.age);
+                            $('#error_gender_edit').text(response.errors.gender);
+                            $('#error_blood_group_edit').text(response.errors.blood_group);
+                            $('#error_last_donation_date_edit').text(response.errors
+                                .last_donation_date);
+                            $('.update_blood_donor').text('Update');
+                        } else {
+                            $('#editDonor').find('input').val('');
+                            $('.update_blood_donor').text('Update');
+                            $('#editDonor').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

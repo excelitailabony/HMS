@@ -9,7 +9,8 @@ class MedicineList extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    //for medicine category
+
+      //for medicine category
     public function Medicinecategory(){
     	return $this->belongsTo(MedicineCategory::class,'category_id','id');
     }
@@ -21,5 +22,4 @@ class MedicineList extends Model
     public function MedicineManufacture(){
     	return $this->belongsTo(Medicine_manufacture::class,'manufacture_id','id');
     }
-
 }

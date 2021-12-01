@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blood_bank\BloodDonor;
 
+use Illuminate\Support\Facades\Validator;
+
 class BloodDonorController extends Controller
 {
     //
@@ -19,35 +21,46 @@ class BloodDonorController extends Controller
         }// end method
 
         public function BloodDonorStore(Request $request){   
-      
-            // validation 
-                $request->validate([
+                      
+                $validator = Validator::make($request->all(), [
                     'name' => 'required',   
                     'age' => 'required', 
                     'gender' => 'required',
                     'blood_group' => 'required',        
-                    'last_donation_date' => 'required'     
-                  ]);
-                 
-               // Blood Donor Insert    
-               BloodDonor::insert([
-                   'name' => $request->name,   
-                   'age' => $request->age, 
-                   'gender' => $request->gender, 
-                   'blood_group' => $request->blood_group,            
-                   'last_donation_date' => $request->last_donation_date,  
-                  ]); 
-        
-                  $notification = array(
-                    'message' =>  'Blood Donor Added Sucessyfuly',
-                    'alert-type' => 'success'
-                ); 
-                return Redirect()->back()->with($notification);        
+                    'last_donation_date' => 'required'  
+                ],[
+                    'name.required' => 'Blood donor name is required',
+                    'blood_group.required' => 'Blood group required',
+                    'last_donation_date.required' => 'Date field is required',
+                ]);
+
+                if($validator->fails())
+                {
+                    return response()->json([
+                        'status'=>400,
+                        'errors'=>$validator->messages()
+                    ]);
+                }
+                else
+                {
+                    $blooddonor = new BloodDonor;
+                    $blooddonor->name = $request->input('name');
+                    $blooddonor->age = $request->input('age');
+                    $blooddonor->gender = $request->input('gender');
+                    $blooddonor->blood_group = $request->input('blood_group');
+                    $blooddonor->last_donation_date = $request->input('last_donation_date');
+                    $blooddonor->save();
+
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Blood Donor Added Successfully',
+                    ]);
+                }
         
           } // end method 
           
-          // method for editing blood donor data
-          public function BloodDonorEdit($id){
+        // method for editing blood donor data
+        public function BloodDonorEdit($id){
             $blooddonor = BloodDonor::find($id);
             return response()->json([
                 'status' =>200,
@@ -56,25 +69,47 @@ class BloodDonorController extends Controller
         }
 
         // method for updating data
-        public function BloodDonorUpdate(Request $request){
+        public function BloodDonorUpdate(Request $request,$id){
 
-          $blooddonor_id=$request->input('blooddonor_id');
-          $blooddonor =BloodDonor::find($blooddonor_id);
-          $blooddonor->name=$request->name;
-          $blooddonor->age=$request->age;
-          $blooddonor->gender=$request->gender;
-          $blooddonor->blood_group=$request->blood_group;
-          $blooddonor->last_donation_date=$request->last_donation_date;
-          $blooddonor->update();
+            $validator = Validator::make($request->all(), [
+                'name'=> 'required|max:191',
+                'age'=> 'required|numeric',
+                'blood_group'=> 'required',
+                'last_donation_date'=> 'required',
+                ],[
+                    'name.required' => 'Blood donor name is required'
+            ]);
 
-          $notification=array(
-              'message'=>'Blood Donor Updated Success',
-              'alert-type'=>'success'
-          );
-
-          return Redirect()->back()->with($notification);
-
-
+            if($validator->fails())
+            {
+                return response()->json([
+                    'status'=>400,
+                    'errors'=>$validator->messages()
+                ]);
+            }
+            else
+            {
+                $blooddonor = BloodDonor::find($id);
+                if($blooddonor)
+                {
+                    $blooddonor->name = $request->input('name');
+                    $blooddonor->age = $request->input('age');
+                    $blooddonor->gender = $request->input('gender');
+                    $blooddonor->last_donation_date = $request->input('last_donation_date');
+                    $blooddonor->update();
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Blood donor name Updated Successfully.'
+                    ]);
+                }
+                else
+                {
+                    return response()->json([
+                        'status'=>404,
+                        'message'=>'Blood donor type Found.'
+                    ]);
+                }
+            }  
         }
         // delete
         public function BloodDonorDelete($id){

@@ -128,7 +128,7 @@ class DoctorController extends Controller
     public function UpdateDoctor(Request $request){
         $doctor_id=$request->doctor_id;
         $old_image=$request->old_image;
-        // dd($old_image);
+        // dd($request->file('image');
         if ($request->file('image')) {
             unlink($old_image);
             $image = $request->file('image');

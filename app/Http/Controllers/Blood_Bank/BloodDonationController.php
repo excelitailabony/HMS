@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blood_Bank\BloodDonation;
 use App\Models\Blood_Bank\BloodDonor;
+use Illuminate\Support\Facades\Validator;
 
 class BloodDonationController extends Controller
 {
@@ -18,67 +19,101 @@ class BloodDonationController extends Controller
             return view('Blood_Bank.view_blood_donation', compact('blooddonors','blooddonations'));
     
         }// end method
-         // Blood Donation store
-         public function BloodDonationStore(Request $request){
-            // Sub category validation 
-            $request->validate([
-                'donor_id' => 'required',   
-                'bags' => 'required',    
-              ]);
-          
-      
-            // Blood Donation Insert    
-            BloodDonation::insert([
-            'donor_id' => $request->donor_id,         
-            'bags' => $request->bags,                 
-            ]);    
-            $notification = array(
-                'message' =>  'Donor Added Successfuly',
-                'alert-type' => 'success'
-            );     
-            return redirect()->back()->with($notification);   
-             } // end mathod
-             
-                // method for editing blood donation data
-            public function BloodDonationEdit($id){
-              $blooddonors = BloodDonor::orderBy('name', 'ASC')->get();
-              $blooddonation = BloodDonation::find($id);
+
+
+      // Blood Donation store
+      public function BloodDonationStore(Request $request){
+
+          $validator = Validator::make($request->all(), [
+              'donor_id'=> 'required',
+              'bags'=> 'required|numeric',
+          ],[
+              'donor_id.required' => 'Donor name is required',
+              'bags.required' => 'Bag number is required'
+          ]);
+
+          if($validator->fails())
+          {
               return response()->json([
-                  'status' =>200,
-                  'blooddonors' => $blooddonors,
-                  'blooddonation' => $blooddonation,
+                  'status'=>400,
+                  'errors'=>$validator->messages()
               ]);
-          }//end edit of blood donation
+          }
+          else
+          {
+              $blooddonation = new BloodDonation;
+              $blooddonation->donor_id = $request->input('donor_id');
+              $blooddonation->bags = $request->input('bags');
+              $blooddonation->save();
+              return response()->json([
+                  'status'=>200,
+                  'message'=>'Donor Added Successfuly',
+              ]);
+          }
+
+      } // end mathod
+          
+        // method for editing blood donation data
+        public function BloodDonationEdit($id){
+            $blooddonors = BloodDonor::orderBy('name', 'ASC')->get();
+            $blooddonation = BloodDonation::find($id);
+            return response()->json([
+                'status' =>200,
+                'blooddonors' => $blooddonors,
+                'blooddonation' => $blooddonation,
+            ]);
+        }//end edit of blood donation
 
 
-  
-            // method for updating data
-          public function BloodDonationUpdate(Request $request){
 
-              $blooddonation_id=$request->input('blooddonation_id');
-              $blooddonation =BloodDonation::find($blooddonation_id);
-              $blooddonation->donor_id=$request->donor_id;
-              $blooddonation->bags=$request->bags;
+        // method for updating data
+        public function BloodDonationUpdate(Request $request,$id){
 
-              $blooddonation->update();
-            
-              $notification=array(
-                  'message'=>'Blood Donation Updated Success',
-                  'alert-type'=>'success'
-              );
-            
-              return Redirect()->back()->with($notification);
-            
-            
-            }
-            
-              // delete
-          public function BloodDonationDelete($id){
+          $validator = Validator::make($request->all(), [
+              'donor_id'=> 'required',
+              'bags'=> 'required|numeric',
+          ],[
+              'donor_id.required' => 'Donor name is required',
+              'bags.required' => 'Bag number is required'
+          ]);
 
-              $blooddonation = BloodDonation::findOrFail($id);
-              BloodDonation::findOrFail($id)->delete(); 
-                        return redirect()->back();
-            }
+          if($validator->fails())
+          {
+              return response()->json([
+                  'status'=>400,
+                  'errors'=>$validator->messages()
+              ]);
+          }
+          else
+          {
+              $blooddonation =BloodDonation::find($id);
+              if($blooddonation)
+              {
+                  $blooddonation->donor_id=$request->donor_id;
+                  $blooddonation->bags=$request->bags;
+                  $blooddonation->update();
+                  return response()->json([
+                      'status'=>200,
+                      'message'=>'Blood Donation Updated Successfully.'
+                  ]);
+              }
+              else
+              {
+                  return response()->json([
+                      'status'=>404,
+                      'message'=>'Blood Donation type Found.'
+                  ]);
+              }
+          }  
+      }
+        
+          // delete
+      public function BloodDonationDelete($id){
+
+          $blooddonation = BloodDonation::findOrFail($id);
+          BloodDonation::findOrFail($id)->delete(); 
+                    return redirect()->back();
+      }
             
 
 }

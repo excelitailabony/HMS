@@ -12,57 +12,91 @@ use Illuminate\Support\Facades\Validator;
 class MedicineController extends Controller
 {
     
-     // Medicine type View
-     public function MedicineTypeView(){
+    // Medicine type View
+    public function MedicineTypeView(){
 
         $medicinetypes= Medicine::latest()->get();
         return View('Medicine.view_medicine_type', compact('medicinetypes'));
   
     }// end method
 
-     // Medicine type store
-          public function MedicineTypeStore(Request $request){
-          // Sub category validation 
-          $request->validate([
-             'name' => 'required',   
-            ]);
-        
-    
-          // Medicine type Insert    
-          Medicine::insert([
-          'name' => $request->name,                  
-          ]);    
-          $notification = array(
-              'message' =>  'Medicine Type Added Successfuly',
-              'alert-type' => 'success'
-          );     
-          return redirect()->back()->with($notification);   
-       } // end mathod
+    // Medicine type store
+    public function MedicineTypeStore(Request $request){
 
-        // method for editing medicine type data
-            public function MedicineTypeEdit($id){
-            $medicinetype = Medicine::find($id);
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+        ],[
+            'name.required' => 'Medicine type name is required'
+        ]);
+
+
+        if($validator->fails())
+        {
             return response()->json([
-                'status' =>200,
-                'medicinetype' => $medicinetype,
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $medicine = new Medicine;
+            $medicine->name = $request->input('name');
+            $medicine->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Medicine Type Added Successfully',
             ]);
         }
 
+    } // end mathod
+
+    // method for editing medicine type data
+    public function MedicineTypeEdit($id){
+        $medicinetype = Medicine::find($id);
+        return response()->json([
+            'status' =>200,
+            'medicinetype' => $medicinetype,
+        ]);
+    }
 
     // method for updating data
-    public function MedicineTypeUpdate(Request $request){
+    public function MedicineTypeUpdate(Request $request,$id){
 
-      $medicinetype_id=$request->input('medicinetype_id');
-      $medicinetype =Medicine::find($medicinetype_id);
-      $medicinetype->name=$request->name;
-      $medicinetype->update();
+      $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+        ],[
+            'name.required' => 'Medicine type name is required'
+        ]);
 
-      $notification=array(
-          'message'=>' Medicine Type Updated Success',
-          'alert-type'=>'success'
-      );
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $medicine = Medicine::find($id);
+            if($medicine)
+            {
+                $medicine->name = $request->input('name');
+                $medicine->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Medicine Type Name Updated Successfully.'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No medicine type Found.'
+                ]);
+            }
 
-      return Redirect()->back()->with($notification);
+        }  
+
     }
 
     // delete Medicinetype
@@ -82,58 +116,55 @@ class MedicineController extends Controller
         $medicinecategorys= MedicineCategory::latest()->get();
         return View('Medicine.view_medicine_category',compact('medicinecategorys'));
 
-  
     }// end method
 
    
-     // Medicine category store
-        public function MedicineCategoryStore(Request $request){
-        // Medicine category validation 
+    // Medicine category store
+    public function MedicineCategoryStore(Request $request){ 
 
-            $validator = Validator::make($request->all(), [
-                'name'=> 'required|max:191',
-            ]);
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+        ],[
+            'name.required' => 'Medicine category name is required'
+        ]);
 
-            $notification = array(
-                'message' =>  'Medicine Category Added Successfuly',
-                'alert-type' => 'success'
-            );  
-
-            if($validator->fails())
-            {
-                return response()->json([
-                    'status'=>400,
-                    'errors'=>$validator->messages()
-                ]);
-            }
-            else
-            {
-                $student = new MedicineCategory;
-                $student->name = $request->input('name');
-                $student->save();
-                return response()->json([
-                    'status'=>200,
-                    'message'=>'Medicine Category Added Successfully',
-                ]);
-            }
-        } // end method
-
-
-        // method for editing medicine category data
-        public function MedicineCategoryEdit($id){
-            $medicinecategory = MedicineCategory::find($id);
+        if($validator->fails())
+        {
             return response()->json([
-                'status' =>200,
-                'medicinecategory' => $medicinecategory,
+                'status'=>400,
+                'errors'=>$validator->messages()
             ]);
         }
+        else
+        {
+            $medicinecategory = new MedicineCategory;
+            $medicinecategory->name = $request->input('name');
+            $medicinecategory->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Medicine Category Added Successfully',
+            ]);
+        }
+    } // end method
 
 
-    // method for updating data
+    // method for editing medicine category data
+    public function MedicineCategoryEdit($id){
+        $medicinecategory = MedicineCategory::find($id);
+        return response()->json([
+            'status' =>200,
+            'medicinecategory' => $medicinecategory,
+        ]);
+    }
+
+
+    // medicince category update using ajax
     public function MedicineCategoryUpdate(Request $request, $id){
 
         $validator = Validator::make($request->all(), [
             'name'=> 'required|max:191',
+        ],[
+            'name.required' => 'Medicine category name is required'
         ]);
 
         if($validator->fails())
@@ -166,13 +197,16 @@ class MedicineController extends Controller
         }      
     }
 
-    // delete Medicinetype
+    // medicince category delete
     public function MedicineCategoryDelete($id){
 
       $medicinecategory = MedicineCategory::findOrFail($id);
       MedicineCategory::findOrFail($id)->delete(); 
       return redirect()->back();
+      
     }
+
+
 ///////////////////////////////////////////Medicine Manufacture//////////////////////////////////////////////
 
 
@@ -185,59 +219,92 @@ class MedicineController extends Controller
     }// end method
    
      // Medicine manufacture store
-          public function MedicineManufactureStore(Request $request){
-          // Medicine manufacture validation 
-          $request->validate([
-          'name' => 'required',   
-          'email' => 'required',
-          'phone_number' => 'required',  
-          
-          ]);
-        
-    
-          // Medicine manufacture Insert    
-          Medicine_manufacture::insert([
-          'name' => $request->name,
-          'email' => $request->email,
-          'phone_number' => $request->phone_number,
-          'note' => $request->note,
-          'address' => $request->address,                          
-          ]);    
-          $notification = array(
-              'message' =>  'Medicine Manufacture Added Successfuly',
-              'alert-type' => 'success'
-          );     
-          return redirect()->back()->with($notification);   
-       } // end method
+    public function MedicineManufactureStore(Request $request){
 
-        // method for editing medicine manufacture data
-            public function MedicineManufactureEdit($id){
-            $medicinemanufacture = Medicine_manufacture::find($id);
+        $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+            'email' => 'required|unique:medicine_manufactures',
+            'phone_number' => 'required|numeric', 
+        ],[
+            'name.required' => 'Medicine manufacture name is required'
+        ]);
+
+        if($validator->fails())
+        {
             return response()->json([
-                'status' =>200,
-                'medicinemanufacture' => $medicinemanufacture,
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $medicinemanufacture = new Medicine_manufacture;
+            $medicinemanufacture->name = $request->input('name');
+            $medicinemanufacture->email = $request->input('email');
+            $medicinemanufacture->phone_number = $request->input('phone_number');
+            $medicinemanufacture->note = $request->input('note');
+            $medicinemanufacture->address = $request->input('address');
+            $medicinemanufacture->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Medicine Manufacturer Added Successfully',
             ]);
         }
 
+    } // end method
+
+    // method for editing medicine manufacture data
+        public function MedicineManufactureEdit($id){
+        $medicinemanufacture = Medicine_manufacture::find($id);
+        return response()->json([
+            'status' =>200,
+            'medicinemanufacture' => $medicinemanufacture,
+        ]);
+    }
 
     // method for updating data
-    public function MedicineManufactureUpdate(Request $request){
+    public function MedicineManufactureUpdate(Request $request,$id){
 
-      $medicinemanufacture_id=$request->input('medicinemanufacture_id');
-      $medicinemanufacture =Medicine_manufacture::find($medicinemanufacture_id);
-      $medicinemanufacture->name=$request->name;
-      $medicinemanufacture->email=$request->email;
-      $medicinemanufacture->phone_number=$request->phone_number;
-      $medicinemanufacture->note=$request->note;
-      $medicinemanufacture->address=$request->address;
-      $medicinemanufacture->update();
+       $validator = Validator::make($request->all(), [
+            'name'=> 'required|max:191',
+            'email' => 'required',
+            'phone_number' => 'required|numeric', 
+        ],[
+            'name.required' => 'Medicine manufacture name is required'
+        ]);
 
-      $notification=array(
-          'message'=>' Medicine Manufacture Updated Success',
-          'alert-type'=>'success'
-      );
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $medicinemanufacture = Medicine_manufacture::find($id);
+            if($medicinemanufacture)
+            {
+                $medicinemanufacture->name = $request->input('name');
+                $medicinemanufacture->email = $request->input('email');
+                $medicinemanufacture->phone_number = $request->input('phone_number');
+                $medicinemanufacture->note = $request->input('note');
+                $medicinemanufacture->address = $request->input('address');
+                $medicinemanufacture->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Medicine Manufacturer Updated Successfully.'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No Manufacturer Found.'
+                ]);
+            }
 
-      return Redirect()->back()->with($notification);
+        }      
     }
 
     // delete Medicine manufacture
@@ -248,3 +315,4 @@ class MedicineController extends Controller
       return redirect()->back();
     }
 }
+
