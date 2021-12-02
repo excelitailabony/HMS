@@ -284,6 +284,7 @@ Route::prefix('Record')->group(function () {
   Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
   Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
 }); 
+Route::get('/check', [CheckController::class, 'index']);
 
 
 

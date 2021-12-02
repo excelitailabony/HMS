@@ -277,6 +277,23 @@
                     }
                 })
             });
+            // check
+            // $('.add_bed').bootstarpValidator(e)({
+            //   fields:{
+            //       bed:{
+            //           validator:{
+            //               stringLength:{
+            //                   min:2,
+            //               },
+            //               notEmpty:{
+            //                   message:'please enter name'
+            //               }
+            //           }
+            //       }
+            //   }
+            // });
+
+            
                // for adding data using ajax
                $(document).on('click', '.add_bed', function(e) {
                 e.preventDefault();
@@ -366,4 +383,5 @@
 
         });
     </script>
+
 @endsection

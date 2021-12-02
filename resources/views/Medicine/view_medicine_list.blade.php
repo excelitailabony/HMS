@@ -54,7 +54,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Medicine List</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        <button style="-moz-user-focus{outline:none}; " type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <form method="POST" enctype="multipart/form-data">

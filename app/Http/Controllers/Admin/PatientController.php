@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Image; 
+use Illuminate\Validation\Rules\Password;
 
 
 class PatientController extends Controller
@@ -21,58 +23,59 @@ class PatientController extends Controller
 
     // method for storing patient data
     public function StorePatient(Request $request){
-        $request->validate([
-             'name' => 'required',
-             'email' => 'required',
-             'password' => 'required',
-        ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required|unique:patients|email',
+            'password' => [
+                        'required',
+                        Password::min(8)
+                        ->letters()
+                        ->numbers()
+                    ],
+            'address' => 'required',
+            'phone' => 'required|numeric|digits_between: 1,11',
+            'dob' => 'required',
+            'blood_group' => 'required',
+            'gender' => 'required',
+            'age' => 'required|numeric',
 
-        if($request->file('image')) {
-            $image = $request->file('image');
-            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(166,110)->save('uploads/patient/'.$name_gen);
-            $save_url = 'uploads/patient/'.$name_gen;
-            Patient::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'image' => $save_url,
-            'password' => $request->password,
-            'phone' => $request->phone,
-            'sex' => $request->gender,
-            'dob' => $request->dob,
-            'address' => $request->address,
-            'age' => $request->age,
-            'blood_group' => $request->blood_group,
-            'created_at' => Carbon::now(),
-           ]);
-        }else{
-            Patient::insert([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'phone' => $request->phone,
-            'sex' => $request->gender,
-            'dob' => $request->dob,
-            'address' => $request->address,
-            'age' => $request->age,
-            'blood_group' => $request->blood_group,
-            'created_at' => Carbon::now(),
+        ]);
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else{
+            $patient=new Patient;
+            $patient->name=$request->input('name');
+            $patient->email=$request->input('email');
+            $patient->password=$request->input('password');
+            $patient->address=$request->input('address');
+            $patient->phone=$request->input('phone');
+            $patient->sex=$request->input('gender');
+            $patient->dob=$request->input('dob');
+            $patient->age=$request->input('age');
+            $patient->blood_group=$request->input('blood_group');
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+                Image::make($file)->resize(300,300)->save('uploads/patient/'.$extension);
+                $save_url = 'uploads/patient/'.$extension;
+                $patient->image= $save_url;
+            }
+            $patient->save();
+            return response()->json([
+               'status'=>200,
+               'message'=>'Patient Updated Successfully.'
            ]);
         }
-
-        $notification=array(
-            'message'=>'Patient Upload Success',
-            'alert-type'=>'success'
-        );
-
-        return Redirect()->back()->with($notification);
     }
 
     // method for editing patient data
     public function EditPatient($id){
         $patient = Patient::find($id);
-
-        // dd($patient);
         return response()->json([
             'status' =>200,
             'patient' => $patient,
@@ -81,48 +84,58 @@ class PatientController extends Controller
 
     // method for updating data
     public function UpdatePatient(Request $request){
-        $patient_id=$request->input('patient_id');
-        $old_img = $request->old_image;
+        // dd($request->all());
+        $old_img  = $request->old_image;
+        unlink($old_img);
+        $image = $request->file('image');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(300,300)->save('uploads/patient/'.$name_gen);
+        $save_url = 'uploads/patient/'.$name_gen;
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required|email',
+            // 'password' => [
+            //             'required',
+            //             Password::min(8)
+            //             ->letters()
+            //             ->numbers()
+            //         ],
+            'address' => 'required',
+            'phone' => 'required|numeric|digits_between: 1,11',
+            'dob' => 'required',
+            'blood_group' => 'required',
+            'gender' => 'required',
+            'age' => 'required|numeric',
 
-        if ($request->file('image')) {
-            unlink($old_img);
-            $image = $request->file('image');
-            $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(166,110)->save('uploads/patient/'.$name_gen);
-            $save_url = 'uploads/patient/'.$name_gen;
-
-            $patient = Patient::find($patient_id);
-            $patient->name=$request->name;
-            $patient->email=$request->email;
-            $patient->image=$save_url;
-            $patient->address=$request->address;
-            $patient->phone=$request->phone;
-            $patient->sex=$request->gender;
-            $patient->dob=$request->dob;
-            $patient->age=$request->age;
-            $patient->blood_group=$request->blood_group;
-            $patient->update();
-        }else{
-            $patient = Patient::find($patient_id);
-            $patient->name=$request->name;
-            $patient->email=$request->email;
-            $patient->address=$request->address;
-            $patient->phone=$request->phone;
-            $patient->sex=$request->gender;
-            $patient->dob=$request->dob;
-            $patient->age=$request->age;
-            $patient->blood_group=$request->blood_group;
-            $patient->update();
+        ]);
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
         }
+        else
+        {
+            $patient_id=$request->input('patient_id');
+            $patient = Patient::find($patient_id);
 
+            $patient->name = $request->input('name');
+            $patient->email=$request->input('email');
+            $patient->address=$request->input('address');
+            $patient->phone=$request->input('phone');
+            $patient->sex=$request->input('gender');
+            $patient->dob=$request->input('dob');
+            $patient->age=$request->input('age');
+            $patient->blood_group=$request->input('blood_group');
+            $patient->image=$save_url;
+            $patient->update();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Patient Updated Successfully.'
+            ]);
 
-         $notification=array(
-            'message'=>'Patient Updated Success',
-            'alert-type'=>'success'
-        );
-
-        return Redirect()->back()->with($notification);
-
+        }      
     }
 
     // method for deleting patient data

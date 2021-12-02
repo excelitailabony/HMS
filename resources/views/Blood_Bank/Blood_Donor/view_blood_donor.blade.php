@@ -71,17 +71,10 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Gender</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="gender form-check-input" type="radio"
-                                                                name="gender" id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="gender form-check-input" type="radio"
-                                                                name="gender" id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
+                                                        <input class="form-check-input gender" type="radio" name="gender"
+                                                                value="male">Male
+                                                                <input class="form-check-input gender" type="radio" name="gender"
+                                                                 value="female">Female
                                                         <span id="error_gender" class="errorColor"></span>
                                                     </div>
                                                 </div>
@@ -165,17 +158,19 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Gender</label><br>
+ 
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
+                                                            <input class="form-check-input gender1" type="radio" name="gender"
                                                                 id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input gender1" type="radio" name="gender"
+                                                                        id="inlineRadio2" value="female">
+                                                                    <label class="form-check-label"
+                                                                        for="inlineRadio2">Female</label>
+                                                                </div>
+
                                                         <span id="error_gender_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
@@ -312,7 +307,7 @@
                 var data = {
                     'name': $('.name').val(),
                     'age': $('.age').val(),
-                    'gender': $('.gender').val(),
+                    'gender': $('.gender:checked').val(),
                     'blood_group': $('.blood_group').val(),
                     'last_donation_date': $('.last_donation_date').val(),
                 }
@@ -348,8 +343,8 @@
                 });
             });
 
-            // for editing data using ajax
-            $(document).on('click', '.editBtn', function() {
+          // for editing data using ajax
+          $(document).on('click', '.editBtn', function() {
                 var blooddonor_id = $(this).val();
                 $('#editDonor').modal('show');
                 $.ajax({
@@ -362,13 +357,12 @@
                         $('#blood_group').val(response.blooddonor.blood_group);
                         $('#last_donation_date').val(response.blooddonor.last_donation_date);
                         if (response.blooddonor.gender == 'male') {
-                            $('#editModal').find(':radio[name=gender][value="male"]').prop(
+                            $('#editDonor').find(':radio[name=gender][value="male"]').prop(
                                 'checked', true);
                         } else {
-                            $('#editModal').find(':radio[name=gender][value="female"]').prop(
+                            $('#editDonor').find(':radio[name=gender][value="female"]').prop(
                                 'checked', true);
                         }
-
                     }
                 })
             });
@@ -381,7 +375,7 @@
                 var data = {
                     'name': $('#name').val(),
                     'age': $('#age').val(),
-                    'gender': $('#gender').val(),
+                    'gender': $('.gender1:checked').val(),
                     'blood_group': $('#blood_group').val(),
                     'last_donation_date': $('#last_donation_date').val(),
                 }
@@ -401,8 +395,7 @@
                             $('#error_age_edit').text(response.errors.age);
                             $('#error_gender_edit').text(response.errors.gender);
                             $('#error_blood_group_edit').text(response.errors.blood_group);
-                            $('#error_last_donation_date_edit').text(response.errors
-                                .last_donation_date);
+                            $('#error_last_donation_date_edit').text(response.errors.last_donation_date);
                             $('.update_blood_donor').text('Update');
                         } else {
                             $('#editDonor').find('input').val('');

@@ -19,73 +19,63 @@ class DoctorController extends Controller
 
      // method for storing doctors data
     public function StoreDoctor(Request $request){
-        // gdfhb
-        dd($request->all());
+
          // validation 
          $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'profile' => 'required',
-            'doc_dept' => 'required',
-            'gender' => 'required',
-            'dob' => 'required',
-            'age' => 'required',
-            'blood_group' => 'required',
-            'social_link' => 'required',
-            'image' => 'required',
+            // 'address' => 'required',
+            // 'phone' => 'required',
+            // 'profile' => 'required',
+            // 'doc_dept' => 'required',
+            // 'gender' => 'required',
+            // 'dob' => 'required',
+            // 'age' => 'required',
+            // 'blood_group' => 'required',
+            // 'social_link' => 'required',
+            // 'image' => 'required',
          ]);
-        
-        // ,
-        // [
-        //     'patient_id.required'=>"Patient type is required",
-        // ]);
-        $image = $request->image;
 
-        // dd($image);
-        $name_gen=hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(166,110)->save('uploads/doctor/'.$name_gen);
-        $save_url = 'uploads/doctor/'.$name_gen;
-        if($validator->fails())
-        {
-            return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
-            ]);
+         if(!$validator->passes()){
+                return response()->json([
+                    'status'=>400,
+                    'errors'=>$validator->messages()
+                ]);
+            }else{
+            $path = 'files/';
+            $file = $request->file('image');
+            // dd($file = $request->file('image'));
+            $file_name = time().'_'.$file->getClientOriginalExtension();
+
+            //    $upload = $file->storeAs($path, $file_name);
+            $upload = $file->storeAs($path, $file_name, 'public');
+
+            if($upload){
+                $doctor = new Doctor;
+                $doctor->name = $request->input('name');
+                $doctor->email = $request->input('email');
+                $doctor->password = $request->input('password');
+                $doctor->address = $request->input('address');
+                $doctor->phone = $request->input('phone');
+                $doctor->image = $file_name;
+                $doctor->profile = $request->input('profile');
+                $doctor->doc_dept = $request->input('doc_dept');
+                $doctor->sex = $request->input('gender');
+                $doctor->dob = $request->input('dob');
+                $doctor->age = $request->input('age');
+                $doctor->blood_group = $request->input('blood_group');
+                $doctor->social_link = $request->input('social_link');
+                $doctor->save();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Medicine Category Added Successfully',
+                ]);
+            } 
         }
-        else
-        {
-            $doctor = new Doctor;
-            $doctor->name = $request->input('name');
-            $doctor->email = $request->input('email');
-            $doctor->password = $request->input('password');
-            $doctor->address = $request->input('address');
-            $doctor->phone = $request->input('phone');
-            $doctor->profile = $request->input('profile');
-            $doctor->doc_dept = $request->input('doc_dept');
-            $doctor->gender = $request->input('gender');
-            $doctor->dob = $request->input('dob');
-            $doctor->age = $request->input('age');
-            $doctor->blood_group = $request->input('blood_group');
-            $doctor->social_link = $request->input('social_link');
-            $doctor->image=$save_url;
-            $doctor->save();
-           
-            return response()->json([
-                'status'=>200,
-                'message'=>'Doctor Added Successfully.'
-            ]);
-            $notification = array(
-                    'message' =>  'Doctor added Successfuly',
-                    'alert-type' => 'success'
-                );     
-                
-        }
-        // fbfdb
        
     }
+
 
     // Doctor deactive
     public function DoctorDeactive($id){

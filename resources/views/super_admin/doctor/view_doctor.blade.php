@@ -19,6 +19,10 @@
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+        .errorColor {
+            color: red;
+        }
+
 
     </style>
 
@@ -37,9 +41,9 @@
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Doctor</h5>
@@ -47,17 +51,16 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form  enctype="multipart/form-data">
+                                    <form  method="post" enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
                                                         <input type="text" class="form-control name"
                                                             placeholder="Enter first name" name="name">
-                                                            <span id="error_name" class="errorColor"></span>
+                                                            <span class="text-danger error-text name_error"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -65,7 +68,7 @@
                                                         <label>Email</label>
                                                         <input type="email" class="form-control email"
                                                             placeholder="Enter your email" name="email">
-                                                            <span id="error_email" class="errorColor"></span>
+                                                            <span class="text-danger error-text email_error"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -73,7 +76,7 @@
                                                         <label>Password</label>
                                                         <input type="password" class="form-control password"
                                                             placeholder="Enter your password" name="password">
-                                                            <span id="error_password" class="errorColor"></span>
+                                                            <span class="text-danger error-text password_error"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -110,20 +113,11 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Sex</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input gender" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                            <span id="error_gender" class="errorColor"></span>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input gender" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                                <span id="error_gender" class="errorColor"></span>
-                                                        </div>
+                                                        <label>Gender</label><br>
+                                                        <input class="form-check-input gender" type="radio" name="gender"
+                                                                value="male">Male
+                                                        <input class="form-check-input gender" type="radio" name="gender"
+                                                                 value="female">Female
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -145,7 +139,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <select name="blood_group" class="form-control blood_group" required="">
+                                                        <select name="blood_group" class="form-control blood_group">
                                                             <option value="" selected="" disabled="">Select Blood group
                                                             </option>
                                                             <option value="A+">A+</option>
@@ -185,7 +179,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary add_doctor">Save</button>
+                                                <button type="submit" class="btn btn-primary add_doctor">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -329,8 +323,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
+                                                        
                                                         <input type="file" class="form-control image"
-                                                            placeholder="Enter your image" name="image" id="image"
+                                                            placeholder="Enter your image" name="image" id="picture"
                                                             onChange="mainThamUrl(this)">
                                                     </div>
                                                 </div>
@@ -449,6 +444,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
             $(document).on('click', '.editBtn', function() {
                 var doctor_id = $(this).val();
                 // alert(doctor_id);
@@ -485,65 +481,30 @@
             });
             
             // for adding data using ajax
-            $(document).on('click', '.add_doctor', function(e) {
+            $('#form').on('submit', function(e){
                 e.preventDefault();
-                $(this).text('Sending..');
-                var data = {
-                    'name': $('.name').val(),
-                    'email': $('.email').val(),
-                    'password': $('.password').val(),
-                    'address': $('.address').val(),
-                    'description': $('.description').val(),
-                    'phone': $('.phone').val(),
-                    'profile': $('.profile').val(),
-                    'doc_dept': $('.doc_dept').val(),
-                    'gender': $('.gender').val(),
-                    'dob': $('.dob').val(),
-                    'age': $('.age').val(),
-                    'blood_group': $('.blood_group').val(),
-                    'social_link': $('.social_link').val(),
-                    'image': $('.image').val(),
-                    
-                }
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+
+                var form = this;
                 $.ajax({
-                    type: "POST",
-                    url: "/store/doctor/",
-                    data: data,
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
                     dataType: "json",
                     success: function(response) {
                         if (response.status == 400) {
                             $('#error_name').text(response.errors.name);
-                            $('#error_email').text(response.errors.email);
-                            $('#error_password').text(response.errors.password);
-                            $('#error_address').text(response.errors.address);
-                            $('#error_phone').text(response.errors.phone);
-                            $('#error_profile').text(response.errors.profile);
-                            $('#error_doc_dept').text(response.errors.doc_dept);
-                            $('#error_gender').text(response.errors.gender);
-                            $('#error_dob').text(response.errors.dob);
-                            $('#error_age').text(response.errors.age);
-                            $('#error_blood_group').text(response.errors.blood_group);
-                            $('#error_social_link').text(response.errors.social_link);
-                            $('#error_image').text(response.errors.image);
+                            $('#email_error').text(response.errors.age);
                             $('.add_doctor').text('Save');
                         } else {
                             $('#addModal').find('input').val('');
                             $('.add_doctor').text('Save');
                             $('#addModal').modal('hide');
-                            toastr.success(response.message);
-                            // fetchstudent();
                             location.reload();
+                            toastr.success(response.message);
                         }
                     }
                 });
-            });
-
-        });
+           });
     </script>
     <script>
         var loadFile = function(event) {
@@ -551,7 +512,7 @@
             image.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
-    {{-- edit img --}}
+
     <script type="text/javascript">
         function mainThamUrl(input) {
             if (input.files && input.files[0]) {
