@@ -136,9 +136,7 @@ class NewBedController extends Controller
             'bed'=> 'required',
             'bed_type_id'=> 'required',
             'charge'=> 'required|numeric',
-            'description'=> 'required|max:191',
-
-            
+            'description'=> 'required|max:191',            
         ]);
 
         if($validator->fails())
@@ -152,7 +150,7 @@ class NewBedController extends Controller
         {
             $student = new NewBed;
             $student->bed = $request->input('bed');
-            $student->bed_type_id = $request->input('bed_type_id');
+            $student->new_bed_type_id = $request->input('bed_type_id');
             $student->charge = $request->input('charge');
             $student->description = $request->input('description');
             $student->save();

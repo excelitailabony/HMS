@@ -15,7 +15,7 @@ class CreateNewBedAllotmentsTable extends Migration
     {
         Schema::create('new_bed_allotments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bed_id');
+            $table->unsignedBigInteger('new_bed_id');
             $table->unsignedBigInteger('patient_id');
             $table->unsignedBigInteger('doctor_id');
             $table->dateTime('allotment_time');

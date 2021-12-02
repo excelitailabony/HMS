@@ -16,7 +16,7 @@ class CreateNewBedsTable extends Migration
         Schema::create('new_beds', function (Blueprint $table) {
             $table->id();
             $table->string('bed');
-            $table->unsignedBigInteger('bed_type_id');
+            $table->unsignedBigInteger('new_bed_type_id');
             $table->integer('charge');
             $table->text('description');
             $table->timestamps();
