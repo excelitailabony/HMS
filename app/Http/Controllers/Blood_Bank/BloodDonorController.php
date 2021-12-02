@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Blood_Bank;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blood_bank\BloodDonor;
-
 use Illuminate\Support\Facades\Validator;
 
 class BloodDonorController extends Controller
@@ -111,7 +110,8 @@ class BloodDonorController extends Controller
                 }
             }  
         }
-        // delete
+
+        // Blood donor delete start
         public function BloodDonorDelete($id){
             $blooddonor = BloodDonor::findOrFail($id);
             BloodDonor::findOrFail($id)->delete(); 

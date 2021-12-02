@@ -47,6 +47,10 @@
             border-radius: 5%;
         }
 
+        .errorColor {
+            color: red;
+        }
+
     </style>
 
     <div class="container-full topBar">
@@ -58,15 +62,16 @@
 
                         <h4 class="card-title text-center">All Doctor
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddDoctor">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#Add_Blood_Issue">
                                 New Blood Issue
                             </button>
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade" id="AddDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="Add_Blood_Issue" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Blood Issue</h5>
@@ -74,16 +79,15 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('blood_issue.store') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Patient</label>
-                                                        <select name="patient_name" class="form-control" required="">
+                                                        <label>Patient</label><span class="errorColor"> *</span>
+                                                        <select name="patient_name" class="patient_name form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
@@ -91,12 +95,14 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
+                                                        <span id="error_patient_name" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Doctor</label>
-                                                        <select name="doctor_name" class="form-control" required="">
+                                                        <label>Doctor</label><span class="errorColor"> *</span>
+                                                        <select name="doctor_name" class="doctor_name form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Doctor Name
                                                             </option>
                                                             @foreach ($doctors as $doctor)
@@ -104,12 +110,13 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
+                                                        <span id="error_doctor_name" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Donor</label>
-                                                        <select name="donor_id" class="form-control" required="">
+                                                        <label>Donor</label><span class="errorColor"> *</span>
+                                                        <select name="donor_id" class="donor_id form-control" required="">
                                                             <option value="" selected="" disabled="">Select Donor Name
                                                             </option>
                                                             @foreach ($donors as $donor)
@@ -117,44 +124,47 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
+                                                        <span id="error_donor_id" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
-                                                        <select class="form-control" placeholder="Blood group of donor"
-                                                            name="blood_donor_group" id="blood_donor_group">
+                                                        <select class="blood_donor_group form-control"
+                                                            placeholder="Blood group of donor" name="blood_donor_group">
                                                             <option label="Choose one"></option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Amount</label>
-                                                        <input type="text" class="form-control" placeholder="Enter smount"
-                                                            name="amount">
+                                                        <label>Amount</label><span class="errorColor"> *</span>
+                                                        <input type="text" class="amount form-control"
+                                                            placeholder="Enter smount" name="amount">
                                                         @error('amount')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+                                                        <span id="error_amount" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Remarks</label>
-                                                        <input type="text" class="form-control"
+                                                        <label>Remarks</label><span class="errorColor"> *</span>
+                                                        <input type="text" class="remarks form-control"
                                                             placeholder="Enter remarks" name="remarks">
                                                         @error('remarks')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+                                                        <span id="error_remarks" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Add Issue">
+                                            <input type="submit" class="btn btn-rounded btn-info add_blood_issue"
+                                                value="Add Issue">
                                         </div>
                                     </form>
                                 </div>
@@ -162,9 +172,9 @@
                         </div>
 
                         <!-- Modal for add Edit doctor -->
-                        <div class="modal fade" id="EditBloosIssue" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="EditBloodIssue" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Update Blood Issue</h5>
@@ -172,8 +182,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('bloodissue.update') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form>
                                         @csrf
                                         <input type="hidden" id="bloodissue_id" name="bloodissue_id">
                                         <div class="modal-body">
@@ -229,6 +238,8 @@
                                                             name="blood_donor_group_edit" id="blood_donor_group_edit_id">
                                                             <option label="Choose one"></option>
                                                         </select>
+                                                        <span id="error_blood_donor_group_edit"
+                                                            class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -236,9 +247,7 @@
                                                         <label>Amount</label>
                                                         <input type="text" class="form-control" placeholder="Enter smount"
                                                             name="amount" id="amount">
-                                                        @error('amount')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span id="error_amount_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -246,24 +255,21 @@
                                                         <label>Remarks</label>
                                                         <input type="text" class="form-control"
                                                             placeholder="Enter remarks" name="remarks" id="remarks">
-                                                        @error('remarks')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <span id="error_remarks_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                            <input type="submit" class="btn btn-rounded btn-info" value="Update Issue">
+                                            <input type="submit" class="btn btn-rounded btn-info update_blood_issue"
+                                                value="Update Issue">
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
@@ -329,8 +335,8 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $blood['created_at'] }}</td>
-                                                    <td>${{ $blood['amount'] }}</td>
                                                     <td>{{ $blood['blood_group'] }}</td>
+                                                    <td>${{ $blood['amount'] }}</td>
                                                     <td>
                                                         <button type="button" value="{{ $blood->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
@@ -348,7 +354,6 @@
                             </div>
 
                         </div>
-
                     </div>
                 </div>
             </div> <!-- end col -->
@@ -413,16 +418,62 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
+            // for adding data using ajax
+            $(document).on('click', '.add_blood_issue', function(e) {
+
+                e.preventDefault();
+                $(this).text('Sending..');
+
+                var data = {
+                    'patient_name': $('.patient_name').val(),
+                    'doctor_name': $('.doctor_name').val(),
+                    'donor_id': $('.donor_id').val(),
+                    'blood_donor_group': $('.blood_donor_group').val(),
+                    'amount': $('.amount').val(),
+                    'remarks': $('.remarks').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/blood/issue/store",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_patient_name').text(response.errors.patient_name);
+                            $('#error_doctor_name').text(response.errors.doctor_name);
+                            $('#error_donor_id').text(response.errors.donor_id);
+                            $('#error_amount').text(response.errors.amount);
+                            $('#error_remarks').text(response.errors.remarks);
+                            $('.add_blood_issue').text('Save');
+                        } else {
+                            $('#Add_Blood_Issue').find('input').val('');
+                            $('.add_blood_issue').text('Save');
+                            $('#Add_Blood_Issue').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
+            // for editing data using ajax
             $(document).on('click', '.editBtn', function() {
                 var bloodissue_id = $(this).val();
                 // alert(bloodissue_id);
-                $('#EditBloosIssue').modal('show');
+                $('#EditBloodIssue').modal('show');
 
                 $.ajax({
                     type: "GET",
                     url: "/blood/issue/edit/" + bloodissue_id,
                     success: function(response) {
-                        console.log(response.blood_issue.blood_group);
+                        // console.log(response.blood_issue.blood_group);
                         $('#bloodissue_id').val(response.blood_issue.id);
                         $('#patient_name_id').val(response.blood_issue.patient_id);
                         $('#doctor_name_id').val(response.blood_issue.doctor_id);
@@ -433,6 +484,50 @@
                     }
                 })
             });
+
+            // for updating data using ajax
+            $(document).on('click', '.update_blood_issue', function(e) {
+                e.preventDefault();
+                $(this).text('Updating..');
+                var id = $('#bloodissue_id').val();
+
+                var data = {
+                    'patient_name': $('#patient_name_id').val(),
+                    'doctor_name': $('#doctor_name_id').val(),
+                    'donor_id': $('#donor_name_id').val(),
+                    'blood_donor_group': $('#blood_donor_group_edit_id').val(),
+                    'amount': $('#amount').val(),
+                    'remarks': $('#remarks').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "PUT",
+                    url: "/blood/issue/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_amount_edit').text(response.errors.amount);
+                            $('#error_amount_edit').text(response.errors.amount);
+                            $('#error_blood_donor_group_edit').text(response.errors
+                                .blood_donor_group);
+                            $('.update_blood_issue').text('Update');
+                        } else {
+                            $('#EditBloodIssue').find('input').val('');
+                            $('.update_blood_issue').text('Update');
+                            $('#EditBloodIssue').modal('hide');
+                            location.reload();
+                            toastr.success(response.message);
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

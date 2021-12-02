@@ -9,6 +9,7 @@
         .topBar {
             padding: 2rem;
         }
+
         .card-title {
             display: flex;
             justify-content: space-between;
@@ -38,10 +39,10 @@
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class=" modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Receptionist</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -181,9 +182,9 @@
                         {{-- check end --}}
                         {{-- modal end --}}
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit Receptionist</h5>

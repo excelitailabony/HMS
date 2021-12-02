@@ -5,19 +5,24 @@
         .topBar {
             margin-top: 4rem;
         }
+
         .topBar {
             padding: 2rem;
         }
+
         .card-title {
             display: flex;
             justify-content: space-between;
         }
+
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+
         .errorColor {
             color: red;
         }
+
     </style>
     <div class="container-full topBar">
 
@@ -45,23 +50,23 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('newbed.add') }}" method="POST" enctype="multipart/form-data">
+                                    <form>
                                         @csrf
                                         <div class="modal-body">
 
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <label> Bed </label>
+                                                    <label>Bed Name</label>
                                                     <input type="text" class="form-control bed" placeholder="Enter Bed Type"
                                                         name="bed">
-                                                        <span id="error_bed" class="errorColor"></span>
+                                                    <span id="error_bed" class="errorColor"></span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select name="bed_type_id" required="" 
-                                                        class="form-control bed_type_id" aria-invalid="false">
+                                                    <select name="bed_type_id" required="" class="form-control bed_type_id"
+                                                        aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
                                                             <option value="{{ $newbedtype->id }}">
@@ -76,7 +81,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Charge</label>
-                                                        <input type="text" class="form-control charge"  name="charge">
+                                                        <input type="text" class="form-control charge" name="charge">
                                                         <span id="error_charge" class="errorColor"></span>
                                                     </div>
                                                 </div>
@@ -85,9 +90,9 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        <textarea class="form-control description" 
+                                                        <textarea class="form-control description"
                                                             name="description"></textarea>
-                                                            <span id="error_description" class="errorColor"></span>
+                                                        <span id="error_description" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,7 +101,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary add_bed">Save</button>
+                                            <button type="button" class="btn btn-info add_bed">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -115,7 +120,7 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form >
+                                    <form>
                                         @csrf
 
                                         <input type="hidden" id="newbed_id" name="newbed_id">
@@ -127,21 +132,21 @@
                                                     <label> Bed </label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
                                                         id="bed">
-                                                        <span id="error_bededit" class="errorColor"></span>
+                                                    <span id="error_bededit" class="errorColor"></span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label> Charge </label>
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
-                                                      id="charge">
-                                                        <span id="error_chargeedit" class="errorColor"></span>
+                                                        id="charge">
+                                                    <span id="error_chargeedit" class="errorColor"></span>
 
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <label> Bed Type</label>
-                                                    <select  required="" id="bed_type_id"
-                                                        class="form-control" aria-invalid="false">
+                                                    <select required="" id="bed_type_id" class="form-control"
+                                                        aria-invalid="false">
                                                         <option value="" selected="" disabled="">Select Bed Type</option>
                                                         @foreach ($newbedtypes as $newbedtype)
                                                             <option value="{{ $newbedtype->id }}">
@@ -153,20 +158,13 @@
 
                                                 </div>
                                             </div>
-                                            {{-- <div class="row">
-                                            <div class="col-md-12">
-                                                <label> Charge </label>
-                                                <input type="text" class="form-control"
-                                                    placeholder="Enter Bed Type" name="charge" id="charge">
-                                            </div>
-                                        </div> --}}
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
                                                         {{-- <textarea class="form-control" id="description" name="description"></textarea> --}}
                                                         <input type="text" class="form-control" id="description">
-                                                            <span id="error_descriptionedit" class="errorColor"></span>
+                                                        <span id="error_descriptionedit" class="errorColor"></span>
 
                                                     </div>
                                                 </div>
@@ -175,7 +173,8 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-rounded btn-info update_bed">update</button>
+                                            <button type="button"
+                                                class="btn btn-rounded btn-info update_bed">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -194,7 +193,7 @@
                                             <tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Bed </th>
+                                                    aria-label="Name: activate to sort column descending">Bed Name</th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Bed Type</th>
@@ -214,7 +213,6 @@
                                             @foreach ($newbeds as $newbed)
                                                 <tr>
                                                     <td class="dtr-control sorting_1" tabindex="0">{{ $newbed->bed }}</td>
-
                                                     <td>
                                                         {{ $newbed['newbed']['bed_types'] }} </td>
                                                     <td>{{ $newbed->charge }}</td>
@@ -228,18 +226,6 @@
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </td>
-
-                                                    {{-- <td>
-
-                                                        <button type="button" value="{{ $newbed->id }}"
-                                                            class="btn btn-success editBtn btn-sm">
-                                                            <i class="fa fa-pencil-alt"></i></button>
-
-                                                        <a href="{{ route('newbed.delete', $newbed->id) }}"
-                                                            class="btn btn-danger btn-sm" id="delete"><i
-                                                                class="fa fa-trash"></i></a>
-                                                    </td> --}}
-
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -252,7 +238,7 @@
                     </div>
                 </div>
             </div> <!-- end col -->
-            
+
         </div>
     </div>
 @endsection
@@ -260,6 +246,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
             $(document).on('click', '.editBtn', function() {
                 var newbed_id = $(this).val();
                 // alert(newbed_id);
@@ -277,25 +264,10 @@
                     }
                 })
             });
-            // check
-            // $('.add_bed').bootstarpValidator(e)({
-            //   fields:{
-            //       bed:{
-            //           validator:{
-            //               stringLength:{
-            //                   min:2,
-            //               },
-            //               notEmpty:{
-            //                   message:'please enter name'
-            //               }
-            //           }
-            //       }
-            //   }
-            // });
 
-            
-               // for adding data using ajax
-               $(document).on('click', '.add_bed', function(e) {
+            // for adding data using ajax
+            $(document).on('click', '.add_bed', function(e) {
+
                 e.preventDefault();
                 $(this).text('Sending..');
                 var data = {
@@ -334,54 +306,55 @@
                     }
                 });
             });
-            
-            $(document).on('click', '.update_bed', function (e) {
-            e.preventDefault();
 
-            $(this).text('Updating..');
-            var id = $('#newbed_id').val();
-            // alert(id);
+            $(document).on('click', '.update_bed', function(e) {
+                e.preventDefault();
 
-            var data = {
-                'bed': $('#bed').val(),
-                'bed_type_id': $('#bed_type_id').val(),
-                'charge': $('#charge').val(),
-                'description': $('#description').val(),
-            }
+                $(this).text('Updating..');
+                var id = $('#newbed_id').val();
+                // alert(id);
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                var data = {
+                    'bed': $('#bed').val(),
+                    'bed_type_id': $('#bed_type_id').val(),
+                    'charge': $('#charge').val(),
+                    'description': $('#description').val(),
                 }
-            });
 
-            $.ajax({
-                type: "PUT",
-                url: "/NewBed/update/" + id,
-                data: data,
-                dataType: "json",
-                success: function (response) {
-                    // console.log(response);
-                    if (response.status == 400) {
-                        $('#error_bededit').text(response.errors.bed);
-                        $('#error_bed_typesedit').text(response.errors.bed_type_id);
-                        $('#error_chargeedit').text(response.errors.charge);
-                        $('#error_descriptionedit').text(response.errors.description);
-                        $('.update_bed').text('Update');
-                    } else {
-                        $('#editModal').find('input').val('');
-                        $('.update_bed').text('Update');
-                        $('#editModal').modal('hide');
-                        toastr.success(response.message);
-                        // fetchstudent();
-                        location.reload();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                }
-            });
+                });
 
-        });
+                $.ajax({
+                    type: "PUT",
+                    url: "/NewBed/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        // console.log(response);
+                        if (response.status == 400) {
+                            $('#error_bededit').text(response.errors.bed);
+                            $('#error_bed_typesedit').text(response.errors.bed_type_id);
+                            $('#error_chargeedit').text(response.errors.charge);
+                            $('#error_descriptionedit').text(response.errors.description);
+                            $('.update_bed').text('Update');
+                        } else {
+                            $('#editModal').find('input').val('');
+                            $('.update_bed').text('Update');
+                            $('#editModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+
+            });
 
         });
     </script>
+
 
 @endsection
