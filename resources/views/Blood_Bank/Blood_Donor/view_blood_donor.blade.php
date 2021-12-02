@@ -161,6 +161,8 @@
                                                         <span id="error_age_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
+
+
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
@@ -347,8 +349,8 @@
                 });
             });
 
-            // for editing data using ajax
-            $(document).on('click', '.editBtn', function() {
+          // for editing data using ajax
+          $(document).on('click', '.editBtn', function() {
                 var blooddonor_id = $(this).val();
                 $('#editDonor').modal('show');
                 $.ajax({
@@ -367,7 +369,6 @@
                             $('#editDonor').find(':radio[name=gender][value="female"]').prop(
                                 'checked', true);
                         }
-
                     }
                 })
             });
@@ -400,8 +401,7 @@
                             $('#error_age_edit').text(response.errors.age);
                             $('#error_gender_edit').text(response.errors.gender);
                             $('#error_blood_group_edit').text(response.errors.blood_group);
-                            $('#error_last_donation_date_edit').text(response.errors
-                                .last_donation_date);
+                            $('#error_last_donation_date_edit').text(response.errors.last_donation_date);
                             $('.update_blood_donor').text('Update');
                         } else {
                             $('#editDonor').find('input').val('');

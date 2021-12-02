@@ -133,7 +133,7 @@ class NewBedController extends Controller
        // new bede type store
        public function NewBedStore(Request $request){
         $validator = Validator::make($request->all(), [
-            'bed'=> 'required',
+            // 'bed'=> 'required',
             'bed_type_id'=> 'required',
             'charge'=> 'required|numeric',
             'description'=> 'required|max:191',

@@ -19,6 +19,10 @@
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+        .errorColor {
+            color: red;
+        }
+
 
     </style>
 
@@ -37,9 +41,11 @@
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
+
+                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+
+              <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Doctor</h5>
@@ -48,16 +54,18 @@
                                     </div>
 
                                     <form enctype="multipart/form-data">
+
                                         @csrf
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Name</label>
                                                         <input type="text" class="form-control name"
                                                             placeholder="Enter first name" name="name">
+
                                                         <span id="error_name" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -65,7 +73,9 @@
                                                         <label>Email</label>
                                                         <input type="email" class="form-control email"
                                                             placeholder="Enter your email" name="email">
+
                                                         <span id="error_email" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -73,7 +83,9 @@
                                                         <label>Password</label>
                                                         <input type="password" class="form-control password"
                                                             placeholder="Enter your password" name="password">
+
                                                         <span id="error_password" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -110,6 +122,7 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+
                                                         <label>Sex</label><br>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input gender" type="radio"
@@ -124,6 +137,7 @@
                                                                 for="inlineRadio2">Female</label>
                                                             <span id="error_gender" class="errorColor"></span>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -145,9 +159,11 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
+
                                                         <select name="blood_group" class="form-control blood_group"
                                                             required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
+
+                                                       <option value="" selected="" disabled="">Select Blood group
                                                             </option>
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A-</option>
@@ -187,7 +203,9 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
+
                                             <button type="button" class="btn btn-primary add_doctor">Save</button>
+
                                         </div>
                                 </div>
                                 </form>
@@ -316,6 +334,7 @@
                                                         <option value="O-">O-</option>
                                                     </select>
                                                 </div>
+
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -323,6 +342,7 @@
                                                     <input type="text" class="form-control"
                                                         placeholder="Enter doctor social link" name="social_link"
                                                         id="social_link">
+
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -447,6 +467,7 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
             $(document).on('click', '.editBtn', function() {
                 var doctor_id = $(this).val();
                 // alert(doctor_id);
@@ -483,8 +504,12 @@
             });
 
             // for adding data using ajax
-            $(document).on('click', '.add_doctor', function(e) {
+            $('#form').on('submit', function(e){
                 e.preventDefault();
+
+
+                var form = this;
+
                 $(this).text('Sending..');
                 var data = {
                     'name': $('.name').val(),
@@ -508,40 +533,27 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
-                    type: "POST",
-                    url: "/store/doctor/",
-                    data: data,
+                    url:$(form).attr('action'),
+                    method:$(form).attr('method'),
+                    data:new FormData(form),
                     dataType: "json",
                     success: function(response) {
                         if (response.status == 400) {
                             $('#error_name').text(response.errors.name);
-                            $('#error_email').text(response.errors.email);
-                            $('#error_password').text(response.errors.password);
-                            $('#error_address').text(response.errors.address);
-                            $('#error_phone').text(response.errors.phone);
-                            $('#error_profile').text(response.errors.profile);
-                            $('#error_doc_dept').text(response.errors.doc_dept);
-                            $('#error_gender').text(response.errors.gender);
-                            $('#error_dob').text(response.errors.dob);
-                            $('#error_age').text(response.errors.age);
-                            $('#error_blood_group').text(response.errors.blood_group);
-                            $('#error_social_link').text(response.errors.social_link);
-                            $('#error_image').text(response.errors.image);
+                            $('#email_error').text(response.errors.age);
                             $('.add_doctor').text('Save');
                         } else {
                             $('#addModal').find('input').val('');
                             $('.add_doctor').text('Save');
                             $('#addModal').modal('hide');
-                            toastr.success(response.message);
-                            // fetchstudent();
                             location.reload();
+                            toastr.success(response.message);
                         }
                     }
                 });
-            });
-
-        });
+           });
     </script>
     <script>
         var loadFile = function(event) {
@@ -549,7 +561,7 @@
             image.src = URL.createObjectURL(event.target.files[0]);
         };
     </script>
-    {{-- edit img --}}
+
     <script type="text/javascript">
         function mainThamUrl(input) {
             if (input.files && input.files[0]) {
