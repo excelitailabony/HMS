@@ -267,6 +267,7 @@
 
             // for adding data using ajax
             $(document).on('click', '.add_bed', function(e) {
+
                 e.preventDefault();
                 $(this).text('Sending..');
                 var data = {
@@ -354,4 +355,6 @@
 
         });
     </script>
+
+
 @endsection

@@ -22,6 +22,10 @@
         .errorColor {
             color: red;
         }
+        
+        .card .card-body `button:focus{
+            outline: none;
+        }
 
     </style>
     <div class="container-full topBar">

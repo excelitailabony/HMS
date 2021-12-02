@@ -21,6 +21,10 @@
             margin-bottom: 1rem;
         }
 
+        .errorColor {
+            color: red;
+        }
+
     </style>
 
     <div class="container-full topBar">
@@ -30,128 +34,110 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title text-center">All Patient
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                                Add Patient
-                            </button>
-                        </h4>
 
-                        <!-- Modal for add patient -->
-                        <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add Patient</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
+                    <h4 class="card-title text-center">All Patient
+                        <a href="#" class="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#AddEmployeeModal">ADD EMPLOYEE</a>
+                    </h4>
 
-                                    <form action="{{ route('store.patient') }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="modal-body">
+                    <!-- Modal for add patient -->
+                    <div class="modal fade" id="AddEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Patient</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter first name" name="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                <form id="AddEmployeeFORM" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <ul class="alert alert-warning d-none" id="save_errorList"></ul>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter first name" name="name">
+                                                        <span id="error_name" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Enter your email" name="email">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control"
+                                                        placeholder="Enter your email" name="email">
+                                                        <span id="error_email" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                        <input type="password" class="form-control"
-                                                            placeholder="Enter your password" name="password">
-                                                        @error('password')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Password</label>
+                                                    <input type="password" class="form-control"
+                                                        placeholder="Enter your password" name="password">
+                                                        <span id="error_password" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your address" name="address">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter your address" name="address">
+                                                        <span id="error_address" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter phone number" name="phone">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter phone number" name="phone">
+                                                        <span id="error_phone" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Sex</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Gender</label><br>
+                                                    <input class="form-check-input gender" type="radio" name="gender"checked
+                                                            value="male">Male
+                                                            <input class="form-check-input gender" type="radio" name="gender" checked
+                                                             value="female">Female
+                                                    <span id="error_gender" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>DOB</label>
-                                                        <input type="date" class="form-control"
-                                                            placeholder="Enter your birth date" name="dob">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>DOB</label>
+                                                    <input type="date" class="form-control"
+                                                        placeholder="Enter your birth date" name="dob">
+                                                        <span id="error_dob" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Age</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your age" name="age">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Age</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter your age" name="age">
+                                                        <span id="error_age" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Blood Group</label>
-                                                        <select name="blood_group" class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
-                                                            </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Image</label>
-                                                        <input type="file" class="form-control" onchange="loadFile(event)"
-                                                            placeholder="Enter your image" name="image">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Blood Group</label>
+                                                    <select name="blood_group" class="form-control" >
+                                                        <option value="" selected="" disabled="">Select Blood group
+                                                        </option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                    </select>
+                                                    <span id="error_blood_group" class="errorColor"></span>
+
                                                 </div>
                                                 <div class="col-md-6 img-show">
                                                     <img id="output" width="100" />
@@ -180,96 +166,99 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form action="{{ route('update.patient') }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
 
-                                        <input type="hidden" id="patient_id" name="patient_id">
-                                        <input type="hidden" id="old_image" name="old_image">
-                                        <div class="modal-body">
+                                <form id="EditEmployeeFORM" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                   
+                                    <input type="hidden" id="patient_id" name="patient_id">
+                                    <input type="hidden" id="old_image" name="old_image">
+                                    <div class="modal-body">
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Name</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter first name" name="name" id="name">
-                                                        @error('name')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter first name" name="name" id="name">
+                                                        <span id="error_nameedit" class="errorColor"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="email" class="form-control"
+                                                        placeholder="Enter your email" name="email" id="email">
+                                                        <span id="error_emailedit" class="errorColor"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter your address" name="address" id="address">
+                                                        <span id="error_addressedit" class="errorColor"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter phone number" name="phone" id="phone">
+                                                        <span id="error_phoneedit" class="errorColor"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Sex</label><br>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                            id="inlineRadio1" value="male">
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        <span id="error_maleedit" class="errorColor"></span>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                            id="inlineRadio2" value="female">
+                                                        <label class="form-check-label"
+                                                            for="inlineRadio2">Female</label>
+                                                            <span id="error_femaleedit" class="errorColor"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Email</label>
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Enter your email" name="email" id="email">
-                                                        @error('email')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>DOB</label>
+                                                    <input type="date" class="form-control"
+                                                        placeholder="Enter your birth date" name="dob" id="dob">
+                                                        <span id="error_dobedit" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Address</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your address" name="address" id="address">
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Age</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter your age" name="age" id="age">
+                                                        <span id="error_ageedit" class="errorColor"></span>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Phone</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter phone number" name="phone" id="phone">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Sex</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender"
-                                                                id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>DOB</label>
-                                                        <input type="date" class="form-control"
-                                                            placeholder="Enter your birth date" name="dob" id="dob">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Age</label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter your age" name="age" id="age">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Blood Group</label>
-                                                        <select name="blood_group" id="blood_group" class="form-control"
-                                                            required="">
-                                                            <option value="" selected="" disabled="">Select Blood group
-                                                            </option>
-                                                            <option value="A+">A+</option>
-                                                            <option value="A-">A-</option>
-                                                            <option value="AB+">AB+</option>
-                                                            <option value="AB-">AB-</option>
-                                                            <option value="B+">B+</option>
-                                                            <option value="B-">B-</option>
-                                                            <option value="O+">O+</option>
-                                                            <option value="O-">O-</option>
-                                                        </select>
-                                                    </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Blood Group</label>
+                                                    <select name="blood_group" id="blood_group" class="form-control"
+                                                        required="">
+                                                        <option value="" selected="" disabled="">Select Blood group
+                                                        </option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="A-">A-</option>
+                                                        <option value="AB+">AB+</option>
+                                                        <option value="AB-">AB-</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="B-">B-</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="O-">O-</option>
+                                                    </select>
+                                                    <span id="error_blood_groupedit" class="errorColor"></span>
+
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
@@ -363,6 +352,7 @@
 @endsection
 
 @section('scripts')
+
     <script>
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
@@ -375,6 +365,7 @@
                     url: "/edit-patient/" + patient_id,
                     success: function(response) {
                         // console.log(response.patient);
+                   
                         $('#patient_id').val(response.patient.id);
                         $('#name').val(response.patient.name);
                         $('#email').val(response.patient.email);
@@ -405,7 +396,7 @@
         };
     </script>
     {{-- edit img --}}
-    <script type="text/javascript">
+    <script>
         function mainThamUrl(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -416,4 +407,86 @@
             }
         }
     </script>
+    <script>
+        $(document).ready(function () {
+            $.ajaxSetup({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     }
+                 });
+            $(document).on('submit', '#AddEmployeeFORM', function (e) {
+                 e.preventDefault();
+                 let formData=new FormData($('#AddEmployeeFORM')[0]);
+              
+             $.ajax({
+               type:"POST",
+               url: "/store/patient",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                  if (response.status == 400) 
+                  {
+                    $('#error_name').text(response.errors.name);
+                    $('#error_email').text(response.errors.email);
+                    $('#error_password').text(response.errors.password);
+                    $('#error_address').text(response.errors.address);
+                    $('#error_phone').text(response.errors.phone);
+                    $('#error_gender').text(response.errors.gender);
+                    $('#error_dob').text(response.errors.dob);
+                    $('#error_age').text(response.errors.age);
+                    $('#error_blood_group').text(response.errors.blood_group);
+                    this.reset();
+                    alert('Image has been uploaded successfully');
+                  }
+                  else if(response.status ==200)
+                  {
+                      $('#AddEmployeeModal').modal('hide');
+                      location.reload();
+                    toastr.success(response.message);
+                  }
+                }
+                 });
+            });
+
+
+            $(document).on('submit', '#EditEmployeeFORM', function (e) {
+                 e.preventDefault();
+                 let formData=new FormData($('#EditEmployeeFORM')[0]);
+              
+             $.ajax({
+               type:"POST",
+                url: "/update-patient",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                  if (response.status == 400) 
+                  {
+                    $('#error_nameedit').text(response.errors.name);
+                    $('#error_emailedit').text(response.errors.email);
+                    // $('#error_passwordedit').text(response.errors.password);
+                    $('#error_addressedit').text(response.errors.address);
+                    $('#error_phoneedit').text(response.errors.phone);
+                    $('#error_genderedit').text(response.errors.gender);
+                    $('#error_dobedit').text(response.errors.dob);
+                    $('#error_ageedit').text(response.errors.age);
+                    $('#error_blood_groupedit').text(response.errors.blood_group);
+                    // this.reset();
+                    // alert('Image has been uploaded successfully');
+                  }
+                  else if(response.status ==200)
+                  {
+                      $('#editModal').modal('hide');
+                      location.reload();
+                    toastr.success(response.message);
+                  }
+                }
+                 });
+            });
+// nhjdfgvn
+
+
+        });
+         </script>
 @endsection
