@@ -16,7 +16,7 @@
         }
 
         .modal-header {
-            border-top: 5px solid darkseagreen;
+            border-top: 5px solid #626ed4;
         }
 
         .modal-footer {
@@ -31,21 +31,21 @@
             color: red;
         }
 
-        .btn-primary {
+        .btn-info {
             color: #fff;
             background-color: #626ed4;
             border-color: #626ed4;
         }
 
+        .modal-body label {
+            padding-bottom: 5px;
+        }
+
         .modal-body input {
-            /* height: 40px;
+            height: 40px;
             border-radius: 20px;
             box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-            border: none; */
-            border-radius: 10px;
-            border: 1px solid darkseagreen;
-            padding: 0 15px;
-            box-shadow: 0 3px 6px 0 darkseagreen;
+            border: none;
         }
 
         .modal-content {

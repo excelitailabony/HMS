@@ -65,7 +65,7 @@
                  <li><a href="{{ route('blood.issue') }}">Blood Issue</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">Blood Bag</a></li>
+                 <li><a href="{{ route('all.bloodgroup') }}">Blood Group</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.blooddonation') }}">Blood Donation</a></li>
@@ -81,7 +81,7 @@
                  <span>Patient Bed</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
-                 <li><a href="">New Bed Assign</a></li>
+                 <li><a href="{{ route('all.assignbed') }}">New Bed Assign</a></li>
              </ul>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.newbed') }}">New Bed</a></li>
@@ -110,24 +110,24 @@
              </ul>
          </li>
          <li>
-            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ti-email"></i>
-                <span>Medicine</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.medicinemanufacture')}}">Medicine Manufacture</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.medicinecategory')}}">Medicine Category</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.medicine')}}">Medicine Type</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{route('all.medicinelist')}}">Medicine List</a></li>
-            </ul>
-            
-        </li>
+             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                 <i class="ti-email"></i>
+                 <span>Medicine</span>
+             </a>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.medicinemanufacture') }}">Medicine Manufacture</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.medicinecategory') }}">Medicine Category</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.medicine') }}">Medicine Type</a></li>
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.medicinelist') }}">Medicine List</a></li>
+             </ul>
+
+         </li>
 
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">

@@ -48,9 +48,9 @@
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="AddmedicineList" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="AddmedicineList" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Medicine List</h5>
@@ -157,9 +157,9 @@
 
                         {{-- modal end --}}
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit Blood Donation</h5>
@@ -236,6 +236,13 @@
                                                             name="price" id="price">
                                                     </div>
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Details</label>
+                                                        <textarea name="description" placeholder="Enter details"
+                                                            id="description"></textarea>
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Image</label>
@@ -250,13 +257,7 @@
                                                             id="expire_date">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Details</label>
-                                                        <textarea name="description" placeholder="Enter details"
-                                                            id="description"></textarea>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -324,13 +325,16 @@
                                                     <td class="dtr-control sorting_1" tabindex="0">
                                                         {{ $medicinelistt['Medicinetype']['name'] }} </td>
                                                     <td>
-                                                        <b>Price:</b>
+                                                        {{-- <b>Price:</b> --}}
                                                         <div class="row " style="text-align: center;">
-                                                            {{ $medicinelistt->price }}</div>
-                                                        <div class="row">{{ $medicinelistt->quantity }}</div>
-                                                        <div class="row">{{ $medicinelistt->expire_date }}
+                                                            Price:{{ $medicinelistt->price }}</div>
+                                                        <div class="row">
+                                                            Quantity:{{ $medicinelistt->quantity }}</div>
+                                                        <div class="row">
+                                                            Expire_date:{{ $medicinelistt->expire_date }}
                                                         </div>
-                                                        <div class="row">{{ $medicinelistt->description }}
+                                                        <div class="row">
+                                                            Description:{{ $medicinelistt->description }}
                                                         </div>
                                                     </td>
 

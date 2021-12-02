@@ -69,9 +69,9 @@
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade" id="Add_Blood_Issue" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="Add_Blood_Issue" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Blood Issue</h5>
@@ -172,9 +172,9 @@
                         </div>
 
                         <!-- Modal for add Edit doctor -->
-                        <div class="modal fade" id="EditBloodIssue" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="EditBloodIssue" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Update Blood Issue</h5>

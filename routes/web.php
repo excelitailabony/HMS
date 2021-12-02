@@ -14,17 +14,19 @@ use App\Http\Controllers\Pharmacist\PharmacistController;
 use App\Http\Controllers\Blood_Bank\BloodDonorController;
 use App\Http\Controllers\Blood_Bank\BloodDonationController;
 use App\Http\Controllers\Blood_Bank\BloodIssueController;
+use App\Http\Controllers\Blood_Bank\BloodGroupController;
 use App\Http\Controllers\Bed\NewBedController;
+use App\Http\Controllers\Bed\BedAssignController;
 use App\Http\Controllers\CheckController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\Appointment\AppointmentController;
 use App\Http\Controllers\Diagnosis\NewDiagnosisController;
 use App\Http\Controllers\Diagnosis\DiagnosisController;
-
 use App\Http\Controllers\Medicine\MedicineController;
 use App\Http\Controllers\Medicine\MedicineListController;
 
 use App\Http\Controllers\Record\RecordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -158,7 +160,6 @@ Route::prefix('laboratorist')->group(function () {
         Route::put('/issue/update/{id}', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');  
   });
 
-
  // Blood Donor Start
  Route::prefix('bloodDonor')->group(function () {
     Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor'); 
@@ -169,6 +170,7 @@ Route::prefix('laboratorist')->group(function () {
   });
 
 //Blood Donor End
+
 // Blood Donation Start
 Route::prefix('bloodDonation')->group(function () {
     Route::get('/view', [BloodDonationController::class, 'BloodDonationView'])->name('all.blooddonation'); 
@@ -176,6 +178,16 @@ Route::prefix('bloodDonation')->group(function () {
     Route::get('edit-blooddonation/{id}', [BloodDonationController::class, 'BloodDonationEdit']); 
     Route::put('/update/{id}', [BloodDonationController::class, 'BloodDonationUpdate'])->name('blooddonation.update');
     Route::get('/delete/{id}', [BloodDonationController::class, 'BloodDonationDelete'])->name('blooddonation.delete'); 
+  });
+//Blood Donation End
+
+// Blood Donation Start
+Route::prefix('bloodgroup')->group(function () {
+    Route::get('/view', [BloodGroupController::class, 'BloodGroupView'])->name('all.bloodgroup'); 
+    Route::post('/add', [BloodGroupController::class, 'BloodGroupStore']); 
+    Route::get('/edit-bloodgroup/{id}', [BloodGroupController::class, 'BloodGroupedit']); 
+    Route::put('/update/{id}', [BloodGroupController::class, 'BloodGroupUpdate']);
+    Route::get('/delete/{id}', [BloodGroupController::class, 'BloodGroupDelete'])->name('bloodgroup.delete'); 
   });
 //Blood Donation End
 
@@ -187,6 +199,7 @@ Route::prefix('NewBedType')->group(function () {
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedTypeDelete'])->name('newbedtype.delete'); 
 });
 //New Bed Type End
+
 // New Bed Start
 Route::prefix('NewBed')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedView'])->name('all.newbed'); 
@@ -194,9 +207,16 @@ Route::prefix('NewBed')->group(function () {
   Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
   Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
+}); 
+
+// New Bed Start
+Route::prefix('BedAssign')->group(function () {
+  Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed'); 
+  // Route::post('/add', [NewBedController::class, 'NewBedStore'])->name('newbed.add'); 
+  // Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
+  // Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
+  // Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 });
-
-
 
 // Appointment start
 Route::prefix('Appointment')->group(function () {

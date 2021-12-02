@@ -108,10 +108,8 @@ class BloodDonationController extends Controller
         
           // delete
       public function BloodDonationDelete($id){
-
-          $blooddonation = BloodDonation::findOrFail($id);
           BloodDonation::findOrFail($id)->delete(); 
-                    return redirect()->back();
+          return redirect()->back();
       }
             
 

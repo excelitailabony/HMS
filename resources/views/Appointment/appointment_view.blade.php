@@ -54,6 +54,7 @@
         .card-title i {
             color: rgb(70, 75, 104);
         }
+
         .errorColor {
             color: red;
         }
@@ -79,9 +80,9 @@
                         </h4>
 
                         <!-- Modal for add doctor -->
-                        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Appointment</h5>
@@ -89,14 +90,15 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form >
+                                    <form>
                                         @csrf
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Patient<span class="errorColor"> *</span></label>
-                                                        <select name="patient_name" class="patient_id form-control" required="">
+                                                        <select name="patient_name" class="patient_id form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
@@ -110,7 +112,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doctor Dept<span class="errorColor"> *</span></label>
-                                                        <select name="doctor_dept_id" class="doctor_dept form-control" required="">
+                                                        <select name="doctor_dept_id" class="doctor_dept form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Doctor
                                                                 Department
                                                             </option>
@@ -126,7 +129,8 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doctor<span class="errorColor"> *</span></label>
-                                                        <select name="doctor_name" class="doctor_id form-control" required="">
+                                                        <select name="doctor_name" class="doctor_id form-control"
+                                                            required="">
                                                             <option value="" selected="" disabled="">Select Doctor
                                                             </option>
                                                             @foreach ($doctors as $doctor)
@@ -142,26 +146,24 @@
                                                     <div class="form-group">
                                                         <label>Date<span class="errorColor"> *</span></label>
                                                         <input type="datetime-local" required class="date form-control">
-                                                    <span id="error_datee" class="errorColor"></span>
+                                                        <span id="error_datee" class="errorColor"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Description<span class="errorColor"> *</span></label>
-                                                        <input type="text" class="description form-control"
-                                                            placeholder="Enter description" name="description">
-                                                            <span id="error_description" class="errorColor"></span>
-                                                        {{-- @error('description')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror --}}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>title<span class="errorColor"> *</span></label>
                                                         <input type="text" class="title form-control"
                                                             placeholder="Enter description" name="title">
-                                                            <span id="error_title" class="errorColor"></span>
+                                                        <span id="error_title" class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Description<span class="errorColor"> *</span></label>
+                                                        <textarea class="description form-control"
+                                                            name="description"></textarea>
+                                                        <span id="error_description" class="errorColor"></span>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -170,7 +172,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary add_appointment">Save</button>
+                                            <button type="button" class="btn btn-info add_appointment">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -178,9 +180,9 @@
                         </div>
 
                         <!-- Modal for add Edit doctor -->
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1"
+                            aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Update Blood Issue</h5>
@@ -188,18 +190,18 @@
                                             aria-label="Close"></button>
                                     </div>
 
-                                    <form >
+                                    <form>
                                         @csrf
-                                        <input type="hidden" id="appointment_id" >
+                                        <input type="hidden" id="appointment_id">
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Patient</label>
-                                                        <select  id="patient_name_id"
-                                                            class="form-control" required="">
+                                                        <select id="patient_name_id" class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
-                                                                <span class="errorColor"> *</span></option>
+                                                                <span class="errorColor"> *</span>
+                                                            </option>
                                                             @foreach ($patients as $patient)
                                                                 <option value="{{ $patient->id }}">
                                                                     {{ $patient->name }}
@@ -212,8 +214,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doctor Dept</label>
-                                                        <select  id="doctor_dept_id"
-                                                            class="form-control" required="">
+                                                        <select id="doctor_dept_id" class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Doctor
                                                                 Department<span class="errorColor"> *</span>
                                                             </option>
@@ -229,9 +230,9 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Doctor</label>
-                                                        <select  id="doctor_name_id"
-                                                            class="form-control" required="">
-                                                            <option value="" selected="" disabled="">Select Doctor<span class="errorColor"> *</span>
+                                                        <select id="doctor_name_id" class="form-control" required="">
+                                                            <option value="" selected="" disabled="">Select Doctor<span
+                                                                    class="errorColor"> *</span>
                                                             </option>
                                                             @foreach ($doctors as $doctor)
                                                                 <option value="{{ $doctor->id }}">
@@ -246,25 +247,24 @@
                                                     <div class="form-group">
                                                         <label>Date<span class="errorColor"> *</span></label>
                                                         <input type="datetime-local" class="form-control"
-                                                           id="appointment_date_id">
-                                                            <span id="error_dateee" class="errorColor"></span>
+                                                            id="appointment_date_id">
+                                                        <span id="error_dateee" class="errorColor"></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>title<span class="errorColor"> *</span><span
+                                                                class="errorColor"> *</span></label>
+                                                        <input type="text" class="title form-control"
+                                                            placeholder="Enter description" id="title_id">
+                                                        <span id="error_titleee" class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Description<span class="errorColor"> *</span></label>
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter description" 
-                                                            id="description_id">
-                                                            <span id="error_descriptionnn" class="errorColor"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label>title<span class="errorColor"> *</span><span class="errorColor"> *</span></label>
-                                                        <input type="text" class="title form-control"
-                                                            placeholder="Enter description"  id="title_id">
-                                                            <span id="error_titleee" class="errorColor"></span>
+                                                        <textarea class="form-control" id="description_id"></textarea>
+                                                        <span id="error_descriptionnn" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,7 +273,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-rounded btn-info update_appointments">update</button>
+                                            <button type="button" class="btn btn-info update_appointments">update</button>
                                         </div>
                                     </form>
                                 </div>
@@ -398,56 +398,56 @@
 
 
             // for update
-            $(document).on('click', '.update_appointments', function (e) {
-            e.preventDefault();
+            $(document).on('click', '.update_appointments', function(e) {
+                e.preventDefault();
 
-            $(this).text('Updating..');
-            var id = $('#appointment_id').val();
-            // alert(id);
+                $(this).text('Updating..');
+                var id = $('#appointment_id').val();
+                // alert(id);
 
-            var data = {
-                'patient_name_id': $('#patient_name_id').val(),
-                'doctor_dept_id': $('#doctor_dept_id').val(),
-                'doctor_name_id': $('#doctor_name_id').val(),
-                'appointment_date_id': $('#appointment_date_id').val(),
-                'description_id': $('#description_id').val(),
-                'title_id': $('#title_id').val(),
-            }
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                var data = {
+                    'patient_name_id': $('#patient_name_id').val(),
+                    'doctor_dept_id': $('#doctor_dept_id').val(),
+                    'doctor_name_id': $('#doctor_name_id').val(),
+                    'appointment_date_id': $('#appointment_date_id').val(),
+                    'description_id': $('#description_id').val(),
+                    'title_id': $('#title_id').val(),
                 }
-            });
 
-            $.ajax({
-                type: "PUT",
-                url: "/Appointment/update/" + id,
-                data: data,
-                dataType: "json",
-                success: function (response) {
-                    // console.log(response);
-                    if (response.status == 400) {
-                        $('#error_patienttt').text(response.errors.patient_name_id);
-                        $('#error_doc_depttt').text(response.errors.doctor_dept_id);
-                        $('#error_doc_nameee').text(response.errors.doctor_name_id);
-                        $('#error_dateee').text(response.errors.appointment_date_id);
-                        $('#error_descriptionnn').text(response.errors.description_id);
-                        $('#error_titleee').text(response.errors.title_id);
-                        $('.update_appointments').text('Update');
-                    } else {
-                        $('#editModal').find('input').val('');
-                        $('.update_appointments').text('Update');
-                        $('#editModal').modal('hide');
-                        toastr.success(response.message);
-                        // fetchstudent();
-                        location.reload();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                }
+                });
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/Appointment/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        // console.log(response);
+                        if (response.status == 400) {
+                            $('#error_patienttt').text(response.errors.patient_name_id);
+                            $('#error_doc_depttt').text(response.errors.doctor_dept_id);
+                            $('#error_doc_nameee').text(response.errors.doctor_name_id);
+                            $('#error_dateee').text(response.errors.appointment_date_id);
+                            $('#error_descriptionnn').text(response.errors.description_id);
+                            $('#error_titleee').text(response.errors.title_id);
+                            $('.update_appointments').text('Update');
+                        } else {
+                            $('#editModal').find('input').val('');
+                            $('.update_appointments').text('Update');
+                            $('#editModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+
             });
 
-        });
-           
         });
     </script>
     {{-- for add and validation --}}

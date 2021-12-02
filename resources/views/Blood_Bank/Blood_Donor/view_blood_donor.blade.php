@@ -38,9 +38,9 @@
                         </h4>
 
                         <!-- AddModal -->
-                        <div class="modal fade" id="AddDonor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="AddDonor" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">New Blood Donor</h5>
@@ -70,23 +70,6 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Gender</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="gender form-check-input" type="radio"
-                                                                name="gender" id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="gender form-check-input" type="radio"
-                                                                name="gender" id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                        <span id="error_gender" class="errorColor"></span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
                                                         <label>Blood Group</label>
                                                         <select name="blood_group" class="blood_group form-control"
                                                             required="">
@@ -112,6 +95,23 @@
                                                         <span id="error_last_donation_date" class="errorColor"></span>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Gender</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="gender form-check-input" type="radio"
+                                                                name="gender" id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="gender form-check-input" type="radio"
+                                                                name="gender" id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
+                                                        <span id="error_gender" class="errorColor"></span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -128,9 +128,9 @@
                         {{-- check start --}}
 
                         <!-- Edit Modal -->
-                        <div class="modal fade" id="editDonor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="editDonor" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit Blood Donor</h5>
@@ -161,24 +161,6 @@
                                                         <span id="error_age_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label>Gender</label><br>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input gender1" type="radio"
-                                                                name="gender" id="inlineRadio1" value="male">
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input gender1" type="radio"
-                                                                name="gender" id="inlineRadio2" value="female">
-                                                            <label class="form-check-label"
-                                                                for="inlineRadio2">Female</label>
-                                                        </div>
-                                                        <span id="error_gender_edit" class="errorColor"></span>
-                                                    </div>
-                                                </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
@@ -206,6 +188,23 @@
                                                             id="last_donation_date">
                                                         <span id="error_last_donation_date_edit"
                                                             class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Gender</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input gender1" type="radio"
+                                                                name="gender" id="inlineRadio1" value="male">
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input gender1" type="radio"
+                                                                name="gender" id="inlineRadio2" value="female">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">Female</label>
+                                                        </div>
+                                                        <span id="error_gender_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
                                             </div>

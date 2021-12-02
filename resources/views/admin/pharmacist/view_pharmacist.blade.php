@@ -37,9 +37,9 @@
                         </h4>
 
                         <!-- Modal for add pharmacist -->
-                        <div class="modal fade" id="AddDoctor" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade  bd-example-modal-lg" id="AddDoctor" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add pharmacist info</h5>
@@ -137,7 +137,7 @@
 
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-
+                                                        <label>Blood group</label><br>
                                                         <select name="blood_group">
                                                             <option selected="">Select blood group</option>
                                                             <option>O+</option>
@@ -175,9 +175,9 @@
 
 
                         {{-- Modal for edit pharmacist --}}
-                        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
+                        <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit pharmacist</h5>
@@ -273,18 +273,18 @@
                                                     <div class="form-group">
                                                         <label>Blood group</label>
                                                         <!-- <select name="blood_group" id="blood_group" class="form-control"
-                                                                        required="">
-                                                                        <option value="" selected="" disabled="">Select Blood group
-                                                                        </option>
-                                                                        <option value="A+">A+</option>
-                                                                        <option value="A-">A-</option>
-                                                                        <option value="AB+">AB+</option>
-                                                                        <option value="AB-">AB-</option>
-                                                                        <option value="B+">B+</option>
-                                                                        <option value="B-">B-</option>
-                                                                        <option value="O+">O+</option>
-                                                                        <option value="O-">O-</option>
-                                                                    </select> -->
+                                                                                                    required="">
+                                                                                                    <option value="" selected="" disabled="">Select Blood group
+                                                                                                    </option>
+                                                                                                    <option value="A+">A+</option>
+                                                                                                    <option value="A-">A-</option>
+                                                                                                    <option value="AB+">AB+</option>
+                                                                                                    <option value="AB-">AB-</option>
+                                                                                                    <option value="B+">B+</option>
+                                                                                                    <option value="B-">B-</option>
+                                                                                                    <option value="O+">O+</option>
+                                                                                                    <option value="O-">O-</option>
+                                                                                                </select> -->
                                                         <input type="text" name="blood_group" id="blood_group">
                                                     </div>
                                                 </div>
@@ -302,7 +302,7 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
                                             <!-- <input type="submit" class="btn btn-rounded btn-info" value="Update Patient">  -->
-                                            <button type="submit" class="btn btn-primary btn-rounded">update</button>
+                                            <button type="submit" class="btn btn-info btn-rounded">update</button>
                                         </div>
                                     </form>
                                 </div>
