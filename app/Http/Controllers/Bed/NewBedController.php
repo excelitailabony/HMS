@@ -204,7 +204,7 @@ class NewBedController extends Controller
                 if($student)
                 {
                     $student->bed = $request->input('bed');
-                    $student->bed_type_id = $request->input('bed_type_id');
+                    $student->new_bed_type_id = $request->input('bed_type_id');
                     $student->charge = $request->input('charge');
                     $student-> description= $request->input('description');
                     $student->update();
@@ -231,14 +231,5 @@ class NewBedController extends Controller
             NewBed::findOrFail($id)->delete(); 
                       return redirect()->back();
           }//end method
-
-          // New Bed View
-        public function NewBedVieweee(){
-            $newbedtypes = NewBedType::orderBy('bed_types', 'ASC')->get();
-            $newbeds= NewBed::latest()->get();
-
-            return View('Bed.view_new_bed', compact('newbeds','newbedtypes'));
-
-          }// end method
       
     }

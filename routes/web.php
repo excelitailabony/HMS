@@ -213,6 +213,8 @@ Route::prefix('NewBed')->group(function () {
 Route::prefix('BedAssign')->group(function () {
   Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed'); 
   Route::post('/add', [BedAssignController::class, 'BedAssignStore']); 
+
+  Route::get('/status', [BedAssignController::class, 'BedAssignStatus'])->name('bed.status');
   // Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
   // Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   // Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');

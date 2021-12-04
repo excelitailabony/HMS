@@ -295,6 +295,7 @@
                                                 @php
                                                     $donor_name = $blood['donor']['name'];
                                                 @endphp
+
                                                 <tr class="ImgBox">
                                                     <td>
                                                         <div class="row d-flex align-items-center">

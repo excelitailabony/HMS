@@ -19,6 +19,11 @@
             text-align: left;
         }
 
+        .btn-info a {
+            text-decoration: none;
+            color: white;
+        }
+
     </style>
     <div class="container-full topBar">
 
@@ -28,11 +33,16 @@
                     <div class="card-body">
 
                         <h4 class="card-title text-center">Bed Allotment
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#addBedAllotment">
-                                Bed Allotment
-                            </button>
+                            <div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#addBedAllotment">
+                                    Bed Allotment
+                                </button>
+                                <button type="button" class="btn btn-info">
+                                    <a href="{{ route('bed.status') }}">Bed Status</a>
+                                </button>
+                            </div>
                         </h4>
 
                         <!-- AddModal -->
@@ -183,18 +193,25 @@
                                                         <b>email:</b> {{ $bedallotment['doctor']['email'] }} <br>
                                                         <b>Gender:</b> {{ $bedallotment['doctor']['sex'] }} <br>
                                                     </td>
+                                                    @php
+                                                        $time = explode(' ', $bedallotment->allotment_time);
+                                                    @endphp
                                                     <td>
-                                                        <b>Date &Time:</b>{{ $bedallotment->allotment_time }}
+                                                        <b>Date:</b>{{ $time[0] }} <br>
+                                                        <b>Time:</b>{{ $time[1] }} <br>
                                                     </td>
+                                                    @php
+                                                        $times = explode(' ', $bedallotment->discharge_time);
+                                                    @endphp
                                                     <td>
-                                                        <b>Date &Time:</b>{{ $bedallotment->discharge_time }}
+                                                        <b>Date:</b>{{ $times[0] }} <br>
+                                                        <b>Time:</b>{{ $times[1] }} <br>
                                                     </td>
                                                     <td>
                                                         <b>Description:</b>{{ $bedallotment->discription }}
                                                     </td>
 
-
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" value="{{ $bedallotment->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>

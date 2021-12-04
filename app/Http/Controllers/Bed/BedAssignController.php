@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\NewBedAllotment;
 use App\Models\NewBed;
+use App\Models\NewBedType;
 use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Support\Facades\Validator;
@@ -58,5 +59,12 @@ class BedAssignController extends Controller
                 'message'=>'New bed  Allotment Added Successfully.'
             ]);
         }
+    }
+
+    public function BedAssignStatus(){
+
+        $newbedtypes = NewBedType::all();
+        return view('Bed.view_bed_status',compact('newbedtypes'));
+        
     }
 }
