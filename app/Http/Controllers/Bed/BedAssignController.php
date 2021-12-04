@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 class BedAssignController extends Controller
 {
     public function BedAssignView(){
-        $newbednames = NewBed::all();
+        $newbednames = NewBed::where('status','0')->get();
         $doctors = Doctor::all();
         $patients = Patient::all();
         $bedallotments = NewBedAllotment::with('bed','patient','doctor','bedTypeName')->get();
@@ -41,6 +41,10 @@ class BedAssignController extends Controller
         }
         else
         {
+            $newbed = NewBed::find($request->bed_name_id);
+            $newbed->status = '1';
+            $newbed->update();
+
             $student = new NewBedAllotment;
             $student->new_bed_id = $request->input('bed_name_id');
             $student->patient_id = $request->input('patient_name_id');
@@ -53,11 +57,6 @@ class BedAssignController extends Controller
                 'status'=>200,
                 'message'=>'New bed  Allotment Added Successfully.'
             ]);
-             $notification = array(
-                    'message' =>  'New Bed Added Successfuly',
-                    'alert-type' => 'success'
-                );     
-            
         }
     }
 }

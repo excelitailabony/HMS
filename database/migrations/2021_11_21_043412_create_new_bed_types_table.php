@@ -17,6 +17,7 @@ class CreateNewBedTypesTable extends Migration
             $table->id();
             $table->string('bed_types');
             $table->string('description');
+            $table->integer('status',1)->default(0);
             $table->timestamps();
         });
     }

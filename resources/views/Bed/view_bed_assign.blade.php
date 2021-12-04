@@ -15,12 +15,8 @@
             justify-content: space-between;
         }
 
-        .modal-body .row .col-md-6 {
-            margin-bottom: 1rem;
-        }
-
-        .errorColor {
-            color: red;
+        .leftside table tbody tr td {
+            text-align: left;
         }
 
     </style>
@@ -129,7 +125,7 @@
 
                         {{-- Edit  modal end --}}
 
-                        <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer leftside">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="datatable-buttons"
@@ -188,10 +184,7 @@
                                                         <b>Gender:</b> {{ $bedallotment['doctor']['sex'] }} <br>
                                                     </td>
                                                     <td>
-                                                        {{-- <b>Date
-                                                            &Time:</b>{{ date_format($bedallotment->allotment_time, 'D M Y') }} --}}
-                                                        <b>Date
-                                                            &Time:</b>{{ $bedallotment->allotment_time }}
+                                                        <b>Date &Time:</b>{{ $bedallotment->allotment_time }}
                                                     </td>
                                                     <td>
                                                         <b>Date &Time:</b>{{ $bedallotment->discharge_time }}
