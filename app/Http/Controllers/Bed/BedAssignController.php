@@ -13,16 +13,16 @@ use Illuminate\Support\Facades\Validator;
 
 class BedAssignController extends Controller
 {
+    // bed assign view start
     public function BedAssignView(){
         $newbednames = NewBed::where('status','0')->get();
         $doctors = Doctor::all();
         $patients = Patient::all();
         $bedallotments = NewBedAllotment::with('bed','patient','doctor','bedTypeName')->get();
-        // dd($bedallotments);
-
         return view ('Bed.view_bed_assign',compact('newbednames','doctors','patients','bedallotments'));
     }
 
+    // bed assign store start
     public function BedAssignStore(Request $request){
          $validator = Validator::make($request->all(), [
             'bed_name_id'=> 'required',
@@ -61,6 +61,7 @@ class BedAssignController extends Controller
         }
     }
 
+    // bed assign status view
     public function BedAssignStatus(){
 
         $newbedtypes = NewBedType::all();
