@@ -142,7 +142,7 @@ Route::prefix('laboratorist')->group(function () {
       Route::get('/view', [ReceptionistController::class, 'ReceptionistView'])->name('all.receptionist'); 
       Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
       Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
-      Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
+      Route::put('/update/{id}', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
       Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
      
        
