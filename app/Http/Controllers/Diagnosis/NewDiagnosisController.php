@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class NewDiagnosisController extends Controller
 {
-    //
-    // New diagnosis View
+
+    // New diagnosis category View
     public function DiagnosisCategoryView(){
 
         $diagnosiscats= Diagnosis::latest()->get();
@@ -18,104 +18,104 @@ class NewDiagnosisController extends Controller
   
     }// end method
     
-           // store Diagnosis
-  public function DiagnosisCategoryStore(Request $request){   
-      
-    $validator = Validator::make($request->all(), [
-      'new_diagnosis_category'=> 'required|max:10',
-      'description'=>'required|max:191',
-      
-  ]);
-
-  if($validator->fails())
-  {
-      return response()->json([
-          'status'=>400,
-          'errors'=>$validator->messages()
-      ]);
-  }
-  else
-  {
-      $diagnosis = new Diagnosis;
-      $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
-      $diagnosis->description = $request->input('description');
-      $diagnosis->save();
-      return response()->json([
-          'status'=>200,
-          'message'=>'Diagnosis category added Successfully.'
-      ]);
-      $notification = array(
-              'message' =>  'Diagnosis category aaded Successfuly',
-              'alert-type' => 'success'
-          );     
+    // new Diagnosis category store
+    public function DiagnosisCategoryStore(Request $request){   
         
-  }
-  } // end method 
-
-  // method for editing accountant data
-  public function DiagnosisCategoryEdit($id){
-    $diagnosiscat = Diagnosis::find($id);
-    if($diagnosiscat)
-    {
-        return response()->json([
-            'status'=>200,
-            'diagnosiscat'=> $diagnosiscat,
+        $validator = Validator::make($request->all(), [
+        'new_diagnosis_category'=> 'required|max:10',
+        'description'=>'required|max:191',
+            
         ]);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $diagnosis = new Diagnosis;
+            $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
+            $diagnosis->description = $request->input('description');
+            $diagnosis->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Diagnosis category added Successfully.'
+            ]);
+            $notification = array(
+                    'message' =>  'Diagnosis category aaded Successfuly',
+                    'alert-type' => 'success'
+                );     
+                
+        }
+    } // end method 
+
+    // new diagnosis category edit
+    public function DiagnosisCategoryEdit($id){
+        $diagnosiscat = Diagnosis::find($id);
+        if($diagnosiscat)
+        {
+            return response()->json([
+                'status'=>200,
+                'diagnosiscat'=> $diagnosiscat,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'No diagnosis Found.'
+            ]);
+        }
     }
-    else
-    {
-        return response()->json([
-            'status'=>404,
-            'message'=>'No diagnosis Found.'
+
+
+    //  new diagnosis category update
+    public function DiagnosisCategoryUpdate(Request $request,$id){
+        
+        $validator = Validator::make($request->all(), [
+            'new_diagnosis_category'=> 'required|max:10',
+            'description'=>'required|max:191',
         ]);
-    }
-}
 
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else
+        {
+            $diagnosis = Diagnosis::find($id);
+            if($diagnosis)
+            {
+                $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
+                $diagnosis->description = $request->input('description');
+                $diagnosis->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Diagnosis Updated Successfully.'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'No Diagnosis Found.'
+                ]);  
+            }
 
- // method for updating data
- public function DiagnosisCategoryUpdate(Request $request,$id){
-      
-  $validator = Validator::make($request->all(), [
-    'new_diagnosis_category'=> 'required|max:10',
-    'description'=>'required|max:191',
-]);
-
-if($validator->fails())
-{
-    return response()->json([
-        'status'=>400,
-        'errors'=>$validator->messages()
-    ]);
-}
-else
-{
-    $diagnosis = Diagnosis::find($id);
-    if($diagnosis)
-    {
-        $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
-        $diagnosis->description = $request->input('description');
-        $diagnosis->update();
-        return response()->json([
-            'status'=>200,
-            'message'=>'Diagnosis Updated Successfully.'
-        ]);
-    }
-    else
-    {
-        return response()->json([
-            'status'=>404,
-            'message'=>'No Diagnosis Found.'
-        ]);  
+        }
     }
 
-}
- }
- // delete
- public function DiagnosisCategoryDelete($id){
-
-  $diagnosis = Diagnosis::findOrFail($id);
-  Diagnosis::findOrFail($id)->delete(); 
-            return redirect()->back(); 
-}//end method
+    //diagnosis category delete
+    public function DiagnosisCategoryDelete($id){
+        $diagnosis = Diagnosis::findOrFail($id);
+        Diagnosis::findOrFail($id)->delete(); 
+        return redirect()->back(); 
+    }//end method
 
 }

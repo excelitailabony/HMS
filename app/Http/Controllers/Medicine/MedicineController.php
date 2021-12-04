@@ -50,7 +50,7 @@ class MedicineController extends Controller
 
     } // end mathod
 
-    // method for editing medicine type data
+    // Medicine type edit
     public function MedicineTypeEdit($id){
         $medicinetype = Medicine::find($id);
         return response()->json([
@@ -59,7 +59,7 @@ class MedicineController extends Controller
         ]);
     }
 
-    // method for updating data
+    // Medicine type update
     public function MedicineTypeUpdate(Request $request,$id){
 
       $validator = Validator::make($request->all(), [
@@ -99,7 +99,7 @@ class MedicineController extends Controller
 
     }
 
-    // delete Medicinetype
+    // Medicine type delete
     public function MedicineTypeDelete($id){
 
       $medicinetype = Medicine::findOrFail($id);
@@ -148,7 +148,7 @@ class MedicineController extends Controller
     } // end method
 
 
-    // method for editing medicine category data
+    // medicine categor edit
     public function MedicineCategoryEdit($id){
         $medicinecategory = MedicineCategory::find($id);
         return response()->json([
@@ -158,7 +158,7 @@ class MedicineController extends Controller
     }
 
 
-    // medicince category update using ajax
+    // medicince category update
     public function MedicineCategoryUpdate(Request $request, $id){
 
         $validator = Validator::make($request->all(), [

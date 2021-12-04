@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class BloodIssueController extends Controller
 {
+    // blood issue view
     public function BloodIssueView(){
         $doctors=Doctor::all();
         $patients=Patient::all();
@@ -21,21 +22,20 @@ class BloodIssueController extends Controller
         return view('Blood_Bank.view_blood_issue',compact('doctors','patients','donors','bloods'));
     }
 
+    // blood donor ajax view
     public function BloodDonorGroup($donor_id){
         $donor_blood = BloodDonor::where('id',$donor_id)->get();
-        // dd($donor_blood);
         return json_encode($donor_blood);
     }
 
+    // blood donor group ajax view
     public function BloodDonorGroupEdit($blood_id){
-        // dd($blood_id);
         $donor_blood_edit = BloodDonor::where('id',$blood_id)->get();
         return json_encode($donor_blood_edit);
     }
 
-
+    // blood issue store
     public function BloodIssueStore(Request $request){
-
         $validator = Validator::make($request->all(), [
             'doctor_name'=> 'required',
             'patient_name'=> 'required',
@@ -76,11 +76,13 @@ class BloodIssueController extends Controller
 
     }
 
+    // blood issue delete
     public function BloodIssueDelete($id){
         Blood_Issue::findOrFail($id)->delete(); 
         return redirect()->back();
     }
 
+    // blood issue edit
     public function BloodIssueEdit($bloodissue_id){         
          $blood_issue = Blood_Issue::find($bloodissue_id);
          return response()->json([
@@ -89,6 +91,7 @@ class BloodIssueController extends Controller
          ]);
     }
 
+    // blood issue update
     public function BloodDonorGroupUpdate(Request $request,$id){
         
           $validator = Validator::make($request->all(), [

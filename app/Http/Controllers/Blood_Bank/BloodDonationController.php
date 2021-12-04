@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class BloodDonationController extends Controller
 {
-    //
+
      // Blood Donation View
      public function BloodDonationView(){
 
@@ -53,7 +53,7 @@ class BloodDonationController extends Controller
 
       } // end mathod
           
-        // method for editing blood donation data
+        // blood donation edit
         public function BloodDonationEdit($id){
             $blooddonors = BloodDonor::orderBy('name', 'ASC')->get();
             $blooddonation = BloodDonation::find($id);
@@ -65,7 +65,7 @@ class BloodDonationController extends Controller
         }//end edit of blood donation
 
 
-        // method for updating data
+        // blood donation update
         public function BloodDonationUpdate(Request $request,$id){
 
           $validator = Validator::make($request->all(), [
@@ -106,7 +106,7 @@ class BloodDonationController extends Controller
           }  
       }
         
-          // delete
+      //   blood donation delete
       public function BloodDonationDelete($id){
           BloodDonation::findOrFail($id)->delete(); 
           return redirect()->back();

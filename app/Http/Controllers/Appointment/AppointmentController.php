@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
+    // apoointment view start
     public function AppointmentView(){
         $doctors=Doctor::all();
         $patients=Patient::all();
@@ -22,8 +23,9 @@ class AppointmentController extends Controller
         return view('Appointment.appointment_view',compact('doctors','patients','appointments'));
     }
 
+    // apoointment store start
     public function AppointmentStore(Request $request){
-        // validation 
+
         $validator = Validator::make($request->all(), [
             'patient_id'=> 'required',
             'doctor_dept'=>'required|max:20',
@@ -66,6 +68,7 @@ class AppointmentController extends Controller
 
     } // end method 
 
+    // apoointment delete start
     public function AppointmentDelete($id){
 
         $appointments=Appointment::find($id);
@@ -79,6 +82,7 @@ class AppointmentController extends Controller
         return Redirect()->back()->with($notification); 
     }
 
+    // apoointment edit start
     public function AppointmentEdit($id){
         $appointments = Appointment::find($id);
         if($appointments)
@@ -97,6 +101,7 @@ class AppointmentController extends Controller
         }
     }
 
+    // apoointment update start
     public function AppointmentUpdate(Request $request,$id){
 
         $validator = Validator::make($request->all(), [
@@ -114,7 +119,7 @@ class AppointmentController extends Controller
         'appointment_date_id.required'=>'appointment date required',
         'description_id.required'=>'description required',
         'title_id.required'=>'title required',
-]);
+    ]);
 
         if($validator->fails())
         {
@@ -152,16 +157,14 @@ class AppointmentController extends Controller
     }
 
 
+    // apointment calender view page
     public function index(Request $request)
      {
      if($request->ajax())
     	{ 
-            // $row=Appointment::orderBy('description','ASC')->get();
-    		// $data = Appointment::get(['id', 'date','title']);
             $data = Appointment::join('doctors', 'appointments.doctor_id', '=', 'doctors.id')
             ->select('appointments.id as id','appointments.date as date', 'doctors.name as title')
             ->get();
-            // dd($data);
             return response()->json($data);
     	}
     	return view('Appointment.appointment_calender');

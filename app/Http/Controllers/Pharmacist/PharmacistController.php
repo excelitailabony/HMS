@@ -9,14 +9,14 @@ use Image;
 
 class PharmacistController extends Controller
 {
-    //view pharmacist info
+    //pharmacist view start
     public function ViewPharmacist(){
         $pharmacists=Pharmacist::all();
         return view('admin.pharmacist.view_pharmacist',compact('pharmacists'));
         
     }//end method
 
-    //add pharmacist info
+    //pharmacist view store
     public function AddPharmacist(Request $request){
          // validation 
          $request->validate([
@@ -54,7 +54,7 @@ class PharmacistController extends Controller
         return redirect()->back()->with('message','Pharmacist info added successfully');
     }//end method
 
-    // method for editing pharmacist data
+    //pharmacist view edit
     public function EditPharmacist($id){
         $pharmacist = Pharmacist::find($id);
         return response()->json([
@@ -66,75 +66,69 @@ class PharmacistController extends Controller
     //uplodad image
     protected function uploadImage($request){
         $image = $request->file('image');
-       $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-       Image::make($image)->resize(50,50)->save('upload/nurse/'.$name_gen);
-       $save_url = 'upload/pharmacist/'.$name_gen;
-       return $save_url;
-   }//end method
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(50,50)->save('upload/nurse/'.$name_gen);
+        $save_url = 'upload/pharmacist/'.$name_gen;
+        return $save_url;
+    }//end method
 
 
-   //update nurse info with image
-   protected function updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url){
-       $pharmacistInfo->name=$request->name;
-       $pharmacistInfo->email=$request->email;
-       $pharmacistInfo->phone=$request->phone;
-       $pharmacistInfo->password=$request->password;
-       $pharmacistInfo->address=$request->address;
-       $pharmacistInfo->sex=$request->sex;
-       $pharmacistInfo->dob=$request->dob;
-       $pharmacistInfo->age=$request->age;
-       $pharmacistInfo->blood_group=$request->blood_group;
-       $pharmacistInfo->image= $save_url;
-       $pharmacistInfo->save();
-   }//end method
+    //update nurse info with image
+    protected function updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url){
+        $pharmacistInfo->name=$request->name;
+        $pharmacistInfo->email=$request->email;
+        $pharmacistInfo->phone=$request->phone;
+        $pharmacistInfo->password=$request->password;
+        $pharmacistInfo->address=$request->address;
+        $pharmacistInfo->sex=$request->sex;
+        $pharmacistInfo->dob=$request->dob;
+        $pharmacistInfo->age=$request->age;
+        $pharmacistInfo->blood_group=$request->blood_group;
+        $pharmacistInfo->image= $save_url;
+        $pharmacistInfo->save();
+    }//end method
 
 
-   //update nurse info without image
-   protected function updatePharmacistINfoWithOutImage($pharmacistInfo,$request){
-       $pharmacistInfo->name=$request->name;
-       $pharmacistInfo->email=$request->email;
-       $pharmacistInfo->phone=$request->phone;
-       $pharmacistInfo->password=$request->password;
-       $pharmacistInfo->address=$request->address;
-       $pharmacistInfo->sex=$request->sex;
-       $pharmacistInfo->dob=$request->dob;
-       $pharmacistInfo->age=$request->age;
-       $pharmacistInfo->blood_group=$request->blood_group;
-   }//end method
+    //update nurse info without image
+    protected function updatePharmacistINfoWithOutImage($pharmacistInfo,$request){
+        $pharmacistInfo->name=$request->name;
+        $pharmacistInfo->email=$request->email;
+        $pharmacistInfo->phone=$request->phone;
+        $pharmacistInfo->password=$request->password;
+        $pharmacistInfo->address=$request->address;
+        $pharmacistInfo->sex=$request->sex;
+        $pharmacistInfo->dob=$request->dob;
+        $pharmacistInfo->age=$request->age;
+        $pharmacistInfo->blood_group=$request->blood_group;
+    }//end method
 
-   //update nurse info
-   public function UpdatePharmacist(Request $request){
-       $pharmacistInfo=Pharmacist::find($request->pharmacist_id);
-       $old_image=$pharmacistInfo->image;
-
-       if($request->file('image')){
-           @unlink($old_image);
-            //image upload
-           $save_url=$this->uploadImage($request);
-       //update data with image
-           $this->updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url);
-      
-       
-       return redirect()->back()->with('message','pharmacist info updated successfully');
-
-       } else{
-           //update data without image
-           $this->updatePharmacistINfoWithOutImage($pharmacistInfo,$request);
-          
-       $pharmacistInfo->save();
-       return redirect()->back()->with('message','pharmacist info updated successfully');
-
-       }
-   }//end method
+    //update nurse info
+    public function UpdatePharmacist(Request $request){
+            $pharmacistInfo=Pharmacist::find($request->pharmacist_id);
+            $old_image=$pharmacistInfo->image;
+            if($request->file('image')){
+                @unlink($old_image);
+                    //image upload
+                $save_url=$this->uploadImage($request);
+            //update data with image
+                $this->updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url);
+            return redirect()->back()->with('message','pharmacist info updated successfully');
+        } else{
+            //update data without image
+            $this->updatePharmacistINfoWithOutImage($pharmacistInfo,$request);
+            $pharmacistInfo->save();
+            return redirect()->back()->with('message','pharmacist info updated successfully');
+        }
+    }//end method
 
 
-   //delete nurse info
-   public function DeletePharmacist($id){
+    //delete nurse info
+    public function DeletePharmacist($id){
         $pharmacist=Pharmacist::find($id);
         $image=$pharmacist->image;
         unlink($image);
         $pharmacist->delete();
         return redirect()->back();
-    }//end method
+     }//end method
 
 }//main end
