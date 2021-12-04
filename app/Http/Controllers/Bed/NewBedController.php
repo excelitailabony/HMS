@@ -231,5 +231,14 @@ class NewBedController extends Controller
             NewBed::findOrFail($id)->delete(); 
                       return redirect()->back();
           }//end method
+
+          // New Bed View
+        public function NewBedVieweee(){
+            $newbedtypes = NewBedType::orderBy('bed_types', 'ASC')->get();
+            $newbeds= NewBed::latest()->get();
+
+            return View('Bed.view_new_bed', compact('newbeds','newbedtypes'));
+
+          }// end method
       
     }
