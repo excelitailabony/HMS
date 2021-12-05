@@ -16,6 +16,12 @@ use Laravel\Fortify\Contracts\LogoutResponse;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
+use App\Models\Nurse\Nurse;
+use App\Models\Laboratorist\Laboratorist;
+use App\Models\Doctor;
+use App\Models\Patient;
+use App\Models\Pharmacist;
+use App\Models\Receptionist;
 
 class AdminController extends Controller
 {
@@ -107,6 +113,18 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return app(LogoutResponse::class);
+    }
+
+    public function DashboardView(){
+         $doctors = Doctor::all()->count();
+         $patients = Patient::all()->count();
+         $receptionist = Receptionist::all()->count();
+         $pharmacist = Pharmacist::all()->count();
+         $nurses = Nurse::all()->count();
+         $laboratorist = Laboratorist::all()->count();
+         
+        //  dd($patients);
+         return view('super_admin.home',compact('doctors','patients','receptionist','pharmacist','nurses','laboratorist'));
     }
 
 }

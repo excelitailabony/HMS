@@ -46,32 +46,29 @@ class PatientController extends Controller
              ]);
          }
          else{
-         
                if ($request->file('image')) {
-               $patient=new Patient;
-               $patient->name=$request->input('name');
-               $patient->email=$request->input('email');
-               $patient->password=$request->input('password');
-               $patient->address=$request->input('address');
-               $patient->phone=$request->input('phone');
-               $patient->sex=$request->input('gender');
-               $patient->dob=$request->input('dob');
-               $patient->age=$request->input('age');
-               $patient->blood_group=$request->input('blood_group');
-               $file = $request->file('image');
-               $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
-               Image::make($file)->resize(300,300)->save('uploads/patient/'.$extension);
-               $save_url = 'uploads/patient/'.$extension;
-               $patient->image= $save_url;
-               $patient->save();
-               return response()->json([
-                 'status'=>200,
-                 'message'=>'Patient Added Successfully.'
-             ]);
-             }
+                    $patient=new Patient;
+                    $patient->name=$request->input('name');
+                    $patient->email=$request->input('email');
+                    $patient->password=$request->input('password');
+                    $patient->address=$request->input('address');
+                    $patient->phone=$request->input('phone');
+                    $patient->sex=$request->input('gender');
+                    $patient->dob=$request->input('dob');
+                    $patient->age=$request->input('age');
+                    $patient->blood_group=$request->input('blood_group');
+                    $file = $request->file('image');
+                    $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+                    Image::make($file)->resize(300,300)->save('uploads/patient/'.$extension);
+                    $save_url = 'uploads/patient/'.$extension;
+                    $patient->image= $save_url;
+                    $patient->save();
+                    return response()->json([
+                        'status'=>200,
+                        'message'=>'Patient Added Successfully.'
+                    ]);
+              }
              else{
- 
-             
                $patient=new Patient;
                $patient->name=$request->input('name');
                $patient->email=$request->input('email');
@@ -82,7 +79,6 @@ class PatientController extends Controller
                $patient->dob=$request->input('dob');
                $patient->age=$request->input('age');
                $patient->blood_group=$request->input('blood_group');
-               $patient->image = 'uploads/patient/check.jpg';
                $patient->save();
                return response()->json([
                  'status'=>200,

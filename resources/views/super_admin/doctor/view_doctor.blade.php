@@ -434,8 +434,7 @@
                                                         class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
-
-                                                    @if ($doctor->status == 1)
+                                                    {{-- @if ($doctor->status == 1)
                                                         <a href="{{ route('doctor.deactive', $doctor->id) }}"
                                                             class="btn btn-danger btn-sm" title="Doctor deactive now"><i
                                                                 class="fa fa-arrow-down"></i></a>
@@ -443,7 +442,7 @@
                                                         <a href="{{ route('doctor.active', $doctor->id) }}"
                                                             class="btn btn-success btn-sm" title="Doctor active now"><i
                                                                 class="fa fa-arrow-up"></i></a>
-                                                    @endif
+                                                    @endif --}}
 
                                                 </td>
                                             </tr>

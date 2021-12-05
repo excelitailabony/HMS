@@ -1,6 +1,14 @@
 @extends('layouts.admin_master')
 
 @section('super-admin-content')
+    <style>
+        .iconCenter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
     <div class="page-content">
         <div class="container-fluid">
 
@@ -37,33 +45,61 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
-                            <p>Doctors</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-md fa-2x" style="color:#626ed4;"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Doctors</p>
+                                    Total: <b>{{ $doctors }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-success"></i>
-                            <p>Patients</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-injured fa-2x text-success"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Patients</p>
+                                    Total: <b>{{ $patients }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-primary"></i>
-                            <p>Acountant</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-tie fa-2x text-secondary"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Receptionist</p>
+                                    Total: <b>{{ $receptionist }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-secondary"></i>
-                            <p>Patient</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-tag fa-2x text-warning"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Pharmacist</p>
+                                    Total: <b>{{ $pharmacist }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,33 +108,59 @@
             <div class="row">
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-info"></i>
-                            <p>laboratorist</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-nurse fa-2x text-info"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Nurse</p>
+                                    Total: <b>{{ $nurses }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-success text-danger"></i>
-                            <p>Receptionist</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-secret text-danger fa-2x"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Laboratorist</p>
+                                    Total: <b>{{ $laboratorist }}</b>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x text-warning"></i>
-                            <p>Pharmacist</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Doctors</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
-                        <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
-                            <p>Nurse</p>
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-3 iconCenter">
+                                    <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
+                                </div>
+                                <div class="col-9">
+                                    <p>Doctors</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

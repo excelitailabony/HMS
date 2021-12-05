@@ -52,11 +52,15 @@ Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->n
 
 
 // Admin Login View
-Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('super_admin.home');
-})->name('dashboard');
+// Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
+//     return view('super_admin.home');
+// })->name('dashboard');
+
+route::get('admin/dashboard',[AdminController::class,'DashboardView']);
 
 
+
+// frontend dashboard
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
