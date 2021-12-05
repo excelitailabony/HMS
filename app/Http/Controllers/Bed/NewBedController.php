@@ -152,7 +152,7 @@ class NewBedController extends Controller
         {
             $student = new NewBed;
             $student->bed = $request->input('bed');
-            $student->bed_type_id = $request->input('bed_type_id');
+            $student->new_bed_type_id = $request->input('bed_type_id');
             $student->charge = $request->input('charge');
             $student->description = $request->input('description');
             $student->save();
@@ -206,7 +206,7 @@ class NewBedController extends Controller
                 if($student)
                 {
                     $student->bed = $request->input('bed');
-                    $student->bed_type_id = $request->input('bed_type_id');
+                    $student->new_bed_type_id = $request->input('bed_type_id');
                     $student->charge = $request->input('charge');
                     $student-> description= $request->input('description');
                     $student->update();

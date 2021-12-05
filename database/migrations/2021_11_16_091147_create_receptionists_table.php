@@ -23,7 +23,7 @@ class CreateReceptionistsTable extends Migration
             $table->string('sex');
             $table->date('dob');
             $table->integer('age');
-            $table->string('bloodgrp');
+            $table->string('blood_group');
             $table->string('image')->nullable();
             $table->timestamps();
         });

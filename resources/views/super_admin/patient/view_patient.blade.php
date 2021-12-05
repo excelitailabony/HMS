@@ -100,7 +100,7 @@
                                                     <input class="form-check-input gender1" type="radio" name="gender"
                                                             value="male">Male
                                                             <input class="form-check-input gender1" type="radio" name="gender" 
-                                                             value="female">Female
+                                                             value="female">Female<br>
                                                     <span id="error_gender" class="errorColor"></span>
                                                 </div>
                                             </div>
@@ -208,7 +208,7 @@
                                                 <div class="form-group">
                                                     <label>Phone</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter phone number" name="phone" id="phone">
+                                                        placeholder="Enter phone number" name="phone"  id="phone">
                                                         <span id="error_phoneedit" class="errorColor"></span>
                                                 </div>
                                             </div>
@@ -216,13 +216,13 @@
                                                 <div class="form-group">
                                                     <label>Sex</label><br>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="gender"
+                                                        <input class="form-check-input" type="radio" name="gender1"
                                                             id="inlineRadio1" value="male">
                                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         <span id="error_maleedit" class="errorColor"></span>
                                                     </div>
                                                     <div class="form-check form-check-inline">
-                                                        <input class="form-check-input" type="radio" name="gender"
+                                                        <input class="form-check-input" type="radio" name="gender1"
                                                             id="inlineRadio2" value="female">
                                                         <label class="form-check-label"
                                                             for="inlineRadio2">Female</label>
@@ -249,7 +249,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Blood Group</label>
-                                                    <select name="blood_group" id="blood_group" class="form-control"
+                                                    <select name="bloodgrp" id="bloodgrp" class="form-control"
                                                         required="">
                                                         <option value="" selected="" disabled="">Select Blood group
                                                         </option>
@@ -269,7 +269,7 @@
                                                 <div class="form-group">
                                                     <label>Image</label>
                                                     <input type="file" class="form-control"
-                                                        placeholder="Enter your image" name="image"
+                                                        placeholder="Enter your image" name="image" id="image"
                                                         onChange="mainThamUrl(this)">
                                                 </div>
                                             </div>
@@ -318,13 +318,17 @@
 
 
                                         <tbody>
-                                            @foreach ($patients as $patient)
+                                            
+                                     @foreach ($patients as $patient)  
+
                                                 <tr>
                                                     <td>{{ $patient->id }}</td>
                                                     <td>{{ $patient->name }}
                                                     </td>
-                                                    <td><img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
-                                                            alt="" style="width: 80px;">
+                                                    <td>
+                                                        <img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
+                                                        alt="" style="width: 80px;">
+  
                                                     </td>
                                                     <td>{{ $patient->email }}</td>
                                                     <td>{{ $patient->phone }}</td>
@@ -367,10 +371,9 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "/edit-patient/" + patient_id,
+                    url: "/patient/edit-patient/" + patient_id,
                     success: function(response) {
-                        // console.log(response.patient);
-                   
+
                         $('#patient_id').val(response.patient.id);
                         $('#name').val(response.patient.name);
                         $('#email').val(response.patient.email);
@@ -380,28 +383,24 @@
                         $('#gender').val(response.patient.sex);
                         $('#dob').val(response.patient.dob);
                         $('#age').val(response.patient.age);
-                        $('#blood_group').val(response.patient.blood_group);
+                        $('#bloodgrp').val(response.patient.blood_group);
 
                         if (response.patient.sex == 'male') {
-                            $('#editModal').find(':radio[name=gender][value="male"]').prop(
+                            $('#editModal').find(':radio[name=gender1][value="male"]').prop(
                                 'checked', true);
                         } else {
-                            $('#editModal').find(':radio[name=gender][value="female"]').prop(
+                            $('#editModal').find(':radio[name=gender1][value="female"]').prop(
                                 'checked', true);
                         }
                     }
                 })
             });
-        });
-    </script>
-    <script>
-        var loadFile = function(event) {
+            // for image show
+            var loadFile = function(event) {
             var image = document.getElementById('output');
             image.src = URL.createObjectURL(event.target.files[0]);
         };
-    </script>
-    {{-- edit img --}}
-    <script>
+        // for image show
         function mainThamUrl(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -411,21 +410,19 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
-    <script>
-        $(document).ready(function () {
-            $.ajaxSetup({
+        // for add
+        $.ajaxSetup({
                      headers: {
                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                      }
                  });
-            $(document).on('submit', '#AddEmployeeFORM', function (e) {
+        $(document).on('submit', '#AddEmployeeFORM', function (e) {
                  e.preventDefault();
                  let formData=new FormData($('#AddEmployeeFORM')[0]);
               
              $.ajax({
                type:"POST",
-               url: "/store/patient",
+               url: "/patient/store",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -441,8 +438,6 @@
                     $('#error_dob').text(response.errors.dob);
                     $('#error_age').text(response.errors.age);
                     $('#error_blood_group').text(response.errors.blood_group);
-                    this.reset();
-                    alert('Image has been uploaded successfully');
                   }
                   else if(response.status ==200)
                   {
@@ -453,15 +448,15 @@
                 }
                  });
             });
-
+            // for update
 
             $(document).on('submit', '#EditEmployeeFORM', function (e) {
                  e.preventDefault();
                  let formData=new FormData($('#EditEmployeeFORM')[0]);
               
              $.ajax({
-               type:"POST",
-                url: "/update-patient",
+                type:"POST",
+                url: "/patient/update",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -470,15 +465,12 @@
                   {
                     $('#error_nameedit').text(response.errors.name);
                     $('#error_emailedit').text(response.errors.email);
-                    // $('#error_passwordedit').text(response.errors.password);
                     $('#error_addressedit').text(response.errors.address);
                     $('#error_phoneedit').text(response.errors.phone);
-                    $('#error_genderedit').text(response.errors.gender);
+                    $('#error_genderedit').text(response.errors.gender1);
                     $('#error_dobedit').text(response.errors.dob);
                     $('#error_ageedit').text(response.errors.age);
-                    $('#error_blood_groupedit').text(response.errors.blood_group);
-                    // this.reset();
-                    // alert('Image has been uploaded successfully');
+                    $('#error_blood_groupedit').text(response.errors.bloodgrp);
                   }
                   else if(response.status ==200)
                   {
@@ -489,9 +481,6 @@
                 }
                  });
             });
-// nhjdfgvn
-
-
         });
-         </script>
+    </script>
 @endsection

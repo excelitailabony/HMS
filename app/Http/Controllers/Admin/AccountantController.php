@@ -6,183 +6,193 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Accountant;
 use Image;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 
 class AccountantController extends Controller
 {
-    //View
-    public function AccountantView(){
+   // method for all patient data 
+   public function AccountantView(){
+   $patients = Accountant::latest()->get();
+   return view('super_admin.accountant.view_accountant',compact('patients'));
+   }
 
-        $accountants=  Accountant::orderBy('id', 'DESC')->get();
-    
-        return View('super_admin.accountant.view_accountant', compact('accountants'));
-    
-        }// end method
+    // method for storing patient data
+    public function AccountantStore(Request $request){
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:100',
+            'email' => 'required|unique:accountants|email',
+            'password' => [
+                        'required',
+                        Password::min(8)
+                        ->letters()
+                        ->numbers()
+                    ],
+            'address' => 'required',
+            'phone' => 'required|numeric|digits_between: 1,11',
+            'dob' => 'required',
+            'blood_group' => 'required',
+            'gender' => 'required',
+            'age' => 'required|numeric',
 
-           // store Accountant
-  public function AccountantStore(Request $request){   
-      
-    // validation 
-        $request->validate([
-            'name' => 'required', 
-            'email' => 'required', 
-            'password' => 'required', 
-            'address' => 'required', 
-            'phone' => 'required',  
-            'sex' => 'required', 
-            'dob' => 'required',     
-            'age' => 'required', 
-            'bloodgrp' => 'required',        
-            'image' => 'required',       
-          ]);
-          // img upload and save
-          $image = $request->file('image');
-          $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-          Image::make($image)->resize(300,300)->save('upload/accountant/'.$name_gen);
-          $save_url = 'upload/accountant/'.$name_gen;
+        ]);
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages()
+            ]);
+        }
+        else{
+        
+              if ($request->file('image')) {
+              $patient=new Accountant;
+              $patient->name=$request->input('name');
+              $patient->email=$request->input('email');
+              $patient->password=$request->input('password');
+              $patient->address=$request->input('address');
+              $patient->phone=$request->input('phone');
+              $patient->sex=$request->input('gender');
+              $patient->dob=$request->input('dob');
+              $patient->age=$request->input('age');
+              $patient->blood_group=$request->input('blood_group');
+              $file = $request->file('image');
+              $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+              Image::make($file)->resize(300,300)->save('uploads/accountant/'.$extension);
+              $save_url = 'uploads/accountant/'.$extension;
+              $patient->image= $save_url;
+              $patient->save();
+              return response()->json([
+                'status'=>200,
+                'message'=>'Accountant Added Successfully.'
+            ]);
+            }
+            else{
 
-       // Accountant Insert    
-       Accountant::insert([
+            
+              $patient=new Accountant;
+              $patient->name=$request->input('name');
+              $patient->email=$request->input('email');
+              $patient->password=$request->input('password');
+              $patient->address=$request->input('address');
+              $patient->phone=$request->input('phone');
+              $patient->sex=$request->input('gender');
+              $patient->dob=$request->input('dob');
+              $patient->age=$request->input('age');
+              $patient->blood_group=$request->input('blood_group');
+              $patient->image = 'uploads/accountant/check.jpg';
+              $patient->save();
+              return response()->json([
+                'status'=>200,
+                'message'=>'Accountant Added Successfully.'
+            ]);
+          }
+        }
+    }
 
-           'name' => $request->name,   
-           'email' => $request->email,
-           'password' => $request->password, 
-           'address' => $request->address, 
-           'phone' => $request->phone, 
-           'sex' => $request->sex, 
-           'dob' => $request->dob, 
-           'age' => $request->age, 
-           'bloodgrp' => $request->bloodgrp,            
-           'image' => $save_url,  
-
-          ]); 
-
-          $notification = array(
-            'message' =>  'Accountant Added Sucessyfuly',
-            'alert-type' => 'success'
-        ); 
-
-
-        return Redirect()->back()->with($notification);        
-
-  } // end method 
-
-  // method for editing accountant data
+  // method for editing patient data
   public function AccountEdit($id){
-    $accountant = Accountant::find($id);
-    return response()->json([
-        'status' =>200,
-        'accountant' => $accountant,
-    ]);
-}
+      $patient = Accountant::find($id);
+      return response()->json([
+          'status' =>200,
+          'patient' => $patient,
+      ]);
+  }
 
+  // method for updating data
+  public function AccountUpdate(Request $request){
 
+      $validator = Validator::make($request->all(), [
+          'name' => 'required|max:100',
+          'email' => 'required|email',
+          'address' => 'required',
+          'phone' => 'required|numeric|digits_between: 1,11',
+          'dob' => 'required',
+          'bloodgrp' => 'required',
+          'gender1' => 'required',
+          'age' => 'required|numeric',
 
- // method for updating data
- public function AccountUpdate(Request $request){
-  $old_img  = $request->old_image;
+      ]);
+      if($validator->fails())
+      {
+          return response()->json([
+              'status'=>400,
+              'errors'=>$validator->messages()
+          ]);
+      }
+      else
+      {
+          if ($request->file('image')) {
+              $old_img  = $request->old_image;
+              unlink($old_img);
+              $file = $request->file('image');
+              $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+              Image::make($file)->resize(300,300)->save('uploads/accountant/'.$extension);
+              $save_url = 'uploads/accountant/'.$extension;
 
-  if ($request->file('image')) {
+              $patient_id=$request->input('patient_id');
+              $patient = Accountant::find($patient_id);
+              $patient->name = $request->input('name');
+              $patient->email=$request->input('email');
+              $patient->address=$request->input('address');
+              $patient->phone=$request->input('phone');
+              $patient->sex=$request->input('gender1');
+              $patient->dob=$request->input('dob');
+              $patient->age=$request->input('age');
+              $patient->image=$save_url;
+              $patient->blood_group=$request->input('bloodgrp');
+              $patient->update();
+              return response()->json([
+                  'status'=>200,
+                  'message'=>'Accountant Updated Successfully.'
+              ]);
+            }  
+            else{
+            $patient_id=$request->input('patient_id');
+            $patient = Accountant::find($patient_id);
+            $patient->name = $request->input('name');
+            $patient->email=$request->input('email');
+            $patient->address=$request->input('address');
+            $patient->phone=$request->input('phone');
+            $patient->sex=$request->input('gender1');
+            $patient->dob=$request->input('dob');
+            $patient->age=$request->input('age');
+            $patient->blood_group=$request->input('bloodgrp');
+            $patient->update();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Accountant Updated Successfully.'
+            ]);
+           }
+      } 
 
-    unlink($old_img);
-    $image = $request->file('image');
-    $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-    Image::make($image)->resize(300,300)->save('upload/accountant/'.$name_gen);
-    $save_url = 'upload/accountant/'.$name_gen;
-  
-   
-// image
-  $accountant_id=$request->input('accountant_id');
-  $accountant =Accountant::find($accountant_id);
-  $accountant->name=$request->name;
-  $accountant->email=$request->email;
-  $accountant->password=$request->password;
-  // $accountant->address=$request->address;
-  // $accountant->phone=$request->phone;
-  $accountant->sex=$request->sex;
-  $accountant->dob=$request->dob;
-  $accountant->age=$request->age;
-  $accountant->bloodgrp=$request->bloodgrp;
-  $accountant->image=$save_url;
-  $accountant->update();
+  }
 
-   $notification=array(
-      'message'=>'Accountant Updated Success',
-      'alert-type'=>'success'
-  );
+  // method for deleting patient data
+  public function AccountDelete($id){
 
-  return Redirect()->back()->with($notification);
-}
-else{
-  $accountant_id=$request->input('accountant_id');
-  $accountant =Accountant::find($accountant_id);
-  $accountant->name=$request->name;
-  $accountant->email=$request->email;
-  $accountant->password=$request->password;
-  // $accountant->address=$request->address;
-  // $accountant->phone=$request->phone;
-  $accountant->sex=$request->sex;
-  $accountant->dob=$request->dob;
-  $accountant->age=$request->age;
-  $accountant->bloodgrp=$request->bloodgrp;
+      $patient = Accountant::findOrFail($id);
+      if($patient->image){
+          $img = $patient->image;
+          unlink($img);
+      }
 
-  $accountant->update();
-
-   $notification=array(
-      'message'=>'Accountant Updated Success',
-      'alert-type'=>'success'
-  );
-
-  return Redirect()->back()->with($notification);
-}
-}
-// delete
-public function AccountDelete($id){
-
-  $accountant = Accountant::findOrFail($id);
-
-            $img = $accountant->image;
-            unlink($img);  
-            Accountant::findOrFail($id)->delete(); 
-            return redirect()->back();
-
- 
-}
-  // Accountant deactive
-  public function AccountantDeactive($id){
-    Accountant::findOrFail($id)->update([
-        'status' => 0, 
+      Accountant::findOrFail($id)->delete();
+      $notification = array(
+          'message' =>  'Accountant Deleted Sucessyfully',
+          'alert-type' => 'info'
+      ); 
+      return redirect()->back()->with($notification);
+     } 
+  public function changeStatus(Request $request){
     
-       ]);
-       $notification = array(
-        'message' =>  'Accountant Deactivated Successfully',
-        'alert-type' => 'info'
-    ); 
+        $patient = Accountant::find($request->id);
+        $patient->status = $request->status;
+        $patient->save();
 
-    return redirect()->back()->with($notification);
-
-}
-// accountant active
-public function AccountantActive($id){
-  Accountant::findOrFail($id)->update([
-        'status' => 1, 
-    
-       ]);
-       $notification = array(
-        'message' =>  'Accountant Activated Successfully',
-        'alert-type' => 'info'
-    ); 
-
-    return redirect()->back()->with($notification);
-
-}
-public function changeStatus(Request $request)
-    {
-        $user = Accountant::find($request->id);
-        $user->status = $request->status;
-        $user->save();
-  
         return response()->json(['success'=>'Status change successfully.']);
     }
+
 
 
 }

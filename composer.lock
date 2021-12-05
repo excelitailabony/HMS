@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2b082f0143a7a2aedbdb394517239af",
+    "content-hash": "5a26bf0880e82a3eb03086a3c86975d1",
     "packages": [
+        {
+            "name": "a6digital/laravel-default-profile-image",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/socialityio/laravel-default-profile-image.git",
+                "reference": "92f46d2f72100959e549b50ba1bc34270dc47d98"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/socialityio/laravel-default-profile-image/zipball/92f46d2f72100959e549b50ba1bc34270dc47d98",
+                "reference": "92f46d2f72100959e549b50ba1bc34270dc47d98",
+                "shasum": ""
+            },
+            "require": {
+                "intervention/image": "2.*",
+                "php": ">=5.4.0"
+            },
+            "type": "laravel-library",
+            "autoload": {
+                "psr-0": {
+                    "A6digital\\Image": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hasan Toprakkaya",
+                    "email": "hasan@a6digital.com"
+                }
+            ],
+            "description": "Laravel package to create default profile image using name of user.",
+            "homepage": "https://github.com/a6digital/laravel-default-profile-image",
+            "keywords": [
+                "laravel default profile image"
+            ],
+            "support": {
+                "issues": "https://github.com/a6digital/laravel-default-profile-image/issues",
+                "source": "https://github.com/a6digital/laravel-default-profile-image"
+            },
+            "time": "2018-03-13T16:24:08+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",
@@ -2185,58 +2230,6 @@
             "time": "2021-10-20T02:27:35+00:00"
         },
         {
-            "name": "maddhatter/laravel-fullcalendar",
-            "version": "dev-develop",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/maddhatter/laravel-fullcalendar.git",
-                "reference": "27833d37aafe9b87698dd3ac20d4d2f54b48caab"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/maddhatter/laravel-fullcalendar/zipball/27833d37aafe9b87698dd3ac20d4d2f54b48caab",
-                "reference": "27833d37aafe9b87698dd3ac20d4d2f54b48caab",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "MaddHatter\\LaravelFullcalendar\\ServiceProvider"
-                    ],
-                    "aliases": {
-                        "Calendar": "MaddHatter\\LaravelFullcalendar\\Facades\\Calendar"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "MaddHatter\\LaravelFullcalendar": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Shawn Tunney",
-                    "email": "shawn.tunney@gmail.com"
-                }
-            ],
-            "description": "Laravel helper for FullCalendar.io",
-            "support": {
-                "issues": "https://github.com/maddhatter/laravel-fullcalendar/issues",
-                "source": "https://github.com/maddhatter/laravel-fullcalendar/tree/develop"
-            },
-            "abandoned": true,
-            "time": "2021-01-09T01:22:33+00:00"
-        },
-        {
             "name": "mobiledetect/mobiledetectlib",
             "version": "2.8.37",
             "source": {
@@ -3649,6 +3642,61 @@
                 }
             ],
             "time": "2021-09-25T23:10:38+00:00"
+        },
+        {
+            "name": "staudenmeir/belongs-to-through",
+            "version": "v2.11.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/staudenmeir/belongs-to-through.git",
+                "reference": "32d03527163a3edd7f88e4b74b03575e4bdb5db7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/staudenmeir/belongs-to-through/zipball/32d03527163a3edd7f88e4b74b03575e4bdb5db7",
+                "reference": "32d03527163a3edd7f88e4b74b03575e4bdb5db7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3",
+                "scrutinizer/ocular": "^1.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Znck\\Eloquent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rahul Kadyan",
+                    "email": "hi@znck.me"
+                },
+                {
+                    "name": "Jonas Staudenmeir",
+                    "email": "mail@jonas-staudenmeir.de"
+                }
+            ],
+            "description": "Laravel Eloquent BelongsToThrough relationships",
+            "support": {
+                "issues": "https://github.com/staudenmeir/belongs-to-through/issues",
+                "source": "https://github.com/staudenmeir/belongs-to-through/tree/v2.11.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/JonasStaudenmeir",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-08-19T18:23:06+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

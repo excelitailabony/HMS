@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Admin\NurseController;
+use App\Http\Controllers\Nurse\NurseController;
 use App\Http\Controllers\Admin\AdminProfileController;
 
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
-use App\Http\Controllers\Admin\LaboratoristController;
+use App\Http\Controllers\Laboratorist\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
 use App\Http\Controllers\Pharmacist\PharmacistController;
 use App\Http\Controllers\Blood_Bank\BloodDonorController;
@@ -68,22 +68,22 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 // Nurse Start
 Route::prefix('nurse')->group(function () {
-Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
-Route::post('/add',[NurseController::class,'AddNurse'])->name('add.nurse');
-Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
-Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
-});
-Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse');
+  Route::get('/view',[NurseController::class,'ViewNurse'])->name('view.nurse');
+  Route::post('/add',[NurseController::class,'AddNurse'])->name('add.nurse');
+  Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
+  Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
+  Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse');
+  });
 // Nurse End
 
 //All pharmacist  
 Route::prefix('pharmacist')->group(function () {
-Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
-Route::post('/add',[PharmacistController::class,'AddPharmacist'])->name('add.pharmacist');
- Route::post('/update',[PharmacistController::class,'UpdatePharmacist'])->name('update.pharmacist');
-    Route::get('/delete/{id}',[PharmacistController::class,'DeletePharmacist'])->name('delete.pharmacist');
+  Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
+  Route::post('/add',[PharmacistController::class,'AddPharmacist'])->name('add.pharmacist');
+  Route::post('/update',[PharmacistController::class,'UpdatePharmacist'])->name('update.pharmacist');
+  Route::get('/delete/{id}',[PharmacistController::class,'DeletePharmacist'])->name('delete.pharmacist');
+  Route::get('edit-pharmacist/{id}',[PharmacistController::class,'EditPharmacist'])->name('edit.pharmacist');
  });
-Route::get('edit-pharmacist/{id}',[PharmacistController::class,'EditPharmacist'])->name('edit.pharmacist');
 //pharmacist end
 
 
@@ -99,58 +99,59 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 Route::get('admin/logout', [AdminController::class, 'loginForm'])->name('admin.logout');
 
 // Patients routes goes here
-Route::get('all/patient',[PatientController::class,'index'])->name('all.patient');
-Route::post('store/patient',[PatientController::class,'StorePatient'])->name('store.patient');
-Route::get('delete/patient/{id}',[PatientController::class,'DeletePatient'])->name('delete.patient');
+Route::prefix('patient')->group(function (){
+Route::get('/view',[PatientController::class,'index'])->name('all.patient');
+Route::post('/store',[PatientController::class,'StorePatient'])->name('store.patient');
+Route::get('delete/{id}',[PatientController::class,'DeletePatient'])->name('delete.patient');
 Route::get('edit-patient/{id}',[PatientController::class,'EditPatient'])->name('edit.patient');
-Route::post('update-patient',[PatientController::class,'UpdatePatient'])->name('update.patient');
+Route::post('/update',[PatientController::class,'UpdatePatient'])->name('update.patient');
+});
 
 
 // Doctors routes goes here
-Route::get('all/doctor',[DoctorController::class,'index'])->name('all.doctor');
-Route::post('store/doctor',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
-Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
-Route::put('update/doctor/{id}',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
-Route::get('delete/doctor/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
-Route::get('/patient/deactive/{id}', [DoctorController::class, 'DoctorDeactive'])->name('doctor.deactive'); 
-Route::get('/patient/active/{id}', [DoctorController::class, 'DoctorActive'])->name('doctor.active');
+Route::prefix('doctor')->group(function () {
+  Route::get('/all',[DoctorController::class,'index'])->name('all.doctor');
+  Route::post('/store',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
+  Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
+  Route::put('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
+  Route::get('/delete{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+});// Accountant All Route Group End 
 
 // Accountant Start
-// Route::prefix('accountant')->group(function () {
-    Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
-    Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
-    Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
-    Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
-    Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
-    Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
-    // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
-    // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
+Route::prefix('accountant')->group(function () {
+  Route::get('/view', [AccountantController::class, 'AccountantView'])->name('all.accountant'); 
+  Route::post('/add', [AccountantController::class, 'AccountantStore'])->name('accountant.add'); 
+  Route::get('edit-accountant/{id}', [AccountantController::class, 'AccountEdit']); 
+  Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
+  Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
+  Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
+  // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
+  // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
      
-//   });// Admin Brand All Route Group End 
+  });// Admin Brand All Route Group End 
+
 // Labroatorist Start
 Route::prefix('laboratorist')->group(function () {
     Route::get('/view', [LaboratoristController::class, 'LaboratoristView'])->name('all.laboratorist'); 
     Route::post('/add', [LaboratoristController::class, 'LaboratoristStore'])->name('laboratorist.add'); 
     Route::get('edit-laboratorist/{id}', [LaboratoristController::class, 'LaboratoristEdit']); 
     Route::post('/update', [LaboratoristController::class, 'LaboratoristUpdate'])->name('laboratorist.update');
-    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete'); 
-   
-     
-  });// Admin Brand All Route Group End 
+    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete');     
+  });
+  // Admin  Labroatorist Route Group End
+
 //    Receptionist Start
-  Route::prefix('receptionist')->group(function () {
-      Route::get('/view', [ReceptionistController::class, 'ReceptionistView'])->name('all.receptionist'); 
-      Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
-      Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
-      Route::put('/update/{id}', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
-      Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
-     
-       
+Route::prefix('receptionist')->group(function () {
+    Route::get('/view', [ReceptionistController::class, 'ReceptionistView'])->name('all.receptionist'); 
+    Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
+    Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
+    Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
+    Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
     });// Admin Brand All Route Group End 
 
 
-  //Blood Issue
-  Route::prefix('blood')->group(function () {
+  // Blood Issue
+   Route::prefix('blood')->group(function () {
         Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');  
         Route::get('/donor/group/{donor_id}', [BloodIssueController::class, 'BloodDonorGroup']);
         Route::post('/issue/store', [BloodIssueController::class, 'BloodIssueStore'])->name('blood_issue.store');
@@ -212,7 +213,7 @@ Route::prefix('NewBed')->group(function () {
 // New Bed Start
 Route::prefix('BedAssign')->group(function () {
   Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed'); 
-  // Route::post('/add', [NewBedController::class, 'NewBedStore'])->name('newbed.add'); 
+  Route::post('/add', [BedAssignController::class, 'BedAssignStore']); 
   // Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
   // Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
   // Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
@@ -304,7 +305,7 @@ Route::prefix('Record')->group(function () {
   Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
   Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
 }); 
-Route::get('/check', [CheckController::class, 'index']);
+
 
 
 

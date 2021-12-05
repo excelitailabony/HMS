@@ -23,7 +23,7 @@ class CreateAccountantsTable extends Migration
             $table->string('sex');
             $table->string('dob');
             $table->string('age');
-            $table->string('bloodgrp');
+            $table->string('blood_group');
             $table->string('image')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();

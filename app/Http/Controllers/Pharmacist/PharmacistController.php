@@ -5,136 +5,185 @@ namespace App\Http\Controllers\Pharmacist;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pharmacist;
-use Image;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Image; 
+use Illuminate\Validation\Rules\Password;
 class PharmacistController extends Controller
 {
-    //view pharmacist info
-    public function ViewPharmacist(){
-        $pharmacists=Pharmacist::all();
-        return view('admin.pharmacist.view_pharmacist',compact('pharmacists'));
-        
-    }//end method
+    // method for all patient data 
+public function ViewPharmacist(){
+    $patients = Pharmacist::latest()->get();
 
-    //add pharmacist info
-    public function AddPharmacist(Request $request){
-         // validation 
-         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required', 
-            'password' => 'required',  
-            'image' => 'required',      
-          ],[ 
-            'name.required' => 'Input Nurse name',
-            'email.required' => 'Input nurse email',
-            'phone.required' => 'Input nurse phone ',
-            'password.required' => 'Input nurse password',
-            'image.required' => 'Input nurse image',
-          ]);
+    return view('super_admin.pharmacist.view_pharmacist',compact('patients'));
+}
 
-        // img upload and save
-        $image = $request->file('image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(50,50)->save('upload/pharmacist/'.$name_gen);
-        $save_url = 'upload/pharmacist/'.$name_gen;
+// method for storing patient data
+public function AddPharmacist(Request $request){
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:100',
+        'email' => 'required|unique:receptionists|email',
+        'password' => [
+                    'required',
+                    Password::min(8)
+                    ->letters()
+                    ->numbers()
+                ],
+        'address' => 'required',
+        'phone' => 'required|numeric|digits_between: 1,11',
+        'dob' => 'required',
+        'blood_group' => 'required',
+        'gender' => 'required',
+        'age' => 'required|numeric',
 
-        $PharmacistInfo=new Pharmacist();
-        $PharmacistInfo->name=$request->name;
-        $PharmacistInfo->email=$request->email;
-        $PharmacistInfo->phone=$request->phone;
-        $PharmacistInfo->password=$request->password;
-        $PharmacistInfo->address=$request->address;
-        $PharmacistInfo->sex=$request->sex;
-        $PharmacistInfo->dob=$request->dob;
-        $PharmacistInfo->age=$request->age;
-        $PharmacistInfo->blood_group=$request->blood_group;
-        $PharmacistInfo->image= $save_url;
-        $PharmacistInfo->save();
-        return redirect()->back()->with('message','Pharmacist info added successfully');
-    }//end method
-
-    // method for editing pharmacist data
-    public function EditPharmacist($id){
-        $pharmacist = Pharmacist::find($id);
+    ]);
+    if($validator->fails())
+    {
         return response()->json([
-            'status' =>200,
-            'pharmacist' => $pharmacist,
+            'status'=>400,
+            'errors'=>$validator->messages()
         ]);
-    }//end method
+    }
+    else{
+     
+        if ($request->file('image')) {
+        $patient=new Pharmacist;
+        $patient->name=$request->input('name');
+        $patient->email=$request->input('email');
+        $patient->password=$request->input('password');
+        $patient->address=$request->input('address');
+        $patient->phone=$request->input('phone');
+        $patient->sex=$request->input('gender');
+        $patient->dob=$request->input('dob');
+        $patient->age=$request->input('age');
+        $patient->blood_group=$request->input('blood_group');
+            $file = $request->file('image');
+            $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+            Image::make($file)->resize(300,300)->save('uploads/pharmacist/'.$extension);
+            $save_url = 'uploads/pharmacist/'.$extension;
+            $patient->image= $save_url;
+        $patient->save();
+        return response()->json([
+           'status'=>200,
+           'message'=>'pharmacist Added Successfully.'
+       ]);
+    }
+    else{
 
-    //uplodad image
-    protected function uploadImage($request){
-        $image = $request->file('image');
-       $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-       Image::make($image)->resize(50,50)->save('upload/nurse/'.$name_gen);
-       $save_url = 'upload/pharmacist/'.$name_gen;
-       return $save_url;
-   }//end method
-
-
-   //update nurse info with image
-   protected function updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url){
-       $pharmacistInfo->name=$request->name;
-       $pharmacistInfo->email=$request->email;
-       $pharmacistInfo->phone=$request->phone;
-       $pharmacistInfo->password=$request->password;
-       $pharmacistInfo->address=$request->address;
-       $pharmacistInfo->sex=$request->sex;
-       $pharmacistInfo->dob=$request->dob;
-       $pharmacistInfo->age=$request->age;
-       $pharmacistInfo->blood_group=$request->blood_group;
-       $pharmacistInfo->image= $save_url;
-       $pharmacistInfo->save();
-   }//end method
-
-
-   //update nurse info without image
-   protected function updatePharmacistINfoWithOutImage($pharmacistInfo,$request){
-       $pharmacistInfo->name=$request->name;
-       $pharmacistInfo->email=$request->email;
-       $pharmacistInfo->phone=$request->phone;
-       $pharmacistInfo->password=$request->password;
-       $pharmacistInfo->address=$request->address;
-       $pharmacistInfo->sex=$request->sex;
-       $pharmacistInfo->dob=$request->dob;
-       $pharmacistInfo->age=$request->age;
-       $pharmacistInfo->blood_group=$request->blood_group;
-   }//end method
-
-   //update nurse info
-   public function UpdatePharmacist(Request $request){
-       $pharmacistInfo=Pharmacist::find($request->pharmacist_id);
-       $old_image=$pharmacistInfo->image;
-
-       if($request->file('image')){
-           @unlink($old_image);
-            //image upload
-           $save_url=$this->uploadImage($request);
-       //update data with image
-           $this->updatePharmacistInfoWithImage($pharmacistInfo,$request,$save_url);
       
-       
-       return redirect()->back()->with('message','pharmacist info updated successfully');
+        $patient=new Pharmacist;
+        $patient->name=$request->input('name');
+        $patient->email=$request->input('email');
+        $patient->password=$request->input('password');
+        $patient->address=$request->input('address');
+        $patient->phone=$request->input('phone');
+        $patient->sex=$request->input('gender');
+        $patient->dob=$request->input('dob');
+        $patient->age=$request->input('age');
+        $patient->blood_group=$request->input('blood_group');
+        $patient->save();
+        return response()->json([
+           'status'=>200,
+           'message'=>'Pharmacist Added Successfully.'
+       ]);
+    }
+    }
+}
 
-       } else{
-           //update data without image
-           $this->updatePharmacistINfoWithOutImage($pharmacistInfo,$request);
-          
-       $pharmacistInfo->save();
-       return redirect()->back()->with('message','pharmacist info updated successfully');
+// method for editing patient data
+public function EditPharmacist($id){
+    $patient = Pharmacist::find($id);
+    return response()->json([
+        'status' =>200,
+        'patient' => $patient,
+    ]);
+}
 
-       }
-   }//end method
+// method for updating data
+public function UpdatePharmacist(Request $request){
 
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:100',
+        'email' => 'required|email',
+        'address' => 'required',
+        'phone' => 'required|numeric|digits_between: 1,11',
+        'dob' => 'required',
+        'bloodgrp' => 'required',
+        'gender1' => 'required',
+        'age' => 'required|numeric',
 
-   //delete nurse info
-   public function DeletePharmacist($id){
-        $pharmacist=Pharmacist::find($id);
-        $image=$pharmacist->image;
-        unlink($image);
-        $pharmacist->delete();
-        return redirect()->back();
-    }//end method
+    ]);
+    if($validator->fails())
+    {
+        return response()->json([
+            'status'=>400,
+            'errors'=>$validator->messages()
+        ]);
+    }
+    else
+    {
+        if ($request->file('image')) {
+            $old_img  = $request->old_image;
+            unlink($old_img);
+            $file = $request->file('image');
+            $extension = hexdec(uniqid()).'.'.$file->getClientOriginalExtension();
+            Image::make($file)->resize(300,300)->save('uploads/pharmacist/'.$extension);
+            $save_url = 'uploads/pharmacist/'.$extension;
+
+            $patient_id=$request->input('patient_id');
+            $patient = Pharmacist::find($patient_id);
+            $patient->name = $request->input('name');
+            $patient->email=$request->input('email');
+            $patient->address=$request->input('address');
+            $patient->phone=$request->input('phone');
+            $patient->sex=$request->input('gender1');
+            $patient->dob=$request->input('dob');
+            $patient->age=$request->input('age');
+            $patient->image=$save_url;
+            $patient->blood_group=$request->input('bloodgrp');
+            $patient->update();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Pharmacist Updated Successfully.'
+            ]);
+    }  
+    else{
+        $patient_id=$request->input('patient_id');
+        $patient = Pharmacist::find($patient_id);
+
+        $patient->name = $request->input('name');
+        $patient->email=$request->input('email');
+        $patient->address=$request->input('address');
+        $patient->phone=$request->input('phone');
+        $patient->sex=$request->input('gender1');
+        $patient->dob=$request->input('dob');
+        $patient->age=$request->input('age');
+        $patient->blood_group=$request->input('bloodgrp');
+        $patient->update();
+        return response()->json([
+            'status'=>200,
+            'message'=>'Pharmacist Updated Successfully.'
+        ]);
+    }
+  } 
+
+}
+
+// method for deleting patient data
+ public function ReceptionistDelete($id){
+
+    $patient = Pharmacist::findOrFail($id);
+    if($patient->image){
+         $img = $patient->image;
+        unlink($img);
+    }
+
+    Pharmacist::findOrFail($id)->delete();
+    $notification = array(
+        'message' =>  'Receptionist Delete Sucessyfully',
+        'alert-type' => 'info'
+    ); 
+    return redirect()->back()->with($notification);
+} 
 
 }//main end
