@@ -233,7 +233,7 @@ class NewBedController extends Controller
 
             $newbed = NewBed::findOrFail($id);
             NewBed::findOrFail($id)->delete(); 
-                      return redirect()->back();
+            return redirect()->back();
           }//end method
       
     }

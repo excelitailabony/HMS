@@ -38,7 +38,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
                         <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x"></i>
+                            <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
                             <p>Doctors</p>
                         </div>
                     </div>
@@ -46,29 +46,63 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
                         <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x"></i>
-                            <p>Doctors</p>
+                            <i class="fas fa-user-alt fa-2x text-success"></i>
+                            <p>Patients</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
                         <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x"></i>
-                            <p>Doctors</p>
+                            <i class="fas fa-user-alt fa-2x text-primary"></i>
+                            <p>Acountant</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
                     <div class="card mini-stat">
                         <div class="card-body">
-                            <i class="fas fa-user-alt fa-2x"></i>
-                            <p>Doctors</p>
+                            <i class="fas fa-user-alt fa-2x text-secondary"></i>
+                            <p>Patient</p>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end row -->
+            <div class="row">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card mini-stat">
+                        <div class="card-body">
+                            <i class="fas fa-user-alt fa-2x text-info"></i>
+                            <p>laboratorist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card mini-stat">
+                        <div class="card-body">
+                            <i class="fas fa-user-alt fa-2x text-success text-danger"></i>
+                            <p>Receptionist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card mini-stat">
+                        <div class="card-body">
+                            <i class="fas fa-user-alt fa-2x text-warning"></i>
+                            <p>Pharmacist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card mini-stat">
+                        <div class="card-body">
+                            <i class="fas fa-user-alt fa-2x" style="color:#626ed4;"></i>
+                            <p>Nurse</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div> <!-- container-fluid -->
     </div>

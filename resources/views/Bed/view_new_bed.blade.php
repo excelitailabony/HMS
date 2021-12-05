@@ -126,7 +126,6 @@
                                         <input type="hidden" id="newbed_id" name="newbed_id">
 
                                         <div class="modal-body">
-
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label> Bed </label>
@@ -139,7 +138,6 @@
                                                     <input type="text" class="form-control" placeholder="Enter Bed Type"
                                                         id="charge">
                                                     <span id="error_chargeedit" class="errorColor"></span>
-
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -152,20 +150,16 @@
                                                             <option value="{{ $newbedtype->id }}">
                                                                 {{ $newbedtype->bed_types }}</option>
                                                         @endforeach
-
                                                     </select>
                                                     <span id="error_bed_typesedit" class="errorColor"></span>
-
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label> Description</label>
-                                                        {{-- <textarea class="form-control" id="description" name="description"></textarea> --}}
                                                         <input type="text" class="form-control" id="description">
                                                         <span id="error_descriptionedit" class="errorColor"></span>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -202,7 +196,7 @@
                                                     aria-label="Name: activate to sort column descending">Charge</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
-                                                    aria-label="Salary: activate to sort column ascending">Description</th>
+                                                    aria-label="Salary: activate to sort column ascending">Status</th>
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Actions</th>
@@ -216,7 +210,13 @@
                                                     <td>
                                                         {{ $newbed['newbed']['bed_types'] }} </td>
                                                     <td>{{ $newbed->charge }}</td>
-                                                    <td>{{ $newbed->description }}</td>
+                                                    <td>
+                                                        @if ($newbed->status == 0)
+                                                            <span class="badge bg-success">Available</span>
+                                                        @else
+                                                            <span class="badge bg-danger">Not Available</span>
+                                                        @endif
+                                                    </td>
                                                     <td>
                                                         <button type="button" value="{{ $newbed->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i

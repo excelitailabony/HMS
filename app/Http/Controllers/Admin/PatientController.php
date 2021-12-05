@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 
 class PatientController extends Controller
@@ -48,10 +49,11 @@ class PatientController extends Controller
             ]);
         }
         else{
+            $password = Hash::make($request->input('password'));
             $patient=new Patient;
             $patient->name=$request->input('name');
             $patient->email=$request->input('email');
-            $patient->password=$request->input('password');
+            $patient->password=$password;
             $patient->address=$request->input('address');
             $patient->phone=$request->input('phone');
             $patient->sex=$request->input('gender');
