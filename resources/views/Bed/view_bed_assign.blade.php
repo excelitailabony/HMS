@@ -12,9 +12,18 @@
             display: flex;
             justify-content: space-between;
         }
+
+
         .leftside table tbody tr td {
             text-align: left;
         }
+
+        .btn-info a {
+            text-decoration: none;
+            color: white;
+        }
+
+
     </style>
     <div class="container-full topBar">
 
@@ -24,11 +33,16 @@
                     <div class="card-body">
 
                         <h4 class="card-title text-center">Bed Allotment
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                data-bs-target="#addBedAllotment">
-                                Bed Allotment
-                            </button>
+                            <div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#addBedAllotment">
+                                    Bed Allotment
+                                </button>
+                                <button type="button" class="btn btn-info">
+                                    <a href="{{ route('bed.status') }}">Bed Status</a>
+                                </button>
+                            </div>
                         </h4>
 
                         <!-- AddModal -->
@@ -91,15 +105,16 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label>Discharged Time</label><span class="errorColor"> *</span>
-                                                    <input type="datetime-local" class="discharge_date_id form-control"
-                                                        id="discharge_date_id">
+                                                    <input type="datetime-local" class="discharge_date_id form-control">
+
                                                     <span id="error_discharge" class="errorColor"></span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Description<span class="errorColor"> *</span></label>
-                                                        <textarea class="description_id form-control"
-                                                            id="description_id"></textarea>
+
+                                                        <textarea class="description_id form-control"></textarea>
+
                                                         <span id="error_descriptionnn" class="errorColor"></span>
                                                     </div>
                                                 </div>
@@ -118,7 +133,88 @@
                         {{-- modal end --}}
 
                         <!-- Edit Modal -->
+                        <div class="modal fade bd-example-modal-lg" id="EditBedAllotment" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Bed Allotment</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
 
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" id="bed_assign_id" name="bed_assign_id">
+                                        <input type="hidden" id="old_bed_id" name="old_bed_id">
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Bed Name</label><span class="errorColor"> *</span>
+                                                    <select id="bed_name_id" required="" class="form-control"
+                                                        aria-invalid="false">
+                                                        <option value="" selected="" disabled="">Select Bed Name</option>
+                                                        @foreach ($newbednamesall as $newbednameall)
+                                                            <option value="{{ $newbednameall->id }}">
+                                                                {{ $newbednameall->bed }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Patient Name</label><span class="errorColor"> *</span>
+                                                    <select id="patient_name_id" required="" class="form-control"
+                                                        aria-invalid="false">
+                                                        <option value="" selected="" disabled="">Select Patient Name
+                                                        </option>
+                                                        @foreach ($patients as $patient)
+                                                            <option value="{{ $patient->id }}">
+                                                                {{ $patient->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Doctor Name</label><span class="errorColor"> *</span>
+                                                    <select required="" class="form-control" id="doctor_name_id"
+                                                        aria-invalid="false">
+                                                        <option value="" selected="" disabled="">Select Doctor Name</option>
+                                                        @foreach ($doctors as $doctor)
+                                                            <option value="{{ $doctor->id }}">
+                                                                {{ $doctor->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Allotment Time</label><span class="errorColor"> *</span>
+                                                    <input type="datetime-local" class="form-control"
+                                                        id="appointment_date_id">
+                                                    <span id="error_Allotment_edit" class="errorColor"></span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Discharged Time</label><span class="errorColor"> *</span>
+                                                    <input type="datetime-local" id="discharge_date_id"
+                                                        class="form-control" id="discharge_date_id">
+                                                    <span id="error_discharge_edit" class="errorColor"></span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Description<span class="errorColor"> *</span></label>
+                                                        <textarea class="description_id form-control"
+                                                            id="description_id"></textarea>
+                                                        <span id="error_descriptionnn_edit" class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-info update_bed_allotment">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         {{-- Edit  modal end --}}
 
                         <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer leftside">
@@ -173,36 +269,41 @@
                                                     <td>
                                                         <b>Doctor
                                                             Department:</b>{{ $bedallotment['doctor']['doc_dept'] }} <br>
-                                                        <b>Doctor Name:</b> {{ $bedallotment['doctor']['doc_dept'] }}
+
+                                                        <b>Doctor Name:</b> {{ $bedallotment['doctor']['name'] }}
+
                                                         <br>
                                                         <b>Phone:</b> {{ $bedallotment['doctor']['phone'] }} <br>
                                                         <b>email:</b> {{ $bedallotment['doctor']['email'] }} <br>
                                                         <b>Gender:</b> {{ $bedallotment['doctor']['sex'] }} <br>
                                                     </td>
                                                     @php
-                                                    $time = explode(' ', $bedallotment->allotment_time);
-                                                @endphp
-                                                <td>
-                                                    <b>Date:</b>{{ $time[0] }} <br>
-                                                    <b>Time:</b>{{ $time[1] }} <br>
-                                                </td>
-                                                @php
-                                                    $times = explode(' ', $bedallotment->discharge_time);
-                                                @endphp
-                                                <td>
-                                                    <b>Date:</b>{{ $times[0] }} <br>
-                                                    <b>Time:</b>{{ $times[1] }} <br>
-                                                </td>
+
+                                                        $time = explode(' ', $bedallotment->allotment_time);
+                                                    @endphp
+                                                    <td>
+                                                        <b>Date:</b>{{ $time[0] }} <br>
+                                                        <b>Time:</b>{{ $time[1] }} <br>
+                                                    </td>
+                                                    @php
+                                                        $times = explode(' ', $bedallotment->discharge_time);
+                                                    @endphp
+                                                    <td>
+                                                        <b>Date:</b>{{ $times[0] }} <br>
+                                                        <b>Time:</b>{{ $times[1] }} <br>
+                                                    </td>
+
                                                     <td>
                                                         <b>Description:</b>{{ $bedallotment->discription }}
                                                     </td>
 
 
-                                                    <td>
+                                                    <td class="text-center">
                                                         <button type="button" value="{{ $bedallotment->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
-                                                        <a href="{{ route('newbed.delete', $bedallotment->id) }}"
+                                                        <a href="{{ route('allotment.delete', $bedallotment->id) }}"
+
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -227,11 +328,12 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+
             // for adding data using ajax
             $(document).on('click', '.add_bed_allotment', function(e) {
                 e.preventDefault();
                 $(this).text('Sending..');
-                // var id = $('.patient_name_id').val();
+
                 var data = {
                     'bed_name_id': $('.bed_name_id').val(),
                     'patient_name_id': $('.patient_name_id').val(),
@@ -240,11 +342,13 @@
                     'discharge_date_id': $('.discharge_date_id').val(),
                     'description_id': $('.description_id').val(),
                 }
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $.ajax({
                     type: "POST",
                     url: "/BedAssign/add",
@@ -258,6 +362,7 @@
                             $('#error_Allotment').text(response.errors.appointment_date_id);
                             $('#error_discharge').text(response.errors.discharge_date_id);
                             $('#error_descriptionnn').text(response.errors.description_id);
+
                             $('.add_bed_allotment').text('Save');
                         } else {
                             $('#addBedAllotment').find('input').val('');
@@ -269,65 +374,81 @@
                     }
                 });
             });
-            // // for editing data using ajax
-            // $(document).on('click', '.editBtn', function() {
-            //     var newbed_id = $(this).val();
-            //     // alert(newbed_id);
-            //     $('#editModal').modal('show');
-            //     $.ajax({
-            //         type: "GET",
-            //         url: "/NewBed/edit-newbed/" + newbed_id,
-            //         success: function(response) {
-            //             //   console.log(response.newbed);
-            //             $('#newbed_id').val(response.newbed.id);
-            //             $('#bed').val(response.newbed.bed);
-            //             $('#bed_type_id').val(response.newbed.bed_type_id);
-            //             $('#charge').val(response.newbed.charge);
-            //             $('#description').val(response.newbed.description);
-            //         }
-            //     })
-            // });
-            // // for updating data using ajax
-            // $(document).on('click', '.update_bed', function(e) {
-            //     e.preventDefault();
-            //     $(this).text('Updating..');
-            //     var id = $('#newbed_id').val();
-            //     // alert(id);
-            //     var data = {
-            //         'bed': $('#bed').val(),
-            //         'bed_type_id': $('#bed_type_id').val(),
-            //         'charge': $('#charge').val(),
-            //         'description': $('#description').val(),
-            //     }
-            //     $.ajaxSetup({
-            //         headers: {
-            //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //         }
-            //     });
-            //     $.ajax({
-            //         type: "PUT",
-            //         url: "/NewBed/update/" + id,
-            //         data: data,
-            //         dataType: "json",
-            //         success: function(response) {
-            //             // console.log(response);
-            //             if (response.status == 400) {
-            //                 $('#error_bededit').text(response.errors.bed);
-            //                 $('#error_bed_typesedit').text(response.errors.bed_type_id);
-            //                 $('#error_chargeedit').text(response.errors.charge);
-            //                 $('#error_descriptionedit').text(response.errors.description);
-            //                 $('.update_bed').text('Update');
-            //             } else {
-            //                 $('#editModal').find('input').val('');
-            //                 $('.update_bed').text('Update');
-            //                 $('#editModal').modal('hide');
-            //                 toastr.success(response.message);
-            //                 // fetchstudent();
-            //                 location.reload();
-            //             }
-            //         }
-            //     });
-            // });
+
+            // for editing data using ajax
+            $(document).on('click', '.editBtn', function() {
+                var newbed_id = $(this).val();
+                // alert(newbed_id);
+                $('#EditBedAllotment').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "/BedAssign/edit/" + newbed_id,
+                    success: function(response) {
+                        // console.log(response.bedassign);
+                        $('#old_bed_id').val(response.bedassign.new_bed_id);
+                        $('#bed_assign_id').val(response.bedassign.id);
+                        $('#bed_name_id').val(response.bedassign.new_bed_id);
+                        $('#patient_name_id').val(response.bedassign.patient_id);
+                        $('#doctor_name_id').val(response.bedassign.doctor_id);
+                        $('#discharge_date_id').val(response.bedassign.allotment_time);
+                        $('#description_id').val(response.bedassign.discription);
+                    }
+                })
+            });
+
+            // for updating data using ajax
+            $(document).on('click', '.update_bed_allotment', function(e) {
+                e.preventDefault();
+
+                $(this).text('Updating..');
+
+                var id = $('#bed_assign_id').val();
+                // alert(id);
+
+                var data = {
+                    'bed': $('#bed_assign_id').val(),
+                    'old_bed': $('#old_bed_id').val(),
+                    'bed_name_id': $('#bed_name_id').val(),
+                    'patient_name_id': $('#patient_name_id').val(),
+                    'doctor_name_id': $('#doctor_name_id').val(),
+                    'appointment_date_id': $('#appointment_date_id').val(),
+                    'discharge_date_id': $('#discharge_date_id').val(),
+                    'description_id': $('#description_id').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/BedAssign/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        // console.log(response);
+                        if (response.status == 400) {
+                            $('#error_Allotment_edit').text(response.errors
+                                .appointment_date_id);
+                            $('#error_discharge_edit').text(response.errors.discharge_date_id);
+                            $('#error_descriptionnn_edit').text(response.errors.description_id);
+                            $('.update_bed_allotment').text('Update');
+                        } else {
+                            $('#EditBedAllotment').find('input').val('');
+                            $('.update_bed_allotment').text('Update');
+                            $('#EditBedAllotment').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+
+            });
+
+
         });
     </script>
 @endsection

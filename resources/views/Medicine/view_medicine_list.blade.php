@@ -54,8 +54,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Medicine List</h5>
-                                        <button style="-moz-user-focus{outline:none}; " type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button style="-moz-user-focus{outline:none}; " type="button" class="btn-close"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <form method="POST" enctype="multipart/form-data">
                                         @csrf
@@ -316,7 +316,6 @@
                                                         <img src="{{ asset($medicinelistt->image) }} "
                                                             class="rounded avatar-lg" height="80px;" width="80px;">
                                                     </td>
-
                                                     <td>{{ $medicinelistt->name }}</td>
                                                     <td>
                                                         {{ $medicinelistt['MedicineManufacture']['name'] }} </td>
@@ -324,20 +323,12 @@
                                                         {{ $medicinelistt['Medicinecategory']['name'] }} </td>
                                                     <td class="dtr-control sorting_1" tabindex="0">
                                                         {{ $medicinelistt['Medicinetype']['name'] }} </td>
-                                                    <td>
-                                                        {{-- <b>Price:</b> --}}
-                                                        <div class="row " style="text-align: center;">
-                                                            Price:{{ $medicinelistt->price }}</div>
-                                                        <div class="row">
-                                                            Quantity:{{ $medicinelistt->quantity }}</div>
-                                                        <div class="row">
-                                                            Expire_date:{{ $medicinelistt->expire_date }}
-                                                        </div>
-                                                        <div class="row">
-                                                            Description:{{ $medicinelistt->description }}
-                                                        </div>
+                                                    <td class="text-start">
+                                                        <b>Price:</b> {{ $medicinelistt->price }} <br>
+                                                        <b>Quantity:</b>{{ $medicinelistt->quantity }} <br>
+                                                        <b>Expire_date:</b>{{ $medicinelistt->expire_date }} <br>
+                                                        <b>Description:</b>{{ $medicinelistt->description }}
                                                     </td>
-
                                                     <td>
                                                         <button type="button" value="{{ $medicinelistt->id }}"
                                                             class="btn btn-success editBtn btn-sm">
@@ -372,10 +363,6 @@
 
                 e.preventDefault();
                 $(this).text('Sending..');
-
-                // var inputData = new FormData($(this)[0]);
-
-                // alert(id);
 
                 var data = {
                     'manufacture_id': $('.manufacture_id').val(),

@@ -19,10 +19,10 @@
         .modal-body .row .col-md-6 {
             margin-bottom: 1rem;
         }
+
         .errorColor {
             color: red;
         }
-
 
     </style>
 
@@ -42,10 +42,10 @@
 
                         <!-- Modal for add doctor -->
 
-                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
 
-              <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Add Doctor</h5>
@@ -163,7 +163,7 @@
                                                         <select name="blood_group" class="form-control blood_group"
                                                             required="">
 
-                                                       <option value="" selected="" disabled="">Select Blood group
+                                                            <option value="" selected="" disabled="">Select Blood group
                                                             </option>
                                                             <option value="A+">A+</option>
                                                             <option value="A-">A-</option>
@@ -203,9 +203,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-bs-dismiss="modal">Close</button>
-
                                             <button type="button" class="btn btn-primary add_doctor">Save</button>
-
                                         </div>
                                 </div>
                                 </form>
@@ -468,92 +466,92 @@
     <script>
         $(document).ready(function() {
 
-            $(document).on('click', '.editBtn', function() {
-                var doctor_id = $(this).val();
-                // alert(doctor_id);
-                $('#EditDoctor').modal('show');
+                    $(document).on('click', '.editBtn', function() {
+                        var doctor_id = $(this).val();
+                        // alert(doctor_id);
+                        $('#EditDoctor').modal('show');
 
-                $.ajax({
-                    type: "GET",
-                    url: "/edit-doctor/" + doctor_id,
-                    success: function(response) {
-                        console.log(response.doctor.blood_group);
-                        $('#doctor_id').val(response.doctor.id);
-                        $('#name').val(response.doctor.name);
-                        $('#email').val(response.doctor.email);
-                        $('#old_image').val(response.doctor.image);
-                        $('#address').val(response.doctor.address);
-                        $('#phone').val(response.doctor.phone);
-                        $('#gender').val(response.doctor.sex);
-                        $('#dob').val(response.doctor.dob);
-                        $('#age').val(response.doctor.age);
-                        $('#profile').val(response.doctor.profile);
-                        $('#doc_dept').val(response.doctor.doc_dept);
-                        $('#social_link').val(response.doctor.social_link);
-                        $('#blood_group').val(response.doctor.blood_group);
+                        $.ajax({
+                            type: "GET",
+                            url: "/edit-doctor/" + doctor_id,
+                            success: function(response) {
+                                console.log(response.doctor.blood_group);
+                                $('#doctor_id').val(response.doctor.id);
+                                $('#name').val(response.doctor.name);
+                                $('#email').val(response.doctor.email);
+                                $('#old_image').val(response.doctor.image);
+                                $('#address').val(response.doctor.address);
+                                $('#phone').val(response.doctor.phone);
+                                $('#gender').val(response.doctor.sex);
+                                $('#dob').val(response.doctor.dob);
+                                $('#age').val(response.doctor.age);
+                                $('#profile').val(response.doctor.profile);
+                                $('#doc_dept').val(response.doctor.doc_dept);
+                                $('#social_link').val(response.doctor.social_link);
+                                $('#blood_group').val(response.doctor.blood_group);
 
-                        if (response.doctor.sex == 'male') {
-                            $('#EditDoctor').find(':radio[name=gender][value="male"]').prop(
-                                'checked', true);
-                        } else {
-                            $('#EditDoctor').find(':radio[name=gender][value="female"]').prop(
-                                'checked', true);
+                                if (response.doctor.sex == 'male') {
+                                    $('#EditDoctor').find(':radio[name=gender][value="male"]').prop(
+                                        'checked', true);
+                                } else {
+                                    $('#EditDoctor').find(':radio[name=gender][value="female"]').prop(
+                                        'checked', true);
+                                }
+                            }
+                        })
+                    });
+
+                    // for adding data using ajax
+                    $('#form').on('submit', function(e) {
+                        e.preventDefault();
+
+
+                        var form = this;
+
+                        $(this).text('Sending..');
+                        var data = {
+                            'name': $('.name').val(),
+                            'email': $('.email').val(),
+                            'password': $('.password').val(),
+                            'address': $('.address').val(),
+                            'description': $('.description').val(),
+                            'phone': $('.phone').val(),
+                            'profile': $('.profile').val(),
+                            'doc_dept': $('.doc_dept').val(),
+                            'gender': $('.gender').val(),
+                            'dob': $('.dob').val(),
+                            'age': $('.age').val(),
+                            'blood_group': $('.blood_group').val(),
+                            'social_link': $('.social_link').val(),
+                            'image': $('.image').val(),
+
                         }
-                    }
-                })
-            });
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        });
 
-            // for adding data using ajax
-            $('#form').on('submit', function(e){
-                e.preventDefault();
-
-
-                var form = this;
-
-                $(this).text('Sending..');
-                var data = {
-                    'name': $('.name').val(),
-                    'email': $('.email').val(),
-                    'password': $('.password').val(),
-                    'address': $('.address').val(),
-                    'description': $('.description').val(),
-                    'phone': $('.phone').val(),
-                    'profile': $('.profile').val(),
-                    'doc_dept': $('.doc_dept').val(),
-                    'gender': $('.gender').val(),
-                    'dob': $('.dob').val(),
-                    'age': $('.age').val(),
-                    'blood_group': $('.blood_group').val(),
-                    'social_link': $('.social_link').val(),
-                    'image': $('.image').val(),
-
-                }
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                $.ajax({
-                    url:$(form).attr('action'),
-                    method:$(form).attr('method'),
-                    data:new FormData(form),
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.status == 400) {
-                            $('#error_name').text(response.errors.name);
-                            $('#email_error').text(response.errors.age);
-                            $('.add_doctor').text('Save');
-                        } else {
-                            $('#addModal').find('input').val('');
-                            $('.add_doctor').text('Save');
-                            $('#addModal').modal('hide');
-                            location.reload();
-                            toastr.success(response.message);
-                        }
-                    }
-                });
-           });
+                        $.ajax({
+                            url: $(form).attr('action'),
+                            method: $(form).attr('method'),
+                            data: new FormData(form),
+                            dataType: "json",
+                            success: function(response) {
+                                if (response.status == 400) {
+                                    $('#error_name').text(response.errors.name);
+                                    $('#email_error').text(response.errors.age);
+                                    $('.add_doctor').text('Save');
+                                } else {
+                                    $('#addModal').find('input').val('');
+                                    $('.add_doctor').text('Save');
+                                    $('#addModal').modal('hide');
+                                    location.reload();
+                                    toastr.success(response.message);
+                                }
+                            }
+                        });
+                    });
     </script>
     <script>
         var loadFile = function(event) {

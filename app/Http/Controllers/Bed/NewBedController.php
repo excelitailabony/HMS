@@ -10,51 +10,52 @@ use Illuminate\Support\Facades\Validator;
 
 class NewBedController extends Controller
 {
-       // New Bed type View
-       public function NewBedTypeView(){
 
-        $newbedtypes= NewBedType::latest()->get();
-        return View('Bed.view_newbed_type', compact('newbedtypes'));
-  
-    }// end method
-   
-     // new bede type store
-     public function NewBedTypeStore(Request $request){
+        // New Bed type View 
+        public function NewBedTypeView(){
 
-        $validator = Validator::make($request->all(), [
-            'bed_types'=> 'required|max:191',
-            'description'=>'required|max:191',
-            
-        ]);
+            $newbedtypes= NewBedType::latest()->get();
+            return View('Bed.view_newbed_type', compact('newbedtypes'));
+    
+        }// end method
+    
+        // new bed type store 
+        public function NewBedTypeStore(Request $request){
 
-        if($validator->fails())
-        {
-            return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
+            $validator = Validator::make($request->all(), [
+                'bed_types'=> 'required|max:191',
+                'description'=>'required|max:191',
+                
             ]);
-        }
-        else
-        {
-            $student = new NewBedType;
-            $student->bed_types = $request->input('bed_types');
-            $student->description = $request->input('description');
-            $student->save();
-            return response()->json([
-                'status'=>200,
-                'message'=>'Student Added Successfully.'
-            ]);
-            $notification = array(
-                    'message' =>  'New Bed Added Successfuly',
-                    'alert-type' => 'success'
-                );     
-              
-        }
-  
-    } // end mathod
+
+            if($validator->fails())
+            {
+                return response()->json([
+                    'status'=>400,
+                    'errors'=>$validator->messages()
+                ]);
+            }
+            else
+            {
+                $student = new NewBedType;
+                $student->bed_types = $request->input('bed_types');
+                $student->description = $request->input('description');
+                $student->save();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'Student Added Successfully.'
+                ]);
+                $notification = array(
+                        'message' =>  'New Bed Added Successfuly',
+                        'alert-type' => 'success'
+                    );     
+                
+            }
+    
+        } // end mathod
 
 
-        // method for editing new bed type data
+        // new bed type edit data
         public function NewBedTypeEdit($id){
             $newbedtype = NewBedType::find($id);
             if($newbedtype)
@@ -73,13 +74,13 @@ class NewBedController extends Controller
             }
         }
 
-    public function NewBedTypeUpdate(Request $request,$id)
-    {
+        // new bed type update data
+        public function NewBedTypeUpdate(Request $request,$id)
+        {
             $validator = Validator::make($request->all(), [
                 'bed_types'=> 'required|max:191',
                 'description'=>'required|max:191',
             ]);
-
             if($validator->fails())
             {
                 return response()->json([
@@ -109,19 +110,21 @@ class NewBedController extends Controller
                 }
 
             }
-    }
+        }
 
 
         // delete bedtype
         public function NewBedTypeDelete($id){
 
-          $newbedtype = NewBedType::findOrFail($id);
-          NewBedType::findOrFail($id)->delete(); 
+            $newbedtype = NewBedType::findOrFail($id);
+            NewBedType::findOrFail($id)->delete(); 
                     return redirect()->back();
         }
 
+
 // /////////////////////////For New Bed/////////////////////////////////////
-        // New Bed View
+
+        // New Bed View start
         public function NewBedView(){
             $newbedtypes = NewBedType::orderBy('bed_types', 'ASC')->get();
             $newbeds= NewBed::latest()->get();
@@ -130,15 +133,13 @@ class NewBedController extends Controller
 
           }// end method
           
-       // new bede type store
+       // new bed View store
        public function NewBedStore(Request $request){
         $validator = Validator::make($request->all(), [
             // 'bed'=> 'required',
             'bed_type_id'=> 'required',
             'charge'=> 'required|numeric',
-            'description'=> 'required|max:191',
-
-            
+            'description'=> 'required|max:191',            
         ]);
 
         if($validator->fails())
@@ -169,7 +170,7 @@ class NewBedController extends Controller
     } // end mathod
 
 
-        // method for editing new bed  data
+        // new bed edit data
         public function NewBedEdit($id){
           $newbed = NewBed::find($id);
           $newbedtypes = NewBedType::orderBy('bed_types', 'ASC')->get();
@@ -182,7 +183,7 @@ class NewBedController extends Controller
 
 
 
-        // // method for updating data
+        //new bed updating data
         public function NewBedUpdate(Request $request,$id)
         {
             $validator = Validator::make($request->all(), [
@@ -226,12 +227,13 @@ class NewBedController extends Controller
             }  
                 
         }
-        // delete
+
+        // new bed delete data
         public function NewBedDelete($id){
 
             $newbed = NewBed::findOrFail($id);
             NewBed::findOrFail($id)->delete(); 
-                      return redirect()->back();
+            return redirect()->back();
           }//end method
       
     }

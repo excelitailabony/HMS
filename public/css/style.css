@@ -1,3 +1,10 @@
+/* css for dashboard page */
+.mini-stat {
+    box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px !important;
+    border: none !important;
+    border-right: 5px solid #626ed4 !important;
+}
+
 .topBar {
     margin-top: 4rem;
 }
@@ -19,7 +26,8 @@
     border-top: none !important;
 }
 
-.modal-body .row .col-md-12 {
+.modal-body .row .col-md-12,
+.modal-body .row .col-md-6 {
     margin-bottom: 1rem;
 }
 
@@ -50,7 +58,7 @@
 }
 
 .modal-body select option {
-    background-color: #f1eae8;
+    background-color: #eee3e0;
 }
 
 .modal-body select option:hover {

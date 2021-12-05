@@ -19,7 +19,9 @@ class CreateNewBedsTable extends Migration
             $table->unsignedBigInteger('new_bed_type_id');
             $table->integer('charge');
             $table->text('description');
-            $table->integer('status')->default(0);
+
+            $table->integer('status',1)->default(0);
+
             $table->timestamps();
         });
     }

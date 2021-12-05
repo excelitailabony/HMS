@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class NewBedAllotment extends Model
 {
     use HasFactory;
     use \Znck\Eloquent\Traits\BelongsToThrough;
-    public function bed(){
+  
+public function bed(){
         return $this->belongsTo(NewBed::class,'new_bed_id');
     }
     public function patient(){

@@ -12,6 +12,7 @@ use Carbon\carbon;
 
 class DiagnosisController extends Controller
 {
+    // diagnosis test View start 
     public function DignsosisTestView(){
         $patients=Patient::all();
         $doctors=Doctor::all();
@@ -20,6 +21,7 @@ class DiagnosisController extends Controller
         return view('Diagnosis.view_diagnosis_test',compact('doctors','patients','diagnosis','diagnosisTests'));
     }
 
+    // diagnosis test View store
     public function DignsosisTestStore(Request $request){
 
          $request->validate([
@@ -50,11 +52,13 @@ class DiagnosisController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    // diagnosis test delete
     public function DignsosisTestDelete($id){
         DiagnosisTest::findOrFail($id)->delete(); 
         return redirect()->back();
     }
 
+    // diagnosis category edit 
     public function DiagnosisCategoryEdit($id){
         $diagnosisTests = DiagnosisTest::find($id);
          return response()->json([
@@ -63,6 +67,7 @@ class DiagnosisController extends Controller
          ]);
     }
 
+    // diagnosis category update
     public function DiagnosisCategoryUpdate(Request $request){
 
         $diagnosis_id=$request->input('diagnosis_id');

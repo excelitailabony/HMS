@@ -51,10 +51,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->name('admin.profile');
 
 
-
-
 // Admin Login View
-// Admin View 
 Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
     return view('super_admin.home');
 })->name('dashboard');
@@ -212,11 +209,12 @@ Route::prefix('NewBed')->group(function () {
 
 // New Bed Start
 Route::prefix('BedAssign')->group(function () {
-  Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed'); 
-  Route::post('/add', [BedAssignController::class, 'BedAssignStore']); 
-  // Route::get('/edit-newbed/{id}', [NewBedController::class, 'NewBedEdit']); 
-  // Route::put('/update/{id}', [NewBedController::class, 'NewBedUpdate'])->name('newbed.update');
-  // Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
+  Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed');
+  Route::post('/add', [BedAssignController::class, 'BedAssignStore']);
+  Route::get('/status', [BedAssignController::class, 'BedAssignStatus'])->name('bed.status');
+  Route::get('/edit/{id}', [BedAssignController::class, 'BedAssignEdit']);
+  Route::put('/update/{id}', [BedAssignController::class, 'BedAssignUpdate']);
+  Route::get('/delete/{id}', [BedAssignController::class, 'BedAssignDelete'])->name('allotment.delete');
 });
 
 // Appointment start
