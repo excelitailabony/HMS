@@ -34,8 +34,8 @@
             <div class="card">
                 <div class="card-body">
 
-                    <h4 class="card-title text-center">All Accountant
-                        <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#AddEmployeeModal">ADD ACCOUNTANT</button>
+                    <h4 class="card-title text-center">All Pharmacist
+                        <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#AddEmployeeModal">ADD Pharmacist</button>
                     </h4>
 
                     <!-- Modal for add patient -->
@@ -44,7 +44,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Accountant</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Pharmacist</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -167,7 +167,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Accountant</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Pharmasist</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -336,16 +336,11 @@
                                                     <td>{{ $patient->dob }}</td>
                                                     <td>{{ $patient->age }}</td>
                                                     <td>{{ $patient->blood_group }}</td>
-                                                    <td> <input data-id="{{ $patient->id }}" class="toggle-class"
-                                                        type="checkbox" data-onstyle="success" data-offstyle="danger"
-                                                        data-toggle="toggle" data-on="Active" data-off="InActive"
-                                                        {{ $patient->status ? 'checked' : '' }}>
-                                                    </td>
                                                     <td>
                                                         <button type="button" value="{{ $patient->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
-                                                        <a href="{{ route('accountant.delete', $patient->id) }}"
+                                                        <a href="{{ route('receptionist.delete', $patient->id) }}"
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -376,7 +371,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "/accountant/edit-accountant/" + patient_id,
+                    url: "/pharmacist/edit-pharmacist/" + patient_id,
                     success: function(response) {
 
                         $('#patient_id').val(response.patient.id);
@@ -427,7 +422,7 @@
               
              $.ajax({
                type:"POST",
-               url: "/accountant/add",
+               url: "/pharmacist/add",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -461,7 +456,7 @@
               
              $.ajax({
                 type:"POST",
-                url: "/accountant/update",
+                url: "/pharmacist/update",
                 data: formData,
                 contentType: false,
                 processData: false,
@@ -487,26 +482,5 @@
                  });
             });
         });
-    </script>
-    <script>
-        $(function() {
-            $('.toggle-class').change(function() {
-                var status = $(this).prop('checked') == true ? 1 : 0;
-                var id = $(this).data('id');
-
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: '/accountant/changeStatus',
-                    data: {
-                        'status': status,
-                        'id': id
-                    },
-                    success: function(data) {
-                        console.log(data.success)
-                    }
-                });
-            })
-        })
     </script>
 @endsection

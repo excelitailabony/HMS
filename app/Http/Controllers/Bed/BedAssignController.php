@@ -24,6 +24,7 @@ class BedAssignController extends Controller
     }
 
     // bed assign store start
+
     public function BedAssignStore(Request $request){
          $validator = Validator::make($request->all(), [
             'bed_name_id'=> 'required',
@@ -60,6 +61,7 @@ class BedAssignController extends Controller
                 'message'=>'New bed  Allotment Added Successfully.'
             ]);
         }
+
     }
 
     // bed assign status view
@@ -147,5 +149,6 @@ class BedAssignController extends Controller
                 ]);  
             }
         } 
+
     }
 }

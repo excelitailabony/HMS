@@ -5,15 +5,14 @@
         .topBar {
             margin-top: 4rem;
         }
-
         .topBar {
             padding: 2rem;
         }
-
         .card-title {
             display: flex;
             justify-content: space-between;
         }
+
 
         .leftside table tbody tr td {
             text-align: left;
@@ -23,6 +22,7 @@
             text-decoration: none;
             color: white;
         }
+
 
     </style>
     <div class="container-full topBar">
@@ -106,12 +106,15 @@
                                                 <div class="col-md-6">
                                                     <label>Discharged Time</label><span class="errorColor"> *</span>
                                                     <input type="datetime-local" class="discharge_date_id form-control">
+
                                                     <span id="error_discharge" class="errorColor"></span>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Description<span class="errorColor"> *</span></label>
+
                                                         <textarea class="description_id form-control"></textarea>
+
                                                         <span id="error_descriptionnn" class="errorColor"></span>
                                                     </div>
                                                 </div>
@@ -266,13 +269,16 @@
                                                     <td>
                                                         <b>Doctor
                                                             Department:</b>{{ $bedallotment['doctor']['doc_dept'] }} <br>
+
                                                         <b>Doctor Name:</b> {{ $bedallotment['doctor']['name'] }}
+
                                                         <br>
                                                         <b>Phone:</b> {{ $bedallotment['doctor']['phone'] }} <br>
                                                         <b>email:</b> {{ $bedallotment['doctor']['email'] }} <br>
                                                         <b>Gender:</b> {{ $bedallotment['doctor']['sex'] }} <br>
                                                     </td>
                                                     @php
+
                                                         $time = explode(' ', $bedallotment->allotment_time);
                                                     @endphp
                                                     <td>
@@ -286,15 +292,18 @@
                                                         <b>Date:</b>{{ $times[0] }} <br>
                                                         <b>Time:</b>{{ $times[1] }} <br>
                                                     </td>
+
                                                     <td>
                                                         <b>Description:</b>{{ $bedallotment->discription }}
                                                     </td>
+
 
                                                     <td class="text-center">
                                                         <button type="button" value="{{ $bedallotment->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
                                                         <a href="{{ route('allotment.delete', $bedallotment->id) }}"
+
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -324,8 +333,6 @@
             $(document).on('click', '.add_bed_allotment', function(e) {
                 e.preventDefault();
                 $(this).text('Sending..');
-
-                // var id = $('.patient_name_id').val();
 
                 var data = {
                     'bed_name_id': $('.bed_name_id').val(),
@@ -440,6 +447,7 @@
                 });
 
             });
+
 
         });
     </script>

@@ -180,6 +180,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        'A6digital\Image\DefaultProfileImageServiceProvider',
         // MaddHatter\LaravelFullcalendar\ServiceProvider::class,
 
     ],
