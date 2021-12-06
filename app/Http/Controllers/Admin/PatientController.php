@@ -13,10 +13,10 @@ use Illuminate\Validation\Rules\Password;
 
 class PatientController extends Controller
 {
- // method for all patient data 
- public function index(){
-    $patients = Patient::latest()->get();
-    return view('super_admin.patient.view_patient',compact('patients'));
+    // method for all patient data 
+    public function index(){
+        $patients = Patient::latest()->get();
+        return view('super_admin.patient.view_patient',compact('patients'));
     }
  
      // method for storing patient data
