@@ -185,4 +185,10 @@ class PatientController extends Controller
        return redirect()->back()->with($notification);
       } 
 
+    // all patient view in dashboard
+    public function AllPatientView(){
+        $listpatients = Patient::latest()->get();
+        return view('super_admin.patient.list_patient',compact('listpatients'));
+    }
+
 }

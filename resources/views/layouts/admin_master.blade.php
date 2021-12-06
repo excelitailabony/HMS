@@ -98,7 +98,7 @@
 
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" style="background:#f5f8fa;">
 
     <!-- Begin page -->
     <div id="layout-wrapper">

@@ -184,15 +184,22 @@ class AccountantController extends Controller
       ); 
       return redirect()->back()->with($notification);
      } 
-  public function changeStatus(Request $request){
+
+
+    public function changeStatus(Request $request){
     
         $patient = Accountant::find($request->id);
         $patient->status = $request->status;
         $patient->save();
 
         return response()->json(['success'=>'Status change successfully.']);
+    } 
+     
+
+    // all acountant list in dashboard
+    public function ListAccountView(){
+        $listaccountants = Accountant::latest()->get();
+        return view('super_admin.accountant.list_accountant',compact('listaccountants'));
     }
-
-
 
 }

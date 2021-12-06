@@ -176,21 +176,27 @@ public function ReceptionistUpdate(Request $request){
 
 }
 
-// method for deleting patient data
- public function ReceptionistDelete($id){
+    // method for deleting patient data
+    public function ReceptionistDelete($id){
 
-    $patient = Receptionist::findOrFail($id);
-    if($patient->image){
-         $img = $patient->image;
-        unlink($img);
+        $patient = Receptionist::findOrFail($id);
+        if($patient->image){
+            $img = $patient->image;
+            unlink($img);
+        }
+
+        Receptionist::findOrFail($id)->delete();
+        $notification = array(
+            'message' =>  'Receptionist Delete Sucessyfully',
+            'alert-type' => 'info'
+        ); 
+        return redirect()->back()->with($notification); 
+    } 
+
+    // all patient view in dashboard
+    public function ListReceptionistView(){
+        $receptionists = Receptionist::latest()->get();
+        return view('super_admin.receptionist.list_receptionist',compact('receptionists'));
     }
-
-    Receptionist::findOrFail($id)->delete();
-    $notification = array(
-        'message' =>  'Receptionist Delete Sucessyfully',
-        'alert-type' => 'info'
-    ); 
-    return redirect()->back()->with($notification);
-} 
 
 }
