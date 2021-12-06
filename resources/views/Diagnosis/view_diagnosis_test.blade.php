@@ -46,16 +46,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-
-                                    <form action="{{ route('store.diagnosis_test') }}" method="POST"
-                                        enctype="multipart/form-data">
+                                    <form >
                                         @csrf
                                         <div class="modal-body">
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Patient</label>
-                                                        <select name="patient_id" class="form-control" required="">
+                                                        <select name="patient_id" class="form-control patient_id" required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
@@ -68,7 +66,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Doctor</label>
-                                                        <select name="doctor_id" class="form-control" required="">
+                                                        <select name="doctor_id" class="form-control doctor_id" required="">
                                                             <option value="" selected="" disabled="">Select Doctor Name
                                                             </option>
                                                             @foreach ($doctors as $doctor)
@@ -81,7 +79,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Diagnosis Category</label>
-                                                        <select name="diagnosis_id" class="form-control" required="">
+                                                        <select name="diagnosis_id" class="form-control diagnosis_id" required="">
                                                             <option value="" selected="" disabled="">Select Diagnosis
                                                                 Category
                                                             </option>
@@ -95,7 +93,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Report Number</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control report_number"
                                                             placeholder="Enter your report number" name="report_number">
                                                         @error('report_number')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -105,7 +103,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Age</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control age"
                                                             placeholder="Enter your age" name="age">
                                                         @error('age')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -115,7 +113,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Height</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control height"
                                                             placeholder="Enter your height" name="height">
                                                         @error('height')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -125,7 +123,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Weight</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control weight"
                                                             placeholder="Enter your weight" name="weight">
                                                         @error('weight')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -135,7 +133,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Average Glucose</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control glucose"
                                                             placeholder="Enter your glucose" name="glucose">
                                                         @error('glucose')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -145,7 +143,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Fasting Blood Sugar</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control blood_sugar"
                                                             placeholder="Enter your blood_sugar" name="blood_sugar">
                                                         @error('blood_sugar')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -155,7 +153,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Urine</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control urine"
                                                             placeholder="Enter your urine" name="urine">
                                                         @error('urine')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -165,7 +163,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Blood Pressure</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control blood_pressure"
                                                             placeholder="Enter your blood_pressure" name="blood_pressure">
                                                         @error('blood_pressure')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -175,7 +173,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Diabetis</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control diabetis" 
                                                             placeholder="Enter your diabetis" name="diabetis">
                                                         @error('diabetis')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -185,7 +183,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Cholestrol</label>
-                                                        <input type="text" class="form-control"
+                                                        <input type="text" class="form-control cholestrol"
                                                             placeholder="Enter your cholestrol" name="cholestrol">
                                                         @error('cholestrol')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -240,7 +238,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Doctor</label>
-                                                        <select name="doctor_id" id="doctor_id" class="form-control"
+                                                        <select  id="doctor_id" class="form-control"
                                                             required="">
                                                             <option value="" selected="" disabled="">Select Doctor Name
                                                             </option>
@@ -254,7 +252,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Diagnosis Category</label>
-                                                        <select name="diagnosis_test_id" id="diagnosis_test_id"
+                                                        <select  id="diagnosis_test_id"
                                                             class="form-control" required="">
                                                             <option value="" selected="" disabled="">Select Diagnosis
                                                                 Category
@@ -270,7 +268,7 @@
                                                     <div class="form-group">
                                                         <label>Report Number</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your report number" name="report_number"
+                                                            placeholder="Enter your report number"
                                                             id="report_number">
                                                         @error('report_number')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -281,7 +279,7 @@
                                                     <div class="form-group">
                                                         <label>Age</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your age" name="age" id="age">
+                                                            placeholder="Enter your age"  id="age">
                                                         @error('age')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -291,7 +289,7 @@
                                                     <div class="form-group">
                                                         <label>Height</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your height" name="height" id="height">
+                                                            placeholder="Enter your height" id="height">
                                                         @error('height')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -301,7 +299,7 @@
                                                     <div class="form-group">
                                                         <label>Weight</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your weight" name="weight" id="weight">
+                                                            placeholder="Enter your weight" id="weight">
                                                         @error('weight')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -311,7 +309,7 @@
                                                     <div class="form-group">
                                                         <label>Average Glucose</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your glucose" name="glucose" id="glucose">
+                                                            placeholder="Enter your glucose"  id="glucose">
                                                         @error('glucose')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -321,7 +319,7 @@
                                                     <div class="form-group">
                                                         <label>Urine</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your urine" name="urine" id="urine">
+                                                            placeholder="Enter your urine"  id="urine">
                                                         @error('urine')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -331,7 +329,7 @@
                                                     <div class="form-group">
                                                         <label>Blood Pressure</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your blood_pressure" name="blood_pressure"
+                                                            placeholder="Enter your blood_pressure" 
                                                             id="blood_pressure">
                                                         @error('blood_pressure')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -342,7 +340,7 @@
                                                     <div class="form-group">
                                                         <label>Diabetis</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your diabetis" name="diabetis" id="diabetis">
+                                                            placeholder="Enter your diabetis"  id="diabetis">
                                                         @error('diabetis')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -352,7 +350,7 @@
                                                     <div class="form-group">
                                                         <label>Cholestrol</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="Enter your cholestrol" name="cholestrol"
+                                                            placeholder="Enter your cholestrol" 
                                                             id="cholestrol">
                                                         @error('cholestrol')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -443,6 +441,43 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
+            //for add
+              // for adding data using ajax
+              $(document).on('click', '.add_diagnosis_category', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'new_diagnosis_category': $('.new_diagnosis_category').val(),
+                    'description': $('.description').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/Diagnosis/store",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_diagnosis_category').text(response.errors.new_diagnosis_category);
+                            $('#error_description').text(response.errors.description);
+
+                            $('.add_diagnosis_category').text('Save');
+                        } else {
+                            $('#addModal').find('input').val('');
+                            $('.add_diagnosis_category').text('Save');
+                            $('#addModal').modal('hide');
+                            toastr.success(response.message);
+                            // fetchstudent();
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            //for add
             $(document).on('click', '.editBtn', function() {
                 var diagnosis_id = $(this).val();
                 // alert(diagnosis_id);

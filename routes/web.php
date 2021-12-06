@@ -61,7 +61,7 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('dashboard');
 
-
+Route::get('check/view',[CheckController::class,'index'])->name('view.nurse');
 
 // Nurse Start
 Route::prefix('nurse')->group(function () {
@@ -110,7 +110,7 @@ Route::prefix('doctor')->group(function () {
   Route::get('/all',[DoctorController::class,'index'])->name('all.doctor');
   Route::post('/store',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
   Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
-  Route::put('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
+  Route::post('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
   Route::get('/delete{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
 });// Accountant All Route Group End 
 
@@ -124,7 +124,7 @@ Route::prefix('accountant')->group(function () {
   Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
   // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
   // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
-     
+
   });// Admin Brand All Route Group End 
 
 // Labroatorist Start

@@ -411,44 +411,44 @@
             }
         }
         // for add
-        $.ajaxSetup({
-                     headers: {
-                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                     }
-                 });
-        $(document).on('submit', '#AddEmployeeFORM', function (e) {
+        // $.ajaxSetup({
+        //              headers: {
+        //                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //              }
+        //          });
+             $(document).on('submit', '#AddEmployeeFORM', function (e) {
                  e.preventDefault();
                  let formData=new FormData($('#AddEmployeeFORM')[0]);
               
-             $.ajax({
-               type:"POST",
-               url: "/patient/store",
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                  if (response.status == 400) 
-                  {
-                    $('#error_name').text(response.errors.name);
-                    $('#error_email').text(response.errors.email);
-                    $('#error_password').text(response.errors.password);
-                    $('#error_address').text(response.errors.address);
-                    $('#error_phone').text(response.errors.phone);
-                    $('#error_gender').text(response.errors.gender);
-                    $('#error_dob').text(response.errors.dob);
-                    $('#error_age').text(response.errors.age);
-                    $('#error_blood_group').text(response.errors.blood_group);
-                  }
-                  else if(response.status ==200)
-                  {
-                      $('#AddEmployeeModal').modal('hide');
-                      location.reload();
-                    toastr.success(response.message);
-                  }
-                }
-                 });
-            });
-            // for update
+                $.ajax({
+                type:"POST",
+                url: "/patient/store",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                    if (response.status == 400) 
+                    {
+                        $('#error_name').text(response.errors.name);
+                        $('#error_email').text(response.errors.email);
+                        $('#error_password').text(response.errors.password);
+                        $('#error_address').text(response.errors.address);
+                        $('#error_phone').text(response.errors.phone);
+                        $('#error_gender').text(response.errors.gender);
+                        $('#error_dob').text(response.errors.dob);
+                        $('#error_age').text(response.errors.age);
+                        $('#error_blood_group').text(response.errors.blood_group);
+                    }
+                    else if(response.status ==200)
+                    {
+                        $('#AddEmployeeModal').modal('hide');
+                        location.reload();
+                        toastr.success(response.message);
+                    }
+                    }
+                    });
+                });
+                // for update
 
             $(document).on('submit', '#EditEmployeeFORM', function (e) {
                  e.preventDefault();

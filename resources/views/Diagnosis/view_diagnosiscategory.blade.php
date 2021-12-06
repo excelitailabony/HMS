@@ -29,13 +29,12 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-
                         <h4 class="card-title text-center">New Diagnosis Category
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                 data-bs-target="#addModal">
                                 Add New Diagnosis Category
-                            </button>
+                        </button>
                         </h4>
 
                         <!-- AddModal -->
@@ -44,7 +43,8 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Add New Diagnosis Category</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Add New       
+                                             Category</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -94,7 +94,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-
+                                    
                                     <form action="">
                                         @csrf
                                         <input type="hidden" id="diagnosiscat_id" >
@@ -214,7 +214,6 @@
                             $('.add_diagnosis_category').text('Save');
                             $('#addModal').modal('hide');
                             toastr.success(response.message);
-                            // fetchstudent();
                             location.reload();
                         }
                     }
