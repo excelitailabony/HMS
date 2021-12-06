@@ -1,153 +1,228 @@
- {{-- @extends('layouts.app')
 
-@section('style') --}}
+@extends('layouts.admin_master')
+@section('super-admin-content')
+<style>
 
-{{-- <link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
-<link href='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.print.min.css' rel='stylesheet' media='print' />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
-<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/jquery.min.js'></script>
-<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/fullcalendar.min.js'></script>
-{{-- enbd --}}
-{{-- <link href='fullcalendar-scheduler/main.css' rel='stylesheet' />
-<script src='fullcalendar-scheduler/main.js'></script>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.css"/>
-@endsection
+  .mail{
+    color: #abb0ac;
+  }
+  .total{
+    border: 2px dotted #ededed;
+    width: 180px;
+    padding: 20px 20px 20px 20px ;
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Full Calendar Example</div>
+  }
+  .total h6{
+    color: #abb0ac;
+  }
+ h6 .ta{
+    font-size: 5px;
+  }
+  .padding-0{
+    padding-right:0;
+    padding-left:0;
+}
 
-                <div class="panel-body">
-                    {!! $calendar->calendar() !!}
+.overview ul li{
+  list-style: none;
+  font-size: 15px;
+  color:#8d8d91;
+}
+.overview1 ul li{
+  list-style: none;
+  font-size: 15px;
+
+}
+.card {
+        margin: 0 auto; 
+        float: none; 
+        margin-bottom: 10px; 
+}
+
+.namebadge .badg{
+  color: #326e2c;
+  background-color: #e8fff3;
+  font-size:12px;
+}
+
+</style> 
+
+<div class="container-full topBar">
+  <div class="row">
+      <div class="col-12 overall">
+          <div class="card" style="width: 1000px;">
+              <div class="card-body" style="align-items: center;">
+                <div class="conatiner">
+                  <div class="row">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <img src="uploads/accountant/1.jpg" class="rounded avatar-lg"
+                      alt="" style="width: 150px; height:195px;">
+                    </div>
+                    <div class="col-md-10">
+                      <div class="namebadge">
+                         {{-- <span class="badge badge-success">Success</span> --}}
+                      <h3><b>Channing Mcmillan</b>   <span class="badge  badg">Available</span></h3> 
+                    </div>
+                      <div class="mail">
+                      <i class="fas fa-envelope"></i>&nbsp;<span>qycuxu@mailinator.com</span>&nbsp;<i class="fas fa-map-marker-alt"></i>&nbsp;<span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet</span>
+                    </div>
+                    <br>
+                    <div class="row no-gutters">
+                      <div class="col-md-4 ">
+                        <div class="total">
+                          <i class="fas fa-2x fa-notes-medical"></i>&nbsp; &nbsp;<span><b>3</b></span>
+                          <h6><b>Total Classes</b></h6>
+                        </div>
+                      </div>
+                      <div class="col-md-4 " >
+                        <div class="total">
+                          <i class="fas fa-2x fa-notes-medical" style="color: yellow;"></i>&nbsp; &nbsp;<span><b>3</b></span>
+                          <h6><b>Patients</b></h6>
+                        </div>
+                      </div>
+                      <div class="col-md-4 ">
+                        <div class="total">
+                          <i class="fas fa-2x fa-notes-medical" style="color: #7d2877;"></i>&nbsp; &nbsp;<span><b>3</b></span>
+                          <h6 class="ta"><b>Total Appointments</b></h6>
+                        </div>
+                      </div>
+                      {{-- <div class="col-md-4">
+                        <div class="total">
+                          <i class="fas fa-2x fa-notes-medical"style="color: #6e0e6e"></i>&nbsp; &nbsp;<span><b>3</b></span>
+                          <h6><b>Total Appointments</b></h6>
+                        </div>
+                      </div> --}}
+                      
+                    </div>
+                    <br>
+                    <br>
+
+                    </div>
+                    
+                    <nav>
+                      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Overview</button>
+                      
+                        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Cases</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Patients</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Appointments</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">schedules</button>
+                        <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">My Payrolls</button>
+                      </div>
+                    </nav>
+                   
+                  </div>
                 </div>
+              </div>
+          </div>
+          <div class="card" style="width: 1000px;">
+            <div class="card-body">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <h5 style="margin-left:30px;"><b>Over View</b></h5>
+            
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="overview">
+                  <ul>
+                    <li>
+                      <b>Designation</b>
+                    </li>
+                    <br>
+                    <li>
+                     <b> Phone</b>
+                    </li>
+                    <br>
+                    <li>
+                      <b>Doctor Department</b>
+                    </li>
+                    <br>
+                    <li>
+                      <b>Qualification</b>
+                    </li>
+                    <br>
+                    <li>
+                     <b> Blood Group</b>
+                    </li>
+                    <br>
+                    <li>
+                     <b> Date Of Birth</b>
+                    </li>
+                    <br>
+                    <li>
+                      <b>Specialist<</b>
+                    </li>
+                    <br>
+                    <li>
+                     <b> Gender</b>
+                    </li>
+                    <br>
+                    <li>
+                     <b> Created on</b>
+                    </li>
+                    <br>
+                    <li>
+                      <b>Last Updated</b>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="overview1">
+                    <ul>
+                      <li>
+                        <b>Designation</b>
+                      </li>
+                      <br>
+                      <li>
+                       <b> Phone</b>
+                      </li>
+                      <br>
+                      <li>
+                        <b>Doctor Department</b>
+                      </li>
+                      <br>
+                      <li>
+                        <b>Qualification</b>
+                      </li>
+                      <br>
+                      <li>
+                       <b> Blood Group</b>
+                      </li>
+                      <br>
+                      <li>
+                       <b> Date Of Birth</b>
+                      </li>
+                      <br>
+                      <li>
+                        <b>Specialist</b>
+                      </li>
+                      <br>
+                      <li>
+                       <b> Gender</b>
+                      </li>
+                      <br>
+                      <li>
+                       <b> Created on</b>
+                      </li>
+                      <br>
+                      <li>
+                        <b>Last Updated</b>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <hr>
             </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae tenetur odit mollitia?</div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur delectus laboriosam voluptatem.</div>
+          </div>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
+  </div>
 @endsection
-
-@section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.2.7/fullcalendar.min.js"></script>
-{!! $calendar->script() !!} --}} 
-
-{{-- @endsection  --}}
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <form class="row g-3 needs-validation" novalidate>
-        <div class="col-md-4">
-          <label for="validationCustom01" class="form-label">First name</label>
-          <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-        </div>
-        <div class="col-md-4">
-          <label for="validationCustom02" class="form-label">Last name</label>
-          <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-          <div class="valid-feedback">
-            Looks good!
-          </div>
-        </div>
-        <div class="col-md-4">
-          <label for="validationCustomUsername" class="form-label">Username</label>
-          <div class="input-group has-validation">
-            <span class="input-group-text" id="inputGroupPrepend">@</span>
-            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-            <div class="invalid-feedback">
-              Please choose a username.
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <label for="validationCustom03" class="form-label">City</label>
-          <input type="text" class="form-control" id="validationCustom03" required>
-          <div class="invalid-feedback">
-            Please provide a valid city.
-          </div>
-        </div>
-        <div class="col-md-3">
-          <label for="validationCustom04" class="form-label">State</label>
-          <select class="form-select" id="validationCustom04" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
-          </select>
-          <div class="invalid-feedback">
-            Please select a valid state.
-          </div>
-        </div>
-        <div class="col-md-3">
-          <label for="validationCustom05" class="form-label">Zip</label>
-          <input type="text" class="form-control" id="validationCustom05" required>
-          <div class="invalid-feedback">
-            Please provide a valid zip.
-          </div>
-        </div>
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-            <label class="form-check-label" for="invalidCheck">
-              Agree to terms and conditions
-            </label>
-            <div class="invalid-feedback">
-              You must agree before submitting.
-            </div>
-          </div>
-        </div>
-        <div class="col-12">
-          <button class="btn btn-primary" type="submit">Submit form</button>
-        </div>
-      </form>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-        </script>
-  </body>
-</html>

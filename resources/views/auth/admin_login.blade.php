@@ -18,6 +18,26 @@
     <link href="{{ asset('backend') }}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
     <!-- App Css-->
     <link href="{{ asset('backend') }}/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
+    <style>
+        .change{
+            /* display:flex;
+            justify-content: center; */
+            align-items: center;
+            margin-left: 20px;
+            /* padding-left: 20px; */
+            
+
+        }
+        .btn_change{
+
+            /* display: flex;
+            justify-content: center; */
+            align-items: center;
+            padding-left: 650px;
+      
+
+        }
+        </style>
 
 </head>
 
@@ -30,7 +50,7 @@
     <div class="account-pages my-5 pt-5">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="col-md-12 col-lg-8 col-xl-4">
                     <div class="card overflow-hidden">
                         <div class="bg-primary">
                             <div class="text-primary text-center p-4">
@@ -92,6 +112,9 @@
                         </div>
 
                     </div>
+                <br>
+                <br>
+
 
                     <div class="mt-5 text-center">
                         {{-- <p>Don't have an account ? <a href="pages-register.html" class="fw-medium text-primary"> Signup now </a> </p>
@@ -102,7 +125,32 @@
                 </div>
             </div>
         </div>
+        <div class="btn_change"> 
+    &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-rounded waves-effect btn-lg waves-light">SUPER ADMIN</button>
+      
+    <button type="button" class="btn btn-secondary btn-rounded waves-effect btn-lg waves-light change">DOCTOR</button>
+    <button type="button" class="btn btn-success btn-rounded waves-effect btn-lg waves-light change">RECEPTIONIST</button>
+    <button type="button" class="btn btn-danger btn-rounded waves-effect  btn-lg waves-light change">ACCOUNTANT</button>
+    <br><br>
+    <button type="button" class="btn btn-warning btn-rounded waves-effect  btn-lg waves-light change">PATIENT</button>
+    <button type="button" class="btn btn-info btn-rounded waves-effect  btn-lg waves-light change">PHARMACIST</button>
+    <button type="button" class="btn btn-light btn-rounded waves-effect  btn-lg waves-light change">LAB TECHNICIAN</button>
+    <button type="button" class="btn btn-dark btn-rounded waves-effect  btn-lg waves-light change">NURSE</button>
+    <br><br>
+    <button type="button" class="btn btn-primary btn-rounded waves-effect  btn-lg waves-light change">IT MANAGER</button>
+    <button type="button" class="btn btn-info btn-rounded waves-effect  btn-lg  waves-light change">Primary</button>
+    <button type="button" class="btn btn-success btn-rounded waves-effect  btn-lg waves-light change">Primary</button>
+     </div> 
     </div>
+{{-- <div class="conatiner">
+        <div class="row">
+            <div class="col-md-12">       --}}
+     
+{{-- </div>
+</div> 
+</div>  --}}
+   
+    
 
     <!-- JAVASCRIPT -->
 
