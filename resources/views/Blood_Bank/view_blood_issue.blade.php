@@ -469,7 +469,6 @@
                 var bloodissue_id = $(this).val();
                 // alert(bloodissue_id);
                 $('#EditBloodIssue').modal('show');
-
                 $.ajax({
                     type: "GET",
                     url: "/blood/issue/edit/" + bloodissue_id,

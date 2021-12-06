@@ -161,8 +161,6 @@
                                                         <span id="error_age_edit" class="errorColor"></span>
                                                     </div>
                                                 </div>
-
-
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Blood Group</label>
@@ -236,7 +234,6 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Name</th>
-
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 89px;"
                                                     aria-label="Salary: activate to sort column ascending">Age</th>
@@ -246,7 +243,6 @@
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 50px;"
                                                     aria-label="Salary: activate to sort column ascending">Blood Group</th>
-
                                                 <th class="sorting" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 141px;"
                                                     aria-label="Position: activate to sort column ascending">Last Donation
@@ -267,12 +263,9 @@
                                                         {{ $blooddonor->name }}
                                                     </td>
                                                     <td>{{ $blooddonor->age }}</td>
-
                                                     <td>{{ $blooddonor->gender }}</td>
-
                                                     <td>{{ $blooddonor->blood_group }}</td>
                                                     <td>{{ $blooddonor->last_donation_date }}</td>
-
                                                     <td>
 
                                                         <button type="button" value="{{ $blooddonor->id }}"
@@ -349,8 +342,8 @@
                 });
             });
 
-          // for editing data using ajax
-          $(document).on('click', '.editBtn', function() {
+            // for editing data using ajax
+            $(document).on('click', '.editBtn', function() {
                 var blooddonor_id = $(this).val();
                 $('#editDonor').modal('show');
                 $.ajax({
@@ -401,7 +394,8 @@
                             $('#error_age_edit').text(response.errors.age);
                             $('#error_gender_edit').text(response.errors.gender);
                             $('#error_blood_group_edit').text(response.errors.blood_group);
-                            $('#error_last_donation_date_edit').text(response.errors.last_donation_date);
+                            $('#error_last_donation_date_edit').text(response.errors
+                                .last_donation_date);
                             $('.update_blood_donor').text('Update');
                         } else {
                             $('#editDonor').find('input').val('');

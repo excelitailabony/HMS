@@ -98,7 +98,7 @@
 
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" style="background:#f5f8fa;">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -130,10 +130,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> Veltrix<span class="d-none d-sm-inline-block"> - Crafted with <i
-                                    class="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
+                            2021 - Hospital Management System &copy;ExcelitAI
                         </div>
                     </div>
                 </div>

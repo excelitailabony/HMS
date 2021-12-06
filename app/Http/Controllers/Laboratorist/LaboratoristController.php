@@ -184,6 +184,12 @@ class LaboratoristController extends Controller
            'alert-type' => 'info'
        ); 
        return redirect()->back()->with($notification);
-      } 
+      }  
+
+      // all laboratorist view in dashboard
+    public function ListlaboratoristView(){
+        $listlaboratorists = Laboratorist::latest()->get();
+        return view('super_admin.laboratorist.list_laboratorist',compact('listlaboratorists'));
+    }
   
 }
