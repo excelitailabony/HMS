@@ -119,7 +119,8 @@ Route::prefix('doctor')->group(function () {
   Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
   Route::post('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
   Route::get('/delete{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
-  Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors');
+  Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors'); 
+  Route::get('/single/view/{id}',[DoctorController::class,'SingleDoctorView'])->name('single.doctor');
 });// Accountant All Route Group End 
 
 // Accountant Start

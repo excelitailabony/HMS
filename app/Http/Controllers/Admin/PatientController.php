@@ -62,6 +62,8 @@ class PatientController extends Controller
                     Image::make($file)->resize(300,300)->save('uploads/patient/'.$extension);
                     $save_url = 'uploads/patient/'.$extension;
                     $patient->image= $save_url;
+                    // $patient->created_at =  $date->format('d-m-y h:i:s' );
+                    $patient->created_at = Carbon::now()->timezone('CST');
                     $patient->save();
                     return response()->json([
                         'status'=>200,
@@ -79,6 +81,7 @@ class PatientController extends Controller
                $patient->dob=$request->input('dob');
                $patient->age=$request->input('age');
                $patient->blood_group=$request->input('blood_group');
+               $patient->created_at = Carbon::now()->timezone('CST');
                $patient->save();
                return response()->json([
                  'status'=>200,
@@ -139,6 +142,7 @@ class PatientController extends Controller
                $patient->age=$request->input('age');
                $patient->image=$save_url;
                $patient->blood_group=$request->input('bloodgrp');
+               $patient->updated_at = Carbon::now()->timezone('CST');
                $patient->update();
                return response()->json([
                    'status'=>200,
@@ -156,7 +160,7 @@ class PatientController extends Controller
              $patient->sex=$request->input('gender1');
              $patient->dob=$request->input('dob');
              $patient->age=$request->input('age');
-             // $patient->image = 'uploads/patient/check.jpg'; 
+             $patient->updated_at = Carbon::now()->timezone('CST');
              $patient->blood_group=$request->input('bloodgrp');
              $patient->update();
              return response()->json([

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\Appointment\Appointment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
@@ -197,9 +198,20 @@ class DoctorController extends Controller
        ); 
        return redirect()->back()->with($notification);
       } 
-  public function AllDoctorView(){
+
+    // all doctor view in dashboard
+    public function AllDoctorView(){
         $listdoctors = Doctor::latest()->get();
         return view('super_admin.doctor.list_doctor',compact('listdoctors'));
     }
 
+    // single doctor view in dashboard
+    public function SingleDoctorView($id){
+        $doctor = Doctor::find($id);
+
+        $appointments = Appointment::where('doctor_id',$id)->count();
+        $appointmentsAll = Appointment::where('doctor_id',$id)->get();
+        // dd($appointmentsAll);
+        return view('super_admin.doctor.single_doctor',compact('doctor','appointments','appointmentsAll'));
+    }
 }
