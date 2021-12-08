@@ -46,6 +46,12 @@
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css">
 
+            <!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<!-- jQuery --> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -95,10 +101,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
-
+        {{-- for select 2 start --}}
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+          {{-- for select 2 end --}}
 </head>
 
-<body data-sidebar="dark">
+<body data-sidebar="dark" style="background:#f5f8fa;">
 
     <!-- Begin page -->
     <div id="layout-wrapper">
@@ -130,10 +138,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> Veltrix<span class="d-none d-sm-inline-block"> - Crafted with <i
-                                    class="mdi mdi-heart text-danger"></i> by Themesbrand.</span>
+                            2021 - Hospital Management System &copy;ExcelitAI
                         </div>
                     </div>
                 </div>
@@ -218,7 +223,7 @@
 
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+    {{-- <script src="{{ asset('backend') }}/assets/js/custom.js"></script> --}}
 
     <!-- Required datatable js -->
     <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -266,7 +271,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-
+    
+    @yield('css')
 
     {{-- js code for toaster --}}
     <script>
@@ -329,6 +335,19 @@
 
     @yield('scripts')
 
+    <script>
+            $(document).ready(function(){
+        // Initialize select2
+        $("#selUser").select2();
+        // Read selected option
+        $('#but_read').click(function(){
+        var username = $('#selUser option:selected').text();
+        var userid = $('#selUser').val();
+        $('#result').html("id : " + userid + ", name : " + username);
+        });
+        });
+    </script>
+
 </body>
 
 </html>
@@ -357,6 +376,9 @@
 
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+{{-- for select2 --}}
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 {{-- for toggle start --}}
 

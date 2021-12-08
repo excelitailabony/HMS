@@ -137,8 +137,11 @@ class NurseController extends Controller
             'status' =>200,
             'nurse' => $nurse,
         ]);
-    }//end method
-   
+    }//end method  
 
-
+    // all nurse list in dashboard
+    public function ListNurseView(){
+        $listnurses = Nurse::latest()->get();
+        return view('super_admin.nurse.list_nurses',compact('listnurses'));
+    }
 }//main end

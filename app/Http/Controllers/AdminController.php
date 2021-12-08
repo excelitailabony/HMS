@@ -17,6 +17,7 @@ use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Http\Requests\LoginRequest;
 
+
 class AdminController extends Controller
 {
     /**

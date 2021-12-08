@@ -26,6 +26,9 @@ use App\Http\Controllers\Medicine\MedicineController;
 use App\Http\Controllers\Medicine\MedicineListController;
 
 use App\Http\Controllers\Record\RecordController;
+use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Schedule\ScheduleController;
+use App\Http\Controllers\Schedule\SchedulelistController;
 
 
 /*
@@ -52,16 +55,35 @@ Route::get('/admin/profile', [AdminProfileController::class, 'AdminProfile'])->n
 
 
 // Admin Login View
-Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('super_admin.home');
-})->name('dashboard');
+// Route::middleware(['auth.admin:admin', 'verified'])->get('/admin/dashboard', function () {
+//     return view('super_admin.home');
+// })->name('dashboard');
+
+route::get('admin/dashboard',[IndexController::class,'DashboardView']);
 
 
+// frontend dashboard
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('check/view',[CheckController::class,'index'])->name('view.nurse');
+//Schedule
+Route::prefix('schedule')->group(function (){
+  Route::get('/view',[ScheduleController::class,'ViewTimeSlot'])->name('all.timeslot');
+  Route::post('/store',[ScheduleController::class,'StoreTimeSlot'])->name('store.timeslot');
+  Route::get('delete/{id}',[ScheduleController::class,'DeleteTimeSlot'])->name('delete.timeslot');
+  Route::get('edit-schedule/{id}',[ScheduleController::class,'EditTimeSlot'])->name('edit.timeslot');
+  Route::put('/update/{id}',[ScheduleController::class,'UpdateTimeSlot'])->name('update.timeslot');
+});
+
+//Schedule
+Route::prefix('schedulelist')->group(function (){
+  Route::get('/view',[SchedulelistController::class,'ViewTimeSlotlist'])->name('all.timeslotlist');
+  Route::post('/store',[SchedulelistController::class,'StoreTimeSlotlist'])->name('store.timeslotlist');
+  Route::get('delete/{id}',[SchedulelistController::class,'DeleteTimeSlotlist'])->name('delete.timeslotlist');
+  Route::get('edit-schedule/{id}',[SchedulelistController::class,'EditTimeSlotlist'])->name('edit.timeslotlist');
+  Route::put('/update/{id}',[SchedulelistController::class,'UpdateTimeSlotlist'])->name('update.timeslotlist');
+});
 
 // Nurse Start
 Route::prefix('nurse')->group(function () {
@@ -69,10 +91,11 @@ Route::prefix('nurse')->group(function () {
   Route::post('/add',[NurseController::class,'AddNurse'])->name('add.nurse');
   Route::post('/update',[NurseController::class,'UpdateNurse'])->name('update.nurse');
   Route::get('/delete/{id}',[NurseController::class,'DeleteNurse'])->name('delete.nurse');
-  Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse');
+  Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse'); 
+  Route::get('/list/view',[NurseController::class,'ListNurseView'])->name('list.nurses'); 
   });
 // Nurse End
-
+Route::get('check/view',[CheckController::class,'index'])->name('view.nurse');
 //All pharmacist  
 Route::prefix('pharmacist')->group(function () {
   Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
@@ -80,6 +103,7 @@ Route::prefix('pharmacist')->group(function () {
   Route::post('/update',[PharmacistController::class,'UpdatePharmacist'])->name('update.pharmacist');
   Route::get('/delete/{id}',[PharmacistController::class,'DeletePharmacist'])->name('delete.pharmacist');
   Route::get('edit-pharmacist/{id}',[PharmacistController::class,'EditPharmacist'])->name('edit.pharmacist');
+  Route::get('/list/view',[PharmacistController::class,'ListPharmacistView'])->name('list.pharmacists'); 
  });
 //pharmacist end
 
@@ -102,6 +126,7 @@ Route::post('/store',[PatientController::class,'StorePatient'])->name('store.pat
 Route::get('delete/{id}',[PatientController::class,'DeletePatient'])->name('delete.patient');
 Route::get('edit-patient/{id}',[PatientController::class,'EditPatient'])->name('edit.patient');
 Route::post('/update',[PatientController::class,'UpdatePatient'])->name('update.patient');
+Route::get('/list/view',[PatientController::class,'AllPatientView'])->name('list.patients');
 });
 
 
@@ -112,6 +137,7 @@ Route::prefix('doctor')->group(function () {
   Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
   Route::post('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
   Route::get('/delete{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+  Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors');
 });// Accountant All Route Group End 
 
 // Accountant Start
@@ -122,6 +148,7 @@ Route::prefix('accountant')->group(function () {
   Route::post('/update', [AccountantController::class, 'AccountUpdate'])->name('account.update');
   Route::get('/delete/{id}', [AccountantController::class, 'AccountDelete'])->name('accountant.delete'); 
   Route::get('changeStatus', [AccountantController::class, 'changeStatus']);
+  Route::get('/list/view',[AccountantController::class,'ListAccountView'])->name('list.accountant'); 
   // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
   // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
 
@@ -133,7 +160,8 @@ Route::prefix('laboratorist')->group(function () {
     Route::post('/add', [LaboratoristController::class, 'LaboratoristStore'])->name('laboratorist.add'); 
     Route::get('edit-laboratorist/{id}', [LaboratoristController::class, 'LaboratoristEdit']); 
     Route::post('/update', [LaboratoristController::class, 'LaboratoristUpdate'])->name('laboratorist.update');
-    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete');     
+    Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete');  
+    Route::get('/list/view',[LaboratoristController::class,'ListlaboratoristView'])->name('list.laboratorist');   
   });
   // Admin  Labroatorist Route Group End
 
@@ -143,7 +171,8 @@ Route::prefix('receptionist')->group(function () {
     Route::post('/add', [ReceptionistController::class, 'ReceptionistStore'])->name('receptionist.add'); 
     Route::get('edit-receptionist/{id}', [ReceptionistController::class, 'ReceptionistEdit']); 
     Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
-    Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete'); 
+    Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete');
+    Route::get('/list/view', [ReceptionistController::class, 'ListReceptionistView'])->name('list.receptionists'); 
     });// Admin Brand All Route Group End 
 
 
@@ -244,7 +273,6 @@ Route::prefix('Diagnsosis')->group(function () {
   Route::get('/delete/{id}', [DiagnosisController::class, 'DignsosisTestDelete'])->name('delete.diagnosisTest');
   Route::get('/edit-Diagnosis-test/{id}', [DiagnosisController::class, 'DiagnosisCategoryEdit']);
   Route::post('/update/test', [DiagnosisController::class, 'DiagnosisCategoryUpdate'])->name('update.diagnosisTest');   
-
 });  
 
 

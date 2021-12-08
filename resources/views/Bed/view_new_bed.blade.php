@@ -212,9 +212,11 @@
                                                     <td>{{ $newbed->charge }}</td>
                                                     <td>
                                                         @if ($newbed->status == 0)
-                                                            <span class="badge bg-success">Available</span>
+                                                            <span class="badge p-1 px-2"
+                                                                style="background-color: #45ca7f;color:white;border-radius:10px;">Available</span>
                                                         @else
-                                                            <span class="badge bg-danger">Not Available</span>
+                                                            <span class="badge p-1 px-2 bg-danger"
+                                                                style="color:white;border-radius:10px;">Not Available</span>
                                                         @endif
                                                     </td>
                                                     <td>

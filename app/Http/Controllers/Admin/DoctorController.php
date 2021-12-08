@@ -197,8 +197,12 @@ class DoctorController extends Controller
        ); 
        return redirect()->back()->with($notification);
       } 
-      public function AllDoctorView(){
+
+
+  public function AllDoctorView(){
         $listdoctors = Doctor::latest()->get();
         return view('super_admin.doctor.list_doctor',compact('listdoctors'));
     }
+
+
 }

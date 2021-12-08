@@ -11,48 +11,53 @@
          </li>
 
          <li>
-             <a href="{{ route('all.accountant') }}" class="waves-effect">
-                 <i class="ti-home"></i>
-                 <span>Accountant</span>
-             </a>
-         </li>
-
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ti-email"></i>
+                <span>Schedule</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.timeslot') }}">Time Slot List</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.timeslotlist') }}">Schedule list</a></li>
+            </ul>
+        </li>
          <li>
              <a href="{{ route('all.patient') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Patient</span>
+                 <span>Manage Patient</span>
              </a>
          </li>
 
          <li>
              <a href="{{ route('all.doctor') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Doctor</span>
+                 <span> Manage Doctor</span>
              </a>
          </li>
          <li>
              <a href="{{ route('all.laboratorist') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Laboratorist</span>
+                 <span>Manage Laboratorist</span>
              </a>
          </li>
          <li>
              <a href="{{ route('all.receptionist') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Receptionist</span>
+                 <span>Manage Receptionist</span>
              </a>
          </li>
          <li>
              <a href="{{ route('view.pharmacist') }}" class="waves-effect">
                  <i class="ti-home"></i>
-                 <span>Pharmacist</span>
+                 <span>Manage Pharmacist</span>
              </a>
          </li>
 
          <li>
              <a href="{{ route('view.nurse') }}" class="waves-effect">
                  <i class="ti-email"></i>
-                 <span>Nurse</span>
+                 <span>Manage Nurse</span>
              </a>
          </li>
          {{-- For Blood Bank --}}
@@ -78,7 +83,7 @@
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">
                  <i class="ti-email"></i>
-                 <span>Patient Bed</span>
+                 <span>Manage Bed</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.assignbed') }}">New Bed Assign</a></li>
@@ -100,7 +105,7 @@
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">
                  <i class="ti-email"></i>
-                 <span>Diagnosis</span>
+                 <span>Manage Diagnosis</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.diagnosisCategory') }}">Diagnosis Categeory</a></li>
@@ -112,7 +117,7 @@
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">
                  <i class="ti-email"></i>
-                 <span>Medicine</span>
+                 <span>Manage Medicine</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.medicinemanufacture') }}">Medicine Manufacture</a></li>
@@ -132,7 +137,7 @@
          <li>
              <a href="javascript: void(0);" class="has-arrow waves-effect">
                  <i class="ti-email"></i>
-                 <span>Record</span>
+                 <span>Manage Record</span>
              </a>
              <ul class="sub-menu" aria-expanded="false">
                  <li><a href="{{ route('all.birth_record') }}">Birth Record</a></li>
@@ -141,6 +146,15 @@
                  <li><a href="{{ route('all.death_record') }}">Death Record</a></li>
              </ul>
          </li>
+
+
+         <li>
+             <a href="{{ route('all.accountant') }}" class="waves-effect">
+                 <i class="ti-home"></i>
+                 <span>Manage Accountant</span>
+             </a>
+         </li>
+
 
      </ul>
  </div>
