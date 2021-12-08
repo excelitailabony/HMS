@@ -27,6 +27,8 @@ use App\Http\Controllers\Medicine\MedicineListController;
 
 use App\Http\Controllers\Record\RecordController;
 use App\Http\Controllers\Admin\IndexController;
+use App\Http\Controllers\Schedule\ScheduleController;
+use App\Http\Controllers\Schedule\SchedulelistController;
 
 
 /*
@@ -65,7 +67,23 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
     return view('dashboard');
 })->name('dashboard');
 
+//Schedule
+Route::prefix('schedule')->group(function (){
+  Route::get('/view',[ScheduleController::class,'ViewTimeSlot'])->name('all.timeslot');
+  Route::post('/store',[ScheduleController::class,'StoreTimeSlot'])->name('store.timeslot');
+  Route::get('delete/{id}',[ScheduleController::class,'DeleteTimeSlot'])->name('delete.timeslot');
+  Route::get('edit-schedule/{id}',[ScheduleController::class,'EditTimeSlot'])->name('edit.timeslot');
+  Route::put('/update/{id}',[ScheduleController::class,'UpdateTimeSlot'])->name('update.timeslot');
+});
 
+//Schedule
+Route::prefix('schedulelist')->group(function (){
+  Route::get('/view',[SchedulelistController::class,'ViewTimeSlotlist'])->name('all.timeslotlist');
+  Route::post('/store',[SchedulelistController::class,'StoreTimeSlotlist'])->name('store.timeslotlist');
+  Route::get('delete/{id}',[SchedulelistController::class,'DeleteTimeSlotlist'])->name('delete.timeslotlist');
+  Route::get('edit-schedule/{id}',[SchedulelistController::class,'EditTimeSlotlist'])->name('edit.timeslotlist');
+  Route::put('/update/{id}',[SchedulelistController::class,'UpdateTimeSlotlist'])->name('update.timeslotlist');
+});
 
 // Nurse Start
 Route::prefix('nurse')->group(function () {
@@ -77,7 +95,7 @@ Route::prefix('nurse')->group(function () {
   Route::get('/list/view',[NurseController::class,'ListNurseView'])->name('list.nurses'); 
   });
 // Nurse End
-
+Route::get('check/view',[CheckController::class,'index'])->name('view.nurse');
 //All pharmacist  
 Route::prefix('pharmacist')->group(function () {
   Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
