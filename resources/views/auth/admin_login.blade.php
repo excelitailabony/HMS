@@ -19,25 +19,22 @@
     <!-- App Css-->
     <link href="{{ asset('backend') }}/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css">
     <style>
-        .change{
+        .change {
             /* display:flex;
             justify-content: center; */
             align-items: center;
             margin-left: 20px;
             /* padding-left: 20px; */
-            
-
         }
-        .btn_change{
 
+        .btn_change {
             /* display: flex;
             justify-content: center; */
             align-items: center;
             padding-left: 650px;
-      
-
         }
-        </style>
+
+    </style>
 
 </head>
 
@@ -86,7 +83,7 @@
                                     <div class="mb-3 row">
                                         <div class="col-sm-6">
                                             <div class="form-check">
-                                            
+
                                                 {{-- <input type="checkbox" class="form-check-input" id="customControlInline">
                                                 <label class="form-check-label" for="customControlInline">Remember me</label> --}}
                                                 <input type="checkbox" id="remember_me" name="remember">
@@ -112,45 +109,44 @@
                         </div>
 
                     </div>
-                <br>
-                <br>
-
-
-                    <div class="mt-5 text-center">
-                        {{-- <p>Don't have an account ? <a href="pages-register.html" class="fw-medium text-primary"> Signup now </a> </p>
-                        <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Veltrix. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p> --}}
-                    </div>
+                    <br>
+                    <br>
 
 
                 </div>
             </div>
         </div>
-        <div class="btn_change"> 
-    &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-primary btn-rounded waves-effect btn-lg waves-light">SUPER ADMIN</button>
-      
-    <button type="button" class="btn btn-secondary btn-rounded waves-effect btn-lg waves-light change">DOCTOR</button>
-    <button type="button" class="btn btn-success btn-rounded waves-effect btn-lg waves-light change">RECEPTIONIST</button>
-    <button type="button" class="btn btn-danger btn-rounded waves-effect  btn-lg waves-light change">ACCOUNTANT</button>
-    <br><br>
-    <button type="button" class="btn btn-warning btn-rounded waves-effect  btn-lg waves-light change">PATIENT</button>
-    <button type="button" class="btn btn-info btn-rounded waves-effect  btn-lg waves-light change">PHARMACIST</button>
-    <button type="button" class="btn btn-light btn-rounded waves-effect  btn-lg waves-light change">LAB TECHNICIAN</button>
-    <button type="button" class="btn btn-dark btn-rounded waves-effect  btn-lg waves-light change">NURSE</button>
-    <br><br>
-    <button type="button" class="btn btn-primary btn-rounded waves-effect  btn-lg waves-light change">IT MANAGER</button>
-    <button type="button" class="btn btn-info btn-rounded waves-effect  btn-lg  waves-light change">Primary</button>
-    <button type="button" class="btn btn-success btn-rounded waves-effect  btn-lg waves-light change">Primary</button>
-     </div> 
+        <div class="btn_change">
+            &nbsp;&nbsp;&nbsp;&nbsp;<button type="button"
+                class="btn btn-primary btn-rounded waves-effect btn-lg waves-light">SUPER ADMIN</button>
+
+            <button type="button"
+                class="btn btn-secondary btn-rounded waves-effect btn-lg waves-light change">DOCTOR</button>
+            <button type="button"
+                class="btn btn-success btn-rounded waves-effect btn-lg waves-light change">RECEPTIONIST</button>
+            <button type="button"
+                class="btn btn-danger btn-rounded waves-effect  btn-lg waves-light change">ACCOUNTANT</button>
+            <br><br>
+            <button type="button"
+                class="btn btn-warning btn-rounded waves-effect  btn-lg waves-light change">PATIENT</button>
+            <button type="button"
+                class="btn btn-info btn-rounded waves-effect  btn-lg waves-light change">PHARMACIST</button>
+            <button type="button" class="btn btn-light btn-rounded waves-effect  btn-lg waves-light change">LAB
+                TECHNICIAN</button>
+            <button type="button"
+                class="btn btn-dark btn-rounded waves-effect  btn-lg waves-light change">NURSE</button>
+            <br>
+        </div>
     </div>
-{{-- <div class="conatiner">
+    {{-- <div class="conatiner">
         <div class="row">
-            <div class="col-md-12">       --}}
-     
-{{-- </div>
+            <div class="col-md-12"> --}}
+
+    {{-- </div>
 </div> 
-</div>  --}}
-   
-    
+</div> --}}
+
+
 
     <!-- JAVASCRIPT -->
 
