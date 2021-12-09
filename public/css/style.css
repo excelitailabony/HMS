@@ -50,7 +50,7 @@
 [type="file"],
 [type="email"],
 [type="datetime-local"],
-.modal-body select {
+.modal-body select option {
     height: 40px !important;
     border-radius: 20px !important;
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px !important;

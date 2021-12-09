@@ -81,7 +81,7 @@ Route::prefix('schedulelist')->group(function (){
   Route::get('/view',[SchedulelistController::class,'ViewTimeSlotlist'])->name('all.timeslotlist');
   Route::post('/store',[SchedulelistController::class,'StoreTimeSlotlist'])->name('store.timeslotlist');
   Route::get('delete/{id}',[SchedulelistController::class,'DeleteTimeSlotlist'])->name('delete.timeslotlist');
-  Route::get('edit-schedule/{id}',[SchedulelistController::class,'EditTimeSlotlist'])->name('edit.timeslotlist');
+  Route::get('edit-schedulelist/{id}',[SchedulelistController::class,'EditTimeSlotlist'])->name('edit.timeslotlist');
   Route::put('/update/{id}',[SchedulelistController::class,'UpdateTimeSlotlist'])->name('update.timeslotlist');
 });
 
