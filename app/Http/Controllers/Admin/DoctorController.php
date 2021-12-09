@@ -199,11 +199,14 @@ class DoctorController extends Controller
        return redirect()->back()->with($notification);
       } 
 
+
     // all doctor view in dashboard
     public function AllDoctorView(){
+
         $listdoctors = Doctor::latest()->get();
         return view('super_admin.doctor.list_doctor',compact('listdoctors'));
     }
+
 
     // single doctor view in dashboard
     public function SingleDoctorView($id){
@@ -214,4 +217,5 @@ class DoctorController extends Controller
         // dd($appointmentsAll);
         return view('super_admin.doctor.single_doctor',compact('doctor','appointments','appointmentsAll'));
     }
+
 }

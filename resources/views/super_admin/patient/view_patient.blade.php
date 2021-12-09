@@ -224,7 +224,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Sex</label><br>
+                                                    <label>Gender</label><br>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio" name="gender1"
                                                             id="inlineRadio1" value="male">

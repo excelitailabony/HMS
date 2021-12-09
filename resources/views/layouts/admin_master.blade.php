@@ -37,6 +37,7 @@
     <!-- Responsive datatable examples -->
     <link href="{{ asset('backend') }}/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
         rel="stylesheet" type="text/css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
@@ -236,6 +237,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 
+    @yield('css')
 
     {{-- js code for toaster --}}
     <script>
@@ -298,6 +300,19 @@
 
     @yield('scripts')
 
+    <script>
+        $(document).ready(function() {
+            // Initialize select2
+            $("#selUser").select2();
+            // Read selected option
+            $('#but_read').click(function() {
+                var username = $('#selUser option:selected').text();
+                var userid = $('#selUser').val();
+                $('#result').html("id : " + userid + ", name : " + username);
+            });
+        });
+    </script>
+
 </body>
 
 </html>
@@ -320,5 +335,6 @@
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+
 {{-- for toggle start --}}
 {{-- for toggle end --}}

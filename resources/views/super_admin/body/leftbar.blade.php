@@ -10,8 +10,18 @@
              </a>
          </li>
 
-
-
+         <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ti-email"></i>
+                <span>Schedule</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.timeslot') }}">Time Slot List</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.timeslotlist') }}">Schedule list</a></li>
+            </ul>
+        </li>
          <li>
              <a href="{{ route('all.patient') }}" class="waves-effect">
                  <i class="ti-home"></i>

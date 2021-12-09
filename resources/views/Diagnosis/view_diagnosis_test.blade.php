@@ -53,7 +53,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label>Patient</label>
-                                                        <select name="patient_id" class="form-control patient_id" required="">
+                                                        <select  class="form-control patient_id" required="">
                                                             <option value="" selected="" disabled="">Select Patient Name
                                                             </option>
                                                             @foreach ($patients as $patient)
