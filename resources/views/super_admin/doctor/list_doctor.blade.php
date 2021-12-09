@@ -20,7 +20,9 @@
                                 <div class="row d-flex justify-content-center text-center">
                                     <img src="{{ asset($listdoctor->image) }}" style="width:100px;" alt=""
                                         class="rounded-circle avatar-lg"><br>
-                                    <b>{{ $listdoctor->name }}</b><br>
+                                    <b> <a href="{{ route('single.doctor', $listdoctor->id) }}"
+                                            style="text-decoration: none;color:black;">{{ $listdoctor->name }}</a>
+                                    </b><br>
                                     <p class="text-muted mb-0">Patient Id: <b>{{ $listdoctor->id }}</b></p>
                                     <p class="mb-0">{{ $listdoctor->address }}</p>
                                 </div>
