@@ -68,6 +68,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
+
+    @yield('css')
 </head>
 
 <body data-sidebar="dark" style="background:#f5f8fa;">
@@ -91,9 +93,9 @@
         <!-- Left Sidebar End -->
 
 
-        <!-- ============================================================== -->
+        <!-- ============================ -->
         <!-- Start right Content here -->
-        <!-- ============================================================== -->
+        <!-- =========================== -->
         <div class="main-content">
 
             @yield('super-admin-content')
@@ -187,7 +189,7 @@
 
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
+    {{-- <script src="{{ asset('backend') }}/assets/js/custom.js"></script> --}}
 
     <!-- Required datatable js -->
     <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -299,8 +301,7 @@
 </body>
 
 </html>
-{{-- {{ asset('backend') }}/ --}}
-{{-- for datatable --}}
+
 <!-- Required datatable js -->
 <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>

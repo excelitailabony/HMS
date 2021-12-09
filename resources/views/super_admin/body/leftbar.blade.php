@@ -18,12 +18,17 @@
                  <span>Manage Patient</span>
              </a>
          </li>
-
          <li>
-             <a href="{{ route('all.doctor') }}" class="waves-effect">
-                 <i class="ti-home"></i>
+             <a href="javascript: void(0);" class="has-arrow waves-effect">
+                 <i class="ti-email"></i>
                  <span> Manage Doctor</span>
              </a>
+             <ul class="sub-menu" aria-expanded="false">
+                 {{-- <li><a href="{{ route('all.department') }}">Doctor Department</a></li> --}}
+             </ul>
+             <ul class="sub-menu" aria-expanded="false">
+                 <li><a href="{{ route('all.doctor') }}">All Doctor</a></li>
+             </ul>
          </li>
          <li>
              <a href="{{ route('all.laboratorist') }}" class="waves-effect">

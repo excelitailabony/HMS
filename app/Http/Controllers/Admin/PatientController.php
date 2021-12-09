@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 
 class PatientController extends Controller
@@ -21,8 +22,13 @@ class PatientController extends Controller
  
      // method for storing patient data
      public function StorePatient(Request $request){
-         $validator = Validator::make($request->all(), [
-             'name' => 'required|max:100',
+
+        $code = $request->ccode;
+        $code = explode(":",$code);
+        $code = trim($code[1]);
+
+        $validator = Validator::make($request->all(), [
+             'fname' => 'required|max:100',
              'email' => 'required|unique:patients|email',
              'password' => [
                          'required',
@@ -36,7 +42,6 @@ class PatientController extends Controller
              'blood_group' => 'required',
              'gender' => 'required',
              'age' => 'required|numeric',
- 
          ]);
          if($validator->fails())
          {
@@ -46,13 +51,17 @@ class PatientController extends Controller
              ]);
          }
          else{
+
+               $fname=$request->fname." ".$request->lname;
+
+               $phone = $code."".$request->input('phone');
                if ($request->file('image')) {
                     $patient=new Patient;
-                    $patient->name=$request->input('name');
+                    $patient->name=$fname;
                     $patient->email=$request->input('email');
-                    $patient->password=$request->input('password');
+                    $patient->password=Hash::make($request->input('password'));
                     $patient->address=$request->input('address');
-                    $patient->phone=$request->input('phone');
+                    $patient->phone=$phone;
                     $patient->sex=$request->input('gender');
                     $patient->dob=$request->input('dob');
                     $patient->age=$request->input('age');
@@ -72,11 +81,11 @@ class PatientController extends Controller
               }
              else{
                $patient=new Patient;
-               $patient->name=$request->input('name');
+               $patient->name=$fname;
                $patient->email=$request->input('email');
-               $patient->password=$request->input('password');
+               $patient->password=Hash::make($request->input('password'));
                $patient->address=$request->input('address');
-               $patient->phone=$request->input('phone');
+               $patient->phone=$phone;
                $patient->sex=$request->input('gender');
                $patient->dob=$request->input('dob');
                $patient->age=$request->input('age');

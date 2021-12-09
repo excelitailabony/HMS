@@ -19,7 +19,7 @@ class CreatePatientsTable extends Migration
             $table->string('email');
             $table->string('image')->nullable();
             $table->string('password');
-            $table->integer ('phone');
+            $table->bigInteger ('phone');
             $table->string('sex');
             $table->date('dob');
             $table->string('address');
