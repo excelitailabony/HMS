@@ -18,7 +18,8 @@ class CreateSchedulelistsTable extends Migration
             $table->string('slot_id');
             $table->string('doctor_id');
             $table->string('available_days');
-            $table->string('available_time');
+            $table->string('available_time_start');
+            $table->string('available_time_end');
             $table->string('per_patient_time');
             $table->string('serial_visiability');
             $table->string('status');

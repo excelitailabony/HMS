@@ -1,8 +1,12 @@
-@extends('layouts.admin_master')
+
+ @extends('layouts.admin_master')
 
 @section('css')
-    <style>
-        .topBar {
+
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<style>
+ .topBar {
                 margin-top: 4rem;
             }
 
@@ -59,171 +63,523 @@
     </style> 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
     <!-- jQuery --> 
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    
 @endsection 
 
-
 @section('super-admin-content')
-
 <div class="container-full topBar">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title text-center">Add Schedule
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-success add_schedule" data-bs-toggle="modal"
-                                    data-bs-target="#addModal">
-                                    Add Schedule
-                            </button>
-                        </h4>
 
-                    </div>
-                   
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
 
-                </div>
-            </div>
-               
-        </div> <!-- end col -->
-</div>
-       
-    
-    
+                    <h4 class="card-title text-center">All Schedule
+                        <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#AddEmployeeModal">ADD SCHEDULE</button>
+                    </h4>
 
+                    <!-- Modal for add patient -->
+                    <div class="modal fade bd-example-modal-lg" id="AddEmployeeModal" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Time Schedule</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Slot Name<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' class="slot_id selUser slot_id">
+                                                                    <option value="" selected="" disabled="">Select Slot Name
+                                                                    </option>
+                                                                    @foreach ($slotsnames as $slotsname)
+                                                                        <option value="{{ $slotsname->id }}">{{ $slotsname->slot_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>   
+                                                                 <span id="error_slot_name" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
+                                             <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Doctor Name<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' class="slot_id selUser doctor_id">
+                                                                    <option value="" selected="" disabled="">Select Doctor Name
+                                                                    </option>
+                                                                    @foreach ($docnames as $docname)
+                                                                        <option value="{{ $docname->id }}">{{ $docname->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                    </select> 
+                                                                    <span id="error_doctor_name" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
 
+                                             <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Available Days<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' class="slot_id selUser available_days">
+                                                                    <option value="" selected="" disabled="">Select Available Days
+                                                                    </option>
+                                                                    <option>Sunday</option>
+                                                                    <option>Monday</option>
+                                                                    <option>Tuesday</option>
+                                                                    <option>Wednesday</option>
+                                                                    <option>Thursday</option>
+                                                                    <option>Friday</option>
+                                                                    <option>Saturday</option>
+ 
+                                                            </select> 
+                                                            <span id="error_available_days" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
+        
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                     <label>Available Time<span class="errorColor"> *</span></label>
+                                                    <input type="time" id="appt" name="appt" class="form-control available_time_start" placeholder="Start Time">
+                                                    <span id="error_available_starttime" class="errorColor"></span> 
+                                                            </div>
+                                                            </div> 
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                     {{-- <label>Available Time<span class="errorColor"> *</span></label> --}}
+                                                            <br>
+                                                    <input type="time" id="appt" name="appt" class="form-control available_time_end" placeholder="End Time">
+                                                     <span id="error_available_endtime" class="errorColor"></span>
+                                                            </div>
+                                                            </div> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                     <div class="form-group">
+                                                     <label>Per Patient Time<span class="errorColor"> *</span></label>
+                                                    <input type="time" id="appt" name="appt" class="form-control per_patient_time">
+                                                     <span id="error_available_perpatienttime" class="errorColor"></span>
+                                                     </div>
+                                                </div>
+                                         
+                                                <div class="col-md-6">
+                                                     <div class="form-group">
+                                                         <label>Serial Visibility<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' class="slot_id selUser serial_visiability">
+                                                                    {{-- <option value="" selected="" disabled="">Select Available Days
+                                                                    </option> --}}
+                                                                    <option>Sequential</option>
+                                                                    <option>Timestamp</option>
+                                                            </select> 
+                                                             <span id="error_serialvisibility" class="errorColor"></span>
+                                                     </div>
+                                                </div>
+                                               <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label><br>
+                                                        <input class="form-check-input status" type="radio" name="gender"
+                                                                value="Active">Active
+                                                                <input class="form-check-input status" type="radio" name="gender" 
+                                                                 value="InActive">InActive<br>
+                                                        <span id="error_status" class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         
+                                        </div>
 
-
-
-      <!-- AddModal -->
-        <div class="modal fade bd-example-modal-lg" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Add Schedule</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    
-                    <form >
-                        @csrf
-                        <div class="modal-body">
-
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label> Slot Time</label>
-                                        <input type="number"  class="form-control slot_time" placeholder="08:00-12.00">
-                                        <span id="error_slot_time" class="errorColor"  ></span>
-                                    </div>
+                                        <div class="modal-footer">
+                                             <button  type="reset" class="but button1">Reset</button>
+                                            <button type="button" class="btn btn-info add_appointment">Save</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>Status</label><br>
-                                        <input class="form-check-input status" type="radio" name="gender"
-                                                value="Active">Active
-                                                <input class="form-check-input status" type="radio" name="gender" 
-                                                    value="InActive">InActive<br>
-                                        <span id="error_status" class="errorColor"></span>
-                                    </div>
-                                </div>
-                            </div>
-                                                                                    <div class="row">
-                                <div class="col-md-12">
-                                    <label> Doctor</label>
-                                      {{-- <select id='selUser' name="patient_name" class="patient_name form-control"
-                                                            required="" style='width: 200px;'>
-                                                            <option value="" selected="" disabled="">Select docotor Name
-                                                            </option>
-                                                            @foreach ($docnames as $patient)
-                                                                <option value="{{ $patient->id }}">{{ $patient->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select> --}}
-
-                                    {{-- <select id='selUser' style='width: 200px;'>
-                                        <option value='0'>Select User</option>
-
-                                        <option value='1'>Yogesh singh</option>
-                                        <option value='2'>Sonarika Bhadoria</option>
-                                        <option value='3'>Anil Singh</option>
-                                        <option value='4'>Vishal Sahu</option>
-                                        <option value='5'>Mayank Patidar</option>
-                                        <option value='6'>Vijay Mourya</option>
-                                        <option value='7'>Rakesh sahu</option>
-                                    </select>
-                                        <br/>
-                                         --}}
-                                        
-                                </div>
-                                
-                            </div>
-
-                            <div id='result'></div>
                         </div>
-                        <div class="modal-footer">
-                                <button  type="reset" class="but button1 ">Reset</button>
-                                    <button type="button" class="btn btn-primary add_timeslot">Save</button> 
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
-            <div class="col-md-12">
-                                    <label> Doctor</label>
-                                      {{-- <select id='selUser' name="patient_name" class="patient_name form-control"
-                                                            required="" style='width: 200px;'>
-                                                            <option value="" selected="" disabled="">Select docotor Name
-                                                            </option>
-                                                            @foreach ($docnames as $patient)
-                                                                <option value="{{ $patient->id }}">{{ $patient->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select> --}}
+                   {{-- view --}}
+                   <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-buttons"
+                                        class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline text-center align-middle"
+                                        style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
+                                        aria-describedby="datatable-buttons_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Slot Name </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Doctor Time</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Available Days</th>
+                                                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Available Time Start</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Available Time End</th>
+                                                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Per Patient Time</th>
+                                                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Serial Visibility</th>
+                                                      <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Status</th>
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
+                                                    rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending">Actions</th>
+                                            </tr>
+                                        </thead>
 
-                                    <select id='selUser' style='width: 200px;'>
-                                        <option value='0'>Select User</option>
-
-                                        <option value='1'>Yogesh singh</option>
-                                        <option value='2'>Sonarika Bhadoria</option>
-                                        <option value='3'>Anil Singh</option>
-                                        <option value='4'>Vishal Sahu</option>
-                                        <option value='5'>Mayank Patidar</option>
-                                        <option value='6'>Vijay Mourya</option>
-                                        <option value='7'>Rakesh sahu</option>
-                                    </select>
-                                        <br/>
-                                        
-                                        
+                                        <tbody>
+                                            @foreach ($diagnosiscats as $diagnosiscat)
+                                                <tr>
+                                                    <td class="dtr-control sorting_1" tabindex="0">{{ $diagnosiscat['schedulename']['slot_name'] }}</td>
+                                                      <td>{{ $diagnosiscat['docotrname']['name'] }}</td>
+                                                     <td>{{ $diagnosiscat->available_days }}</td>
+                                                      <td>{{ $diagnosiscat->available_time_start }}</td>
+                                                      <td>{{ $diagnosiscat->available_time_end }}</td>
+                                                       <td>{{ $diagnosiscat->per_patient_time }}</td>
+                                                        <td>{{ $diagnosiscat->serial_visiability }}</td>
+                                                    <td>{{ $diagnosiscat->status }}</td>
+                                                    <td>
+                                                        <button type="button" value="{{ $diagnosiscat->id }}"
+                                                            class="btn btn-success editBtn btn-sm">
+                                                            <i class="fa fa-pencil-alt"></i></button>
+                                                        <a href="{{ route('delete.timeslotlist', $diagnosiscat->id) }}"
+                                                            class="btn btn-danger btn-sm" id="delete"><i
+                                                                class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
+
+                        </div> 
+                        {{-- for edit start --}}
+                    <!-- Edit Modal -->
+                  
+                    <div class="modal fade" id="editModal"  aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Time Schedule</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+
+                                    <form action="">
+                                        @csrf
+                                        <input type="hidden" id="diagnosiscat_id" >
+
+                                        <div class="modal-body">
+                                             <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Slot Name<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;'  id="slot_id" id="selUserEdit1">
+                                                                    <option value="" selected="" disabled="">Select Slot Name
+                                                                    </option>
+                                                                    @foreach ($slotsnames as $slotsname)
+                                                                        <option value="{{ $slotsname->id }}">{{ $slotsname->slot_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>   
+                                                                 <span id="error_slot_slotidedit" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
+                                             <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Doctor Name<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' id="doctor_id" id="selUserEdit2">
+                                                                    <option value="" selected="" disabled="">Select Doctor Name
+                                                                    </option>
+                                                                    @foreach ($docnames as $docname)
+                                                                        <option value="{{ $docname->id }}">{{ $docname->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                    </select> 
+                                                                    <span id="error_doctor_nameedit" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
+
+                                             <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Available Days<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' id="available_days" id="selUserEdit3">
+                                                                    <option value="" selected="" disabled="">Select Available Days
+                                                                    </option>
+                                                                    <option>Sunday</option>
+                                                                    <option>Monday</option>
+                                                                    <option>Tuesday</option>
+                                                                    <option>Wednesday</option>
+                                                                    <option>Thursday</option>
+                                                                    <option>Friday</option>
+                                                                    <option>Saturday</option>
+ 
+                                                            </select> 
+                                                            <span id="error_available_daysedit" class="errorColor"></span> 
+                                                    </div>
+                                                </div> 
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                     <label>Available Time<span class="errorColor"> *</span></label>
+                                                    <input type="time" id="appt" name="appt" class="form-control available_time" placeholder="Start Time">
+                                                    <span id="error_available_starttime" class="errorColor"></span> 
+                                                            </div>
+                                                            </div> 
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                     {{-- <label>Available Time<span class="errorColor"> *</span></label> --}}
+                                                            <br>
+                                                    <input type="time" id="appt" name="appt" class="form-control available_times" placeholder="End Time">
+                                                     <span id="error_available_endtime" class="errorColor"></span>
+                                                            </div>
+                                                            </div> 
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                     <div class="form-group">
+                                                     <label>Per Patient Time<span class="errorColor"> *</span></label>
+                                                    <input type="time" class="form-control " id="per_patient_time">
+                                                     <span id="error_available_perpatienttimeedit" class="errorColor"></span>
+                                                     </div>
+                                                </div>
+
+                                                
+                                         
+                                                <div class="col-md-6">
+                                                     <div class="form-group">
+                                                         <label>Serial Visibility<span class="errorColor"> *</span></label>
+                                                                <select  style='width: 200px;' id="serial_visiability" id="selUserEdit4">
+                                                                    {{-- <option value="" selected="" disabled="">Select Available Days
+                                                                    </option> --}}
+                                                                    <option>Sequential</option>
+                                                                    <option>Timestamp</option>
+                                                            </select> 
+                                                             <span id="error_serialvisibilityedit" class="errorColor"></span>
+                                                     </div>
+                                                </div>
+                                               <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Status</label><br>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input status1" type="radio" name="gender1"
+                                                                id="inlineRadio1" value="Active">
+                                                            <label class="form-check-label" for="inlineRadio1">Active</label>
+                                                            
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input status1" type="radio" name="gender1"
+                                                                id="inlineRadio2" value="InActive">
+                                                            <label class="form-check-label"
+                                                                for="inlineRadio2">InActive</label>
+                                                               
+                                                        </div>
+                                                        <span id="error_statusedit" class="errorColor"></span>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+     
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button  type="reset" class="but button1 ">Reset</button>
+                                            <button type="submit" class="btn btn-rounded btn-info update_schedule_slot">update</button>
+                                        </div>
+                                    </form>
+
+                                    
+                                </div>
+                            </div>
+                        </div> 
+                 
+                           {{-- for edit end --}}
+                            
+
+                   </div>
+                </div>
+            </div> <!-- end col -->
         </div>
-
-   
-
-
+    </div>
+                        {{-- modal end --}}
 
 @endsection
+@section('scripts') 
 
-@section('scripts')
 
-    <script>
-        $(".add_schedule").on('click',function(){
-            $("#selUser").select2();
-        })
-        $(document).ready(function(){
-        // Initialize select2
-        // Read selected option
-        $('#but_read').click(function(){
-        var username = $('#selUser option:selected').text();
-          var userid = $('#selUser').val();
-                 $('#result').html("id : " + userid + ", name : " + username);
-           });
-        });
-        });
-    </script>
+
+
+<script>
+
+
+
+        $(document).ready(function() {
+    $('.selUser').select2({
+        dropdownParent: $('#AddEmployeeModal')
+    });
+    // for edit
+    $('#selUserEdit1').select2({
+        dropdownParent: $('#editModal')
+    });
+    // $('#selUserEdit2').select2({
+    //     dropdownParent: $('#editModal')
+    // });
+    // $('#selUserEdit3').select2({
+    //     dropdownParent: $('#editModal')
+    // });
+    // $('#selUserEdit4').select2({
+    //     dropdownParent: $('#editModal')
+    // });
+      // for adding data using ajax
+            $(document).on('click', '.add_appointment', function(e) {
+                e.preventDefault();
+                $(this).text('Sending..');
+                var data = {
+                    'slot_id': $('.slot_id').val(),
+                    'doctor_id': $('.doctor_id').val(),
+                    'available_days': $('.available_days').val(),
+                    'available_time_start': $('.available_time_start').val(),
+                    'available_time_end': $('.available_time_end').val(),
+                    'per_patient_time': $('.per_patient_time').val(),
+                     'serial_visiability': $('.serial_visiability').val(),
+                    'status': $('.status:checked').val(),
+                }
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "/schedulelist/store",
+                    data: data,
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.status == 400) {
+                            $('#error_slot_name').text(response.errors.slot_id);
+                            $('#error_doctor_name').text(response.errors.doctor_id);
+                            $('#error_available_days').text(response.errors.available_days);
+                            $('#error_available_starttime').text(response.errors.available_starttime);
+                            $('#error_available_endtime').text(response.errors.available_endtime);
+                            $('#error_available_perpatienttime').text(response.errors.per_patient_time);
+                            $('#error_serialvisibility').text(response.errors.available_days);   
+                            $('#error_status').text(response.errors.status);
+                            $('.add_appointment').text('Save');
+                        } else {
+                            $('#AddEmployeeModal').find('input').val('');
+                            $('.add_appointment').text('Save');
+                            $('#AddEmployeeModal').modal('hide');
+                            toastr.success(response.message);
+                            location.reload();
+                        }
+                    }
+                });
+            });
+             // // for editing data using ajax
+            $(document).on('click', '.editBtn', function() {
+                var diagnosiscat_id= $(this).val();
+                // alert(newbed_id);
+
+                $('#editModal').modal('show');
+                $.ajax({
+                    type: "GET",
+                    url: "/schedulelist/edit-schedulelist/" + diagnosiscat_id,
+                    success: function(response) {
+                          console.log(response.diagnosiscat);
+                        $('#diagnosiscat_id').val(response.diagnosiscat.id);
+                        $('#slot_id').val(response.diagnosiscat.slot_id);
+                        $('#doctor_id').val(response.diagnosiscat.doctor_id);
+                        $('#available_days').val(response.diagnosiscat.available_days);
+                        $('.available_time').val(response.diagnosiscat.available_time_start);
+                        $('.available_times').val(response.diagnosiscat.available_time_end);
+                        $('#per_patient_time').val(response.diagnosiscat.per_patient_time);
+                        $('#serial_visiability').val(response.diagnosiscat.serial_visiability);
+                        if (response.diagnosiscat.status == 'Active') {
+                            $('#editModal').find(':radio[name=gender1][value="Active"]').prop(
+                                'checked', true);
+                        } else {
+                            $('#editModal').find(':radio[name=gender1][value="InActive"]').prop(
+                                'checked', true);
+                        }
+                    }
+                })
+            });
+              // for updating data using ajax
+            $(document).on('click', '.update_schedule_slot', function (e) {
+               e.preventDefault();
+
+                $(this).text('Updating..');
+                var id = $('.available_time').val();
+                alert(id);
+
+                var data = {
+                    'slot_id': $('#slot_id').val(),
+                    'doctor_id': $('#doctor_id').val(),
+                    'available_days': $('#available_days').val(),
+                    'available_time_start': $('#available_time_start').val(),
+                    'available_time_end': $('#available_time_end').val(),
+                    'per_patient_time': $('#per_patient_time').val(),
+                     'serial_visiability': $('#serial_visiability').val(),
+                    'status': $('.status1:checked').val(),
+                    // 'slot_name': $('#slot_name').val(),
+                    // 'slot_time': $('#slot_time').val(),
+                    // 'status': $('.status1:checked').val(),
+                }
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: "PUT",
+                    url: "/schedulelist/update/" + id,
+                    data: data,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response);
+                        if (response.status == 400) {
+                            $('#error_slot_slotidedit').text(response.errors.slot_id);
+                            $('#error_doctor_nameedit').text(response.errors.doctor_id);
+                            $('#error_available_daysedit').text(response.errors.available_days);
+                            $('#error_available_starttimeedit').text(response.errors.available_starttime);
+                            $('#error_available_endtimeedit').text(response.errors.available_endtime);
+                            $('#error_available_perpatienttimeedit').text(response.errors.per_patient_time);
+                            $('#error_serialvisibilityedit').text(response.errors.available_days);   
+                            $('#error_statusedit').text(response.errors.status);
+                            $('.update_schedule_slot').text('Update');
+                        } else {
+                            $('#editModal').find('input').val('');
+                            $('.update_schedule_slot').text('Update');
+                            $('#editModal').modal('hide');
+                            toastr.success(response.message);
+                            location.reload();  
+                        }
+                    }
+                });
+
+            });
+
+ });
+
+
+
 @endsection

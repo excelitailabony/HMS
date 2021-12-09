@@ -238,7 +238,7 @@ input[type=number]::-webkit-outer-spin-button {
 
                         </div> 
 
-                    </div>
+                    </div><!--card-body end-->
                 </div>
             </div> <!-- end col -->
         </div>
@@ -299,8 +299,7 @@ input[type=number]::-webkit-outer-spin-button {
                         //   console.log(response.newbed);
                         $('#diagnosiscat_id').val(response.diagnosiscat.id);
                         $('#slot_name').val(response.diagnosiscat.slot_name);
-                        $('#slot_time').val(response.diagnosiscat.slot_time);
-    
+                        $('#slot_time').val(response.diagnosiscat.slot_time); 
                         if (response.diagnosiscat.status == 'Active') {
                             $('#editModal').find(':radio[name=gender1][value="Active"]').prop(
                                 'checked', true);
