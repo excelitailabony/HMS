@@ -42,13 +42,13 @@
                             data-bs-target="#AddEmployeeModal">ADD Doctor Dept</button>
                     </h4>
 
-                    <!-- Modal for add patient -->
+                    <!-- Modal for add doctor department -->
                     <div class="modal fade" id="AddEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add Patient</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Doctor Dept</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>

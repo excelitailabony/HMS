@@ -430,24 +430,24 @@
 
 
 
-        $(document).ready(function() {
-    $('.selUser').select2({
-        dropdownParent: $('#AddEmployeeModal')
-    });
-    // for edit
-    $('#selUserEdit1').select2({
-        dropdownParent: $('#editModal')
-    });
-    // $('#selUserEdit2').select2({
-    //     dropdownParent: $('#editModal')
-    // });
-    // $('#selUserEdit3').select2({
-    //     dropdownParent: $('#editModal')
-    // });
-    // $('#selUserEdit4').select2({
-    //     dropdownParent: $('#editModal')
-    // });
-      // for adding data using ajax
+    $(document).ready(function() {
+            $('.selUser').select2({
+                dropdownParent: $('#AddEmployeeModal')
+            });
+            // for edit
+            $('#selUserEdit1').select2({
+                dropdownParent: $('#editModal')
+            });
+            // $('#selUserEdit2').select2({
+            //     dropdownParent: $('#editModal')
+            // });
+            // $('#selUserEdit3').select2({
+            //     dropdownParent: $('#editModal')
+            // });
+            // $('#selUserEdit4').select2({
+            //     dropdownParent: $('#editModal')
+            // });
+            // for adding data using ajax
             $(document).on('click', '.add_appointment', function(e) {
                 e.preventDefault();
                 $(this).text('Sending..');

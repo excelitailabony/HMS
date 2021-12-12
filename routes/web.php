@@ -273,6 +273,7 @@ Route::prefix('Appointment')->group(function () {
   Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
   Route::get('/calender', [AppointmentController::class, 'index']);
   Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
+  Route::get('/schedule/list/{doctor_name}',[AppointmentController::class,'SlotName']);
 });
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){
