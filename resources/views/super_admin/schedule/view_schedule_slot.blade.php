@@ -239,6 +239,7 @@
                         </div>
 
                     </div>
+                    <!--card-body end-->
                 </div>
             </div> <!-- end col -->
         </div>
@@ -300,7 +301,6 @@
                         $('#diagnosiscat_id').val(response.diagnosiscat.id);
                         $('#slot_name').val(response.diagnosiscat.slot_name);
                         $('#slot_time').val(response.diagnosiscat.slot_time);
-
                         if (response.diagnosiscat.status == 'Active') {
                             $('#editModal').find(':radio[name=gender1][value="Active"]').prop(
                                 'checked', true);
