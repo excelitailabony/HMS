@@ -17,14 +17,20 @@ class CreatePatientsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('image')->nullable();
             $table->string('password');
-            $table->bigInteger ('phone');
+            $table->bigInteger('phone');
+            $table->bigInteger('mobile');
+            $table->string('blood_group');
             $table->string('sex');
             $table->date('dob');
-            $table->string('address');
             $table->integer('age');
-            $table->string('blood_group');
+            $table->string('image')->nullable();
+            $table->string('address');
+            $table->string('address2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
             $table->timestamps();
         });
     }

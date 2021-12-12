@@ -27,19 +27,20 @@
 
     </style>
 
-<div class="container-full topBar">
+    <div class="container-full topBar">
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
 
-                    <h4 class="card-title text-center">All Doctor
-                        <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal" data-bs-target="#AddEmployeeModal">ADD DOCTOR</button>
-                    </h4>
+                        <h4 class="card-title text-center">All Doctor
+                            <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal"
+                                data-bs-target="#AddEmployeeModal">ADD DOCTOR</button>
+                        </h4>
 
-                    <!-- Modal for add patient -->
-                    <div class="modal fade bd-example-modal-lg" id="AddEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <!-- Modal for add patient -->
+                        {{-- <div class="modal fade bd-example-modal-lg" id="AddEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -184,10 +185,10 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    {{-- Modal for edit patient --}}
-                    <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        {{-- Modal for edit patient --}}
+                        {{-- <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -340,16 +341,16 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table id="datatable-buttons"
-                                    class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline text-center align-middle"
-                                    style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
-                                    aria-describedby="datatable-buttons_info">
- 
+                        <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="datatable-buttons"
+                                        class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline text-center align-middle"
+                                        style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
+                                        aria-describedby="datatable-buttons_info">
+
                                         <thead>
                                             <tr role="row">
                                                 <th rowspan="1" colspan="1" style="width: 50px;">Id</th>
@@ -357,13 +358,7 @@
                                                 <th rowspan="1" colspan="1" style="width: 141px;">Image</th>
                                                 <th rowspan="1" colspan="1" style="width: 117px;">Email</th>
                                                 <th rowspan="1" colspan="1" style="width: 53p">Phone</th>
-                                                <th rowspan="1" colspan="1" style="width: 105px;">Gender
-                                                </th>
-                                                <th rowspan="1" colspan="1" style="width: 105px;">Designation
-                                                </th>
-                                                <th rowspan="1" colspan="1" style="width: 105px;">Doctor Department
-                                                </th>
-                                                <th rowspan="1" colspan="1" style="width: 105px;">Social Link
+                                                <th rowspan="1" colspan="1" style="width: 105px;">Sex
                                                 </th>
                                                 <th rowspan="1" colspan="1" style="width: 89px;">Date Of Birth</th>
                                                 <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
@@ -372,35 +367,28 @@
                                             </tr>
                                         </thead>
 
-
                                         <tbody>
-                                            
-                                     @foreach ($patients as $patient)  
-
+                                            @foreach ($doctors as $doctor)
                                                 <tr>
-                                                    <td>{{ $patient->id }}</td>
-                                                    <td>{{ $patient->name }}
+                                                    <td>{{ $doctor->id }}</td>
+                                                    <td>{{ $doctor->name }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
-                                                        alt="" style="width: 80px;">
-  
+                                                        <img src="{{ asset($doctor->image) }}" class="rounded avatar-lg"
+                                                            alt="" style="width: 80px;">
+
                                                     </td>
-                                                    <td>{{ $patient->email }}</td>
-                                                    <td>{{ $patient->phone }}</td>
-                                                    <td>{{ $patient->sex }}</td>
-                                                    <td>{{ $patient->profile }}</td>
-                                                    <td>{{ $patient->doc_dept }}</td>
-                                                    <td>{{ $patient->social_link }}</td>
-                                                    <td>{{ $patient->sex }}</td>
-                                                    <td>{{ $patient->dob }}</td>
-                                                    <td>{{ $patient->age }}</td>
-                                                    <td>{{ $patient->blood_group }}</td>
+                                                    <td>{{ $doctor->email }}</td>
+                                                    <td>+{{ $doctor->phone }}</td>
+                                                    <td>{{ $doctor->sex }}</td>
+                                                    <td>{{ $doctor->dob }}</td>
+                                                    <td>{{ $doctor->age }}</td>
+                                                    <td>{{ $doctor->blood_group }}</td>
                                                     <td>
-                                                        <button type="button" value="{{ $patient->id }}"
+                                                        <button type="button" value="{{ $doctor->id }}"
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
-                                                        <a href="{{ route('delete.doctor', $patient->id) }}"
+                                                        <a href="{{ route('delete.patient', $doctor->id) }}"
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
@@ -417,12 +405,12 @@
             </div>
         </div> <!-- end col -->
     </div>
-</div>
+    </div>
 @endsection
 
 @section('scripts')
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $(document).on('click', '.editBtn', function() {
                 var patient_id = $(this).val();
@@ -553,5 +541,5 @@
                  });
             });
         });
-    </script>
+    </script> --}}
 @endsection

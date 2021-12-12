@@ -190,7 +190,7 @@
 
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-    {{-- <script src="{{ asset('backend') }}/assets/js/custom.js"></script> --}}
+    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
 
     <!-- Required datatable js -->
     <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -299,19 +299,6 @@
     </script>
 
     @yield('scripts')
-
-    <script>
-        $(document).ready(function() {
-            // Initialize select2
-            $("#selUser").select2();
-            // Read selected option
-            $('#but_read').click(function() {
-                var username = $('#selUser option:selected').text();
-                var userid = $('#selUser').val();
-                $('#result').html("id : " + userid + ", name : " + username);
-            });
-        });
-    </script>
 
 </body>
 

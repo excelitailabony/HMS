@@ -23,10 +23,6 @@ class PatientController extends Controller
      // method for storing patient data
      public function StorePatient(Request $request){
 
-        $code = $request->ccode;
-        $code = explode(":",$code);
-        $code = trim($code[1]);
-
         $validator = Validator::make($request->all(), [
              'fname' => 'required|max:100',
              'email' => 'required|unique:patients|email',
@@ -54,15 +50,20 @@ class PatientController extends Controller
 
                $fname=$request->fname." ".$request->lname;
 
-               $phone = $code."".$request->input('phone');
                if ($request->file('image')) {
                     $patient=new Patient;
                     $patient->name=$fname;
                     $patient->email=$request->input('email');
                     $patient->password=Hash::make($request->input('password'));
                     $patient->address=$request->input('address');
-                    $patient->phone=$phone;
+                    $patient->address2=$request->input('address2');
+                    $patient->phone=$request->input('phone');
+                    $patient->mobile=$request->input('mobile');
                     $patient->sex=$request->input('gender');
+                    $patient->city=$request->input('city');
+                    $patient->facebook=$request->input('facebook');
+                    $patient->twitter=$request->input('twitter');
+                    $patient->zip=$request->input('zip');
                     $patient->dob=$request->input('dob');
                     $patient->age=$request->input('age');
                     $patient->blood_group=$request->input('blood_group');
@@ -80,19 +81,25 @@ class PatientController extends Controller
                     ]);
               }
              else{
-               $patient=new Patient;
-               $patient->name=$fname;
-               $patient->email=$request->input('email');
-               $patient->password=Hash::make($request->input('password'));
-               $patient->address=$request->input('address');
-               $patient->phone=$phone;
-               $patient->sex=$request->input('gender');
-               $patient->dob=$request->input('dob');
-               $patient->age=$request->input('age');
-               $patient->blood_group=$request->input('blood_group');
-               $patient->created_at = Carbon::now()->timezone('CST');
-               $patient->save();
-               return response()->json([
+                $patient=new Patient;
+                $patient->name=$fname;
+                $patient->email=$request->input('email');
+                $patient->password=Hash::make($request->input('password'));
+                $patient->address=$request->input('address');
+                $patient->address2=$request->input('address2');
+                $patient->phone=$request->input('phone');
+                $patient->mobile=$request->input('mobile');
+                $patient->sex=$request->input('gender');
+                $patient->city=$request->input('city');
+                $patient->facebook=$request->input('facebook');
+                $patient->twitter=$request->input('twitter');
+                $patient->zip=$request->input('zip');
+                $patient->dob=$request->input('dob');
+                $patient->age=$request->input('age');
+                $patient->blood_group=$request->input('blood_group');
+                $patient->created_at = Carbon::now()->timezone('CST');
+                $patient->save();
+                return response()->json([
                  'status'=>200,
                  'message'=>'Patient Added Successfully.'
              ]);
@@ -202,6 +209,12 @@ class PatientController extends Controller
     public function AllPatientView(){
         $listpatients = Patient::latest()->get();
         return view('super_admin.patient.list_patient',compact('listpatients'));
+    }
+
+    public function findPatientName($name)
+    {
+        $patient = Patient::where('name','like',$name)->first();
+        return response()->json($patient);
     }
 
 }
