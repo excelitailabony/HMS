@@ -26,6 +26,12 @@
             color: red;
         }
 
+        #blah {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
     </style>
 @endsection
 
@@ -52,6 +58,7 @@
                                         aria-label="Close"></button>
                                 </div>
 
+
                                 <form id="AddEmployeeFORM" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
@@ -60,8 +67,11 @@
                                                 <div class="form-group">
                                                     <label>First Name</label><span class="errorColor"> *</span>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Enter first name" name="fname">
+
+                                                        placeholder="Enter first name" id="user_name" name="fname">
                                                     <span id="error_name" class="errorColor"></span>
+                                                </div>
+                                                <div class="text-danger" id='show_user'>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -149,18 +159,18 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Image</label>
-                                                    <input type="file" class="form-control"
-                                                        placeholder="Enter your image" name="image">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <label>Image</label>
+                                                            <input type="file" class="form-control"
+                                                                placeholder="Enter your image" name="image" id="imgInp">
+                                                        </div>
+                                                        <img class="col-6" id="blah"
+                                                            src="{{ asset('backend') }}/assets/images/avatar.png"
+                                                            alt="your image" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-6"> id="imgInp"
-                                                        class="upload"
-                                                <div>
-                                                    <img src="{{ asset('backend') }}/assets/images/avatar.png" alt=""
-                                                        id="blah" height="150px;width:150px;">
-                                                </div>
-                                            </div> --}}
                                             <hr>
                                             <p><b>Adress Details</b></p>
                                             <div class="col-md-6">
@@ -514,13 +524,39 @@
         });
     });
 </script>
-{{-- <script>
+
+
+<script>
+    $('#user_name').on('keyup', function() {
+        var name = $('#user_name').val();
+        console.log(name);
+        const sgl = 'Single quotes.';
+        $.ajax({
+            type: "GET",
+            url: "/patient/find/" + name,
+            success: function(response) {
+                console.log(response);
+                if (Object.keys(response).length) {
+                    $('#show_user').empty();
+                    $('#show_user').append(response.name);
+                } else {
+                    $('#show_user').empty();
+                    $('#show_user').append('no patient found');
+                }
+            },
+            error: function(e) {
+                console.log(e);
+            }
+        });
+    })
+</script>
     imgInp.onchange = evt => {
         const [file] = imgInp.files
         if (file) {
             blah.src = URL.createObjectURL(file)
         }
-    }
-</script> --}}
+
+</script>
+
 
 @endsection

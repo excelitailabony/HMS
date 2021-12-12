@@ -70,6 +70,7 @@
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
 
+    @yield('css')
 </head>
 
 <body data-sidebar="dark" style="background:#f5f8fa;">
@@ -93,9 +94,9 @@
         <!-- Left Sidebar End -->
 
 
-        <!-- ============================================================== -->
+        <!-- ============================ -->
         <!-- Start right Content here -->
-        <!-- ============================================================== -->
+        <!-- =========================== -->
         <div class="main-content">
 
             @yield('super-admin-content')
@@ -189,7 +190,7 @@
 
     <script src="{{ asset('backend') }}/assets/js/app.js"></script>
 
-    {{-- <script src="{{ asset('backend') }}/assets/js/custom.js"></script> --}}
+    <script src="{{ asset('backend') }}/assets/js/custom.js"></script>
 
     <!-- Required datatable js -->
     <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -235,7 +236,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
-    
+
     @yield('css')
 
     {{-- js code for toaster --}}
@@ -299,24 +300,10 @@
 
     @yield('scripts')
 
-    <script>
-            $(document).ready(function(){
-        // Initialize select2
-        $("#selUser").select2();
-        // Read selected option
-        $('#but_read').click(function(){
-        var username = $('#selUser option:selected').text();
-        var userid = $('#selUser').val();
-        $('#result').html("id : " + userid + ", name : " + username);
-        });
-        });
-    </script>
-
 </body>
 
 </html>
-{{-- {{ asset('backend') }}/ --}}
-{{-- for datatable --}}
+
 <!-- Required datatable js -->
 <script src="{{ asset('backend') }}/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('backend') }}/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>

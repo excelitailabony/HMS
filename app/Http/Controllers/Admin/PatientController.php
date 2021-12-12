@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\Validator;
 use Image; 
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
+
 use App\Helpers\Helper;
+
 
 
 class PatientController extends Controller
@@ -53,8 +55,10 @@ class PatientController extends Controller
 
                if ($request->file('image')) {
                     $patient=new Patient;
+
                     $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
                     $patient->patient_id=$student_id;
+
                     $patient->name=$fname;
                     $patient->email=$request->input('email');
                     $patient->password=Hash::make($request->input('password'));
@@ -87,6 +91,7 @@ class PatientController extends Controller
                 $patient=new Patient;
                 $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
                 $patient->patient_id=$student_id;
+
                 $patient->name=$fname;
                 $patient->email=$request->input('email');
                 $patient->password=Hash::make($request->input('password'));
@@ -214,6 +219,12 @@ class PatientController extends Controller
     public function AllPatientView(){
         $listpatients = Patient::latest()->get();
         return view('super_admin.patient.list_patient',compact('listpatients'));
+    }
+
+    public function findPatientName($name)
+    {
+        $patient = Patient::where('name','like',$name)->first();
+        return response()->json($patient);
     }
 
 }

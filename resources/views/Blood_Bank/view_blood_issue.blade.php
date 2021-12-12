@@ -78,7 +78,6 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-
                                     <form>
                                         @csrf
                                         <div class="modal-body">

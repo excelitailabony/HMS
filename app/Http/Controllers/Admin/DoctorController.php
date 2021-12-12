@@ -10,13 +10,21 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
 use Illuminate\Validation\Rules\Password;
+use App\Models\DoctorDept;
 
 class DoctorController extends Controller
 {
-  // method for all patient data 
- public function index(){
-    $patients = Doctor::latest()->get();
-    return view('super_admin.doctor.view_doctor',compact('patients'));
+    // method for all patient data 
+    public function index(){
+        $doctors = Doctor::latest()->get();
+        return view('super_admin.doctor.view_doctor',compact('doctors'));
+    }
+
+    // method for add doctor page
+    public function CreateDoctor(){
+        $doctorDepts = DoctorDept::latest()->get();
+        // dd($doctorDepts);
+        return view('super_admin.doctor.add_doctor',compact('doctorDepts'));
     }
  
      // method for storing patient data

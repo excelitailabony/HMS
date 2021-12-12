@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AccountantController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Admin\DoctorController;
+use App\Http\Controllers\Admin\DoctorDeptController;
 use App\Http\Controllers\Laboratorist\LaboratoristController;
 use App\Http\Controllers\Admin\ReceptionistController;
 use App\Http\Controllers\Pharmacist\PharmacistController;
@@ -94,7 +95,9 @@ Route::prefix('nurse')->group(function () {
   Route::get('edit-nurse/{id}',[NurseController::class,'EditNurse'])->name('edit.nurse'); 
   Route::get('/list/view',[NurseController::class,'ListNurseView'])->name('list.nurses'); 
   });
+
 // Nurse End
+
 
 //All pharmacist  
 Route::prefix('pharmacist')->group(function () {
@@ -127,19 +130,32 @@ Route::get('delete/{id}',[PatientController::class,'DeletePatient'])->name('dele
 Route::get('edit-patient/{id}',[PatientController::class,'EditPatient'])->name('edit.patient');
 Route::post('/update',[PatientController::class,'UpdatePatient'])->name('update.patient');
 Route::get('/list/view',[PatientController::class,'AllPatientView'])->name('list.patients');
+Route::get('/find/{name}',[PatientController::class,'findPatientName'])->name('find.patients');
 });
 
 
 // Doctors routes goes here
 Route::prefix('doctor')->group(function () {
-  Route::get('/all',[DoctorController::class,'index'])->name('all.doctor');
+  Route::get('/all',[DoctorController::class,'index'])->name('all.doctor'); 
+  Route::get('/create',[DoctorController::class,'CreateDoctor'])->name('add.doctor');
   Route::post('/store',[DoctorController::class,'StoreDoctor'])->name('store.doctor');
   Route::get('edit-doctor/{id}',[DoctorController::class,'EditDoctor'])->name('edit.doctor');
   Route::post('/update',[DoctorController::class,'UpdateDoctor'])->name('update.doctor');
-  Route::get('/delete{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
+  Route::get('/delete/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
   Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors'); 
   Route::get('/single/view/{id}',[DoctorController::class,'SingleDoctorView'])->name('single.doctor');
 });// Accountant All Route Group End 
+
+// doctor department route goes here
+Route::prefix('doctor/dept')->group(function () {
+  Route::get('/all',[DoctorDeptController::class,'index'])->name('all.department');
+  Route::post('/store',[DoctorDeptController::class,'StoreDoctorDept']);
+  Route::get('/edit/{id}',[DoctorDeptController::class,'EditDoctorDept']);
+  Route::post('/update',[DoctorDeptController::class,'UpdateDoctorDept']);
+  Route::get('/delete/{id}',[DoctorDeptController::class,'DeleteDoctorDept'])->name('delete.doctorDept');
+  // Route::get('/list/view',[DoctorDeptController::class,'AllDoctorView'])->name('list.doctors'); 
+  // Route::get('/single/view/{id}',[DoctorDeptController::class,'SingleDoctorView'])->name('single.doctor');
+});
 
 // Accountant Start
 Route::prefix('accountant')->group(function () {
@@ -333,7 +349,3 @@ Route::prefix('Record')->group(function () {
   Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
   Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
 }); 
-
-
-
-
