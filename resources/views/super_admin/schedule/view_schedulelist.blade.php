@@ -580,6 +580,6 @@
 
  });
 
-
+</script>
 
 @endsection

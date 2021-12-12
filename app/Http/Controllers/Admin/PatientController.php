@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
+use App\Helpers\Helper;
 
 
 class PatientController extends Controller
@@ -21,8 +23,9 @@ class PatientController extends Controller
  
      // method for storing patient data
      public function StorePatient(Request $request){
-         $validator = Validator::make($request->all(), [
-             'name' => 'required|max:100',
+
+        $validator = Validator::make($request->all(), [
+             'fname' => 'required|max:100',
              'email' => 'required|unique:patients|email',
              'password' => [
                          'required',
@@ -36,7 +39,6 @@ class PatientController extends Controller
              'blood_group' => 'required',
              'gender' => 'required',
              'age' => 'required|numeric',
- 
          ]);
          if($validator->fails())
          {
@@ -46,14 +48,25 @@ class PatientController extends Controller
              ]);
          }
          else{
+
+               $fname=$request->fname." ".$request->lname;
+
                if ($request->file('image')) {
                     $patient=new Patient;
-                    $patient->name=$request->input('name');
+                    $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
+                    $patient->patient_id=$student_id;
+                    $patient->name=$fname;
                     $patient->email=$request->input('email');
-                    $patient->password=$request->input('password');
+                    $patient->password=Hash::make($request->input('password'));
                     $patient->address=$request->input('address');
+                    $patient->address2=$request->input('address2');
                     $patient->phone=$request->input('phone');
+                    $patient->mobile=$request->input('mobile');
                     $patient->sex=$request->input('gender');
+                    $patient->city=$request->input('city');
+                    $patient->facebook=$request->input('facebook');
+                    $patient->twitter=$request->input('twitter');
+                    $patient->zip=$request->input('zip');
                     $patient->dob=$request->input('dob');
                     $patient->age=$request->input('age');
                     $patient->blood_group=$request->input('blood_group');
@@ -71,19 +84,27 @@ class PatientController extends Controller
                     ]);
               }
              else{
-               $patient=new Patient;
-               $patient->name=$request->input('name');
-               $patient->email=$request->input('email');
-               $patient->password=$request->input('password');
-               $patient->address=$request->input('address');
-               $patient->phone=$request->input('phone');
-               $patient->sex=$request->input('gender');
-               $patient->dob=$request->input('dob');
-               $patient->age=$request->input('age');
-               $patient->blood_group=$request->input('blood_group');
-               $patient->created_at = Carbon::now()->timezone('CST');
-               $patient->save();
-               return response()->json([
+                $patient=new Patient;
+                $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
+                $patient->patient_id=$student_id;
+                $patient->name=$fname;
+                $patient->email=$request->input('email');
+                $patient->password=Hash::make($request->input('password'));
+                $patient->address=$request->input('address');
+                $patient->address2=$request->input('address2');
+                $patient->phone=$request->input('phone');
+                $patient->mobile=$request->input('mobile');
+                $patient->sex=$request->input('gender');
+                $patient->city=$request->input('city');
+                $patient->facebook=$request->input('facebook');
+                $patient->twitter=$request->input('twitter');
+                $patient->zip=$request->input('zip');
+                $patient->dob=$request->input('dob');
+                $patient->age=$request->input('age');
+                $patient->blood_group=$request->input('blood_group');
+                $patient->created_at = Carbon::now()->timezone('CST');
+                $patient->save();
+                return response()->json([
                  'status'=>200,
                  'message'=>'Patient Added Successfully.'
              ]);

@@ -95,7 +95,7 @@ Route::prefix('nurse')->group(function () {
   Route::get('/list/view',[NurseController::class,'ListNurseView'])->name('list.nurses'); 
   });
 // Nurse End
-Route::get('check/view',[CheckController::class,'index'])->name('view.nurse');
+
 //All pharmacist  
 Route::prefix('pharmacist')->group(function () {
   Route::get('/view',[PharmacistController::class,'ViewPharmacist'])->name('view.pharmacist');
@@ -152,6 +152,7 @@ Route::prefix('accountant')->group(function () {
   Route::get('/list/view',[AccountantController::class,'ListAccountView'])->name('list.accountant'); 
   // Route::get('/deactive/{id}', [AccountantController::class, 'AccountantDeactive'])->name('accountant.deactive'); 
   // Route::get('/active/{id}', [AccountantController::class, 'AccountantActive'])->name('accountant.active');
+  
 
   });// Admin Brand All Route Group End 
 
@@ -254,8 +255,8 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
-
   Route::get('/calender', [AppointmentController::class, 'index']);
+  Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
 });
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){
