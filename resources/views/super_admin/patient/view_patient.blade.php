@@ -67,11 +67,11 @@
                                                 <div class="form-group">
                                                     <label>First Name</label><span class="errorColor"> *</span>
                                                     <input type="text" class="form-control"
+
                                                         placeholder="Enter first name" id="user_name" name="fname">
                                                     <span id="error_name" class="errorColor"></span>
                                                 </div>
                                                 <div class="text-danger" id='show_user'>
-
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -157,7 +157,7 @@
                                                     <span id="error_age" class="errorColor"></span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-6">
@@ -171,7 +171,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <hr>
                                             <p><b>Adress Details</b></p>
                                             <div class="col-md-6">
@@ -526,6 +525,7 @@
     });
 </script>
 
+
 <script>
     $('#user_name').on('keyup', function() {
         var name = $('#user_name').val();
@@ -550,13 +550,13 @@
         });
     })
 </script>
-<script>
     imgInp.onchange = evt => {
         const [file] = imgInp.files
         if (file) {
             blah.src = URL.createObjectURL(file)
         }
-    }
+
 </script>
+
 
 @endsection

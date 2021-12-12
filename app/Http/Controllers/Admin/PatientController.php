@@ -11,6 +11,9 @@ use Image;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Hash;
 
+use App\Helpers\Helper;
+
+
 
 class PatientController extends Controller
 {
@@ -52,6 +55,10 @@ class PatientController extends Controller
 
                if ($request->file('image')) {
                     $patient=new Patient;
+
+                    $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
+                    $patient->patient_id=$student_id;
+
                     $patient->name=$fname;
                     $patient->email=$request->input('email');
                     $patient->password=Hash::make($request->input('password'));
@@ -82,6 +89,9 @@ class PatientController extends Controller
               }
              else{
                 $patient=new Patient;
+                $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
+                $patient->patient_id=$student_id;
+
                 $patient->name=$fname;
                 $patient->email=$request->input('email');
                 $patient->password=Hash::make($request->input('password'));
