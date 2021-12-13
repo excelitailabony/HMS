@@ -274,6 +274,7 @@ Route::prefix('BedAssign')->group(function () {
 // Appointment start
 Route::prefix('Appointment')->group(function () {
   Route::get('/view', [AppointmentController::class, 'AppointmentView'])->name('all.appointment');
+<<<<<<< HEAD
   // Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
   // Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   // Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
@@ -283,6 +284,15 @@ Route::prefix('Appointment')->group(function () {
   // // Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');
   // Route::post('dynamic-field/insert',[AppointmentController::class,'insert'])->name('dynamic-field.insert');
   
+=======
+  Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
+  Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
+  Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
+  Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
+  Route::get('/calender', [AppointmentController::class, 'index']);
+  Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
+  Route::get('/schedule/list/{doctor_name}',[AppointmentController::class,'SlotName']);
+>>>>>>> ef9eae67bfdb5098d46d49565a8155df9eb47c6a
 });
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){

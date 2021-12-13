@@ -364,7 +364,7 @@
         $(document).ready(function() {
             $('select[name="donor_id"]').on('change', function() {
                 var donor_id = $(this).val();
-                // alert(donor_edit_id);
+                // alert(donor_id);
                 if (donor_id) {
                     $.ajax({
                         url: "{{ url('/blood/donor/group') }}/" + donor_id,
@@ -424,7 +424,6 @@
 
                 e.preventDefault();
                 $(this).text('Sending..');
-
                 var data = {
                     'patient_name': $('.patient_name').val(),
                     'doctor_name': $('.doctor_name').val(),
@@ -433,7 +432,6 @@
                     'amount': $('.amount').val(),
                     'remarks': $('.remarks').val(),
                 }
-
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

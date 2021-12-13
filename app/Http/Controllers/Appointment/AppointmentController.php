@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Appointment\Appointment;
-use App\Models\Apointment\Apointment;
+use App\Models\DoctorDept;
+use App\Models\Schedule\Schedulelist;
 use Carbon\carbon;
 use App\Models\Event;
 use DB;
@@ -170,10 +171,22 @@ class AppointmentController extends Controller
     	}
     	return view('Appointment.appointment_calender');
     }
+
+    // for adding in appointment
     public function AppointmentView(){
+        $myDate = '12/12/2021';
+        $date = Carbon::createFromFormat('m/d/Y', $myDate)->format('l');
+        dd($date);
         $doctors=Doctor::all();
-        $patients=Patient::all();
-        return view('Appointment.appointment_view',compact('doctors','patients'));
+        $docdepts=DoctorDept::all();
+        return view('Appointment.appointment_view',compact('doctors','docdepts'));
+    }
+
+    // for getting doctors free schedule
+    public function SlotName($doctor_name){
+        $scheduleList = Schedulelist::where('doctor_id',$doctor_name)->get();
+        // dd($scheduleList);
+        return response()->json($scheduleList);
     }
     // apoointment store start
     public function AppointmentStore(Request $request){
