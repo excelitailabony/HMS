@@ -387,17 +387,15 @@
                                             <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         @foreach ($patients as $patient)
                                             <tr>
-                                                <td>{{ $patient->id }}</td>
+                                                <td>{{ $patient->patient_id }}</td>
                                                 <td>{{ $patient->name }}
                                                 </td>
                                                 <td>
                                                     <img src="{{ asset($patient->image) }}" class="rounded avatar-lg"
                                                         alt="" style="width: 80px;">
-
                                                 </td>
                                                 <td>{{ $patient->email }}</td>
                                                 <td>+{{ $patient->phone }}</td>

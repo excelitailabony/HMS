@@ -17,32 +17,32 @@
                     justify-content: space-between;
                 }
 
-                .modal-body .row .col-md-6 {
+                .card-body .row .col-md-6 {
                     margin-bottom: 1rem;
                 }
                 .errorColor {
                     color: red;
                 }
                 .but {
-                border: none;
-                color: white;
-                padding: 5px 9px; 
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                transition-duration: 0.4s;
-                cursor: pointer;
-                }
+                        border: none;
+                        color: white;
+                        padding: 5px 9px; 
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        transition-duration: 0.4s;
+                        cursor: pointer;
+                        }
                 .button1 {
-                background-color: white; 
-                color: black; 
-                border: 2px solid #c4c3c0;
-                padding: 6px 8px;
-                border-radius: 12%;
-        
-        }
+                    background-color: white; 
+                    color: black; 
+                    border: 2px solid #c4c3c0;
+                    padding: 6px 8px;
+                    border-radius: 12%;
+                
+                }
 
         .button1:hover {
         background-color: #c4c3c0;
@@ -77,14 +77,13 @@
             <div class="card">
                 <div class="card-body">
                     {{-- for modal --}}
-                                        <h4 class="card-title text-center">All Patient
+                    <h4 class="card-title text-center">All Patient
                         <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal"
                             data-bs-target="#AddEmployeeModal">ADD PATIENT</button>
                     </h4>
 
                     <!-- Modal for add patient -->
-                    <div class="modal fade bd-example-modal-lg" id="AddEmployeeModal" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="AddEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -196,13 +195,6 @@
                                                         placeholder="Enter your image" name="image">
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-md-6"> id="imgInp"
-                                                        class="upload"
-                                                <div>
-                                                    <img src="{{ asset('backend') }}/assets/images/avatar.png" alt=""
-                                                        id="blah" height="150px;width:150px;">
-                                                </div>
-                                            </div> --}}
                                             <hr>
                                             <p><b>Adress Details</b></p>
                                             <div class="col-md-6">
@@ -302,7 +294,7 @@
                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Doctor Name</label><br>
-                                     <select class="selUser" name="doctor_name" class="doctor_name">
+                                     <select class="selUser" name="doctor_name" class="doctor_name" id="doctor_name">
                                             <option value="" selected="" disabled="">Select Slot Name
                                             </option>
                                             @foreach ($doctors as $slotsname)
@@ -321,7 +313,7 @@
                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Appointment Date</label><br>
-                                     <input type="date" name="appointment_date">
+                                     <input type="date" name="appointment_date" id="appointment_date">
                                 </div>
                             </div>
                         </div>
@@ -329,7 +321,13 @@
                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Serial No</label>
-                                    <input type="text" class="form-control" placeholder="Enter patient id" name="serial_no">
+                                    <div id="serial_number" class="text-danger" name="serial_number">
+                                        <div type="button" class="btn btn-success disabled btn-sm"> 01</div>
+                                        <div type="button" class="btn btn-success disabled btn-sm"> 02</div>
+                                        <div type="button" class="btn btn-success disabled btn-sm"> 03</div>
+                                        <span class="text-success text-mute">.....</span>
+                                        <div type="button" class="btn btn-success disabled btn-sm"> N</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -337,7 +335,7 @@
                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Problems</label>
-                                     <textarea name="problem"  class="form-control" rows="5" id="comment">
+                                     <textarea name="problem"  class="form-control"  id="comment">
 
                                      </textarea>
                                 </div>
@@ -357,6 +355,11 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+
+
+                {{-- <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
+                <label class="btn btn-outline-danger btn-sm" for="danger-outlined">01</label> --}}
+
                 </div>
             </div>
         </div>
@@ -366,9 +369,10 @@
 <script>
     $(document).ready(function() {
 
-            $('.selUser').select2();
-            // for adding patient information
-            $(document).on('submit', '#AddEmployeeFORM', function(e) {
+        $('.selUser').select2();
+
+        // for adding patient information
+        $(document).on('submit', '#AddEmployeeFORM', function(e) {
                 e.preventDefault();
                 let formData = new FormData($('#AddEmployeeFORM')[0]);
                 $.ajax({
@@ -389,38 +393,41 @@
                             $('#error_age').text(response.errors.age);
                             $('#error_blood_group').text(response.errors.blood_group);
                         } else if (response.status == 200) {
-                            $('#AddEmployeeModal').modal('hide');  
-                            location.reload();
                             toastr.success(response.message);
+                              $('#user_name').val(response.patientId);
+                              $('#AddEmployeeModal').modal('hide');
+                              $('.modal-backdrop').remove();
+                            //   $('#AddEmployeeModal')[0].reset();
                         }
                     }
                 });
-            });
+        });
 
-        // for  ajax
+        // for getting patient id available or not
         $('#user_name').on('keyup', function() {
-        var name = $('#user_name').val();
-        console.log(name);
-        $.ajax({
-            type: "GET",
-            url: "/Appointment/find/" + name,
-            success: function(response) {
-                console.log(response);
-                if (Object.keys(response).length) {
-                    $('#show_user').empty();
-                    var Namedata =`<span class="text-success">&nbsp${response.name}</span>`
-                    $('#show_user').append(Namedata);
-                } else {
-                    $('#show_user').empty();
-                    $('#show_user').append('Invalid Patient Id');
+            var name = $('#user_name').val();
+            // console.log(name);
+            $.ajax({
+                type: "GET",
+                url: "/Appointment/find/" + name,
+                success: function(response) {
+                    console.log(response);
+                    if (Object.keys(response).length) {
+                        $('#show_user').empty();
+                        var Namedata =`<span class="text-success">&nbsp${response.name}</span>`
+                        $('#show_user').append(Namedata);
+                    } else {
+                        $('#show_user').empty();
+                        $('#show_user').append('Invalid Patient Id');
+                    }
+                },
+                error: function(e) {
+                    console.log(e);
                 }
-            },
-            error: function(e) {
-                console.log(e);
-            }
-          });
+            });
         })
 
+        // for getting doctors free schedule
         $('select[name="doctor_name"]').on('change', function() {
                 var doctor_name = $(this).val();
                 // alert(doctor_name);
@@ -448,9 +455,76 @@
                 } else {
                     alert('danger');
                 }
-         });
+        });
+
+        // for getting serial number on this date
+        $("#appointment_date").on("change",function(){
+            var date = $(this).val();
+            var id = $('#doctor_name').val();
+            // alert(id);
+            $.ajax({
+                type: "GET",
+                url: "/Appointment/by/date/" + date + "/id/" + id,
+                success: function(response) {
+                    console.log(response.id);
+                    if (response.serialNumber != null) {
+                        $('#serial_number').empty();
+                        for (var i=1; i <= 10; i++) {
+                            var Namedata =  
+                            `<input type="radio" class="btn-check" value="${i}" name="AppointmentSerial" id="danger-outlined${i}" autocomplete="off">
+                             <label class="btn btn-outline-danger btn-sm" for="danger-outlined${i}">${i}</label>`                            
+                            $('#serial_number').append(Namedata);  
+                        }
+                        console.log($('.serial_no'));
+                        testing();
+                    }else{
+                        if(response.id != null){
+                              $('#serial_number').empty();
+                              $('#serial_number').append("no schedule available on this date");
+                        }else{
+                              $('#serial_number').empty();
+                              $('#serial_number').append("Please select the doctor name first");
+                        }
+                    }
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+        });
+
+
+        // code for disable previous date
+        $(function() {
+            var dtToday = new Date();
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if (month < 10)
+                month = '0' + month.toString();
+            if (day < 10)
+                day = '0' + day.toString();
+            var maxDate = year + '-' + month + '-' + day;
+            $('#appointment_date').attr('min', maxDate);
+        });
         
 });
+
+        // code for select button
+        function testing()
+        {
+            $.each( $('.serial_no'), function( key, value ) {
+            var clicked = $(this).on('click',function()
+                {
+                    $.each( $('.serial_no'), function( index, data ) {
+                        $(this).css('background-color','green');
+                    });
+
+                    $(this).css('background-color','#E5343D');
+                });
+            });
+        }
+
 
 </script>
 
