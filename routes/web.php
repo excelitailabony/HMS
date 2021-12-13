@@ -188,7 +188,7 @@ Route::prefix('laboratorist')->group(function () {
     Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete');  
     Route::get('/list/view',[LaboratoristController::class,'ListlaboratoristView'])->name('list.laboratorist');   
   });
-  // Admin  Labroatorist Route Group End
+  // Labroatorist Route Group End
 
 //    Receptionist Start
 Route::prefix('receptionist')->group(function () {
@@ -198,7 +198,7 @@ Route::prefix('receptionist')->group(function () {
     Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
     Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete');
     Route::get('/list/view', [ReceptionistController::class, 'ListReceptionistView'])->name('list.receptionists'); 
-    });// Admin Brand All Route Group End 
+  });
 
 
   // Blood Issue
@@ -233,7 +233,7 @@ Route::prefix('bloodDonation')->group(function () {
   });
 //Blood Donation End
 
-// Blood Donation Start
+// Blood group Start
 Route::prefix('bloodgroup')->group(function () {
     Route::get('/view', [BloodGroupController::class, 'BloodGroupView'])->name('all.bloodgroup'); 
     Route::post('/add', [BloodGroupController::class, 'BloodGroupStore']); 
@@ -241,8 +241,9 @@ Route::prefix('bloodgroup')->group(function () {
     Route::put('/update/{id}', [BloodGroupController::class, 'BloodGroupUpdate']);
     Route::get('/delete/{id}', [BloodGroupController::class, 'BloodGroupDelete'])->name('bloodgroup.delete'); 
   });
-//Blood Donation End
+//Blood group End
 
+// new bed type
 Route::prefix('NewBedType')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedTypeView'])->name('all.newbedtype'); 
   Route::post('/add', [NewBedController::class, 'NewBedTypeStore'])->name('newbedtype.add'); 
@@ -261,7 +262,7 @@ Route::prefix('NewBed')->group(function () {
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 }); 
 
-// New Bed Start
+// New Bed Assign Start
 Route::prefix('BedAssign')->group(function () {
   Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed');
   Route::post('/add', [BedAssignController::class, 'BedAssignStore']);
@@ -274,26 +275,16 @@ Route::prefix('BedAssign')->group(function () {
 // Appointment start
 Route::prefix('Appointment')->group(function () {
   Route::get('/view', [AppointmentController::class, 'AppointmentView'])->name('all.appointment');
-<<<<<<< HEAD
-  // Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
-  // Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
-  // Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
-  // Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
-  // Route::get('/calender', [AppointmentController::class, 'index']);
-  // Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
-  // // Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');
-  // Route::post('dynamic-field/insert',[AppointmentController::class,'insert'])->name('dynamic-field.insert');
-  
-=======
   Route::post('/store', [AppointmentController::class, 'AppointmentStore'])->name('appointment.store');
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
   Route::get('/calender', [AppointmentController::class, 'index']);
-  Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
+  Route::get('/find/{name}',[AppointmentController::class,'PatientName']); 
   Route::get('/schedule/list/{doctor_name}',[AppointmentController::class,'SlotName']);
->>>>>>> ef9eae67bfdb5098d46d49565a8155df9eb47c6a
+  Route::get('/by/date/{date}/id/{id}',[AppointmentController::class,'SerialDate']);
 });
+
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){
   Route::get('/view', [NewDiagnosisController::class, 'DiagnosisCategoryView'])->name('all.diagnosisCategory');
@@ -304,7 +295,7 @@ Route::prefix('Diagnosis')->group(function (){
 });
 
 
-// Appointment start
+// Diagnosis test start
 Route::prefix('Diagnsosis')->group(function () {  
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');

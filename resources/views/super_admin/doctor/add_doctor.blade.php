@@ -245,6 +245,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Long Biography</label>
+
                                         <textarea class="ckeditor form-control" name="long_biography"></textarea>
 
                                     </div>
@@ -279,6 +280,7 @@
 
                                         </div>
                                         <span id="error_statusedit" class="errorColor"></span>
+
                                     </div>
                                 </div>
                             </div>
@@ -335,6 +337,7 @@
 
 @endsection
 @section('scripts')
+
 
     {{-- for ckeditor --}}
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
@@ -409,4 +412,5 @@
 
         });
     </script>
+
 @endsection

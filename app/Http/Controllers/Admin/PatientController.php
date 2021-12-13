@@ -58,7 +58,6 @@ class PatientController extends Controller
 
                     $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
                     $patient->patient_id=$student_id;
-
                     $patient->name=$fname;
                     $patient->email=$request->input('email');
                     $patient->password=Hash::make($request->input('password'));
@@ -82,8 +81,10 @@ class PatientController extends Controller
                     // $patient->created_at =  $date->format('d-m-y h:i:s' );
                     $patient->created_at = Carbon::now()->timezone('CST');
                     $patient->save();
+
                     return response()->json([
                         'status'=>200,
+                        'patientId' => $student_id,
                         'message'=>'Patient Added Successfully.'
                     ]);
               }
