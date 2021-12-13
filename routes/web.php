@@ -30,6 +30,7 @@ use App\Http\Controllers\Record\RecordController;
 use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Schedule\ScheduleController;
 use App\Http\Controllers\Schedule\SchedulelistController;
+use App\Http\Controllers\LanguageController;
 
 
 /*
@@ -67,7 +68,9 @@ route::get('admin/dashboard',[IndexController::class,'DashboardView']);
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+// sdfg
 
+// sdfgvb
 //Schedule
 Route::prefix('schedule')->group(function (){
   Route::get('/view',[ScheduleController::class,'ViewTimeSlot'])->name('all.timeslot');
@@ -144,6 +147,9 @@ Route::prefix('doctor')->group(function () {
   Route::get('/delete/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
   Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors'); 
   Route::get('/single/view/{id}',[DoctorController::class,'SingleDoctorView'])->name('single.doctor');
+  Route::post('dynamic-field/insert',[DoctorController::class,'insertt'])->name('dynamic-field.insert');
+   Route::get('/list',[DoctorController::class,'index'])->name('all.doctorlist'); 
+
 });// Accountant All Route Group End 
 
 // doctor department route goes here
@@ -153,6 +159,7 @@ Route::prefix('doctor/dept')->group(function () {
   Route::get('/edit/{id}',[DoctorDeptController::class,'EditDoctorDept']);
   Route::post('/update',[DoctorDeptController::class,'UpdateDoctorDept']);
   Route::get('/delete/{id}',[DoctorDeptController::class,'DeleteDoctorDept'])->name('delete.doctorDept');
+  
   // Route::get('/list/view',[DoctorDeptController::class,'AllDoctorView'])->name('list.doctors'); 
   // Route::get('/single/view/{id}',[DoctorDeptController::class,'SingleDoctorView'])->name('single.doctor');
 });
@@ -353,3 +360,6 @@ Route::prefix('Record')->group(function () {
   Route::get('/death/edit/{id}', [RecordController::class, 'DeathEdit']);
   Route::post('/death/update', [RecordController::class, 'DeathUpdate'])->name('update.death_record');
 }); 
+// Route::get('dynamic-field', [LanguageController::class,'indexx']);
+
+// Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');

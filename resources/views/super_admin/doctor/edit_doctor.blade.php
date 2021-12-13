@@ -43,14 +43,17 @@
             <div class="col-10">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('store.doctor') }}">
+                        <form method="POST" action="{{ route('update.doctor', $doctors->id) }}"
+                            enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="id" value="{{ $doctors->id }}">
+                            <input type="hidden" name="old_image" value="{{ $doctors->image }}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>First Name</label>
                                         <input type="text" class="form-control" placeholder="Enter first name"
-                                            name="first_name1">
+                                            name="first_name1" value="{{ $doctors->first_name1 }}">
                                         <span id="error_fname" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -58,7 +61,7 @@
                                     <div class="form-group">
                                         <label>Last Name</label>
                                         <input type="text" class="form-control" placeholder="Enter last name"
-                                            name="last_name1">
+                                            name="last_name1" value="{{ $doctors->last_name1 }}">
                                         <span id="error_lname" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -66,7 +69,7 @@
                                     <div class="form-group">
                                         <label>Email</label>
                                         <input type="email" class="form-control" placeholder="Enter your email"
-                                            name="email">
+                                            name="email" value="{{ $doctors->email }}">
                                         <span id="error_email" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -74,7 +77,7 @@
                                     <div class="form-group">
                                         <label>Password</label>
                                         <input type="password" class="form-control" placeholder="Enter your password"
-                                            name="password">
+                                            name="password" value="{{ $doctors->password }}">
                                         <span id="error_password" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -82,19 +85,23 @@
                                     <div class="form-group">
                                         <label>Designation</label>
                                         <input type="text" class="form-control" placeholder="Enter your designation"
-                                            name="designation">
+                                            name="designation" value="{{ $doctors->designation }}">
                                         <span id="error_profile" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Doc Dept</label>
-                                        <select name="doc_dept" class="form-control">
-                                            <option value="" selected="" disabled="">Doctor department
-                                            </option>
-                                            @foreach ($doctorDepts as $doctorDept)
-                                                <option value="A+">{{ $doctorDept->name }}</option>
+                                        <select name="doc_dept" required="" id="category_id" class="form-control"
+                                            aria-invalid="false">
+                                            <option value="" selected="" disabled="">Select Category </option>
+                                            @foreach ($DoctorDepts as $category)
+                                                <option
+                                                    value="{{ $category->id == $doctors->doc_dept ? 'selected' : '' }}">
+                                                    {{ $category->name }}
+                                                </option>
                                             @endforeach
+
                                         </select>
                                         <span id="error_doc_dept" class="errorColor"></span>
                                     </div>
@@ -105,7 +112,7 @@
                                     <div class="form-group">
                                         <label>Phone</label>
                                         <input type="text" class="form-control" placeholder="Enter phone number"
-                                            name="phone">
+                                            name="phone" value="{{ $doctors->phone }}">
                                         <span id="error_phone" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -113,7 +120,7 @@
                                     <div class="form-group">
                                         <label>Mobile</label>
                                         <input type="text" class="form-control" placeholder="Enter mobile number"
-                                            name="mobile">
+                                            name="mobile" value="{{ $doctors->mobile }}">
                                         <span id="error_mobile" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -132,7 +139,7 @@
                                         <div class="form-group">
                                             <label>Address1</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
-                                                name="address1">
+                                                name="address1" value="{{ $doctors->address1 }}">
                                             <span id="error_address" class="errorColor"></span>
                                         </div>
                                     </div>
@@ -140,7 +147,7 @@
                                         <div class="form-group">
                                             <label>Address2</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
-                                                name="address12">
+                                                name="address12" value="{{ $doctors->address12 }}">
                                             <span id="error_address" class="errorColor"></span>
                                         </div>
                                     </div>
@@ -148,7 +155,7 @@
                                         <div class="form-group">
                                             <label>City</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
-                                                name="city">
+                                                name="city" value="{{ $doctors->city }}">
                                             <span id="error_address" class="errorColor"></span>
                                         </div>
                                     </div>
@@ -156,7 +163,7 @@
                                         <div class="form-group">
                                             <label>Zip</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
-                                                name="zip">
+                                                name="zip" value="{{ $doctors->zip }}">
                                             <span id="error_address" class="errorColor"></span>
                                         </div>
                                     </div>
@@ -166,14 +173,15 @@
                                     <div class="form-group">
                                         <label>DOB</label>
                                         <input type="date" class="form-control" placeholder="Enter your birth date"
-                                            name="dob">
+                                            name="dob" value="{{ $doctors->dob }}">
                                         <span id="error_dob" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Age</label>
-                                        <input type="text" class="form-control" placeholder="Enter your age" name="age">
+                                        <input type="text" class="form-control" placeholder="Enter your age" name="age"
+                                            value="{{ $doctors->age }}">
                                         <span id="error_age" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -181,7 +189,7 @@
                                     <div class="form-group">
                                         <label>Profile</label>
                                         <input type="text" class="form-control" placeholder="Enter your speciality"
-                                            name="profile">
+                                            name="profile" value="{{ $doctors->profile }}">
                                         <span id="error_speciality" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -189,7 +197,7 @@
                                     <div class="form-group">
                                         <label>Social Link</label>
                                         <input type="text" class="form-control" placeholder="Enter doctor social link"
-                                            name="social_link">
+                                            name="social_link" value="{{ $doctors->social_link }}">
                                         <span id="error_sociallink" class="errorColor"></span>
 
                                     </div>
@@ -197,7 +205,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Blood Group</label>
-                                        <select name="blood_group" class="form-control">
+                                        <select name="blood_group" class="form-control"
+                                            value="{{ $doctors->blood_group }}">
                                             <option value="" selected="" disabled="">Select Blood group
                                             </option>
                                             <option value="A+">A+</option>
@@ -216,7 +225,7 @@
                                     <div class="form-group">
                                         <label>Image</label>
                                         <input type="file" class="form-control" onchange="loadFile(event)"
-                                            placeholder="Enter your image" name="image">
+                                            placeholder="Enter your image" name="image" value="{{ $doctors->image }}">
                                     </div>
                                 </div>
 
@@ -224,29 +233,32 @@
                                     <div class="form-group">
                                         <label>Career Title</label>
                                         <input type="text" class="form-control" placeholder="Enter career title"
-                                            name="career_title">
+                                            name="career_title" value="{{ $doctors->career_title }}">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Short Biography</label>
-                                        <textarea class="ckeditor form-control" name="short_biography"></textarea>
+                                        {{-- <textarea id="elm1" name="area"></textarea> --}}
+                                        <textarea class="ckeditor form-control" name="short_biography"
+                                            value="{{ $doctors->short_biography }}"></textarea>
 
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Specialist</label>
+                                        {{-- <textarea id="elm1" name="area"></textarea> --}}
                                         <input type="text" class="form-control" placeholder="Enter career title"
-                                            name="specialist">
+                                            name="specialist" value="{{ $doctors->specialist }}">
 
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Long Biography</label>
-
-                                        <textarea class="ckeditor form-control" name="long_biography"></textarea>
+                                        <textarea class="ckeditor form-control" name="long_biography"
+                                            value="{{ $doctors->long_biography }}"> </textarea>
 
                                     </div>
                                 </div>
@@ -256,7 +268,8 @@
                                         <label>Education Degree</label>
                                         <div class="col-md-12">
                                             <div class="jq">
-                                                <textarea class="ckeditor form-control" name="education_degree"></textarea>
+                                                <textarea class="ckeditor form-control" name="education_degree"
+                                                    value="{{ $doctors->education_degree }}"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -269,28 +282,59 @@
                                         <label>Status</label><br>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input status1" type="radio" name="status"
-                                                id="inlineRadio1" value="Active">
+                                                id="inlineRadio1" value="Active" value="{{ $doctors->status }}">
                                             <label class="form-check-label" for="inlineRadio1">Active</label>
 
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input status1" type="radio" name="status"
-                                                id="inlineRadio2" value="InActive">
+                                                id="inlineRadio2" value="InActive" value="{{ $doctors->status }}">
                                             <label class="form-check-label" for="inlineRadio2">InActive</label>
 
                                         </div>
                                         <span id="error_statusedit" class="errorColor"></span>
-
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            {{-- <div class="row">
+                                <div class="col-md-12">
+                                    <label>Language Proficiency</label>
+                                    <div class="table-responsive">
+                                        {{-- <form method="post"> --}}
+                            {{-- @csrf
+                                        <span id="result"></span>
+                                        <table class="table table-bordered table-striped" id="user_table">
+                                            <thead>
+                                                <tr>
+                                                    <th width="35%">First Name</th>
+                                                    <th width="35%">Last Name</th>
+                                                    <th width="30%">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2" align="right">&nbsp;</td>
+                                                    <td>
+                                                        @csrf
+                                                        <input type="submit" name="save" id="save" class="btn btn-primary"
+                                                            value="Save" />
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                        {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
+                            {{-- </form> --}}
+                            {{-- </div>
+                                </div>
+                            </div> --}}
+                            <input type="submit" class="btn btn-rounded btn-info" value="Update Sub Category">
                         </form>
                     </div>
 
                 </div>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-10">
@@ -328,7 +372,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             {{-- <div class="col-1"></div> --}}
         </div>
@@ -337,7 +381,6 @@
 
 @endsection
 @section('scripts')
-
 
     {{-- for ckeditor --}}
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
@@ -359,6 +402,7 @@
 
             function dynamic_field(number) {
                 html = '<tr>';
+                // html += '<td><input type="text" name="first_name[]" class="form-control" /></td>';
                 html += '<td><input type="text" name="first_name[]" class="form-control" /></td>';
                 html += '<td><input type="text" name="last_name[]" class="form-control" /></td>';
                 if (number > 1) {
@@ -412,5 +456,4 @@
 
         });
     </script>
-
 @endsection
