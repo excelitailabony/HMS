@@ -4,21 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Check;
+use Validator;
 
-class CheckController extends Controller
+class LanguageController extends Controller
 {
     //
-   
-    // public function index()
-    // {
-    //     return view('checkout');
-    // }
-    public function index()
+    public function indexx()
     {
      return view('language');
     }
 
-    public function insert(Request $request)
+    public function insertt(Request $request)
     {
      if($request->ajax())
      {
@@ -33,24 +29,25 @@ class CheckController extends Controller
         'error'  => $error->errors()->all()
        ]);
       }
-
+      $doctor_name = $request->doctor_name;
       $first_name = $request->first_name;
       $last_name = $request->last_name;
       for($count = 0; $count < count($first_name); $count++)
       {
        $data = array(
+        'doctor_name' => $doctor_name[$count],
         'first_name' => $first_name[$count],
-        'last_name'  => $last_name[$count]
+        'last_name'  => $last_name[$count],
+        
        );
        $insert_data[] = $data; 
       }
 
-      DynamicField::insert($insert_data);
+      Check::insert($insert_data);
       return response()->json([
        'success'  => 'Data Added successfully.'
       ]);
      }
     }
-
 
 }

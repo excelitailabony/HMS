@@ -67,7 +67,6 @@
                                                 <div class="form-group">
                                                     <label>First Name</label><span class="errorColor"> *</span>
                                                     <input type="text" class="form-control"
-
                                                         placeholder="Enter first name" id="user_name" name="fname">
                                                     <span id="error_name" class="errorColor"></span>
                                                 </div>
@@ -550,13 +549,16 @@
         });
     })
 </script>
+<script>
     imgInp.onchange = evt => {
         const [file] = imgInp.files
         if (file) {
+
             blah.src = URL.createObjectURL(file)
         }
-
+    }
 </script>
+
 
 
 @endsection
