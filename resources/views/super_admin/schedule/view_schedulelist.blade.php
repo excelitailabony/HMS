@@ -54,11 +54,6 @@
         .modal{
             z-index:1050 !important;
         }
-        /* input[type=number]::-webkit-inner-spin-button,
-        input[type=number]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-        } */
 
     </style> 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
@@ -111,14 +106,14 @@
                                                     <div class="form-group">
                                                         <label>Doctor Name<span class="errorColor"> *</span></label>
                                                                 <select  style='width: 200px;' class="slot_id selUser doctor_id">
-                                                                    <option value="" selected="" disabled="">Select Doctor Name
-                                                                    </option>
+                                                                <option value="" selected="" disabled="">Select Doctor Name
+                                                                </option>
                                                                     @foreach ($docnames as $docname)
                                                                         <option value="{{ $docname->id }}">{{ $docname->name }}
                                                                         </option>
                                                                     @endforeach
-                                                                    </select> 
-                                                                    <span id="error_doctor_name" class="errorColor"></span> 
+                                                                </select> 
+                                                                <span id="error_doctor_name" class="errorColor"></span> 
                                                     </div>
                                                 </div> 
 
@@ -152,7 +147,6 @@
                                                             </div> 
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                     {{-- <label>Available Time<span class="errorColor"> *</span></label> --}}
                                                             <br>
                                                     <input type="time" id="appt" name="appt" class="form-control available_time_end" placeholder="End Time">
                                                      <span id="error_available_endtime" class="errorColor"></span>
@@ -172,8 +166,6 @@
                                                      <div class="form-group">
                                                          <label>Serial Visibility<span class="errorColor"> *</span></label>
                                                                 <select  style='width: 200px;' class="slot_id selUser serial_visiability">
-                                                                    {{-- <option value="" selected="" disabled="">Select Available Days
-                                                                    </option> --}}
                                                                     <option>Sequential</option>
                                                                     <option>Timestamp</option>
                                                             </select> 
@@ -203,6 +195,7 @@
                             </div>
                         </div>
                    {{-- view --}}
+
                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="row">
                                 <div class="col-sm-12">
@@ -217,7 +210,7 @@
                                                     aria-label="Name: activate to sort column descending">Slot Name </th>
                                                 <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
-                                                    aria-label="Name: activate to sort column descending">Doctor Time</th>
+                                                    aria-label="Name: activate to sort column descending">Doctor Name</th>
                                                     <th class="sorting_asc" tabindex="0" aria-controls="datatable-buttons"
                                                     rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending">Available Days</th>
@@ -243,10 +236,10 @@
                                         </thead>
 
                                         <tbody>
-                                            @foreach ($diagnosiscats as $diagnosiscat)
+                                            @foreach ($schedulists as $diagnosiscat)
                                                 <tr>
                                                     <td class="dtr-control sorting_1" tabindex="0">{{ $diagnosiscat['schedulename']['slot_name'] }}</td>
-                                                      <td>{{ $diagnosiscat['docotrname']['name'] }}</td>
+                                                      <td>{{ $diagnosiscat['doctorname']['first_name1'] }}</td>
                                                      <td>{{ $diagnosiscat->available_days }}</td>
                                                       <td>{{ $diagnosiscat->available_time_start }}</td>
                                                       <td>{{ $diagnosiscat->available_time_end }}</td>
@@ -346,7 +339,6 @@
                                                             </div> 
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                     {{-- <label>Available Time<span class="errorColor"> *</span></label> --}}
                                                             <br>
                                                     <input type="time" id="appt" name="appt" class="form-control available_times" placeholder="End Time">
                                                      <span id="error_available_endtime" class="errorColor"></span>
@@ -361,15 +353,10 @@
                                                      <span id="error_available_perpatienttimeedit" class="errorColor"></span>
                                                      </div>
                                                 </div>
-
-                                                
-                                         
                                                 <div class="col-md-6">
                                                      <div class="form-group">
                                                          <label>Serial Visibility<span class="errorColor"> *</span></label>
                                                                 <select  style='width: 200px;' id="serial_visiability" id="selUserEdit4">
-                                                                    {{-- <option value="" selected="" disabled="">Select Available Days
-                                                                    </option> --}}
                                                                     <option>Sequential</option>
                                                                     <option>Timestamp</option>
                                                             </select> 
@@ -423,12 +410,7 @@
 @endsection
 @section('scripts') 
 
-
-
-
 <script>
-
-
 
     $(document).ready(function() {
             $('.selUser').select2({
@@ -438,15 +420,7 @@
             $('#selUserEdit1').select2({
                 dropdownParent: $('#editModal')
             });
-            // $('#selUserEdit2').select2({
-            //     dropdownParent: $('#editModal')
-            // });
-            // $('#selUserEdit3').select2({
-            //     dropdownParent: $('#editModal')
-            // });
-            // $('#selUserEdit4').select2({
-            //     dropdownParent: $('#editModal')
-            // });
+
             // for adding data using ajax
             $(document).on('click', '.add_appointment', function(e) {
                 e.preventDefault();
@@ -538,9 +512,6 @@
                     'per_patient_time': $('#per_patient_time').val(),
                      'serial_visiability': $('#serial_visiability').val(),
                     'status': $('.status1:checked').val(),
-                    // 'slot_name': $('#slot_name').val(),
-                    // 'slot_time': $('#slot_time').val(),
-                    // 'status': $('.status1:checked').val(),
                 }
 
                 $.ajaxSetup({

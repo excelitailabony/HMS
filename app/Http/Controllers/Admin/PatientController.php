@@ -55,8 +55,7 @@ class PatientController extends Controller
 
                if ($request->file('image')) {
                     $patient=new Patient;
-
-                    $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2, 'PTD'); /** Generate id */
+                    $student_id = Helper::IDGenerator(new Patient, 'patient_id', 2 , 'PTD'); /** Generate id */
                     $patient->patient_id=$student_id;
                     $patient->name=$fname;
                     $patient->email=$request->input('email');

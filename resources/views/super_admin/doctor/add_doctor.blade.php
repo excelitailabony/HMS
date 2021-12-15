@@ -93,7 +93,7 @@
                                             <option value="" selected="" disabled="">Doctor department
                                             </option>
                                             @foreach ($doctorDepts as $doctorDept)
-                                                <option value="A+">{{ $doctorDept->name }}</option>
+                                                <option value="{{ $doctorDept->id }}">{{ $doctorDept->name }}</option>
                                             @endforeach
                                         </select>
                                         <span id="error_doc_dept" class="errorColor"></span>
@@ -250,7 +250,6 @@
 
                                     </div>
                                 </div>
-
                                 <div class="col-md-12">
                                     <div class="row">
                                         <label>Education Degree</label>
@@ -261,7 +260,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -277,18 +275,14 @@
                                             <input class="form-check-input status1" type="radio" name="status"
                                                 id="inlineRadio2" value="InActive">
                                             <label class="form-check-label" for="inlineRadio2">InActive</label>
-
                                         </div>
                                         <span id="error_statusedit" class="errorColor"></span>
-
                                     </div>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
                     </div>
-
                 </div>
                 <div class="card">
                     <div class="card-body">
@@ -302,8 +296,8 @@
                                             <thead>
                                                 <tr>
 
-                                                    <th width="35%">First Name</th>
-                                                    <th width="35%">Last Name</th>
+                                                    <th width="35%">Language</th>
+                                                    <th width="35%">Rating</th>
                                                     <th width="30%">Action</th>
                                                 </tr>
                                             </thead>
@@ -312,7 +306,6 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-
                                                     <td colspan="2" align="right">&nbsp;</td>
                                                     <td>
                                                         @csrf
@@ -322,7 +315,6 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
                                 </div>
                             </div>
@@ -338,18 +330,12 @@
 @endsection
 @section('scripts')
 
-
     {{-- for ckeditor --}}
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('.ckeditor').ckeditor();
 
-        });
-    </script> --}}
     <script>
         $(document).ready(function() {
 

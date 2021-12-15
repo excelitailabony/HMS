@@ -12,7 +12,7 @@ class Schedulelist extends Model
     public function schedulename(){
         return $this->belongsTo("App\Models\Schedule\Schedule",'slot_id');
     }
-    public function docotrname(){
+    public function doctorname(){
         return $this->belongsTo("App\Models\Doctor",'doctor_id');
     }
 }

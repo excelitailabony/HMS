@@ -18,8 +18,10 @@ class SchedulelistController extends Controller
      {
          $docnames=Doctor::get()->all();
          $slotsnames=Schedule::get()->all();
-         $diagnosiscats= Schedulelist::latest()->get();
-         return view('super_admin.schedule.view_schedulelist',compact('diagnosiscats','slotsnames','docnames'));
+         $schedulists= Schedulelist::latest()->get();
+
+        //  dd($schedulists);
+         return view('super_admin.schedule.view_schedulelist',compact('schedulists','slotsnames','docnames'));
      }
       // new time slot store
       public function StoreTimeSlotlist(Request $request){   

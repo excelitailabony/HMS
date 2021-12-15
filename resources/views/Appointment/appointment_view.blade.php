@@ -26,7 +26,7 @@
                 .but {
                         border: none;
                         color: white;
-                        padding: 5px 9px; 
+                        padding: 5px 9px;
                         text-align: center;
                         text-decoration: none;
                         display: inline-block;
@@ -36,12 +36,12 @@
                         cursor: pointer;
                         }
                 .button1 {
-                    background-color: white; 
-                    color: black; 
+                    background-color: white;
+                    color: black;
                     border: 2px solid #c4c3c0;
                     padding: 6px 8px;
                     border-radius: 12%;
-                
+
                 }
 
         .button1:hover {
@@ -52,21 +52,30 @@
         .modal{
             z-index:1050 !important;
         }
-        .select2-container .select2-choice {
-            padding: 5px 10px;
-            height: 40px;
-            width: 132px; 
-            font-size: 1.2em;  
+
+        .InputRow{
+             display: flex;
+             align-items: center;
+        }
+        .selUser{
+            width:200px !important;
+        }
+        .select2.select2-container.select2-container--default{
+            width:100% !important;
         }
 
-    </style> 
+        .row{
+            margin-bottom: 1rem;
+        }
+
+    </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-    <!-- jQuery --> 
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-@endsection 
+@endsection
 
 @section('super-admin-content')
 
@@ -77,7 +86,7 @@
             <div class="card">
                 <div class="card-body">
                     {{-- for modal --}}
-                    <h4 class="card-title text-center">All Patient
+                    <h4 class="card-title text-center"> <a href="{{ url("/Appointment/view/all") }}" class="btn btn-success btn-sm">All Appointment</a>
                         <button type="button" class="btn btn-success btn-sm float-end" data-bs-toggle="modal"
                             data-bs-target="#AddEmployeeModal">ADD PATIENT</button>
                     </h4>
@@ -103,7 +112,7 @@
                                                         placeholder="Enter first name" name="fname"   >
                                                     <span id="error_name" class="errorColor"></span>
                                                 </div>
-                                                
+
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -260,113 +269,173 @@
                     </div>
                     {{-- for modal --}}
 
-             <form action="{{ route('appointment.store') }}" method="POST">
-                @csrf
+                <form action="{{ route('appointment.store') }}" method="POST">
+                    @csrf
                     <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
                                     <label for="exampleInputEmail1">Patient Id</label>
+                                </div>
+                                <div class="col-4">
                                     <input type="text" class="form-control" placeholder="Enter patient id" name="patient_id" id="user_name">
                                 </div>
-                                <div class="text-danger" id='show_user'>
-                                             
-                                </div>
                             </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4"> <div class="text-danger" id='show_user'> </div></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-4">
+                                @error('patient_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                        <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Department Name</label><br>
-                                     <select class="selUser" name="department_name">
-                                            <option value="" selected="" disabled="">Select Slot Name
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
+                                        <label for="exampleInputEmail1">Department Name</label>
+                                </div>
+                                <div class="col-4">
+                                    <select class="selUser" name="department_name">
+                                        <option value="" selected="" disabled="">Select Department Name
+                                        </option>
+                                        @foreach ($docdepts as $docdept)
+                                            <option value="{{ $docdept->id }}">{{ $docdept->name }}
                                             </option>
-                                            @foreach ($docdepts as $docdept)
-                                                <option value="{{ $docdept->id }}">{{ $docdept->name }}
-                                                </option>
-                                            @endforeach
-                                    </select>   
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    @error('department_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
+                                     <label for="exampleInputEmail1">Doctor Name</label>
+                                </div>
+                                <div class="col-4">
                                     <label for="exampleInputEmail1">Doctor Name</label><br>
-                                     <select class="selUser" name="doctor_name" class="doctor_name" id="doctor_name">
-                                            <option value="" selected="" disabled="">Select Slot Name
+                                        <select class="selUser"  name="doctor_name" class="doctor_name" id="doctor_name">
+                                            <option value="" selected="" disabled="">Select dept first
                                             </option>
-                                            @foreach ($doctors as $slotsname)
-                                                <option value="{{ $slotsname->id }}">{{ $slotsname->name }}
-                                                </option>
-                                            @endforeach
-                                    </select>  
-                                    <div id="show_slot">
-                                    
-                                    </div> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4"> <div id="show_slot" class="text-danger"> </div></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    @error('doctor_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
                                     <label for="exampleInputEmail1">Appointment Date</label><br>
-                                     <input type="date" name="appointment_date" id="appointment_date">
+                                </div>
+                                <div class="col-4">
+                                    <input type="date" class="w-100 p-3" name="appointment_date" id="appointment_date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    @error('appointment_date')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                       <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
                                     <label for="exampleInputEmail1">Serial No</label>
+                                </div>
+                                <div class="col-4">
                                     <div id="serial_number" class="text-danger" name="serial_number">
                                         <div type="button" class="btn btn-success disabled btn-sm"> 01</div>
                                         <div type="button" class="btn btn-success disabled btn-sm"> 02</div>
                                         <div type="button" class="btn btn-success disabled btn-sm"> 03</div>
-                                        <span class="text-success text-mute">.....</span>
+                                        <span class="text-success text-mute">...........................</span>
                                         <div type="button" class="btn btn-success disabled btn-sm"> N</div>
-                                    </div>
+                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-2"></div>
+                                <div class="col-4">
+                                    @error('AppointmentSerial')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                           <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1">Problems</label>
-                                     <textarea name="problem"  class="form-control"  id="comment">
-
-                                     </textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
+                                     <label for="exampleInputEmail1">Problems</label>
+                                </div>
+                                <div class="col-4">
+                                    <textarea name="problem"  class="form-control"  id="comment"> </textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Status</label><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-2 InputRow">
+                                    <label>Status</label>
+                                </div>
+                                <div class="col-4">
                                     <input class="form-check-input status" type="radio" name="status"
-                                            value="Active">Active
-                                            <input class="form-check-input status" type="radio" name="status" 
-                                                value="InActive">InActive<br>
-                                    <span id="error_status" class="errorColor"></span>
+                                        value="Active">Active
+                                    <input class="form-check-input status" type="radio" name="status"
+                                            value="InActive">InActive
                                 </div>
                             </div>
+                            <span id="error_status" class="errorColor"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-
-
-                {{-- <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off">
-                <label class="btn btn-outline-danger btn-sm" for="danger-outlined">01</label> --}}
-
+                    </div>
+                       <button type="submit" class="btn btn-primary">Submit</button>
+                   </form>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-@section('scripts') 
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
     $(document).ready(function() {
 
         $('.selUser').select2();
@@ -403,18 +472,37 @@
                 });
         });
 
+        // doctor name on department select
+        $('select[name="department_name"]').on('change', function(){
+            var department_id = $(this).val();
+            if(department_id) {
+                $.ajax({
+                    url: "/Appointment/department/doctor/" + department_id,
+                    type:"GET",
+                    dataType:"json",
+                    success:function(response) {
+                          $('select[name="doctor_name"]').html('');
+                          $('select[name="doctor_name"]').append('<option value="">Select Doctor Name</option>');
+                          $.each(response, function(key, value){
+                              $('select[name="doctor_name"]').append('<option value="'+ value.id +'">' + value.first_name1 + '</option>');
+                          });
+                    },
+                });
+            } else {
+                alert('danger');
+            }
+        });
+
         // for getting patient id available or not
         $('#user_name').on('keyup', function() {
             var name = $('#user_name').val();
-            // console.log(name);
             $.ajax({
                 type: "GET",
                 url: "/Appointment/find/" + name,
                 success: function(response) {
-                    console.log(response);
                     if (Object.keys(response).length) {
                         $('#show_user').empty();
-                        var Namedata =`<span class="text-success">&nbsp${response.name}</span>`
+                        var Namedata =`<span class="text-success">&nbsp Patient Name: ${response.name}</span>`
                         $('#show_user').append(Namedata);
                     } else {
                         $('#show_user').empty();
@@ -428,22 +516,20 @@
         })
 
         // for getting doctors free schedule
-        $('select[name="doctor_name"]').on('change', function() {
+        $('#doctor_name').on('change', function() {
                 var doctor_name = $(this).val();
-                // alert(doctor_name);
                 if (doctor_name) {
                     $.ajax({
                         url: "{{ url('/Appointment/schedule/list') }}/" + doctor_name,
                         type: "GET",
                         dataType: "json",
                         success: function(response) {
-                             console.log(response);
                              if (Object.keys(response).length) {
                                 $('#show_slot').empty();
                                 for (var i=0; i < Object.keys(response).length; i++) {
                                     var data = `<i class="text-success fas fa-calendar-alt"></i>&nbsp<span class="text-success">${response[i].available_days}</span>
                                     <span class="text-success">[${response[i].available_time_start}-${response[i].available_time_end}]</span>
-                                    <br>`             
+                                    <br>`
                                     $('#show_slot').append(data);
                                 }
                             } else {
@@ -461,22 +547,32 @@
         $("#appointment_date").on("change",function(){
             var date = $(this).val();
             var id = $('#doctor_name').val();
-            // alert(id);
             $.ajax({
                 type: "GET",
                 url: "/Appointment/by/date/" + date + "/id/" + id,
                 success: function(response) {
-                    console.log(response.id);
                     if (response.serialNumber != null) {
                         $('#serial_number').empty();
-                        for (var i=1; i <= 10; i++) {
-                            var Namedata =  
-                            `<input type="radio" class="btn-check" value="${i}" name="AppointmentSerial" id="danger-outlined${i}" autocomplete="off">
-                             <label class="btn btn-outline-danger btn-sm" for="danger-outlined${i}">${i}</label>`                            
-                            $('#serial_number').append(Namedata);  
-                        }
-                        console.log($('.serial_no'));
-                        testing();
+                        let doctor_id = $("#doctor_name").val();
+                        // disable which appointment are booked
+                        axios.get(`/Appointment/doctor/${doctor_id}`)
+                            .then(({data:{apointments}})=>{
+                                    for (var i=0; i < 10; i++) {
+                                            let item = apointments[i];
+                                            if(item && i+1 == item){
+                                                var Namedata =
+                                                `<input type="radio" class="btn-check" disabled value="${i+1}" name="AppointmentSerial" id="danger-outlined${i+1}" autocomplete="off">
+                                                <label class="btn btn-danger btn-sm" for="danger-outlined${i+1}">${i+1}</label>`
+                                                $('#serial_number').append(Namedata);
+                                            }
+                                            else{
+                                                var Namedata =
+                                                `<input type="radio" class="btn-check" value="${i+1}" name="AppointmentSerial" id="danger-outlined${i+1}" autocomplete="off">
+                                                <label class="btn btn-outline-danger btn-sm" for="danger-outlined${i+1}">${i+1}</label>`
+                                                $('#serial_number').append(Namedata);
+                                            }
+                                    }
+                            })
                     }else{
                         if(response.id != null){
                               $('#serial_number').empty();
@@ -488,11 +584,11 @@
                     }
                 },
                 error: function(e) {
-                    console.log(e);
+                    $('#serial_number').empty();
+                    $('#serial_number').append("Please select the doctor name first");
                 }
             });
         });
-
 
         // code for disable previous date
         $(function() {
@@ -507,23 +603,8 @@
             var maxDate = year + '-' + month + '-' + day;
             $('#appointment_date').attr('min', maxDate);
         });
-        
+
 });
-
-        // code for select button
-        function testing()
-        {
-            $.each( $('.serial_no'), function( key, value ) {
-            var clicked = $(this).on('click',function()
-                {
-                    $.each( $('.serial_no'), function( index, data ) {
-                        $(this).css('background-color','green');
-                    });
-
-                    $(this).css('background-color','#E5343D');
-                });
-            });
-        }
 
 
 </script>
