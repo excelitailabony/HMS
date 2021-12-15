@@ -312,7 +312,6 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-
                                                     <td colspan="2" align="right">&nbsp;</td>
                                                     <td>
                                                         @csrf

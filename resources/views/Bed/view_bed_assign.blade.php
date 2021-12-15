@@ -5,9 +5,11 @@
         .topBar {
             margin-top: 4rem;
         }
+
         .topBar {
             padding: 2rem;
         }
+
         .card-title {
             display: flex;
             justify-content: space-between;
@@ -22,7 +24,6 @@
             text-decoration: none;
             color: white;
         }
-
 
     </style>
     <div class="container-full topBar">
@@ -278,7 +279,7 @@
                                                         <b>Gender:</b> {{ $bedallotment['doctor']['sex'] }} <br>
                                                     </td>
                                                     @php
-
+                                                        
                                                         $time = explode(' ', $bedallotment->allotment_time);
                                                     @endphp
                                                     <td>
@@ -303,7 +304,6 @@
                                                             class="btn btn-success editBtn btn-sm"><i
                                                                 class="fa fa-pencil-alt"></i></button>
                                                         <a href="{{ route('allotment.delete', $bedallotment->id) }}"
-
                                                             class="btn btn-sm btn-danger" id="delete" title="delete data">
                                                             <i class="fa fa-trash"></i>
                                                         </a>

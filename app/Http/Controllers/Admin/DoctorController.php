@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Doctor\Doctor;
+use App\Models\Doctor;
 use App\Models\Check;
-use App\Models\Appointment\Appointment;
+use App\Models\Apointment\Apointment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Image; 
@@ -167,7 +167,8 @@ class DoctorController extends Controller
                   'long_biography' => $request->long_biography,
                   'education_degree' => $request->education_degree,
                   'status' => $request->status,
-        
+                  'created_at'=>$request->Carbon::now(),
+                  'updated_at'=>$request->Carbon::now()
                   ]);
         
                   $notification = array(
@@ -233,5 +234,24 @@ class DoctorController extends Controller
      }
     }
     // for language end
+
+      // all doctor view in dashboard
+    public function AllDoctorView(){
+
+        $listdoctors = Doctor::latest()->get();
+        return view('super_admin.doctor.list_doctor',compact('listdoctors'));
+    }
+
+
+    // single doctor view in dashboard
+    public function SingleDoctorView($id){
+        $doctor = Doctor::find($id);
+
+        $appointments = Apointment::where('doctor_id',$id)->count();
+        $appointmentsAll = Apointment::where('doctor_id',$id)->get();
+        // dd($appointmentsAll);
+        return view('super_admin.doctor.single_doctor',compact('doctor','appointments','appointmentsAll'));
+    }
+
 
 }

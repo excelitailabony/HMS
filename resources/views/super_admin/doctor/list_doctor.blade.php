@@ -21,7 +21,8 @@
                                     <img src="{{ asset($listdoctor->image) }}" style="width:100px;" alt=""
                                         class="rounded-circle avatar-lg"><br>
                                     <b> <a href="{{ route('single.doctor', $listdoctor->id) }}"
-                                            style="text-decoration: none;color:black;">{{ $listdoctor->name }}</a>
+                                            style="text-decoration: none;color:black;">{{ $listdoctor->first_name1 }}
+                                            {{ $listdoctor->last_name1 }}</a>
                                     </b><br>
                                     <p class="text-muted mb-0">Patient Id: <b>{{ $listdoctor->id }}</b></p>
                                     <p class="mb-0">{{ $listdoctor->address }}</p>

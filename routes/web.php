@@ -31,6 +31,7 @@ use App\Http\Controllers\Admin\IndexController;
 use App\Http\Controllers\Schedule\ScheduleController;
 use App\Http\Controllers\Schedule\SchedulelistController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\Prescription\PatientcasestudyController;
 
 
 /*
@@ -147,8 +148,8 @@ Route::prefix('doctor')->group(function () {
   Route::get('/delete/{id}',[DoctorController::class,'DeleteDoctor'])->name('delete.doctor');
   Route::get('/list/view',[DoctorController::class,'AllDoctorView'])->name('list.doctors'); 
   Route::get('/single/view/{id}',[DoctorController::class,'SingleDoctorView'])->name('single.doctor');
-  Route::post('dynamic-field/insert',[DoctorController::class,'insertt'])->name('dynamic-field.insert');
-   Route::get('/list',[DoctorController::class,'index'])->name('all.doctorlist'); 
+  // Route::post('dynamic-field/insert',[DoctorController::class,'insertt'])->name('dynamic-field.insert');
+  //  Route::get('/list',[DoctorController::class,'index'])->name('all.doctorlist'); 
 
 });// Accountant All Route Group End 
 
@@ -188,7 +189,7 @@ Route::prefix('laboratorist')->group(function () {
     Route::get('/delete/{id}', [LaboratoristController::class, 'LaboratoristDelete'])->name('laboratorist.delete');  
     Route::get('/list/view',[LaboratoristController::class,'ListlaboratoristView'])->name('list.laboratorist');   
   });
-  // Labroatorist Route Group End
+  // Admin  Labroatorist Route Group End
 
 //    Receptionist Start
 Route::prefix('receptionist')->group(function () {
@@ -198,7 +199,7 @@ Route::prefix('receptionist')->group(function () {
     Route::post('/update', [ReceptionistController::class, 'ReceptionistUpdate'])->name('receptionist.update');
     Route::get('/delete/{id}', [ReceptionistController::class, 'ReceptionistDelete'])->name('receptionist.delete');
     Route::get('/list/view', [ReceptionistController::class, 'ListReceptionistView'])->name('list.receptionists'); 
-  });
+    });// Admin Brand All Route Group End 
 
 
   // Blood Issue
@@ -233,7 +234,7 @@ Route::prefix('bloodDonation')->group(function () {
   });
 //Blood Donation End
 
-// Blood group Start
+// Blood Donation Start
 Route::prefix('bloodgroup')->group(function () {
     Route::get('/view', [BloodGroupController::class, 'BloodGroupView'])->name('all.bloodgroup'); 
     Route::post('/add', [BloodGroupController::class, 'BloodGroupStore']); 
@@ -241,9 +242,8 @@ Route::prefix('bloodgroup')->group(function () {
     Route::put('/update/{id}', [BloodGroupController::class, 'BloodGroupUpdate']);
     Route::get('/delete/{id}', [BloodGroupController::class, 'BloodGroupDelete'])->name('bloodgroup.delete'); 
   });
-//Blood group End
+//Blood Donation End
 
-// new bed type
 Route::prefix('NewBedType')->group(function () {
   Route::get('/view', [NewBedController::class, 'NewBedTypeView'])->name('all.newbedtype'); 
   Route::post('/add', [NewBedController::class, 'NewBedTypeStore'])->name('newbedtype.add'); 
@@ -262,7 +262,7 @@ Route::prefix('NewBed')->group(function () {
   Route::get('/delete/{id}', [NewBedController::class, 'NewBedDelete'])->name('newbed.delete');
 }); 
 
-// New Bed Assign Start
+// New Bed Start
 Route::prefix('BedAssign')->group(function () {
   Route::get('/view', [BedAssignController::class, 'BedAssignView'])->name('all.assignbed');
   Route::post('/add', [BedAssignController::class, 'BedAssignStore']);
@@ -279,12 +279,12 @@ Route::prefix('Appointment')->group(function () {
   Route::get('/edit/{id}', [AppointmentController::class, 'AppointmentEdit'])->name('edit.appointment');
   Route::get('/delete/{id}', [AppointmentController::class, 'AppointmentDelete'])->name('delete.appointment');
   Route::put('/update/{id}', [AppointmentController::class, 'AppointmentUpdate'])->name('update.appointment');
-  Route::get('/calender', [AppointmentController::class, 'index']);
-  Route::get('/find/{name}',[AppointmentController::class,'PatientName']); 
-  Route::get('/schedule/list/{doctor_name}',[AppointmentController::class,'SlotName']);
-  Route::get('/by/date/{date}/id/{id}',[AppointmentController::class,'SerialDate']);
+  Route::get('/calender', [AppointmentController::class, 'Calender']);
+  Route::get('/find/{name}',[AppointmentController::class,'PatientName']);
+  // Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');
+  // Route::post('dynamic-field/insert',[AppointmentController::class,'insert'])->name('dynamic-field.insert');
+  
 });
-
 // For Diagonosis
 Route::prefix('Diagnosis')->group(function (){
   Route::get('/view', [NewDiagnosisController::class, 'DiagnosisCategoryView'])->name('all.diagnosisCategory');
@@ -295,7 +295,7 @@ Route::prefix('Diagnosis')->group(function (){
 });
 
 
-// Diagnosis test start
+// Appointment start
 Route::prefix('Diagnsosis')->group(function () {  
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
   Route::post('/store', [DiagnosisController::class, 'DignsosisTestStore'])->name('store.diagnosis_test');
@@ -363,3 +363,17 @@ Route::prefix('Record')->group(function () {
 // Route::get('dynamic-field', [LanguageController::class,'indexx']);
 
 // Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');
+
+// Prescription start
+Route::prefix('Prescription')->group(function(){
+//Patient Case Study Start
+  Route::get('/view', [PatientcasestudyController::class, 'PrescriptionCaseStudyView'])->name('view.prescriptioncasestudy');
+  Route::get('/add', [PatientcasestudyController::class, 'PrescriptionCaseStudyAdd'])->name('add.prescriptioncasestudy');
+  Route::post('/store', [PatientcasestudyController::class, 'PrescriptionCaseStudyStore'])->name('store.prescriptioncasestudy');
+  Route::get('/delete/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyDelete'])->name('delete.prescriptioncasestudy');
+  Route::get('/edit-prescription/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyEdit'])->name('edit.prescriptioncasestudy');
+  //   Route::post('dynamic-field/insert',[PatientcasestudyController::class,'Ajaxinsert'])->name('dynamic-field.insert');
+  // Route::post('/update/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyUpdate'])->name('update.prescriptioncasestudy');   
+// Patient Case Study End
+});
+// prescription end

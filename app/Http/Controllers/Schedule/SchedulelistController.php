@@ -27,6 +27,13 @@ class SchedulelistController extends Controller
          $validator = Validator::make($request->all(), [
          'slot_id'=> 'required',
          'doctor_id'=>'required',
+         'available_days'=>'required',
+         'available_starttime'=>'required',
+         'available_endtime'=>'required',
+         'per_patient_time'=>'required',
+         'serialvisibility'=>'required',
+         'status'=>'required',
+         
          'status'=>'required',
              
          ]);

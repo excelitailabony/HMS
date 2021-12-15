@@ -18,7 +18,7 @@ public function bed(){
         return $this->belongsTo("App\Models\Patient",'patient_id');
     }
     public function doctor(){
-        return $this->belongsTo("App\Models\doctor",'doctor_id');
+        return $this->belongsTo("App\Models\Doctor",'doctor_id');
     }
     public function bedTypeName()
     {

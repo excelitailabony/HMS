@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Validator;
 class AppointmentController extends Controller
 {
     // apointment calender view page
-    public function index(Request $request)
+    public function Calender(Request $request)
      {
       if($request->ajax())
         { 
