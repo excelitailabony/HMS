@@ -116,10 +116,22 @@
             </ul>
         </li>
         <li>
-            <a href="{{ route('all.appointment') }}" class="waves-effect">
-                <i class="ti-home"></i>
-                <span>Appointment</span>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ti-email"></i>
+                <span>Manage Appointment</span>
             </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('add.appointment') }}">New Appointment</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.appointment') }}">All Appointment</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.assign.appointment') }}">Assign By All</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('assignTo.appointment') }}">Assign To Doctor</a></li>
+            </ul>
         </li>
 
         <li>

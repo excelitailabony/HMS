@@ -11,111 +11,100 @@ class NewDiagnosisController extends Controller
 {
 
     // New diagnosis category View
-    public function DiagnosisCategoryView(){
+    public function DiagnosisCategoryView()
+    {
 
-        $diagnosiscats= Diagnosis::latest()->get();
+        $diagnosiscats = Diagnosis::latest()->get();
         return View('Diagnosis.view_diagnosiscategory', compact('diagnosiscats'));
-  
-    }// end method
-    
+    } // end method
+
     // new Diagnosis category store
-    public function DiagnosisCategoryStore(Request $request){   
-        
+    public function DiagnosisCategoryStore(Request $request)
+    {
+
         $validator = Validator::make($request->all(), [
-        'new_diagnosis_category'=> 'required|max:10',
-        'description'=>'required|max:191',
-            
+            'new_diagnosis_category' => 'required|max:10',
+            'description' => 'required|max:191',
+
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
+                'status' => 400,
+                'errors' => $validator->messages()
             ]);
-        }
-        else
-        {
+        } else {
             $diagnosis = new Diagnosis;
             $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
             $diagnosis->description = $request->input('description');
             $diagnosis->save();
             return response()->json([
-                'status'=>200,
-                'message'=>'Diagnosis category added Successfully.'
+                'status' => 200,
+                'message' => 'Diagnosis category added Successfully.'
             ]);
             $notification = array(
-                    'message' =>  'Diagnosis category aaded Successfuly',
-                    'alert-type' => 'success'
-                );     
-                
+                'message' =>  'Diagnosis category aaded Successfuly',
+                'alert-type' => 'success'
+            );
         }
-    } // end method 
+    } // end method
 
     // new diagnosis category edit
-    public function DiagnosisCategoryEdit($id){
+    public function DiagnosisCategoryEdit($id)
+    {
         $diagnosiscat = Diagnosis::find($id);
-        if($diagnosiscat)
-        {
+        if ($diagnosiscat) {
             return response()->json([
-                'status'=>200,
-                'diagnosiscat'=> $diagnosiscat,
+                'status' => 200,
+                'diagnosiscat' => $diagnosiscat,
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
-                'status'=>404,
-                'message'=>'No diagnosis Found.'
+                'status' => 404,
+                'message' => 'No diagnosis Found.'
             ]);
         }
     }
 
 
     //  new diagnosis category update
-    public function DiagnosisCategoryUpdate(Request $request,$id){
-        
+    public function DiagnosisCategoryUpdate(Request $request, $id)
+    {
+
         $validator = Validator::make($request->all(), [
-            'new_diagnosis_category'=> 'required|max:10',
-            'description'=>'required|max:191',
+            'new_diagnosis_category' => 'required|max:10',
+            'description' => 'required|max:191',
         ]);
 
-        if($validator->fails())
-        {
+        if ($validator->fails()) {
             return response()->json([
-                'status'=>400,
-                'errors'=>$validator->messages()
+                'status' => 400,
+                'errors' => $validator->messages()
             ]);
-        }
-        else
-        {
+        } else {
             $diagnosis = Diagnosis::find($id);
-            if($diagnosis)
-            {
+            if ($diagnosis) {
                 $diagnosis->new_diagnosis_category = $request->input('new_diagnosis_category');
                 $diagnosis->description = $request->input('description');
                 $diagnosis->update();
                 return response()->json([
-                    'status'=>200,
-                    'message'=>'Diagnosis Updated Successfully.'
+                    'status' => 200,
+                    'message' => 'Diagnosis Updated Successfully.'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'No Diagnosis Found.'
                 ]);
             }
-            else
-            {
-                return response()->json([
-                    'status'=>404,
-                    'message'=>'No Diagnosis Found.'
-                ]);  
-            }
-
         }
     }
 
     //diagnosis category delete
-    public function DiagnosisCategoryDelete($id){
-        $diagnosis = Diagnosis::findOrFail($id);
-        Diagnosis::findOrFail($id)->delete(); 
-        return redirect()->back(); 
-    }//end method
+    public function DiagnosisCategoryDelete($id)
+    {
+        Diagnosis::findOrFail($id)->delete();
+        return redirect()->back();
+    } //end method
 
 }

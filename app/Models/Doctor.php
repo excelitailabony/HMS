@@ -9,4 +9,8 @@ class Doctor extends Model
 {
     use HasFactory;
      protected $guarded = [];
+
+      public function docdept(){
+        return $this->belongsTo("App\Models\DoctorDept",'doc_dept');
+    }
 }

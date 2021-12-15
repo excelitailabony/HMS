@@ -56,21 +56,6 @@
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Mobile</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Gender</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Address 1</th>
-                                                {{-- <th rowspan="1" colspan="1" style="width: 120px;">Address 2</th>
-                                                <th rowspan="1" colspan="1" style="width: 120px;">City</th>
-                                                <th rowspan="1" colspan="1" style="width: 120px;">Zip</th>
-
-                                                <th rowspan="1" colspan="1" style="width: 89px;">Date Of Birth</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Age</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Profile</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Social Link</th>
-                                                <th rowspan="1" colspan="1" style="width: 89px;">Blood Group</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Image</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Career Title</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Short Biography</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Long Biography</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">SPecialist</th>
-                                                <th rowspan="1" colspan="1" style="width: 50px;">Education Degree</th> --}}
                                                 <th rowspan="1" colspan="1" style="width: 89px;">Actions</th>
                                             </tr>
                                         </thead>
@@ -91,32 +76,6 @@
                                                     <td>{{ $doctor->mobile }}</td>
                                                     <td>{{ $doctor->sex }}</td>
                                                     <td>{{ $doctor->profile }}</td>
-                                                    {{-- <td>{{ $doctor->dob }}</td>
-                                                    <td>{{ $doctor->address1 }}</td>
-                                                    <td>{{ $doctor->address12 }}</td>
-                                                    <td>{{ $doctor->address12 }}</td>
-                                                    <td>{{ $doctor->city }}</td>
-                                                    <td>{{ $doctor->zip }}</td>
-                                                    <td>{{ $doctor->specialist }}</td>
-                                                    <td>{{ $doctor->age }}</td>
-                                                    <td>{{ $doctor->blood_group }}</td>
-                                                    <td>{{ $doctor->social_link }}</td>
-
-                                                    <td>{{ $doctor->career_title }}</td>
-                                                    <td>{{ $doctor->short_biography }}</td>
-                                                    <td>{{ $doctor->long_biography }}</td>
-                                                    <td>{{ $doctor->education_degree }}</td>
-                                                    <td>{{ $doctor->status }}</td>
-                                                    {{-- <td>{{ $doctor->city }}</td>
-                                                                            <td>{{ $doctor->city }}</td>
-                                                                              <td>{{ $doctor->city }}</td> --}}
-
-                                                    {{-- <td>{{ $doctor->email }}</td>
-                                                    <td>+{{ $doctor->phone }}</td>
-                                                    <td>{{ $doctor->sex }}</td>
-                                                    <td>{{ $doctor->dob }}</td>
-                                                    <td>{{ $doctor->age }}</td>
-                                                    <td>{{ $doctor->blood_group }}</td> --}}
                                                     <td>
 
                                                         <a href="{{ route('edit.doctor', $doctor->id) }}"
