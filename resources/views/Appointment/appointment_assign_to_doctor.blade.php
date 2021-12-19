@@ -32,7 +32,7 @@
                     style="border-collapse: collapse; border-spacing: 0px; width: 100%;" role="grid"
                     aria-describedby="datatable-buttons_info">
                     <div class="filterBox">
-                        <form id="AssignToDoctor" method="POST">
+                        <form id="AssignToDoctor">
                             @csrf
                             <select class="selUser" name="doctor_id" id="doctor_id">
                                 <option value="" selected="" disabled="">Select Doctor Name
@@ -42,9 +42,8 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <input type="date" name="starting_date">
-                            <input type="date" name="ending_date">&emsp;
-                            <button type="submit" class="btn btn-info">Filter</button>
+                            <input type="date" name="starting_date" id="starting_date">
+                            <input type="date" name="ending_date" id="ending_date">&emsp;
                         </form>
                     </div>
                     <br>
@@ -96,45 +95,53 @@ $('.selUser').select2();
 
 $(document).ready(function() {
 
-        // for adding patient information
-        $(document).on('submit', '#AssignToDoctor', function(e) {
-            e.preventDefault();
-            var id =$('#doctor_id').val();
-            // alert(id);
-            let formData = new FormData($('#AssignToDoctor')[0]);
-            $.ajax({
-                type: "POST",
-                url: "/Appointment/assign/to/doctor/ajax/" + id,
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    $('#SearchValue').empty();
-                    console.log(response.length)
-                    if( response.length != 0 ){
-                        response.forEach(function(value) {
-                        var appSearch = `<tr>
-                                        <td> ${value.id} </td>
-                                        <td> ${value.appointment_id} </td>
-                                        <td> ${value.patient_id} </td>
-                                        <td> ${value.doctor_dept.name} </td>
-                                        <td> ${value.doctor.first_name1} </td>
-                                        <td> ${value.serial_no} </td>
-                                        <td> ${value.problem} </td>
-                                        <td> ${value.appointment_date} </td>
-                                        <td>
-                                    </td>
-                                        </tr>`
-                            $('#SearchValue').append(appSearch);
-                        });
-                    }else{
-                        var noData = `<span>No data found on these criteria</span>`
-                        $('#SearchValue').append(noData);
-                    }
-                }
+        // for getting appointment between specific dates and doctor
+        $('#doctor_id').on('change', function(){
+            $('#starting_date').on('change', function(){
+                $('#ending_date').on('change', function(){
+                        var id =$('#doctor_id').val();
+                        var data = {
+                            'starting_date': $('#starting_date').val(),
+                            'ending_date': $('#ending_date').val(),
+                        }
+
+                        $.ajax({
+                        type: "POST",
+                        url: "/Appointment/assign/to/doctor/ajax/" + id,
+                        headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                        dataType: "json",
+                        data: data,
+                        success: function(response) {
+                            $('#SearchValue').empty();
+                            if( response.length != 0 ){
+                                response.forEach(function(value) {
+                                var appSearch = `<tr>
+                                                <td> ${value.id} </td>
+                                                <td> ${value.appointment_id} </td>
+                                                <td> ${value.patient_id} </td>
+                                                <td> ${value.doctor_dept.name} </td>
+                                                <td> ${value.doctor.first_name1} </td>
+                                                <td> ${value.serial_no} </td>
+                                                <td> ${value.problem} </td>
+                                                <td> ${value.appointment_date} </td>
+                                                <td>
+                                            </td>
+                                                </tr>`
+                                    $('#SearchValue').append(appSearch);
+                                });
+                            }else{
+                                var noData = `<tr>
+                                                <td colspan="8"><span>no data found in these criteria</span></td>
+                                                </tr>`
+                                $('#SearchValue').append(noData);
+                            }
+                        }
+                    });
+                });
             });
         });
-
     });
 </script>
 @endsection
