@@ -40,6 +40,25 @@
                 <li><a href="{{ route('view.prescription') }}">Prescription List</a></li>
             </ul>
         </li>
+        {{-- all the routes for appointment --}}
+        <li>
+            <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <i class="ti-email"></i>
+                <span>Manage Appointment</span>
+            </a>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('add.appointment') }}">New Appointment</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.appointment') }}">All Appointment</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('all.assign.appointment') }}">Assign By All</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('assignTo.appointment') }}">Assign To Doctor</a></li>
+            </ul>
+        </li>
         <li>
             <a href="{{ route('all.patient') }}" class="waves-effect">
                 <i class="ti-home"></i>
@@ -121,25 +140,6 @@
                 <li><a href="{{ route('all.newbedtype') }}">New Bed Type</a></li>
             </ul>
         </li>
-        <li>
-            <a href="javascript: void(0);" class="has-arrow waves-effect">
-                <i class="ti-email"></i>
-                <span>Manage Appointment</span>
-            </a>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('add.appointment') }}">New Appointment</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('all.appointment') }}">All Appointment</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('all.assign.appointment') }}">Assign By All</a></li>
-            </ul>
-            <ul class="sub-menu" aria-expanded="false">
-                <li><a href="{{ route('assignTo.appointment') }}">Assign To Doctor</a></li>
-            </ul>
-        </li>
-
         <li>
             <a href="javascript: void(0);" class="has-arrow waves-effect">
                 <i class="ti-email"></i>

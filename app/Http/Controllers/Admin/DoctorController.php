@@ -9,28 +9,29 @@ use App\Models\Check;
 use App\Models\Apointment\Apointment;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-use Image; 
+use Image;
 use Illuminate\Validation\Rules\Password;
 use App\Models\DoctorDept;
 use DB;
 
 class DoctorController extends Controller
 {
-    // method for all patient data 
-    public function index(){
-       $doctorDepts = DoctorDept::latest()->get();
+    // method for all patient data
+    public function index()
+    {
+        $doctorDepts = DoctorDept::latest()->get();
         $doctors = Doctor::latest()->get();
-        return view('super_admin.doctor.view_doctor',compact('doctors','doctorDepts'));
+        return view('super_admin.doctor.view_doctor', compact('doctors', 'doctorDepts'));
     }
 
     // method for add doctor page
-    public function CreateDoctor(){
+    public function CreateDoctor()
+    {
         $doctorDepts = DoctorDept::latest()->get();
-        return view('super_admin.doctor.add_doctor',compact('doctorDepts'));
+        return view('super_admin.doctor.add_doctor', compact('doctorDepts'));
     }
- 
 
-//      // method for storing patient data
+   // method for storing patient data
      public function StoreDoctor(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -111,12 +112,16 @@ class DoctorController extends Controller
         public function EditDoctor($id){
               $DoctorDepts = DoctorDept::orderBy('name', 'ASC')->get();
 
-              $doctors = Doctor::findOrfail($id);
+        $doctors = Doctor::findOrfail($id);
 
-            return view('super_admin.doctor.edit_doctor', compact('doctors','DoctorDepts'));                
-        }
-        // update Doctor
-        public function UpdateDoctor(Request $request){
+        return view('super_admin.doctor.edit_doctor', compact('doctors', 'DoctorDepts'));
+    }
+    // update Doctor
+    public function UpdateDoctor(Request $request)
+    {
+
+        $doctor_id = $request->id;
+        $old_img  = $request->old_image;
 
             $validator = Validator::make($request->all(), [
               'email' => 'required',
@@ -218,7 +223,11 @@ class DoctorController extends Controller
      } // method end
                       // delete sub category
 
-      public function DeleteDoctor($id){
+    // method end
+    // delete sub category
+
+    public function DeleteDoctor($id)
+    {
 
         $doctor = Doctor::findOrFail($id);
 
@@ -236,23 +245,23 @@ class DoctorController extends Controller
     } // end method
 
 
-      // all doctor view in dashboard
-    public function AllDoctorView(){
+    // all doctor view in dashboard
+    public function AllDoctorView()
+    {
 
         $listdoctors = Doctor::latest()->get();
-        return view('super_admin.doctor.list_doctor',compact('listdoctors'));
+        return view('super_admin.doctor.list_doctor', compact('listdoctors'));
     }
 
 
     // single doctor view in dashboard
-    public function SingleDoctorView($id){
+    public function SingleDoctorView($id)
+    {
         $doctor = Doctor::find($id);
 
-        $appointments = Apointment::where('doctor_id',$id)->count();
-        $appointmentsAll = Apointment::where('doctor_id',$id)->get();
+        $appointments = Apointment::where('doctor_id', $id)->count();
+        $appointmentsAll = Apointment::where('doctor_id', $id)->get();
         // dd($appointmentsAll);
-        return view('super_admin.doctor.single_doctor',compact('doctor','appointments','appointmentsAll'));
+        return view('super_admin.doctor.single_doctor', compact('doctor', 'appointments', 'appointmentsAll'));
     }
-
-
 }

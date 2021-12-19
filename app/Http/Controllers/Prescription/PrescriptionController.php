@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\Prescription\PatientCaseStudy;
 use App\Models\Patient;
 use App\Models\Prescription\Prescription;
+use App\Models\Check;
+use App\Models\Prescription\Others_Case_Study;
+use DB;
+use Illuminate\Support\Facades\Validator;
 
-class PrescriptionController extends Controller
+class PatientcasestudyController extends Controller
 {
     //
    public function PrescriptionAdd()
@@ -17,15 +21,19 @@ class PrescriptionController extends Controller
    }
 
  public function DeatilsPrescription($id)
- {
-      $patients  =  Patient::where('patient_id', $id)->get();
-     $casestudy  =  PatientCaseStudy::where('patient_id', $id)->get();
-        return response()->json([
-            'status' => 200,
-            'patients' => $patients ,
-            'casestudy' => $casestudy,
-        ]);
- }
- 
-}
+    {
+        $patients  =  Patient::where('patient_id', $id)->get();
+        $casestudy  =  PatientCaseStudy::where('patient_id', $id)->get();
+            return response()->json([
+                'status' => 200,
+                'patients' => $patients ,
+                'casestudy' => $casestudy,
+            ]);
+    }
 
+    public function Patientname($patientname)
+    {
+        $patient = Patient::where('patient_id', 'like', $patientname)->first();
+        return response()->json($patient);
+    }
+}
