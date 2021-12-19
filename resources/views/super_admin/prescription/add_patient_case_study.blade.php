@@ -63,8 +63,12 @@
                                     <div class="form-group">
                                         <label>Patient id</label>
                                         <input type="text" class="form-control" name="patient_id"
-                                            placeholder="Enter first name" class="patient_id" id="patient_id"
+                                            placeholder="Enter first name" class="patient_id" id="patient_name"
                                             placeholder="Enter Patient id">
+                                            <div class="row">
+                                                <div class="col-2"></div>
+                                                <div class="col-4"> <div class="text-danger" id='show_user'> </div></div>
+                                            </div>
                                         <span id="error_patient_id" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -298,6 +302,27 @@
                 $(this).closest("tr").remove();
             });
 
+          // for getting patient id available or not
+        $('#patient_name').on('keyup', function() {
+            var name = $('#patient_name').val();
+            $.ajax({
+                type: "GET",
+                url: "/Prescription/findout/" + name,
+                success: function(response) {
+                    if (Object.keys(response).length) {
+                        $('#show_user').empty();
+                        var Namedata =`<span class="text-success">&nbsp Patient Name: ${response.name}</span>`
+                        $('#show_user').append(Namedata);
+                    } else {
+                        $('#show_user').empty();
+                        $('#show_user').append('Invalid Patient Id');
+                    }
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+        })
 
         });
     </script>
