@@ -63,8 +63,14 @@
                                     <div class="form-group">
                                         <label>Patient id</label>
                                         <input type="text" class="form-control" name="patient_id"
-                                            placeholder="Enter first name" class="patient_id" id="patient_id"
+                                            placeholder="Enter first name" class="patient_id" id="patient_name"
                                             placeholder="Enter Patient id">
+                                        <div class="row">
+                                            <div class="col-2"></div>
+                                            <div class="col-4">
+                                                <div class="text-danger" id='show_user'> </div>
+                                            </div>
+                                        </div>
                                         <span id="error_patient_id" class="errorColor"></span>
                                     </div>
                                 </div>
@@ -115,6 +121,12 @@
                                         <label>Accident</label>
                                         <input type="text" class="form-control" name="accident"
                                             placeholder="Enter Accident">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Weight</label>
+                                        <input type="text" class="form-control" name="weight" placeholder="Enter weight">
                                     </div>
                                 </div>
                             </div>
@@ -252,10 +264,11 @@
             let others = $("#others").val();
 
             let formData = new FormData($('#AddEmployeeFORM')[0]);
-            axios.post('/Prescription/store', formData)
+            axios.post('/Prescription/casestudy/store', formData)
                 .then(response => {
                     toastr.success(response.message);
-                    location.reload();
+                    // location.reload();
+                    document.location.href = '/Prescription/casestudy/view'
                 }).catch(error => {
                     console.log(error.response.data.errors);
                     console.log(error.response);
@@ -298,6 +311,28 @@
                 $(this).closest("tr").remove();
             });
 
+            // for getting patient id available or not
+            $('#patient_name').on('keyup', function() {
+                var name = $('#patient_name').val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Prescription/findout/" + name,
+                    success: function(response) {
+                        if (Object.keys(response).length) {
+                            $('#show_user').empty();
+                            var Namedata =
+                                `<span class="text-success">&nbsp Patient Name: ${response.name}</span>`
+                            $('#show_user').append(Namedata);
+                        } else {
+                            $('#show_user').empty();
+                            $('#show_user').append('Invalid Patient Id');
+                        }
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+            })
 
         });
     </script>

@@ -14,6 +14,7 @@
             border: none;
             box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px !important;
             border: none !important;
+
         }
 
         .card .row .col-md-6,
@@ -29,6 +30,25 @@
             overflow-x: hidden;
         }
 
+        .cardcheck {
+            margin-top: 50px;
+        }
+
+        .wrapper {
+            text-align: center;
+        }
+
+        .cardcenter {
+            margin: 0 18%;
+            margin-bottom: 5rem;
+        }
+
+        #blah {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -36,15 +56,15 @@
 @endsection
 
 @section('super-admin-content')
+    <form id="AddEmployeeFORM">
+        @csrf
+        <div class="container-full topBar">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-body">
 
-    <div class="container-full topBar">
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <div class="card">
-                    <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('store.doctor') }}">
-                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -83,7 +103,7 @@
                                         <label>Designation</label>
                                         <input type="text" class="form-control" placeholder="Enter your designation"
                                             name="designation">
-                                        <span id="error_profile" class="errorColor"></span>
+                                        <span id="error_designation" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -133,7 +153,7 @@
                                             <label>Address1</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
                                                 name="address1">
-                                            <span id="error_address" class="errorColor"></span>
+                                            <span id="error_address1" class="errorColor"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -141,7 +161,7 @@
                                             <label>Address2</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
                                                 name="address12">
-                                            <span id="error_address" class="errorColor"></span>
+                                            <span id="error_address12" class="errorColor"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -149,7 +169,7 @@
                                             <label>City</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
                                                 name="city">
-                                            <span id="error_address" class="errorColor"></span>
+                                            <span id="error_city" class="errorColor"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -157,7 +177,7 @@
                                             <label>Zip</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
                                                 name="zip">
-                                            <span id="error_address" class="errorColor"></span>
+                                            <span id="error_zip" class="errorColor"></span>
                                         </div>
                                     </div>
                                     <hr>
@@ -182,7 +202,7 @@
                                         <label>Profile</label>
                                         <input type="text" class="form-control" placeholder="Enter your speciality"
                                             name="profile">
-                                        <span id="error_speciality" class="errorColor"></span>
+                                        <span id="error_profile" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -214,9 +234,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control" onchange="loadFile(event)"
-                                            placeholder="Enter your image" name="image">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Image</label>
+                                                <input type="file" class="form-control" placeholder="Enter your image"
+                                                    name="image" id="imgInp">
+                                            </div>
+                                            <img class="col-6" id="blah"
+                                                src="{{ asset('backend') }}/assets/images/avatar.png" alt="your image" />
+                                        </div>
+                                        <span id="error_image" class="errorColor"></span>
                                     </div>
                                 </div>
 
@@ -225,13 +252,14 @@
                                         <label>Career Title</label>
                                         <input type="text" class="form-control" placeholder="Enter career title"
                                             name="career_title">
+                                        <span id="error_career_title" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Short Biography</label>
                                         <textarea class="ckeditor form-control" name="short_biography"></textarea>
-
+                                        <span id="error_short_biography" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -239,6 +267,7 @@
                                         <label>Specialist</label>
                                         <input type="text" class="form-control" placeholder="Enter career title"
                                             name="specialist">
+                                        <span id="error_specialist" class="errorColor"></span>
 
                                     </div>
                                 </div>
@@ -247,7 +276,7 @@
                                         <label>Long Biography</label>
 
                                         <textarea class="ckeditor form-control" name="long_biography"></textarea>
-
+                                        <span id="error_long_biography" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -256,6 +285,7 @@
                                         <div class="col-md-12">
                                             <div class="jq">
                                                 <textarea class="ckeditor form-control" name="education_degree"></textarea>
+                                                <span id="error_education_degree" class="errorColor"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -276,23 +306,21 @@
                                                 id="inlineRadio2" value="InActive">
                                             <label class="form-check-label" for="inlineRadio2">InActive</label>
                                         </div>
-                                        <span id="error_statusedit" class="errorColor"></span>
+                                        <span id="error_status" class="errorColor"></span>
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="table-responsive">
-                                    <form method="post" id="dynamic_form">
+                    {{-- for language --}}
+                    <div class="card cardcenter">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="table-responsive">
                                         @csrf
-                                        <span id="result"></span>
-                                        <table class="table table-bordered table-striped" id="user_table">
+
+                                        <table class="table " id="user_table">
                                             <thead>
                                                 <tr>
 
@@ -306,26 +334,28 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="2" align="right">&nbsp;</td>
+                                                    {{-- <td colspan="2" align="right">&nbsp;</td> --}}
                                                     <td>
                                                         @csrf
-                                                        <input type="submit" name="save" id="save" class="btn btn-primary"
-                                                            value="Save" />
+                                                        {{-- <input type="submit" name="save" id="save" class="btn btn-primary"
+                                                            value="Save" /> --}}
                                                     </td>
                                                 </tr>
                                             </tfoot>
                                         </table>
-                                    </form>
+                                        <div class="wrapper">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{-- <div class="col-1"></div> --}}
             </div>
-            {{-- <div class="col-1"></div> --}}
         </div>
-    </div>
-
+    </form>
 
 @endsection
 @section('scripts')
@@ -335,18 +365,78 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        $('textarea').ckeditor(); // if class is prefered.
+    </script>
 
     <script>
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // for adding data using ajax
+        // for adding patient information
+        $("#AddEmployeeFORM").on('submit', function(event) {
+            event.preventDefault();
+            // let patient_id = $("#patient_id").val();
+            let first_name = $("#first_name").val();
+            let last_name = $("#last_name").val();
+            let email = $("#email").val();
+            let password = $("#password").val();
+            let address1 = $("#address1").val();
+            let mobile = $("#mobile").val();
+            let sex = $("#sex").val();
+            let formData = new FormData($('#AddEmployeeFORM')[0]);
+            axios.post('/doctor/store', formData)
+                .then(response => {
+                    toastr.success(response.message);
+                    // location.reload();
+                    document.location.href = '/doctor/all'
+                }).catch(error => {
+                    console.log(error.response.data.errors);
+                    console.log(error.response);
+                    if (error.response.status == 422) {
+                        $('#error_fname').text(error.response.data.errors.first_name1[0]);
+                        $('#error_lname').text(error.response.data.errors.last_name1[0]);
+                        $('#error_email').text(error.response.data.errors.email[0]);
+                        $('#error_password').text(error.response.data.errors.password[0]);
+                        // $('#error_designation').text(error.response.data.errors.designation[0]);
+                        // $('#error_doc_dept').text(error.response.data.errors.doc_dept[0]);
+                        // $('#error_phone').text(error.response.data.errors.phone[0]);
+                        $('#error_mobile').text(error.response.data.errors.mobile[0]);
+                        $('#error_gender').text(error.response.data.errors.sex[0]);
+                        $('#error_address1').text(error.response.data.errors.address1[0]);
+                        // $('#error_address12').text(error.response.data.errors.address12[0]);
+                        // $('#error_city').text(error.response.data.errors.city[0]);
+                        // $('#error_zip').text(error.response.data.errors.zip[0]);
+                        // $('#error_dob').text(error.response.data.errors.dob[0]);
+                        // $('#error_age').text(error.response.data.errors.age[0]);
+                        // $('#error_profile').text(error.response.data.errors.profile[0]);
+                        // $('#error_sociallink').text(error.response.data.errors.social_link[0]);
+                        // $('#error_blood_group').text(error.response.data.errors.blood_group[0]);
+                        // $('#error_image').text(error.response.data.errors.image[0]);
+                        // $('#error_career_title').text(error.response.data.errors.career_title[0]);
+                        // $('#error_short_biography').text(error.response.data.errors.short_biography[0]);
+                        // $('#error_specialist').text(error.response.data.errors.specialist[0]);
+                        // $('#error_long_biography').text(error.response.data.errors.long_biography[0]);
+                        // $('#error_education_degree').text(error.response.data.errors.education_degree[0]);
+                        // $('#error_status').text(error.response.data.errors.status[0]);
+
+
+                    }
+                })
+
+        })
+    </script>
+    <script>
         $(document).ready(function() {
-
             var count = 1;
-
             dynamic_field(count);
 
             function dynamic_field(number) {
                 html = '<tr>';
-                html += '<td><input type="text" name="first_name[]" class="form-control" /></td>';
-                html += '<td><input type="text" name="last_name[]" class="form-control" /></td>';
+                html += '<td><input type="text" name="first_name[]" id="first_name" class="form-control" /></td>';
+                html += '<td><input type="text" name="last_name[]" id="last_name" class="form-control" /></td>';
                 if (number > 1) {
                     html +=
                         '<td><button type="button" name="remove" id="" class="btn btn-danger remove">Remove</button></td></tr>';
@@ -367,36 +457,16 @@
                 count--;
                 $(this).closest("tr").remove();
             });
-
-            $('#dynamic_form').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: '{{ route('dynamic-field.insert') }}',
-                    method: 'post',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('#save').attr('disabled', 'disabled');
-                    },
-                    success: function(data) {
-                        if (data.error) {
-                            var error_html = '';
-                            for (var count = 0; count < data.error.length; count++) {
-                                error_html += '<p>' + data.error[count] + '</p>';
-                            }
-                            $('#result').html('<div class="alert alert-danger">' + error_html +
-                                '</div>');
-                        } else {
-                            dynamic_field(1);
-                            $('#result').html('<div class="alert alert-success">' + data
-                                .success + '</div>');
-                        }
-                        $('#save').attr('disabled', false);
-                    }
-                })
-            });
-
         });
+    </script>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+
+                blah.src = URL.createObjectURL(file)
+            }
+        }
     </script>
 
 @endsection

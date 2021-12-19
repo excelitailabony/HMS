@@ -33,6 +33,12 @@
             <ul class="sub-menu" aria-expanded="false">
                 <li><a href="{{ route('view.prescriptioncasestudy') }}">Patient Case Study List</a></li>
             </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('add.prescription') }}">Add Prescription</a></li>
+            </ul>
+            <ul class="sub-menu" aria-expanded="false">
+                <li><a href="{{ route('view.prescription') }}">Prescription List</a></li>
+            </ul>
         </li>
         <li>
             <a href="{{ route('all.patient') }}" class="waves-effect">

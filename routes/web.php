@@ -34,6 +34,7 @@ use App\Http\Controllers\Schedule\SchedulelistController;
 
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Prescription\PatientcasestudyController;
+use App\Http\Controllers\Prescription\PrescriptionController;
 
 
 
@@ -210,15 +211,6 @@ Route::prefix('blood')->group(function () {
     Route::put('/issue/update/{id}', [BloodIssueController::class, 'BloodDonorGroupUpdate'])->name('bloodissue.update');
 });
 
-// Blood Donor Start
-Route::prefix('bloodDonor')->group(function () {
-    Route::get('/view', [BloodDonorController::class, 'BloodDonorView'])->name('all.blooddonor');
-    Route::post('/add', [BloodDonorController::class, 'BloodDonorStore'])->name('blooddonor.add');
-    Route::get('edit-blooddonor/{id}', [BloodDonorController::class, 'BloodDonorEdit']);
-    Route::get('/list/view', [ReceptionistController::class, 'ListReceptionistView'])->name('list.receptionists'); 
-    });// Admin Brand All Route Group End 
-
-
   // Blood Issue
    Route::prefix('blood')->group(function () {
         Route::get('/issue/view', [BloodIssueController::class, 'BloodIssueView'])->name('blood.issue');  
@@ -367,7 +359,8 @@ Route::prefix('Medicine')->group(function () {
     Route::post('/list/update', [MedicineListController::class, 'MedicineListUpdate'])->name('update.medicinelist');
     Route::get('/list/delete/{id}', [MedicineListController::class, 'MedicineListDelete'])->name('delete.medicinelist');
     //  Medicine List end
-  
+});  
+
 // Appointment start
 Route::prefix('Diagnsosis')->group(function () {  
   Route::get('/view', [DiagnosisController::class, 'DignsosisTestView'])->name('all.diagnosis_test');
@@ -437,17 +430,24 @@ Route::prefix('Record')->group(function () {
 
 // Route::post('dynamic-field/insert',[LanguageController::class,'insertt'])->name('dynamic-field.insert');
 
+
 // Prescription start
 Route::prefix('Prescription')->group(function(){
 //Patient Case Study Start
-  Route::get('/view', [PatientcasestudyController::class, 'PrescriptionCaseStudyView'])->name('view.prescriptioncasestudy');
-  Route::get('/add', [PatientcasestudyController::class, 'PrescriptionCaseStudyAdd'])->name('add.prescriptioncasestudy');
-  Route::post('/store', [PatientcasestudyController::class, 'PrescriptionCaseStudyStore'])->name('store.prescriptioncasestudy');
-  Route::get('/delete/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyDelete'])->name('delete.prescriptioncasestudy');
-  Route::get('/edit-prescription/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyEdit'])->name('edit.prescriptioncasestudy');
+  Route::get('/casestudy/view', [PatientcasestudyController::class, 'PrescriptionCaseStudyView'])->name('view.prescriptioncasestudy');
+  Route::get('/casestudy/add', [PatientcasestudyController::class, 'PrescriptionCaseStudyAdd'])->name('add.prescriptioncasestudy');
+  Route::post('/casestudy/store', [PatientcasestudyController::class, 'PrescriptionCaseStudyStore'])->name('store.prescriptioncasestudy');
+  Route::get('/casestudy/delete/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyDelete'])->name('delete.prescriptioncasestudy');
+  Route::get('/casestudy/edit-patientCaseStudy/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyEdit'])->name('edit.prescriptioncasestudy');
   //   Route::post('dynamic-field/insert',[PatientcasestudyController::class,'Ajaxinsert'])->name('dynamic-field.insert');
-  // Route::post('/update/{id}', [PatientcasestudyController::class, 'PrescriptionCaseStudyUpdate'])->name('update.prescriptioncasestudy');   
-// Patient Case Study End
+  Route::post('/casestudy/update', [PatientcasestudyController::class, 'PrescriptionCaseStudyUpdate'])->name('update.prescriptioncasestudy');   
+  Route::get('/findout/{patientname}', [PatientcasestudyController::class, 'Patientname']);
+// For Prescription
+  Route::get('/view', [PrescriptionController::class, 'PrescriptionView'])->name('view.prescription');
+  Route::get('/add', [PrescriptionController::class, 'PrescriptionAdd'])->name('add.prescription');
+  Route::post('/store', [PrescriptionController::class, 'PrescriptionStore'])->name('store.prescription');
+  Route::get('/patient/{id}', [PrescriptionController::class, 'DeatilsPrescription']);
+
+  // Patient Case Study End
 });
 // prescription end
-

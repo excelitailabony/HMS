@@ -29,6 +29,7 @@ class CreatePatientCaseStudiesTable extends Migration
             $table->string('breast_feeding')->nullable();
             $table->string('health_insurance')->nullable();
             $table->string('low_income')->nullable();
+            $table->string('weight')->nullable();
             $table->string('reference')->nullable();
             $table->string('status');
 

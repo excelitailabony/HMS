@@ -130,6 +130,7 @@
                                                     <span id="error_blood_group" class="errorColor"></span>
                                                 </div>
                                             </div>
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Gender</label><span class="errorColor"> *</span><br>

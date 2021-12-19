@@ -32,55 +32,80 @@ class DoctorController extends Controller
 
 //      // method for storing patient data
      public function StoreDoctor(Request $request){
-          // validation 
-        $request->validate([
-            'first_name1' => 'required',
-            'last_name1' => 'required',
-       
-          ],[ 
-            'first_name1.required' => 'Input The First Name',
-            'last_name1.required' => 'Input The last Name',
-          ]);
-          // img upload and save
+
+        $validator = Validator::make($request->all(), [
+           'email' => 'required',
+           'last_name1' => 'required',
+           'first_name1' => 'required',
+            'password' => 'required',
+            'mobile' => 'required',
+            'sex' => 'required',
+            'address1' => 'required',
+              
+       ]);
+
+       if($validator->fails())
+       {
+           return response()->json([
+              //  'status'=>400,
+               'errors'=>$validator->errors()
+           ],
+          422);
+       }
+       else{
+         //  img upload and save
           $image = $request->file('image');
           $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
           Image::make($image)->resize(300,300)->save('uploads/doctor/'.$name_gen);
           $save_url = 'uploads/doctor/'.$name_gen;
-        // Doctor Insert    
-          Doctor::insert([
-           'first_name1' => $request->first_name1,
-           'last_name1' => $request->last_name1,
-           'email' => $request->email,
-           'password' => $request->password,
-           'designation' => $request->designation,
-           'doc_dept' => $request->doc_dept,
-           'phone' => $request->phone,
-           'mobile' => $request->mobile,
-           'sex' => $request->sex,
-           'profile' => $request->profile,
-           'dob' => $request->dob,
-           'address1' => $request->address1,
-           'address12' => $request->address12,
-           'city' => $request->city,
-           'zip' => $request->zip,
-           'specialist' => $request->specialist,
-           'age' => $request->age,
-           'blood_group' => $request->blood_group,
-           'social_link' => $request->social_link,
-           'image' => $save_url,
-           'career_title' => $request->career_title,
-           'short_biography' => $request->short_biography,
-           'long_biography' => $request->long_biography,
-           'education_degree' => $request->education_degree,
-           'status' => $request->status,
-           
-          ]); 
-          $notification = array(
-            'message' =>  'Doctor Added Sucessfully',
-            'alert-type' => 'success'
-        ); 
 
-        return redirect()->back()->with($notification);
+              $patient=new Doctor;
+              $patient->first_name1=$request->input('first_name1');
+              $patient->last_name1=$request->input('last_name1');
+              $patient->email=$request->input('email');
+              $patient->password=$request->input('password');
+              $patient->designation=$request->input('designation');
+              $patient->doc_dept=$request->input('doc_dept');
+              $patient->phone=$request->input('phone');
+              $patient->mobile=$request->input('mobile');
+              $patient->sex=$request->input('sex');
+              $patient->profile=$request->input('profile');
+              $patient->dob=$request->input('dob');
+              $patient->address1=$request->input('address1');
+              $patient->address12=$request->input('address12');
+              $patient->city=$request->input('city');
+              $patient->zip=$request->input('zip');
+              $patient->specialist=$request->input('specialist');
+              $patient->age=$request->input('age');
+              $patient->blood_group=$request->input('blood_group');
+              $patient->social_link=$request->input('social_link');
+              $patient->career_title=$request->input('career_title');
+              $patient->short_biography=$request->input('short_biography');
+              $patient->long_biography=$request->input('long_biography');
+              $patient->education_degree=$request->input('education_degree');
+              $patient->status=$request->input('status');
+              $patient->image=$save_url;
+              $patient->save();
+              $first_name = $request->first_name;
+              $last_name = $request->last_name;
+              $last3 = DB::table('doctors')->latest('id')->first();
+              $last = $last3->id;
+          
+              for($count = 0; $count < count($first_name); $count++)
+              {
+                  $data = array(
+                      'first_name' => $first_name[$count],
+                      'last_name' => $last_name[$count],
+                      'doctor_name'  => $last
+                  );
+                  $insert_data[] = $data; 
+               }
+              Check::insert($insert_data);
+            return response()->json([
+               'status'=>200,
+               'message'=>'Patient Case Study Added Successfully.'
+           ]);  
+         }
         }
         // edit DOctor
         public function EditDoctor($id){
@@ -93,147 +118,123 @@ class DoctorController extends Controller
         // update Doctor
         public function UpdateDoctor(Request $request){
 
-            $doctor_id = $request->id;
-            $old_img  = $request->old_image;
-
-            if ($request->file('image')) {
-
-                unlink($old_img);
-                $image = $request->file('image');
-                $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-                Image::make($image)->resize(300,300)->save('uploads/doctor/'.$name_gen);
-                $save_url = 'uploads/doctor/'.$name_gen;
-      
-            // Brand Update    
-                Doctor::findOrFail($doctor_id)->update([
-                'first_name1' => $request->first_name1,
-                  'last_name1' => $request->last_name1,
-                  'email' => $request->email,
-                  'password' => $request->password,
-                  'designation' => $request->designation,
-                  'doc_dept' => $request->doc_dept,
-                  'phone' => $request->phone,
-                  'mobile' => $request->mobile,
-                  'sex' => $request->sex,
-                  'profile' => $request->profile,
-                  'dob' => $request->dob,
-                  'address1' => $request->address1,
-                  'address12' => $request->address12,
-                  'city' => $request->city,
-                  'zip' => $request->zip,
-                  'specialist' => $request->specialist,
-                  'age' => $request->age,
-                  'blood_group' => $request->blood_group,
-                  'social_link' => $request->social_link,
-                  'image' => $save_url,
-                  'career_title' => $request->career_title,
-                  'short_biography' => $request->short_biography,
-                  'long_biography' => $request->long_biography,
-                  'education_degree' => $request->education_degree,
-                  'status' => $request->status,
-                ]);
-      
-                $notification = array(
-                  'message' =>  'Doctor Updated Sucessfuly',
-                  'alert-type' => 'info'
-              ); 
-      
-              return redirect()->route('view_doctor')->with($notification);
-      
-
-            }else{
-                Doctor::findOrFail($doctor_id)->update([
-                  'first_name1' => $request->first_name1,
-                  'last_name1' => $request->last_name1,
-                  'email' => $request->email,
-                  'password' => $request->password,
-                  'designation' => $request->designation,
-                  'doc_dept' => $request->doc_dept,
-                  'phone' => $request->phone,
-                  'mobile' => $request->mobile,
-                  'sex' => $request->sex,
-                  'profile' => $request->profile,
-                  'dob' => $request->dob,
-                  'address1' => $request->address1,
-                  'address12' => $request->address12,
-                  'city' => $request->city,
-                  'zip' => $request->zip,
-                  'specialist' => $request->specialist,
-                  'age' => $request->age,
-                  'blood_group' => $request->blood_group,
-                  'social_link' => $request->social_link,
-                  'career_title' => $request->career_title,
-                  'short_biography' => $request->short_biography,
-                  'long_biography' => $request->long_biography,
-                  'education_degree' => $request->education_degree,
-                  'status' => $request->status,
-                  'created_at'=>$request->Carbon::now(),
-                  'updated_at'=>$request->Carbon::now()
-                  ]);
-        
-                  $notification = array(
-                    'message' =>  'Doctor Updated Sucessfully',
-                    'alert-type' => 'info'
-                ); 
-        
-                return redirect()->route('view_doctor')->with($notification);
-        
-
-            } // else end
-
-            } // method end
+            $validator = Validator::make($request->all(), [
+              'email' => 'required',
+              'last_name1' => 'required',
+              'first_name1' => 'required',
+              'password' => 'required',
+              'mobile' => 'required',
+              'sex' => 'required',
+              'address1' => 'required',
+           ]);
+              //   dd(  $validator );
+           if($validator->fails())
+           {
+               return response()->json([
+                   'status'=>400,
+                   'errors'=>$validator->errors()
+               ],
+             );
+              // 422);
+           }
+          
+           else{
+              $doctor_id = $request->input('id');
+              $old_img  = $request->input('old_image');
+              if ($request->file('image')) {
+           
+            // for image
+            unlink($old_img);
+            $image = $request->file('image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(300,300)->save('uploads/doctor/'.$name_gen);
+            $save_url = 'uploads/doctor/'.$name_gen;
+              // $patienr_id=$request->input('id');
+              $patient = Doctor::find($doctor_id);
+              $patient->first_name1=$request->input('first_name1');
+              $patient->last_name1=$request->input('last_name1');
+              $patient->email=$request->input('email');
+              $patient->password=$request->input('password');
+              $patient->designation=$request->input('designation');
+              $patient->doc_dept=$request->input('doc_dept');
+              $patient->phone=$request->input('phone');
+              $patient->mobile=$request->input('mobile');
+              $patient->sex=$request->input('sex');
+              $patient->profile=$request->input('profile');
+              $patient->dob=$request->input('dob');
+              $patient->address1=$request->input('address1');
+              $patient->address12=$request->input('address12');
+              $patient->city=$request->input('city');
+              $patient->zip=$request->input('zip');
+              $patient->specialist=$request->input('specialist');
+              $patient->age=$request->input('age');
+              $patient->blood_group=$request->input('blood_group');
+              $patient->social_link=$request->input('social_link');
+              $patient->career_title=$request->input('career_title');
+              $patient->short_biography=$request->input('short_biography');
+              $patient->long_biography=$request->input('long_biography');
+              $patient->education_degree=$request->input('education_degree');
+              $patient->status=$request->input('status');
+              $patient->image=$save_url;
+                  $patient->update();
+                return response()->json([
+                   'status'=>200,
+                   'message'=>'Doctor updated Successfully.'
+               ]);
+           }
+           else{
+              $patient = Doctor::find($doctor_id);
+              $patient->first_name1=$request->input('first_name1');
+              $patient->last_name1=$request->input('last_name1');
+              $patient->email=$request->input('email');
+              $patient->password=$request->input('password');
+              $patient->designation=$request->input('designation');
+              $patient->doc_dept=$request->input('doc_dept');
+              $patient->phone=$request->input('phone');
+              $patient->mobile=$request->input('mobile');
+              $patient->sex=$request->input('sex');
+              $patient->profile=$request->input('profile');
+              $patient->dob=$request->input('dob');
+              $patient->address1=$request->input('address1');
+              $patient->address12=$request->input('address12');
+              $patient->city=$request->input('city');
+              $patient->zip=$request->input('zip');
+              $patient->specialist=$request->input('specialist');
+              $patient->age=$request->input('age');
+              $patient->blood_group=$request->input('blood_group');
+              $patient->social_link=$request->input('social_link');
+              $patient->career_title=$request->input('career_title');
+              $patient->short_biography=$request->input('short_biography');
+              $patient->long_biography=$request->input('long_biography');
+              $patient->education_degree=$request->input('education_degree');
+              $patient->status=$request->input('status');
+                  $patient->update();
+                return response()->json([
+                   'status'=>200,
+                   'message'=>'Doctor updated Successfully.'
+               ]);
+           }
+         }
+     } // method end
                       // delete sub category
 
       public function DeleteDoctor($id){
 
-        Doctor::findOrFail($id)->delete();
+        $doctor = Doctor::findOrFail($id);
 
-        $notification = array(
-        'message' => 'Doctor Deleted Successfully',
-        'alert-type' => 'warning'
-      );
+                $img = $doctor->image;
+                unlink($img);
 
-      return redirect()->back()->with($notification);
+                Doctor::findOrFail($id)->delete();
 
-    } // end mathod
-    // for language start
-     public function insertt(Request $request)
-    {
-     if($request->ajax())
-     {
-      $rules = array(
-       'first_name.*'  => 'required',
-       'last_name.*'  => 'required'
-      );
-      $error = Validator::make($request->all(), $rules);
-      if($error->fails())
-      {
-       return response()->json([
-        'error'  => $error->errors()->all()
-       ]);
-      }
-      $last3 = DB::table('doctors')->latest('id')->first();
-      $last = $last3->id;
-    //   dd($last);
-      $first_name = $request->first_name;
-      $last_name = $request->last_name;
-      for($count = 0; $count < count($first_name); $count++)
-      {
-       $data = array(
-        'first_name' => $first_name[$count],
-        'last_name'  => $last_name[$count],
-        'doctor_name'  => $last
-       );
-       $insert_data[] = $data; 
-      }
-     
-      Check::insert($insert_data);
-      return response()->json([
-       'success'  => 'Data Added successfully.'
-      ]);
-     }
-    }
-    // for language end
+                $notification = array(
+                'message' =>  'Doctor  Deleted Sucessyfully',
+                'alert-type' => 'info'
+                ); 
+
+            return redirect()->back()->with($notification);
+    } // end method
+
 
       // all doctor view in dashboard
     public function AllDoctorView(){

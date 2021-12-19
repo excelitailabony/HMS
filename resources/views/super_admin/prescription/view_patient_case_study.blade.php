@@ -37,6 +37,7 @@
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Breast Feeding</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Health Insurance</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Low Income</th>
+                                                <th rowspan="1" colspan="1" style="width: 120px;">Weight</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Reference</th>
                                                 <th rowspan="1" colspan="1" style="width: 120px;">Status</th>
 
@@ -62,11 +63,12 @@
                                                     <td>{{ $casestudy->breast_feeding }}</td>
                                                     <td>{{ $casestudy->health_insurance }}</td>
                                                     <td>{{ $casestudy->low_income }}</td>
+                                                    <td>{{ $casestudy->weight }}</td>
                                                     <td>{{ $casestudy->reference }}</td>
                                                     <td>{{ $casestudy->status }}</td>
                                                     <td>
                                                         <a href="{{ route('edit.prescriptioncasestudy', $casestudy->id) }}"
-                                                            class="btn btn-sm btn-danger editBtn">
+                                                            class="btn btn-sm btn-danger ">
                                                             <i class="fa fa-pencil-alt"></i>
 
                                                             <a href="{{ route('delete.prescriptioncasestudy', $casestudy->id) }}"

@@ -29,6 +29,12 @@
             overflow-x: hidden;
         }
 
+        #blah {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
@@ -43,8 +49,7 @@
             <div class="col-10">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('update.doctor', $doctors->id) }}"
-                            enctype="multipart/form-data">
+                        <form id="UpdateEmployeeFORM" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="id" value="{{ $doctors->id }}">
                             <input type="hidden" name="old_image" value="{{ $doctors->image }}">
@@ -70,7 +75,7 @@
                                         <label>Email</label>
                                         <input type="email" class="form-control" placeholder="Enter your email"
                                             name="email" value="{{ $doctors->email }}">
-                                        <span id="error_email" class="errorColor"></span>
+                                        <span id="error_emailedit" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -78,7 +83,7 @@
                                         <label>Password</label>
                                         <input type="password" class="form-control" placeholder="Enter your password"
                                             name="password" value="{{ $doctors->password }}">
-                                        <span id="error_password" class="errorColor"></span>
+                                        <span id="error_passwordedit" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -96,10 +101,11 @@
                                             aria-invalid="false">
                                             <option value="" selected="" disabled="">Select Category </option>
                                             @foreach ($DoctorDepts as $category)
-                                                <option
-                                                    value="{{ $category->id == $doctors->doc_dept ? 'selected' : '' }}">
+                                                <option value="{{ $category->id }}"
+                                                    {{ $category->id == $doctors->doc_dept ? 'selected' : '' }}>
                                                     {{ $category->name }}
                                                 </option>
+
                                             @endforeach
 
                                         </select>
@@ -121,17 +127,18 @@
                                         <label>Mobile</label>
                                         <input type="text" class="form-control" placeholder="Enter mobile number"
                                             name="mobile" value="{{ $doctors->mobile }}">
-                                        <span id="error_mobile" class="errorColor"></span>
+                                        <span id="error_mobileedit" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Gender</label><br>
-                                        <input class="form-check-input gender1" type="radio" name="sex" value="male">Male
-                                        <input class="form-check-input gender1" type="radio" name="sex"
-                                            value="female">Female<br>
-                                        <span id="error_gender" class="errorColor"></span>
+                                        <label>Gender</label><span class="errorColor"> *</span><br>
+                                        <input class="form-check-input " type="radio" class="status" value="male"
+                                            name="sex" {{ $doctors->sex == 'male' ? 'checked' : '' }}>male
+                                        <input class="form-check-input " type="radio" class="status" value="female"
+                                            name="sex" {{ $doctors->sex == 'female' ? 'checked' : '' }}>female<br>
+                                        <span id="error_statusedit" class="errorColor"></span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -140,7 +147,7 @@
                                             <label>Address1</label>
                                             <input type="text" class="form-control" placeholder="Enter your address"
                                                 name="address1" value="{{ $doctors->address1 }}">
-                                            <span id="error_address" class="errorColor"></span>
+                                            <span id="error_address1edit" class="errorColor"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -207,6 +214,7 @@
                                         <label>Blood Group</label>
                                         <select name="blood_group" class="form-control"
                                             value="{{ $doctors->blood_group }}">
+
                                             <option value="" selected="" disabled="">Select Blood group
                                             </option>
                                             <option value="A+">A+</option>
@@ -223,9 +231,16 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Image</label>
-                                        <input type="file" class="form-control" onchange="loadFile(event)"
-                                            placeholder="Enter your image" name="image" value="{{ $doctors->image }}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Image</label>
+                                                <input type="file" class="form-control" placeholder="Enter your image"
+                                                    name="image" id="imgInp">
+                                            </div>
+                                            <img class="col-6" id="blah"
+                                                src="{{ asset('backend') }}/assets/images/avatar.png" alt="your image" />
+                                        </div>
+                                        <span id="error_image" class="errorColor"></span>
                                     </div>
                                 </div>
 
@@ -239,16 +254,15 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Short Biography</label>
-                                        {{-- <textarea id="elm1" name="area"></textarea> --}}
-                                        <textarea class="ckeditor form-control" name="short_biography"
-                                            value="{{ $doctors->short_biography }}"></textarea>
+                                        <textarea class="ckeditor form-control"
+                                            name="short_biography">{{ $doctors->short_biography }}</textarea>
 
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Specialist</label>
-                                        {{-- <textarea id="elm1" name="area"></textarea> --}}
+
                                         <input type="text" class="form-control" placeholder="Enter career title"
                                             name="specialist" value="{{ $doctors->specialist }}">
 
@@ -257,8 +271,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Long Biography</label>
-                                        <textarea class="ckeditor form-control" name="long_biography"
-                                            value="{{ $doctors->long_biography }}"> </textarea>
+                                        <textarea class="ckeditor form-control"
+                                            name="long_biography"> {{ $doctors->long_biography }}</textarea>
 
                                     </div>
                                 </div>
@@ -268,8 +282,8 @@
                                         <label>Education Degree</label>
                                         <div class="col-md-12">
                                             <div class="jq">
-                                                <textarea class="ckeditor form-control" name="education_degree"
-                                                    value="{{ $doctors->education_degree }}"></textarea>
+                                                <textarea class="ckeditor form-control"
+                                                    name="education_degree">{{ $doctors->education_degree }}</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -279,100 +293,24 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>Status</label><br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input status1" type="radio" name="status"
-                                                id="inlineRadio1" value="Active" value="{{ $doctors->status }}">
-                                            <label class="form-check-label" for="inlineRadio1">Active</label>
-
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input status1" type="radio" name="status"
-                                                id="inlineRadio2" value="InActive" value="{{ $doctors->status }}">
-                                            <label class="form-check-label" for="inlineRadio2">InActive</label>
-
-                                        </div>
-                                        <span id="error_statusedit" class="errorColor"></span>
+                                        <label>Status</label><span class="errorColor"> *</span><br>
+                                        <input class="form-check-input " type="radio" class="status"
+                                            value="Active" name="status"
+                                            {{ $doctors->status == 'Active' ? 'checked' : '' }}>Active
+                                        <input class="form-check-input " type="radio" class="status"
+                                            value="Inactive" name="status"
+                                            {{ $doctors->status == 'Inactive' ? 'checked' : '' }}>Inactive<br>
+                                        <span id="error_status" class="errorColor"></span>
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="row">
-                                <div class="col-md-12">
-                                    <label>Language Proficiency</label>
-                                    <div class="table-responsive">
-                                        {{-- <form method="post"> --}}
-                            {{-- @csrf
-                                        <span id="result"></span>
-                                        <table class="table table-bordered table-striped" id="user_table">
-                                            <thead>
-                                                <tr>
-                                                    <th width="35%">First Name</th>
-                                                    <th width="35%">Last Name</th>
-                                                    <th width="30%">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="2" align="right">&nbsp;</td>
-                                                    <td>
-                                                        @csrf
-                                                        <input type="submit" name="save" id="save" class="btn btn-primary"
-                                                            value="Save" />
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                        {{-- <button type="submit" class="btn btn-primary">Submit</button> --}}
-                            {{-- </form> --}}
-                            {{-- </div>
-                                </div>
-                            </div> --}}
+
                             <input type="submit" class="btn btn-rounded btn-info" value="Update Sub Category">
                         </form>
                     </div>
 
                 </div>
-                {{-- <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="table-responsive">
-                                    <form method="post" id="dynamic_form">
-                                        @csrf
-                                        <span id="result"></span>
-                                        <table class="table table-bordered table-striped" id="user_table">
-                                            <thead>
-                                                <tr>
 
-                                                    <th width="35%">First Name</th>
-                                                    <th width="35%">Last Name</th>
-                                                    <th width="30%">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-
-                                                    <td colspan="2" align="right">&nbsp;</td>
-                                                    <td>
-                                                        @csrf
-                                                        <input type="submit" name="save" id="save" class="btn btn-primary"
-                                                            value="Save" />
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
             {{-- <div class="col-1"></div> --}}
         </div>
@@ -387,73 +325,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('.ckeditor').ckeditor();
-
-        });
-    </script> --}}
     <script>
-        $(document).ready(function() {
-
-            var count = 1;
-
-            dynamic_field(count);
-
-            function dynamic_field(number) {
-                html = '<tr>';
-                // html += '<td><input type="text" name="first_name[]" class="form-control" /></td>';
-                html += '<td><input type="text" name="first_name[]" class="form-control" /></td>';
-                html += '<td><input type="text" name="last_name[]" class="form-control" /></td>';
-                if (number > 1) {
-                    html +=
-                        '<td><button type="button" name="remove" id="" class="btn btn-danger remove">Remove</button></td></tr>';
-                    $('tbody').append(html);
-                } else {
-                    html +=
-                        '<td><button type="button" name="add" id="add" class="btn btn-success">Add</button></td></tr>';
-                    $('tbody').html(html);
-                }
-            }
-
-            $(document).on('click', '#add', function() {
-                count++;
-                dynamic_field(count);
-            });
-
-            $(document).on('click', '.remove', function() {
-                count--;
-                $(this).closest("tr").remove();
-            });
-
-            $('#dynamic_form').on('submit', function(event) {
-                event.preventDefault();
-                $.ajax({
-                    url: '{{ route('dynamic-field.insert') }}',
-                    method: 'post',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    beforeSend: function() {
-                        $('#save').attr('disabled', 'disabled');
-                    },
-                    success: function(data) {
-                        if (data.error) {
-                            var error_html = '';
-                            for (var count = 0; count < data.error.length; count++) {
-                                error_html += '<p>' + data.error[count] + '</p>';
-                            }
-                            $('#result').html('<div class="alert alert-danger">' + error_html +
-                                '</div>');
-                        } else {
-                            dynamic_field(1);
-                            $('#result').html('<div class="alert alert-success">' + data
-                                .success + '</div>');
-                        }
-                        $('#save').attr('disabled', false);
+        $('textarea').ckeditor(); // if class is prefered.
+    </script>
+    <script>
+        // for adding data using ajax
+        // for updating patient information
+        $(document).on('submit', '#UpdateEmployeeFORM', function(e) {
+            e.preventDefault();
+            let formData = new FormData($('#UpdateEmployeeFORM')[0]);
+            $.ajax({
+                type: "POST",
+                url: "/doctor/update",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.status == 400) {
+                        $('#error_fname').text(response.errors.first_name1);
+                        $('#error_lname').text(response.errors.last_name1);
+                        $('#error_emailedit').text(response.errors.email);
+                        $('#error_mobileedit').text(response.errors.mobile);
+                        $('#error_address1edit').text(response.errors.address1);
+                        $('#error_statusedit').text(response.errors.sex);
+                    } else if (response.status == 200) {
+                        document.location.href = '/doctor/all'
+                        toastr.success(response.message);
                     }
-                })
+                }
             });
-
         });
     </script>
+    <script>
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+
 @endsection
